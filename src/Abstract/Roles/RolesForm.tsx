@@ -79,6 +79,7 @@ export const RolesForm = ({
   },
   permissionsProps,
 }: RolesFormProps): JSX.Element => {
+  console.log('AllRoles', AllRoles);
   const isAddForm = formType === 'add';
   const isUpdateForm = formType === 'update';
 
@@ -164,15 +165,20 @@ export const RolesForm = ({
             <Button {...selectAllButtonProps} />
             <Button {...deselectAllButtonProps} />
           </div>
-          {AllRoles.map((role) => (
-            <RolePermissions
-              selectedPermissions={use.states.permissions}
-              key={role.name}
-              role={role}
-              onPermissionChange={use.actions.changePermissions}
-              {...permissionsProps}
-            />
-          ))}
+          {AllRoles.map((role) => {
+            console.log('role', role);
+            return(
+              <RolePermissions
+                selectedPermissions={use.states.permissions}
+                key={role.name}
+                role={role}
+                onPermissionChange={use.actions.changePermissions}
+                {...permissionsProps}
+              />
+            )
+        }
+          
+          )}
         </div>
       </>
     </ModelForm>
