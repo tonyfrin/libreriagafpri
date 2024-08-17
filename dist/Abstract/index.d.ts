@@ -62,8 +62,6 @@ export { OrderInit, Sales, OrderView } from './Order';
 export type { OrderInitStylesContainerProps, OrderInitProps, SalesProps, OrderViewProps, } from './Order';
 export { BudgetInit, BudgetModule, BudgetPrint, BudgetSearchPrint, BudgetView, } from './Budget';
 export type { BudgetInitStylesContainerProps, BudgetInitProps, BudgetModuleProps, BudgetPrintProps, BudgetSearchPrintProps, BudgetSearchPrintExtended, BudgetViewProps, } from './Budget';
-export { BudgetPdf, PrintButtonBudget } from './Pdf';
-export type { BudgetPdfProps, PrintButtonBudgetProps } from './Pdf';
 export { ShippingMethodsForm, ShippingAreasForm, InitShippingAreas, } from './Shipping';
 export type { ShippingMethodsFormProps, ShippingMethodsFormPropsExtended, ShippingAreasFormProps, InitShippingAreasProps, InitShippingAreasExtended, } from './Shipping';
 export { Modal } from './Modal';

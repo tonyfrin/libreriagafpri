@@ -1,7 +1,7 @@
 import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { Button } from '../Button';
-import { BudgetPdf } from '../Pdf';
+import { BudgetPdf } from '../Pdf/BudgetPdf';
 import { SiteOptions } from '../../states';
 import { Loading } from '../../Components';
 import { BudgetAttributes } from '../states';

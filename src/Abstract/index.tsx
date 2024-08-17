@@ -946,8 +946,6 @@ export type {
   BudgetSearchPrintExtended,
   BudgetViewProps,
 } from './Budget';
-export { BudgetPdf, PrintButtonBudget } from './Pdf';
-export type { BudgetPdfProps, PrintButtonBudgetProps } from './Pdf';
 export {
   ShippingMethodsForm,
   ShippingAreasForm,
