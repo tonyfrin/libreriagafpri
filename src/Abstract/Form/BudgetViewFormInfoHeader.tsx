@@ -4,7 +4,6 @@ import { ContainerHeaderInfo, ContainerButton } from '../Containers';
 import { LineInfoTwo } from '../Li';
 import { decimalFormatPriceConverter } from '../../helpers';
 import { BudgetAttributes } from '../states';
-import { PrintButtonBudget } from '../Pdf';
 
 export type BudgetViewFormInfoHeaderProps = {
   budget: BudgetAttributes;
@@ -67,20 +66,6 @@ export const BudgetViewFormInfoHeader = ({
             custom: 'text-align: center;',
           }}
         />
-        <ContainerButton
-          styles={{
-            width: '100%',
-            custom: 'margin-top: 30px;',
-          }}
-        >
-          <>
-            <PrintButtonBudget
-              budget={budget}
-              siteOptions={siteOptions}
-              logoPdf={logoPdf}
-            />
-          </>
-        </ContainerButton>
       </ContainerHeaderInfo>
     </>
   );

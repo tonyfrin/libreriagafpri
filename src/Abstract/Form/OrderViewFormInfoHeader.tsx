@@ -4,7 +4,6 @@ import { ContainerHeaderInfo, ContainerButton } from '../Containers';
 import { LineInfoTwo } from '../Li';
 import { decimalFormatPriceConverter } from '../../helpers';
 import { OrderAttributes } from '../states';
-import { PrintButtonOrderPending } from '../Pdf';
 
 export type OrderViewFormInfoHeaderProps = {
   order: OrderAttributes;
@@ -60,20 +59,6 @@ export const OrderViewFormInfoHeader = ({
             custom: 'text-align: center;',
           }}
         />
-        <ContainerButton
-          styles={{
-            width: '100%',
-            custom: 'margin-top: 30px;',
-          }}
-        >
-          <>
-            <PrintButtonOrderPending
-              order={order}
-              siteOptions={siteOptions}
-              logoPdf={logoPdf}
-            />
-          </>
-        </ContainerButton>
       </ContainerHeaderInfo>
     </>
   );

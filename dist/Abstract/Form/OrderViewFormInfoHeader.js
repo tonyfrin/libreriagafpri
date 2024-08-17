@@ -9,7 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 var _Containers = require("../Containers");
 var _Li = require("../Li");
 var _helpers = require("../../helpers");
-var _Pdf = require("../Pdf");
 var OrderViewFormInfoHeader = exports.OrderViewFormInfoHeader = function OrderViewFormInfoHeader(_ref) {
   var order = _ref.order,
     siteOptions = _ref.siteOptions,
@@ -36,14 +35,5 @@ var OrderViewFormInfoHeader = exports.OrderViewFormInfoHeader = function OrderVi
     contentInfoStyles: {
       custom: 'text-align: center;'
     }
-  }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
-    styles: {
-      width: '100%',
-      custom: 'margin-top: 30px;'
-    }
-  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Pdf.PrintButtonOrderPending, {
-    order: order,
-    siteOptions: siteOptions,
-    logoPdf: logoPdf
-  })))));
+  })));
 };

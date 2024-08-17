@@ -9,7 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 var _Containers = require("../Containers");
 var _Li = require("../Li");
 var _helpers = require("../../helpers");
-var _Pdf = require("../Pdf");
 var BudgetViewFormInfoHeader = exports.BudgetViewFormInfoHeader = function BudgetViewFormInfoHeader(_ref) {
   var budget = _ref.budget,
     siteOptions = _ref.siteOptions,
@@ -42,14 +41,5 @@ var BudgetViewFormInfoHeader = exports.BudgetViewFormInfoHeader = function Budge
     contentInfoStyles: {
       custom: 'text-align: center;'
     }
-  }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
-    styles: {
-      width: '100%',
-      custom: 'margin-top: 30px;'
-    }
-  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Pdf.PrintButtonBudget, {
-    budget: budget,
-    siteOptions: siteOptions,
-    logoPdf: logoPdf
-  })))));
+  })));
 };
