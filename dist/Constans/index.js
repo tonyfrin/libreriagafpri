@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "AllRoles", {
-  enumerable: true,
-  get: function get() {
-    return _AllRoles.AllRoles;
-  }
-});
 Object.defineProperty(exports, "Cities", {
   enumerable: true,
   get: function get() {
@@ -37,4 +31,3 @@ var _Countries = require("./Countries");
 var _StatesCountries = require("./StatesCountries");
 var _Cities = require("./Cities");
 var _DocumentsIndex = require("./DocumentsIndex");
-var _AllRoles = require("./AllRoles");
