@@ -54,6 +54,7 @@ var RolesForm = exports.RolesForm = function RolesForm(_ref) {
       }
     } : _ref$deselectAllButto,
     permissionsProps = _ref.permissionsProps;
+  console.log('AllRoles', _constants.AllRoles); // slint-disable-line
   var isAddForm = formType === 'add';
   var isUpdateForm = formType === 'update';
   var currentRoles = isUpdateForm ? use.actions.getById(use.states.currentId) : null;
@@ -116,6 +117,7 @@ var RolesForm = exports.RolesForm = function RolesForm(_ref) {
   }, /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.css)(optionButtonContainerStyle)
   }, /*#__PURE__*/_react["default"].createElement(_Button.Button, selectAllButtonProps), /*#__PURE__*/_react["default"].createElement(_Button.Button, deselectAllButtonProps)), _constants.AllRoles.map(function (role) {
+    console.log('role', role); // slint-disable-line
     return /*#__PURE__*/_react["default"].createElement(_RolePermissions.RolePermissions, (0, _extends2["default"])({
       selectedPermissions: use.states.permissions,
       key: role.name,

@@ -79,7 +79,7 @@ export const RolesForm = ({
   },
   permissionsProps,
 }: RolesFormProps): JSX.Element => {
-  console.log('AllRoles', AllRoles);
+  console.log('AllRoles', AllRoles); // slint-disable-line
   const isAddForm = formType === 'add';
   const isUpdateForm = formType === 'update';
 
@@ -166,8 +166,8 @@ export const RolesForm = ({
             <Button {...deselectAllButtonProps} />
           </div>
           {AllRoles.map((role) => {
-            console.log('role', role);
-            return(
+            console.log('role', role); // slint-disable-line
+            return (
               <RolePermissions
                 selectedPermissions={use.states.permissions}
                 key={role.name}
@@ -175,10 +175,8 @@ export const RolesForm = ({
                 onPermissionChange={use.actions.changePermissions}
                 {...permissionsProps}
               />
-            )
-        }
-          
-          )}
+            );
+          })}
         </div>
       </>
     </ModelForm>
