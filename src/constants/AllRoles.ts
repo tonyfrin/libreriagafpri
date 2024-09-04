@@ -268,4 +268,13 @@ export const AllRoles = [
       { name: 'Obtener', value: 'pay-runGet' },
     ],
   },
+  {
+    name: 'Descuentos',
+    permissions: [
+      { name: 'Crear', value: 'discountCreate' },
+      { name: 'Actualizar', value: 'discountUpdate' },
+      { name: 'Borrar', value: 'discountDelete' },
+      { name: 'Obtener', value: 'discountGet' },
+    ],
+  },
 ];
