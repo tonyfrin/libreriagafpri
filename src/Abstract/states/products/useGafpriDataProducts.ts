@@ -16,9 +16,12 @@ export interface ProductsAttributes {
   image: string;
   galleryImage: string[];
   note: string;
-  salesPrice: number;
-  offerPrice: number;
-  cost: number;
+  salesPrice?: number;
+  price1?: number;
+  price2?: number;
+  price3?: number;
+  price4?: number;
+  price5?: number;
   type: string;
   taxStatus: string;
   taxClass: string;
@@ -33,6 +36,7 @@ export interface ProductsAttributes {
   length: number;
   catalogOrder: number;
   reviews: boolean;
+  discount: boolean;
   posts: PostsAttributes;
   category: CategoryAttributes;
 }

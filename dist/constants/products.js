@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.VISIBILITY_DEFAULT = exports.VISIBILITY = exports.TAX_STATUS_DEFAULT = exports.TAX_STATUS = exports.PRODUCT_TYPES_DEFAULT = exports.PRODUCT_TYPES = exports.PRODUCT_STATUS_DEFAULT = exports.PRODUCT_STATUS = exports.PRODUCT_IMAGE_DEFAULT = exports.PACKAGE_TYPE_DEFAULT = exports.PACKAGE_TYPE = void 0;
 var PRODUCT_TYPES = exports.PRODUCT_TYPES = [{
-  value: 'simple',
-  label: 'Simple'
+  value: 'product',
+  label: 'Producto'
 }, {
-  value: 'grouped',
-  label: 'Agrupados'
+  value: 'spare_parts',
+  label: 'Repuesto'
 }, {
   value: 'service',
   label: 'Servicio'

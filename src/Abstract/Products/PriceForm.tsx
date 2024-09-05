@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { css } from '@emotion/css';
 import { ContainerButton } from '../Containers';
 import { ModelForm } from '../Form';
 import { UseGafpriProductsReturn } from '../../states';
-import { InputSalesPrice, InputOfferPrice, InputCost } from '../Input';
+import { InputSalesPrice, InputOfferPrice, InputCost, Input } from '../Input';
 
 export type PriceFormProps = {
   use: UseGafpriProductsReturn;
@@ -39,12 +39,24 @@ export const PriceForm = ({ use, formType }: PriceFormProps): JSX.Element => {
         use.attributes.actions.changeSalesPrice(`${current.salesPrice}`);
       }
 
-      if (current.offerPrice) {
-        use.attributes.actions.changeOfferPrice(`${current.offerPrice}`);
+      if (current.price1) {
+        use.attributes.actions.changePrice1(`${current.price1}`);
       }
 
-      if (current.cost) {
-        use.attributes.actions.changeCost(`${current.cost}`);
+      if (current.price2) {
+        use.attributes.actions.changePrice1(`${current.price2}`);
+      }
+
+      if (current.price3) {
+        use.attributes.actions.changePrice1(`${current.price3}`);
+      }
+
+      if (current.price4) {
+        use.attributes.actions.changePrice1(`${current.price4}`);
+      }
+
+      if (current.price5) {
+        use.attributes.actions.changePrice1(`${current.price5}`);
       }
     }
   }, [current]);
@@ -121,15 +133,21 @@ export const PriceForm = ({ use, formType }: PriceFormProps): JSX.Element => {
           }}
         >
           <>
-            <InputOfferPrice
-              change={use.attributes.actions.changeOfferPrice}
-              props={{
-                styles: {
-                  width: '100%',
-                },
-                inputProps: {
-                  defaultValue: use.attributes.states.offerPrice,
-                },
+            <Input
+              styles={{
+                width: '100%',
+              }}
+              inputProps={{
+                placeholder: 'Precio 1',
+                type: 'number',
+                min: '0',
+                step: '0.1',
+                title: 'Precio 1',
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  use.attributes.actions.changePrice1(
+                    event.currentTarget.value
+                  ),
+                defaultValue: use.attributes.states.price1,
               }}
             />
           </>
@@ -141,15 +159,99 @@ export const PriceForm = ({ use, formType }: PriceFormProps): JSX.Element => {
           }}
         >
           <>
-            <InputCost
-              changeCost={use.attributes.actions.changeCost}
-              props={{
-                styles: {
-                  width: '100%',
-                },
-                inputProps: {
-                  defaultValue: use.attributes.states.cost,
-                },
+            <Input
+              styles={{
+                width: '100%',
+              }}
+              inputProps={{
+                placeholder: 'Precio 2',
+                type: 'number',
+                min: '0',
+                step: '0.1',
+                title: 'Precio 2',
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  use.attributes.actions.changePrice2(
+                    event.currentTarget.value
+                  ),
+                defaultValue: use.attributes.states.price2,
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '40%',
+            justifyContent: 'end',
+          }}
+        >
+          <>
+            <Input
+              styles={{
+                width: '100%',
+              }}
+              inputProps={{
+                placeholder: 'Precio 3',
+                type: 'number',
+                min: '0',
+                step: '0.1',
+                title: 'Precio 3',
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  use.attributes.actions.changePrice3(
+                    event.currentTarget.value
+                  ),
+                defaultValue: use.attributes.states.price3,
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '40%',
+            justifyContent: 'end',
+          }}
+        >
+          <>
+            <Input
+              styles={{
+                width: '100%',
+              }}
+              inputProps={{
+                placeholder: 'Precio 4',
+                type: 'number',
+                min: '0',
+                step: '0.1',
+                title: 'Precio 4',
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  use.attributes.actions.changePrice4(
+                    event.currentTarget.value
+                  ),
+                defaultValue: use.attributes.states.price4,
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '40%',
+            justifyContent: 'end',
+          }}
+        >
+          <>
+            <Input
+              styles={{
+                width: '100%',
+              }}
+              inputProps={{
+                placeholder: 'Precio 5',
+                type: 'number',
+                min: '0',
+                step: '0.1',
+                title: 'Precio 5',
+                onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                  use.attributes.actions.changePrice5(
+                    event.currentTarget.value
+                  ),
+                defaultValue: use.attributes.states.price5,
               }}
             />
           </>

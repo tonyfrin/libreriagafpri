@@ -45,6 +45,9 @@ var AdvancedForm = exports.AdvancedForm = function AdvancedForm(_ref) {
       if (current.reviews) {
         use.attributes.actions.setReviews(current.reviews);
       }
+      if (current.discount) {
+        use.attributes.actions.setDiscount(current.reviews);
+      }
     }
   }, [current]);
   var title1Text = isAddForm ? 'Avanzado' : 'Actualización Avanzada';
@@ -136,6 +139,19 @@ var AdvancedForm = exports.AdvancedForm = function AdvancedForm(_ref) {
     title: "Habilitar rese\xF1as",
     selected: use.attributes.states.reviews,
     onChange: use.attributes.actions.changeReviews,
+    titleStyles: {
+      customStyle: "\n              margin-right: 15px;\n              color: #8d8d8d;\n            "
+    }
+  })), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '100%',
+      justifyContent: 'flex-start',
+      custom: "padding-left: 34px;"
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_CheckBox.SingleCheckBox, {
+    title: "Habilitar descuento",
+    selected: use.attributes.states.discount,
+    onChange: use.attributes.actions.changeDiscount,
     titleStyles: {
       customStyle: "\n              margin-right: 15px;\n              color: #8d8d8d;\n            "
     }

@@ -26,8 +26,11 @@ type State = {
     noteValid: boolean;
     salesPrice: string;
     salesPriceValid: boolean;
-    offerPrice: string;
-    offerPriceValid: boolean;
+    price1: string;
+    price2: string;
+    price3: string;
+    price4: string;
+    price5: string;
     cost: string;
     costValid: boolean;
     type: string;
@@ -76,6 +79,7 @@ type State = {
     catalogOrderValid: boolean;
     reviews: boolean;
     reviewsValid: boolean;
+    discount: boolean;
     currentId: number;
     uploadCurrent: boolean;
     categoryOptions: Category[];
@@ -92,7 +96,6 @@ type Actions = {
     validationGalleryImage: (value: string[]) => boolean;
     validationNote: (value: string) => boolean;
     validationSalesPrice: (value: number) => boolean;
-    validationOfferPrice: (value: number) => boolean;
     validationCost: (value: number) => boolean;
     validationType: (value: string) => boolean;
     validationTaxStatus: (value: string) => boolean;
@@ -120,7 +123,11 @@ type Actions = {
     changeGalleryImage: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
     changeNote: (value: string) => void;
     changeSalesPrice: (value: string) => void;
-    changeOfferPrice: (value: string) => void;
+    changePrice1: (value: string) => void;
+    changePrice2: (value: string) => void;
+    changePrice3: (value: string) => void;
+    changePrice4: (value: string) => void;
+    changePrice5: (value: string) => void;
     changeCost: (value: string) => void;
     changeType: (value: SingleValue<{
         value: string;
@@ -159,6 +166,7 @@ type Actions = {
     changeLength: (value: string) => void;
     changeCatalogOrder: (value: string) => void;
     changeReviews: () => void;
+    changeDiscount: () => void;
     setCurrentId: (id: number) => void;
     setPhoto: (value: string) => void;
     setSubmitting: (value: boolean) => void;
@@ -194,6 +202,7 @@ type Actions = {
         value: string;
     }> | undefined;
     setReviews: (value: boolean) => void;
+    setDiscount: (value: boolean) => void;
     setUploadCurrent: (value: boolean) => void;
 };
 export type UseGafpriAttributesProductsReturn = {

@@ -1,6 +1,6 @@
 export const PRODUCT_TYPES = [
-  { value: 'simple', label: 'Simple' },
-  { value: 'grouped', label: 'Agrupados' },
+  { value: 'product', label: 'Producto' },
+  { value: 'spare_parts', label: 'Repuesto' },
   { value: 'service', label: 'Servicio' },
 ];
 

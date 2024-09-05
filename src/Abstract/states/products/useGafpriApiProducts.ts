@@ -26,7 +26,11 @@ type Data = {
   galleryImage?: string[];
   note?: string;
   salesPrice?: number;
-  offerPrice?: number;
+  price1?: number;
+  price2?: number;
+  price3?: number;
+  price4?: number;
+  price5?: number;
   cost?: number;
   type?: string;
   taxStatus?: string;
@@ -106,6 +110,11 @@ export function useGafpriApiProducts({
           galleryImage: attributes.states.galleryImage,
           note: attributes.states.note,
           salesPrice: parseFloat(attributes.states.salesPrice),
+          price1: parseFloat(attributes.states.price1),
+          price2: parseFloat(attributes.states.price2),
+          price3: parseFloat(attributes.states.price3),
+          price4: parseFloat(attributes.states.price4),
+          price5: parseFloat(attributes.states.price5),
           type: attributes.states.type,
           taxStatus: attributes.states.taxStatus,
           taxClass: attributes.states.taxClasses,
@@ -173,7 +182,11 @@ export function useGafpriApiProducts({
           galleryImage: attributes.states.galleryImage,
           note: attributes.states.note,
           salesPrice: parseFloat(attributes.states.salesPrice),
-          offerPrice: parseFloat(attributes.states.offerPrice),
+          price1: parseFloat(attributes.states.price1),
+          price2: parseFloat(attributes.states.price2),
+          price3: parseFloat(attributes.states.price3),
+          price4: parseFloat(attributes.states.price4),
+          price5: parseFloat(attributes.states.price5),
           cost: parseFloat(attributes.states.cost),
           type: attributes.states.type,
           taxStatus: attributes.states.taxStatus,

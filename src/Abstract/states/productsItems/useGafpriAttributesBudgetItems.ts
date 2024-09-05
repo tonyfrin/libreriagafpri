@@ -150,7 +150,7 @@ export function useGafpriAttributesBudgetItems({
       productsPostsId: product.postsId,
       sku: product.sku,
       name: product.name,
-      cost: parseFloat(`${product.cost}`) ?? 0,
+      cost: 0,
       qty: 1,
       price: parseFloat(`${product.salesPrice}`),
       type: product.type,

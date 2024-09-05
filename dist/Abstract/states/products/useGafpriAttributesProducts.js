@@ -108,194 +108,210 @@ function useGafpriAttributesProducts(_ref) {
     setSalesPriceValid = _useState44[1];
   var _useState45 = (0, _react.useState)(''),
     _useState46 = (0, _slicedToArray2["default"])(_useState45, 2),
-    offerPrice = _useState46[0],
-    setOfferPrice = _useState46[1];
-  var _useState47 = (0, _react.useState)(true),
+    price1 = _useState46[0],
+    setPrice1 = _useState46[1];
+  var _useState47 = (0, _react.useState)(''),
     _useState48 = (0, _slicedToArray2["default"])(_useState47, 2),
-    offerPriceValid = _useState48[0],
-    setOfferPriceValid = _useState48[1];
+    price2 = _useState48[0],
+    setPrice2 = _useState48[1];
   var _useState49 = (0, _react.useState)(''),
     _useState50 = (0, _slicedToArray2["default"])(_useState49, 2),
-    cost = _useState50[0],
-    setCost = _useState50[1];
-  var _useState51 = (0, _react.useState)(true),
+    price3 = _useState50[0],
+    setPrice3 = _useState50[1];
+  var _useState51 = (0, _react.useState)(''),
     _useState52 = (0, _slicedToArray2["default"])(_useState51, 2),
-    costValid = _useState52[0],
-    setCostValid = _useState52[1];
+    price4 = _useState52[0],
+    setPrice4 = _useState52[1];
   var _useState53 = (0, _react.useState)(''),
     _useState54 = (0, _slicedToArray2["default"])(_useState53, 2),
-    type = _useState54[0],
-    setType = _useState54[1];
-  var _useState55 = (0, _react.useState)(false),
+    price5 = _useState54[0],
+    setPrice5 = _useState54[1];
+  var _useState55 = (0, _react.useState)(''),
     _useState56 = (0, _slicedToArray2["default"])(_useState55, 2),
-    typeValid = _useState56[0],
-    setTypeValid = _useState56[1];
-  var _useState57 = (0, _react.useState)(_constants.PRODUCT_TYPES_DEFAULT),
+    cost = _useState56[0],
+    setCost = _useState56[1];
+  var _useState57 = (0, _react.useState)(true),
     _useState58 = (0, _slicedToArray2["default"])(_useState57, 2),
-    typeDefault = _useState58[0],
-    setTypeDefault = _useState58[1];
-  var typeOptions = _constants.PRODUCT_TYPES;
+    costValid = _useState58[0],
+    setCostValid = _useState58[1];
   var _useState59 = (0, _react.useState)(''),
     _useState60 = (0, _slicedToArray2["default"])(_useState59, 2),
-    taxStatus = _useState60[0],
-    setTaxStatus = _useState60[1];
-  var _useState61 = (0, _react.useState)(true),
+    type = _useState60[0],
+    setType = _useState60[1];
+  var _useState61 = (0, _react.useState)(false),
     _useState62 = (0, _slicedToArray2["default"])(_useState61, 2),
-    taxStatusValid = _useState62[0],
-    setTaxStatusValid = _useState62[1];
-  var _useState63 = (0, _react.useState)(_constants.TAX_STATUS_DEFAULT),
+    typeValid = _useState62[0],
+    setTypeValid = _useState62[1];
+  var _useState63 = (0, _react.useState)(_constants.PRODUCT_TYPES_DEFAULT),
     _useState64 = (0, _slicedToArray2["default"])(_useState63, 2),
-    taxStatusDefault = _useState64[0],
-    setTaxStatusDefault = _useState64[1];
-  var taxStatusOptions = _constants.TAX_STATUS;
+    typeDefault = _useState64[0],
+    setTypeDefault = _useState64[1];
+  var typeOptions = _constants.PRODUCT_TYPES;
   var _useState65 = (0, _react.useState)(''),
     _useState66 = (0, _slicedToArray2["default"])(_useState65, 2),
-    taxClasses = _useState66[0],
-    setTaxClasses = _useState66[1];
+    taxStatus = _useState66[0],
+    setTaxStatus = _useState66[1];
   var _useState67 = (0, _react.useState)(true),
     _useState68 = (0, _slicedToArray2["default"])(_useState67, 2),
-    taxClassesValid = _useState68[0],
-    setTaxClassesValid = _useState68[1];
-  var _useState69 = (0, _react.useState)({
+    taxStatusValid = _useState68[0],
+    setTaxStatusValid = _useState68[1];
+  var _useState69 = (0, _react.useState)(_constants.TAX_STATUS_DEFAULT),
+    _useState70 = (0, _slicedToArray2["default"])(_useState69, 2),
+    taxStatusDefault = _useState70[0],
+    setTaxStatusDefault = _useState70[1];
+  var taxStatusOptions = _constants.TAX_STATUS;
+  var _useState71 = (0, _react.useState)(''),
+    _useState72 = (0, _slicedToArray2["default"])(_useState71, 2),
+    taxClasses = _useState72[0],
+    setTaxClasses = _useState72[1];
+  var _useState73 = (0, _react.useState)(true),
+    _useState74 = (0, _slicedToArray2["default"])(_useState73, 2),
+    taxClassesValid = _useState74[0],
+    setTaxClassesValid = _useState74[1];
+  var _useState75 = (0, _react.useState)({
       label: 'Clase de impuesto',
       value: ''
     }),
-    _useState70 = (0, _slicedToArray2["default"])(_useState69, 2),
-    taxClassesDefault = _useState70[0],
-    setTaxClassesDefault = _useState70[1];
-  var taxClassesOptions = optionsTaxClasses;
-  var _useState71 = (0, _react.useState)(''),
-    _useState72 = (0, _slicedToArray2["default"])(_useState71, 2),
-    packageType = _useState72[0],
-    setPackageType = _useState72[1];
-  var _useState73 = (0, _react.useState)(true),
-    _useState74 = (0, _slicedToArray2["default"])(_useState73, 2),
-    packageTypeValid = _useState74[0],
-    setPackageTypeValid = _useState74[1];
-  var _useState75 = (0, _react.useState)(_constants.PACKAGE_TYPE_DEFAULT),
     _useState76 = (0, _slicedToArray2["default"])(_useState75, 2),
-    packageTypeDefault = _useState76[0],
-    setPackageTypeDefault = _useState76[1];
-  var packageTypeOptions = _constants.PACKAGE_TYPE;
+    taxClassesDefault = _useState76[0],
+    setTaxClassesDefault = _useState76[1];
+  var taxClassesOptions = optionsTaxClasses;
   var _useState77 = (0, _react.useState)(''),
     _useState78 = (0, _slicedToArray2["default"])(_useState77, 2),
-    qtyPack = _useState78[0],
-    setQtyPack = _useState78[1];
+    packageType = _useState78[0],
+    setPackageType = _useState78[1];
   var _useState79 = (0, _react.useState)(true),
     _useState80 = (0, _slicedToArray2["default"])(_useState79, 2),
-    qtyPackValid = _useState80[0],
-    setQtyPackValid = _useState80[1];
-  var _useState81 = (0, _react.useState)(''),
+    packageTypeValid = _useState80[0],
+    setPackageTypeValid = _useState80[1];
+  var _useState81 = (0, _react.useState)(_constants.PACKAGE_TYPE_DEFAULT),
     _useState82 = (0, _slicedToArray2["default"])(_useState81, 2),
-    undCbm = _useState82[0],
-    setUndCbm = _useState82[1];
-  var _useState83 = (0, _react.useState)(true),
+    packageTypeDefault = _useState82[0],
+    setPackageTypeDefault = _useState82[1];
+  var packageTypeOptions = _constants.PACKAGE_TYPE;
+  var _useState83 = (0, _react.useState)(''),
     _useState84 = (0, _slicedToArray2["default"])(_useState83, 2),
-    undCbmValid = _useState84[0],
-    setUndCbmValid = _useState84[1];
-  var _useState85 = (0, _react.useState)([]),
+    qtyPack = _useState84[0],
+    setQtyPack = _useState84[1];
+  var _useState85 = (0, _react.useState)(true),
     _useState86 = (0, _slicedToArray2["default"])(_useState85, 2),
-    attributes = _useState86[0],
-    setAttributes = _useState86[1];
-  var _useState87 = (0, _react.useState)(true),
+    qtyPackValid = _useState86[0],
+    setQtyPackValid = _useState86[1];
+  var _useState87 = (0, _react.useState)(''),
     _useState88 = (0, _slicedToArray2["default"])(_useState87, 2),
-    attributesValid = _useState88[0],
-    setAttributesValid = _useState88[1];
-  var _useState89 = (0, _react.useState)(''),
+    undCbm = _useState88[0],
+    setUndCbm = _useState88[1];
+  var _useState89 = (0, _react.useState)(true),
     _useState90 = (0, _slicedToArray2["default"])(_useState89, 2),
-    valueAttributes = _useState90[0],
-    setValueAttributes = _useState90[1];
-  var _useState91 = (0, _react.useState)(''),
+    undCbmValid = _useState90[0],
+    setUndCbmValid = _useState90[1];
+  var _useState91 = (0, _react.useState)([]),
     _useState92 = (0, _slicedToArray2["default"])(_useState91, 2),
-    descriptionAttributes = _useState92[0],
-    setDescriptionAttributes = _useState92[1];
-  var _useState93 = (0, _react.useState)(''),
+    attributes = _useState92[0],
+    setAttributes = _useState92[1];
+  var _useState93 = (0, _react.useState)(true),
     _useState94 = (0, _slicedToArray2["default"])(_useState93, 2),
-    status = _useState94[0],
-    setStatus = _useState94[1];
-  var _useState95 = (0, _react.useState)(false),
+    attributesValid = _useState94[0],
+    setAttributesValid = _useState94[1];
+  var _useState95 = (0, _react.useState)(''),
     _useState96 = (0, _slicedToArray2["default"])(_useState95, 2),
-    statusValid = _useState96[0],
-    setStatusValid = _useState96[1];
-  var _useState97 = (0, _react.useState)(_constants.PRODUCT_STATUS_DEFAULT),
+    valueAttributes = _useState96[0],
+    setValueAttributes = _useState96[1];
+  var _useState97 = (0, _react.useState)(''),
     _useState98 = (0, _slicedToArray2["default"])(_useState97, 2),
-    statusDefault = _useState98[0],
-    setStatusDefault = _useState98[1];
-  var statusOptions = _constants.PRODUCT_STATUS;
+    descriptionAttributes = _useState98[0],
+    setDescriptionAttributes = _useState98[1];
   var _useState99 = (0, _react.useState)(''),
     _useState100 = (0, _slicedToArray2["default"])(_useState99, 2),
-    permanentLink = _useState100[0],
-    setPermanentLink = _useState100[1];
-  var _useState101 = (0, _react.useState)(true),
+    status = _useState100[0],
+    setStatus = _useState100[1];
+  var _useState101 = (0, _react.useState)(false),
     _useState102 = (0, _slicedToArray2["default"])(_useState101, 2),
-    permanentLinkValid = _useState102[0],
-    setPermanentLinkValid = _useState102[1];
-  var _useState103 = (0, _react.useState)(''),
+    statusValid = _useState102[0],
+    setStatusValid = _useState102[1];
+  var _useState103 = (0, _react.useState)(_constants.PRODUCT_STATUS_DEFAULT),
     _useState104 = (0, _slicedToArray2["default"])(_useState103, 2),
-    visibility = _useState104[0],
-    setVisibility = _useState104[1];
-  var _useState105 = (0, _react.useState)(false),
+    statusDefault = _useState104[0],
+    setStatusDefault = _useState104[1];
+  var statusOptions = _constants.PRODUCT_STATUS;
+  var _useState105 = (0, _react.useState)(''),
     _useState106 = (0, _slicedToArray2["default"])(_useState105, 2),
-    visibilityValid = _useState106[0],
-    setVisibilityValid = _useState106[1];
-  var _useState107 = (0, _react.useState)(_constants.VISIBILITY_DEFAULT),
+    permanentLink = _useState106[0],
+    setPermanentLink = _useState106[1];
+  var _useState107 = (0, _react.useState)(true),
     _useState108 = (0, _slicedToArray2["default"])(_useState107, 2),
-    visibilityDefault = _useState108[0],
-    setVisibilityDefault = _useState108[1];
-  var visibilityOptions = _constants.VISIBILITY;
+    permanentLinkValid = _useState108[0],
+    setPermanentLinkValid = _useState108[1];
   var _useState109 = (0, _react.useState)(''),
     _useState110 = (0, _slicedToArray2["default"])(_useState109, 2),
-    weight = _useState110[0],
-    setWeight = _useState110[1];
-  var _useState111 = (0, _react.useState)(true),
+    visibility = _useState110[0],
+    setVisibility = _useState110[1];
+  var _useState111 = (0, _react.useState)(false),
     _useState112 = (0, _slicedToArray2["default"])(_useState111, 2),
-    weightValid = _useState112[0],
-    setWeightValid = _useState112[1];
-  var _useState113 = (0, _react.useState)(''),
+    visibilityValid = _useState112[0],
+    setVisibilityValid = _useState112[1];
+  var _useState113 = (0, _react.useState)(_constants.VISIBILITY_DEFAULT),
     _useState114 = (0, _slicedToArray2["default"])(_useState113, 2),
-    height = _useState114[0],
-    setHeight = _useState114[1];
-  var _useState115 = (0, _react.useState)(true),
+    visibilityDefault = _useState114[0],
+    setVisibilityDefault = _useState114[1];
+  var visibilityOptions = _constants.VISIBILITY;
+  var _useState115 = (0, _react.useState)(''),
     _useState116 = (0, _slicedToArray2["default"])(_useState115, 2),
-    heightValid = _useState116[0],
-    setHeightValid = _useState116[1];
-  var _useState117 = (0, _react.useState)(''),
+    weight = _useState116[0],
+    setWeight = _useState116[1];
+  var _useState117 = (0, _react.useState)(true),
     _useState118 = (0, _slicedToArray2["default"])(_useState117, 2),
-    width = _useState118[0],
-    setWidth = _useState118[1];
-  var _useState119 = (0, _react.useState)(true),
+    weightValid = _useState118[0],
+    setWeightValid = _useState118[1];
+  var _useState119 = (0, _react.useState)(''),
     _useState120 = (0, _slicedToArray2["default"])(_useState119, 2),
-    widthValid = _useState120[0],
-    setWidthValid = _useState120[1];
-  var _useState121 = (0, _react.useState)(''),
+    height = _useState120[0],
+    setHeight = _useState120[1];
+  var _useState121 = (0, _react.useState)(true),
     _useState122 = (0, _slicedToArray2["default"])(_useState121, 2),
-    length = _useState122[0],
-    setLength = _useState122[1];
-  var _useState123 = (0, _react.useState)(true),
+    heightValid = _useState122[0],
+    setHeightValid = _useState122[1];
+  var _useState123 = (0, _react.useState)(''),
     _useState124 = (0, _slicedToArray2["default"])(_useState123, 2),
-    lengthValid = _useState124[0],
-    setLengthValid = _useState124[1];
-  var _useState125 = (0, _react.useState)(''),
+    width = _useState124[0],
+    setWidth = _useState124[1];
+  var _useState125 = (0, _react.useState)(true),
     _useState126 = (0, _slicedToArray2["default"])(_useState125, 2),
-    catalogOrder = _useState126[0],
-    setCatalogOrder = _useState126[1];
-  var _useState127 = (0, _react.useState)(true),
+    widthValid = _useState126[0],
+    setWidthValid = _useState126[1];
+  var _useState127 = (0, _react.useState)(''),
     _useState128 = (0, _slicedToArray2["default"])(_useState127, 2),
-    catalogOrderValid = _useState128[0],
-    setCatalogOrderValid = _useState128[1];
-  var _useState129 = (0, _react.useState)(false),
+    length = _useState128[0],
+    setLength = _useState128[1];
+  var _useState129 = (0, _react.useState)(true),
     _useState130 = (0, _slicedToArray2["default"])(_useState129, 2),
-    reviews = _useState130[0],
-    setReviews = _useState130[1];
-  var reviewsValid = true;
-  var _useState131 = (0, _react.useState)(0),
+    lengthValid = _useState130[0],
+    setLengthValid = _useState130[1];
+  var _useState131 = (0, _react.useState)(''),
     _useState132 = (0, _slicedToArray2["default"])(_useState131, 2),
-    currentId = _useState132[0],
-    setCurrentId = _useState132[1];
-  var _useState133 = (0, _react.useState)(false),
+    catalogOrder = _useState132[0],
+    setCatalogOrder = _useState132[1];
+  var _useState133 = (0, _react.useState)(true),
     _useState134 = (0, _slicedToArray2["default"])(_useState133, 2),
-    uploadCurrent = _useState134[0],
-    setUploadCurrent = _useState134[1];
+    catalogOrderValid = _useState134[0],
+    setCatalogOrderValid = _useState134[1];
+  var _useState135 = (0, _react.useState)(false),
+    _useState136 = (0, _slicedToArray2["default"])(_useState135, 2),
+    reviews = _useState136[0],
+    setReviews = _useState136[1];
+  var reviewsValid = true;
+  var _useState137 = (0, _react.useState)(false),
+    _useState138 = (0, _slicedToArray2["default"])(_useState137, 2),
+    discount = _useState138[0],
+    setDiscount = _useState138[1];
+  var _useState139 = (0, _react.useState)(0),
+    _useState140 = (0, _slicedToArray2["default"])(_useState139, 2),
+    currentId = _useState140[0],
+    setCurrentId = _useState140[1];
+  var _useState141 = (0, _react.useState)(false),
+    _useState142 = (0, _slicedToArray2["default"])(_useState141, 2),
+    uploadCurrent = _useState142[0],
+    setUploadCurrent = _useState142[1];
   var infoReset = function infoReset() {
     setName('');
     setNameValid(false);
@@ -319,8 +335,11 @@ function useGafpriAttributesProducts(_ref) {
     setNoteValid(true);
     setSalesPrice('');
     setSalesPriceValid(false);
-    setOfferPrice('');
-    setOfferPriceValid(true);
+    setPrice1('');
+    setPrice2('');
+    setPrice3('');
+    setPrice4('');
+    setPrice5('');
     setCost('');
     setCostValid(true);
     setType('');
@@ -361,6 +380,7 @@ function useGafpriAttributesProducts(_ref) {
     setCatalogOrder('');
     setCatalogOrderValid(true);
     setReviews(false);
+    setDiscount(false);
   };
 
   // Funciones de Validacion
@@ -440,14 +460,6 @@ function useGafpriAttributesProducts(_ref) {
       setValid: setSalesPriceValid,
       currentValid: salesPriceValid
     }); //
-  };
-  var validationOfferPrice = function validationOfferPrice(value) {
-    return (0, _Validations.generalValidationOfferPrice)({
-      value: value,
-      setValid: setOfferPriceValid,
-      currentValid: offerPriceValid,
-      required: false
-    });
   };
   var validationCost = function validationCost(value) {
     return (0, _Validations.generalValidationCost)({
@@ -699,12 +711,25 @@ function useGafpriAttributesProducts(_ref) {
       setValue: setSalesPrice
     });
   };
-  var changeOfferPrice = function changeOfferPrice(value) {
-    (0, _Changes.generalChangeOfferPrice)({
-      value: value,
-      validation: validationOfferPrice,
-      setValue: setOfferPrice
-    });
+  var changePrice1 = function changePrice1(value) {
+    var formatValue = parseFloat(value).toFixed(2);
+    setPrice1(formatValue);
+  };
+  var changePrice2 = function changePrice2(value) {
+    var formatValue = parseFloat(value).toFixed(2);
+    setPrice2(formatValue);
+  };
+  var changePrice3 = function changePrice3(value) {
+    var formatValue = parseFloat(value).toFixed(2);
+    setPrice3(formatValue);
+  };
+  var changePrice4 = function changePrice4(value) {
+    var formatValue = parseFloat(value).toFixed(2);
+    setPrice4(formatValue);
+  };
+  var changePrice5 = function changePrice5(value) {
+    var formatValue = parseFloat(value).toFixed(2);
+    setPrice5(formatValue);
   };
   var changeCost = function changeCost(value) {
     (0, _Changes.generalChangeCost)({
@@ -831,6 +856,11 @@ function useGafpriAttributesProducts(_ref) {
       return !prevValue;
     });
   };
+  var changeDiscount = function changeDiscount() {
+    setDiscount(function (prevValue) {
+      return !prevValue;
+    });
+  };
 
   /**
    * Otras funciones
@@ -913,8 +943,11 @@ function useGafpriAttributesProducts(_ref) {
     noteValid: noteValid,
     salesPrice: salesPrice,
     salesPriceValid: salesPriceValid,
-    offerPrice: offerPrice,
-    offerPriceValid: offerPriceValid,
+    price1: price1,
+    price2: price2,
+    price3: price3,
+    price4: price4,
+    price5: price5,
     cost: cost,
     costValid: costValid,
     type: type,
@@ -963,6 +996,7 @@ function useGafpriAttributesProducts(_ref) {
     catalogOrderValid: catalogOrderValid,
     reviews: reviews,
     reviewsValid: reviewsValid,
+    discount: discount,
     currentId: currentId,
     categoryOptions: categoryOptions,
     uploadCurrent: uploadCurrent
@@ -979,7 +1013,6 @@ function useGafpriAttributesProducts(_ref) {
     validationGalleryImage: validationGalleryImage,
     validationNote: validationNote,
     validationSalesPrice: validationSalesPrice,
-    validationOfferPrice: validationOfferPrice,
     validationCost: validationCost,
     validationType: validationType,
     validationTaxStatus: validationTaxStatus,
@@ -1007,7 +1040,11 @@ function useGafpriAttributesProducts(_ref) {
     changeGalleryImage: changeGalleryImage,
     changeNote: changeNote,
     changeSalesPrice: changeSalesPrice,
-    changeOfferPrice: changeOfferPrice,
+    changePrice1: changePrice1,
+    changePrice2: changePrice2,
+    changePrice3: changePrice3,
+    changePrice4: changePrice4,
+    changePrice5: changePrice5,
     changeCost: changeCost,
     changeType: changeType,
     changeTaxStatus: changeTaxStatus,
@@ -1028,6 +1065,7 @@ function useGafpriAttributesProducts(_ref) {
     changeLength: changeLength,
     changeCatalogOrder: changeCatalogOrder,
     changeReviews: changeReviews,
+    changeDiscount: changeDiscount,
     setCurrentId: setCurrentId,
     setPhoto: setPhoto,
     setSubmitting: setSubmitting,
@@ -1045,6 +1083,7 @@ function useGafpriAttributesProducts(_ref) {
     getTaxStatusOptionByValue: getTaxStatusOptionByValue,
     getTaxClassesOptionByValue: getTaxClassesOptionByValue,
     setReviews: setReviews,
+    setDiscount: setDiscount,
     setUploadCurrent: setUploadCurrent
   };
   return {

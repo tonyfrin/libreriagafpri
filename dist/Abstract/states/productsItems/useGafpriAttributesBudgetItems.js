@@ -110,12 +110,11 @@ function useGafpriAttributesBudgetItems(_ref) {
     return newTotal;
   };
   var addItemToCart = function addItemToCart(product) {
-    var _parseFloat;
     var item = {
       productsPostsId: product.postsId,
       sku: product.sku,
       name: product.name,
-      cost: (_parseFloat = parseFloat("".concat(product.cost))) !== null && _parseFloat !== void 0 ? _parseFloat : 0,
+      cost: 0,
       qty: 1,
       price: parseFloat("".concat(product.salesPrice)),
       type: product.type,
@@ -163,12 +162,12 @@ function useGafpriAttributesBudgetItems(_ref) {
     });
   };
   var addBudgetItemToCart = function addBudgetItemToCart(budgetItem) {
-    var _parseFloat2;
+    var _parseFloat;
     var item = {
       productsPostsId: budgetItem.productsPostsId,
       sku: budgetItem.sku,
       name: budgetItem.name,
-      cost: (_parseFloat2 = parseFloat("".concat(budgetItem.cost))) !== null && _parseFloat2 !== void 0 ? _parseFloat2 : 0,
+      cost: (_parseFloat = parseFloat("".concat(budgetItem.cost))) !== null && _parseFloat !== void 0 ? _parseFloat : 0,
       qty: budgetItem.qty,
       price: parseFloat("".concat(budgetItem.price)),
       type: budgetItem.type,
@@ -184,12 +183,12 @@ function useGafpriAttributesBudgetItems(_ref) {
     }
   };
   var addOrderItemToCart = function addOrderItemToCart(orderItem) {
-    var _parseFloat3;
+    var _parseFloat2;
     var item = {
       productsPostsId: orderItem.productsPostsId,
       sku: orderItem.sku,
       name: orderItem.name,
-      cost: (_parseFloat3 = parseFloat("".concat(orderItem.cost))) !== null && _parseFloat3 !== void 0 ? _parseFloat3 : 0,
+      cost: (_parseFloat2 = parseFloat("".concat(orderItem.cost))) !== null && _parseFloat2 !== void 0 ? _parseFloat2 : 0,
       qty: orderItem.qty,
       price: parseFloat("".concat(orderItem.price)),
       type: orderItem.type,

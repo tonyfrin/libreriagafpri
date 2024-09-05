@@ -58,7 +58,7 @@ var SearchProducts = exports.SearchProducts = function SearchProducts(_ref) {
   var projects = use.paginations.actions.sortByProperty(filtered, searchBy, use.paginations.states.orderList) || [];
   var paginated = use.paginations.actions.getPaginated(projects, use.paginations.states.currentPage, use.paginations.states.itemsPerPage);
   var items = (_paginated$map = paginated === null || paginated === void 0 ? void 0 : paginated.map(function (item) {
-    var price = (0, _helpers.decimalFormatPriceConverter)(item.salesPrice, sitesOptions.DECIMAL_NUMBERS, sitesOptions.CURRENCY_SYMBOL, sitesOptions.CURRENCY_LOCATION, sitesOptions.CURRENCY_FORMAT);
+    var price = (0, _helpers.decimalFormatPriceConverter)(item.salesPrice || 0, sitesOptions.DECIMAL_NUMBERS, sitesOptions.CURRENCY_SYMBOL, sitesOptions.CURRENCY_LOCATION, sitesOptions.CURRENCY_FORMAT);
     return [item.sku, item.name, price, /*#__PURE__*/_react["default"].createElement(ButtonUpdate, {
       id: item.postsId
     })];

@@ -113,8 +113,7 @@ var ProductsForm = exports.ProductsForm = function ProductsForm(_ref) {
         if (type) use.attributes.actions.changeType(type);
       }
       if (current.salesPrice) use.attributes.actions.changeSalesPrice("".concat(current.salesPrice));
-      if (current.offerPrice) use.attributes.actions.changeOfferPrice("".concat(current.offerPrice));
-      if (current.cost) use.attributes.actions.changeCost("".concat(current.cost));
+      use.attributes.actions.changeCost("0.00");
       if (current.packageType) {
         var options = use.attributes.actions.getPackageTypeOptionByValue(current.packageType);
         if (options) use.attributes.actions.changePackageType(options);

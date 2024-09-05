@@ -148,9 +148,7 @@ export const ProductsForm = ({
       if (current.salesPrice)
         use.attributes.actions.changeSalesPrice(`${current.salesPrice}`);
 
-      if (current.offerPrice)
-        use.attributes.actions.changeOfferPrice(`${current.offerPrice}`);
-      if (current.cost) use.attributes.actions.changeCost(`${current.cost}`);
+      use.attributes.actions.changeCost(`0.00`);
 
       if (current.packageType) {
         const options = use.attributes.actions.getPackageTypeOptionByValue(

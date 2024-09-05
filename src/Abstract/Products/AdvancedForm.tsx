@@ -76,6 +76,9 @@ export const AdvancedForm = ({
       if (current.reviews) {
         use.attributes.actions.setReviews(current.reviews);
       }
+      if (current.discount) {
+        use.attributes.actions.setDiscount(current.reviews);
+      }
     }
   }, [current]);
 
@@ -188,6 +191,25 @@ export const AdvancedForm = ({
             title="Habilitar reseñas"
             selected={use.attributes.states.reviews}
             onChange={use.attributes.actions.changeReviews}
+            titleStyles={{
+              customStyle: `
+              margin-right: 15px;
+              color: #8d8d8d;
+            `,
+            }}
+          />
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+            justifyContent: 'flex-start',
+            custom: `padding-left: 34px;`,
+          }}
+        >
+          <SingleCheckBox
+            title="Habilitar descuento"
+            selected={use.attributes.states.discount}
+            onChange={use.attributes.actions.changeDiscount}
             titleStyles={{
               customStyle: `
               margin-right: 15px;

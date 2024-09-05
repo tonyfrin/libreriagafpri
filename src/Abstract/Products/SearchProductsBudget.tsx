@@ -110,7 +110,7 @@ export const SearchProductsBudget = ({
   const items =
     paginated?.map((item) => {
       const price = decimalFormatPriceConverter(
-        item.salesPrice,
+        item.salesPrice || 0,
         sitesOptions.DECIMAL_NUMBERS,
         sitesOptions.CURRENCY_SYMBOL,
         sitesOptions.CURRENCY_LOCATION,

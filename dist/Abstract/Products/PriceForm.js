@@ -26,11 +26,20 @@ var PriceForm = exports.PriceForm = function PriceForm(_ref) {
       if (current.salesPrice) {
         use.attributes.actions.changeSalesPrice("".concat(current.salesPrice));
       }
-      if (current.offerPrice) {
-        use.attributes.actions.changeOfferPrice("".concat(current.offerPrice));
+      if (current.price1) {
+        use.attributes.actions.changePrice1("".concat(current.price1));
       }
-      if (current.cost) {
-        use.attributes.actions.changeCost("".concat(current.cost));
+      if (current.price2) {
+        use.attributes.actions.changePrice1("".concat(current.price2));
+      }
+      if (current.price3) {
+        use.attributes.actions.changePrice1("".concat(current.price3));
+      }
+      if (current.price4) {
+        use.attributes.actions.changePrice1("".concat(current.price4));
+      }
+      if (current.price5) {
+        use.attributes.actions.changePrice1("".concat(current.price5));
       }
     }
   }, [current]);
@@ -93,30 +102,100 @@ var PriceForm = exports.PriceForm = function PriceForm(_ref) {
       width: '40%',
       justifyContent: 'end'
     }
-  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.InputOfferPrice, {
-    change: use.attributes.actions.changeOfferPrice,
-    props: {
-      styles: {
-        width: '100%'
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    styles: {
+      width: '100%'
+    },
+    inputProps: {
+      placeholder: 'Precio 1',
+      type: 'number',
+      min: '0',
+      step: '0.1',
+      title: 'Precio 1',
+      onChange: function onChange(event) {
+        return use.attributes.actions.changePrice1(event.currentTarget.value);
       },
-      inputProps: {
-        defaultValue: use.attributes.states.offerPrice
-      }
+      defaultValue: use.attributes.states.price1
     }
   }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
     styles: {
       width: '40%',
       justifyContent: 'end'
     }
-  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.InputCost, {
-    changeCost: use.attributes.actions.changeCost,
-    props: {
-      styles: {
-        width: '100%'
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    styles: {
+      width: '100%'
+    },
+    inputProps: {
+      placeholder: 'Precio 2',
+      type: 'number',
+      min: '0',
+      step: '0.1',
+      title: 'Precio 2',
+      onChange: function onChange(event) {
+        return use.attributes.actions.changePrice2(event.currentTarget.value);
       },
-      inputProps: {
-        defaultValue: use.attributes.states.cost
-      }
+      defaultValue: use.attributes.states.price2
+    }
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '40%',
+      justifyContent: 'end'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    styles: {
+      width: '100%'
+    },
+    inputProps: {
+      placeholder: 'Precio 3',
+      type: 'number',
+      min: '0',
+      step: '0.1',
+      title: 'Precio 3',
+      onChange: function onChange(event) {
+        return use.attributes.actions.changePrice3(event.currentTarget.value);
+      },
+      defaultValue: use.attributes.states.price3
+    }
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '40%',
+      justifyContent: 'end'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    styles: {
+      width: '100%'
+    },
+    inputProps: {
+      placeholder: 'Precio 4',
+      type: 'number',
+      min: '0',
+      step: '0.1',
+      title: 'Precio 4',
+      onChange: function onChange(event) {
+        return use.attributes.actions.changePrice4(event.currentTarget.value);
+      },
+      defaultValue: use.attributes.states.price4
+    }
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '40%',
+      justifyContent: 'end'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    styles: {
+      width: '100%'
+    },
+    inputProps: {
+      placeholder: 'Precio 5',
+      type: 'number',
+      min: '0',
+      step: '0.1',
+      title: 'Precio 5',
+      onChange: function onChange(event) {
+        return use.attributes.actions.changePrice5(event.currentTarget.value);
+      },
+      defaultValue: use.attributes.states.price5
     }
   })))));
 };

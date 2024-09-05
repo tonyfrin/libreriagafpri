@@ -27,7 +27,6 @@ import {
   generalValidationNote,
   generalValidationPublicName,
   generalValidationSalesPrice,
-  generalValidationOfferPrice,
   generalValidationCost,
   generalValidationTaxStatus,
   generalValidationTaxClass,
@@ -59,7 +58,6 @@ import {
   generalChangeTags,
   generalChangeSku,
   generalChangeSalesPrice,
-  generalChangeOfferPrice,
   generalChangeCost,
   generalChangeTaxStatus,
   generalChangeTaxClass,
@@ -109,8 +107,11 @@ type State = {
   salesPrice: string;
   salesPriceValid: boolean;
 
-  offerPrice: string;
-  offerPriceValid: boolean;
+  price1: string;
+  price2: string;
+  price3: string;
+  price4: string;
+  price5: string;
 
   cost: string;
   costValid: boolean;
@@ -177,6 +178,8 @@ type State = {
   reviews: boolean;
   reviewsValid: boolean;
 
+  discount: boolean;
+
   currentId: number;
   uploadCurrent: boolean;
   categoryOptions: Category[];
@@ -195,7 +198,6 @@ type Actions = {
   validationGalleryImage: (value: string[]) => boolean;
   validationNote: (value: string) => boolean;
   validationSalesPrice: (value: number) => boolean;
-  validationOfferPrice: (value: number) => boolean;
   validationCost: (value: number) => boolean;
   validationType: (value: string) => boolean;
   validationTaxStatus: (value: string) => boolean;
@@ -224,7 +226,11 @@ type Actions = {
   changeGalleryImage: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
   changeNote: (value: string) => void;
   changeSalesPrice: (value: string) => void;
-  changeOfferPrice: (value: string) => void;
+  changePrice1: (value: string) => void;
+  changePrice2: (value: string) => void;
+  changePrice3: (value: string) => void;
+  changePrice4: (value: string) => void;
+  changePrice5: (value: string) => void;
   changeCost: (value: string) => void;
   changeType: (value: SingleValue<{ value: string; label: string }>) => void;
   changeTaxStatus: (
@@ -253,6 +259,7 @@ type Actions = {
   changeLength: (value: string) => void;
   changeCatalogOrder: (value: string) => void;
   changeReviews: () => void;
+  changeDiscount: () => void;
   setCurrentId: (id: number) => void;
   setPhoto: (value: string) => void;
   setSubmitting: (value: boolean) => void;
@@ -282,6 +289,7 @@ type Actions = {
     value: string
   ) => SingleValue<{ label: string; value: string }> | undefined;
   setReviews: (value: boolean) => void;
+  setDiscount: (value: boolean) => void;
   setUploadCurrent: (value: boolean) => void;
 };
 
@@ -334,8 +342,11 @@ export function useGafpriAttributesProducts({
   const [salesPrice, setSalesPrice] = useState('');
   const [salesPriceValid, setSalesPriceValid] = useState(false);
 
-  const [offerPrice, setOfferPrice] = useState('');
-  const [offerPriceValid, setOfferPriceValid] = useState(true);
+  const [price1, setPrice1] = useState('');
+  const [price2, setPrice2] = useState('');
+  const [price3, setPrice3] = useState('');
+  const [price4, setPrice4] = useState('');
+  const [price5, setPrice5] = useState('');
 
   const [cost, setCost] = useState('');
   const [costValid, setCostValid] = useState(true);
@@ -412,6 +423,8 @@ export function useGafpriAttributesProducts({
   const [reviews, setReviews] = useState(false);
   const reviewsValid = true;
 
+  const [discount, setDiscount] = useState(false);
+
   const [currentId, setCurrentId] = useState(0);
   const [uploadCurrent, setUploadCurrent] = useState(false);
 
@@ -448,8 +461,11 @@ export function useGafpriAttributesProducts({
     setSalesPrice('');
     setSalesPriceValid(false);
 
-    setOfferPrice('');
-    setOfferPriceValid(true);
+    setPrice1('');
+    setPrice2('');
+    setPrice3('');
+    setPrice4('');
+    setPrice5('');
 
     setCost('');
     setCostValid(true);
@@ -504,6 +520,7 @@ export function useGafpriAttributesProducts({
     setCatalogOrderValid(true);
 
     setReviews(false);
+    setDiscount(false);
   };
 
   // Funciones de Validacion
@@ -592,15 +609,6 @@ export function useGafpriAttributesProducts({
       setValid: setSalesPriceValid,
       currentValid: salesPriceValid,
     }); //
-  };
-
-  const validationOfferPrice = (value: number): boolean => {
-    return generalValidationOfferPrice({
-      value,
-      setValid: setOfferPriceValid,
-      currentValid: offerPriceValid,
-      required: false,
-    });
   };
 
   const validationCost = (value: number): boolean => {
@@ -855,12 +863,29 @@ export function useGafpriAttributesProducts({
     });
   };
 
-  const changeOfferPrice = (value: string): void => {
-    generalChangeOfferPrice({
-      value,
-      validation: validationOfferPrice,
-      setValue: setOfferPrice,
-    });
+  const changePrice1 = (value: string): void => {
+    const formatValue = parseFloat(value).toFixed(2);
+    setPrice1(formatValue);
+  };
+
+  const changePrice2 = (value: string): void => {
+    const formatValue = parseFloat(value).toFixed(2);
+    setPrice2(formatValue);
+  };
+
+  const changePrice3 = (value: string): void => {
+    const formatValue = parseFloat(value).toFixed(2);
+    setPrice3(formatValue);
+  };
+
+  const changePrice4 = (value: string): void => {
+    const formatValue = parseFloat(value).toFixed(2);
+    setPrice4(formatValue);
+  };
+
+  const changePrice5 = (value: string): void => {
+    const formatValue = parseFloat(value).toFixed(2);
+    setPrice5(formatValue);
   };
 
   const changeCost = (value: string): void => {
@@ -1015,6 +1040,10 @@ export function useGafpriAttributesProducts({
     setReviews((prevValue) => !prevValue);
   };
 
+  const changeDiscount = (): void => {
+    setDiscount((prevValue) => !prevValue);
+  };
+
   /**
    * Otras funciones
    *
@@ -1113,8 +1142,11 @@ export function useGafpriAttributesProducts({
     salesPrice,
     salesPriceValid,
 
-    offerPrice,
-    offerPriceValid,
+    price1,
+    price2,
+    price3,
+    price4,
+    price5,
 
     cost,
     costValid,
@@ -1181,6 +1213,8 @@ export function useGafpriAttributesProducts({
     reviews,
     reviewsValid,
 
+    discount,
+
     currentId,
     categoryOptions,
     uploadCurrent,
@@ -1199,7 +1233,7 @@ export function useGafpriAttributesProducts({
     validationGalleryImage,
     validationNote,
     validationSalesPrice,
-    validationOfferPrice,
+
     validationCost,
     validationType,
     validationTaxStatus,
@@ -1228,7 +1262,11 @@ export function useGafpriAttributesProducts({
     changeGalleryImage,
     changeNote,
     changeSalesPrice,
-    changeOfferPrice,
+    changePrice1,
+    changePrice2,
+    changePrice3,
+    changePrice4,
+    changePrice5,
     changeCost,
     changeType,
     changeTaxStatus,
@@ -1249,6 +1287,7 @@ export function useGafpriAttributesProducts({
     changeLength,
     changeCatalogOrder,
     changeReviews,
+    changeDiscount,
 
     setCurrentId,
     setPhoto,
@@ -1268,6 +1307,7 @@ export function useGafpriAttributesProducts({
     getTaxStatusOptionByValue,
     getTaxClassesOptionByValue,
     setReviews,
+    setDiscount,
     setUploadCurrent,
   };
 
