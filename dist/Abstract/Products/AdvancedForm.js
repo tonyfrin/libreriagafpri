@@ -46,7 +46,7 @@ var AdvancedForm = exports.AdvancedForm = function AdvancedForm(_ref) {
         use.attributes.actions.setReviews(current.reviews);
       }
       if (current.discount) {
-        use.attributes.actions.setDiscount(current.reviews);
+        use.attributes.actions.setDiscount(current.discount);
       }
     }
   }, [current]);

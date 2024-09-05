@@ -1,0 +1,30 @@
+import type { InputProps, GsSelectPropsExtended } from '../Input';
+import type { ModelFormPropsExtended, PhotoDocumentIdProps } from '../Form';
+import type { UseGafpriEntityReturn } from '../../states';
+export type DocumentAddFormProps = {
+    use: UseGafpriEntityReturn;
+    photoMainContainerStyle?: string;
+    photoInfoContainerStyle?: string;
+    nameLastNameContainerStyle?: string;
+    inputTypeDocumentIdIdProps?: GsSelectPropsExtended;
+    inputIndexProps?: GsSelectPropsExtended;
+    mainTitle?: string;
+    subTitle?: string;
+    modelFormProps?: ModelFormPropsExtended;
+    inputDigitProps?: InputProps;
+    propsPhoto?: PhotoDocumentIdProps['props'];
+};
+export type DocumentAddFormPropsExtended = {
+    use: UseGafpriEntityReturn;
+    photoMainContainerStyle?: string;
+    photoInfoContainerStyle?: string;
+    nameLastNameContainerStyle?: string;
+    inputTypeDocumentIdIdProps?: GsSelectPropsExtended;
+    inputIndexProps?: GsSelectPropsExtended;
+    mainTitle?: string;
+    subTitle?: string;
+    modelFormProps?: ModelFormPropsExtended;
+    inputDigitProps?: InputProps;
+    propsPhoto?: PhotoDocumentIdProps['props'];
+};
+export declare const DocumentAddForm: ({ use, photoMainContainerStyle, photoInfoContainerStyle, nameLastNameContainerStyle, inputTypeDocumentIdIdProps, inputIndexProps, mainTitle, subTitle, modelFormProps, inputDigitProps, propsPhoto, }: DocumentAddFormProps) => JSX.Element;
