@@ -44,19 +44,19 @@ export const PriceForm = ({ use, formType }: PriceFormProps): JSX.Element => {
       }
 
       if (current.price2) {
-        use.attributes.actions.changePrice1(`${current.price2}`);
+        use.attributes.actions.changePrice2(`${current.price2}`);
       }
 
       if (current.price3) {
-        use.attributes.actions.changePrice1(`${current.price3}`);
+        use.attributes.actions.changePrice3(`${current.price3}`);
       }
 
       if (current.price4) {
-        use.attributes.actions.changePrice1(`${current.price4}`);
+        use.attributes.actions.changePrice4(`${current.price4}`);
       }
 
       if (current.price5) {
-        use.attributes.actions.changePrice1(`${current.price5}`);
+        use.attributes.actions.changePrice5(`${current.price5}`);
       }
     }
   }, [current]);

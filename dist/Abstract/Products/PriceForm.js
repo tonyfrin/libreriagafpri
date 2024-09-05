@@ -30,16 +30,16 @@ var PriceForm = exports.PriceForm = function PriceForm(_ref) {
         use.attributes.actions.changePrice1("".concat(current.price1));
       }
       if (current.price2) {
-        use.attributes.actions.changePrice1("".concat(current.price2));
+        use.attributes.actions.changePrice2("".concat(current.price2));
       }
       if (current.price3) {
-        use.attributes.actions.changePrice1("".concat(current.price3));
+        use.attributes.actions.changePrice3("".concat(current.price3));
       }
       if (current.price4) {
-        use.attributes.actions.changePrice1("".concat(current.price4));
+        use.attributes.actions.changePrice4("".concat(current.price4));
       }
       if (current.price5) {
-        use.attributes.actions.changePrice1("".concat(current.price5));
+        use.attributes.actions.changePrice5("".concat(current.price5));
       }
     }
   }, [current]);
