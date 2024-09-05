@@ -49,6 +49,7 @@ type Data = {
   length?: number;
   catalogOrder?: number;
   reviews?: boolean;
+  discount?: boolean;
   sitesProducts?: object;
 };
 
@@ -128,6 +129,7 @@ export function useGafpriApiProducts({
           length: parseFloat(attributes.states.length),
           catalogOrder: parseFloat(attributes.states.catalogOrder),
           reviews: attributes.states.reviews,
+          discount: attributes.states.discount,
           posts: {
             status: attributes.states.status,
             visibility: attributes.states.visibility,
@@ -201,6 +203,7 @@ export function useGafpriApiProducts({
           length: parseFloat(attributes.states.length),
           catalogOrder: parseFloat(attributes.states.catalogOrder),
           reviews: attributes.states.reviews,
+          discount: attributes.states.discount,
           posts: {
             status: attributes.states.status,
             visibility: attributes.states.visibility,

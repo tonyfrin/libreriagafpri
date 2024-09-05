@@ -52,6 +52,7 @@ function useGafpriApiProducts(_ref) {
           length: parseFloat(attributes.states.length),
           catalogOrder: parseFloat(attributes.states.catalogOrder),
           reviews: attributes.states.reviews,
+          discount: attributes.states.discount,
           posts: {
             status: attributes.states.status,
             visibility: attributes.states.visibility,
@@ -115,6 +116,7 @@ function useGafpriApiProducts(_ref) {
           length: parseFloat(attributes.states.length),
           catalogOrder: parseFloat(attributes.states.catalogOrder),
           reviews: attributes.states.reviews,
+          discount: attributes.states.discount,
           posts: {
             status: attributes.states.status,
             visibility: attributes.states.visibility,
