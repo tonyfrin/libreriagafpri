@@ -63,7 +63,7 @@ function useGafpriApiProducts(_ref) {
             manageStock: true,
             thereIsStock: false,
             isAvailable: true,
-            cost: parseFloat(attributes.states.cost)
+            cost: parseFloat(attributes.states.cost) || 0
           }
         },
         initToken: {
@@ -102,7 +102,6 @@ function useGafpriApiProducts(_ref) {
           price3: parseFloat(attributes.states.price3),
           price4: parseFloat(attributes.states.price4),
           price5: parseFloat(attributes.states.price5),
-          cost: parseFloat(attributes.states.cost),
           type: attributes.states.type,
           taxStatus: attributes.states.taxStatus,
           taxClass: attributes.states.taxClasses,
