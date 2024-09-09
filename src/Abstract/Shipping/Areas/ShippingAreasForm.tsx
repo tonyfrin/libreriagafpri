@@ -329,6 +329,7 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
+            display: 'block',
           }}
           {...infoContainerProps}
         >
@@ -370,6 +371,7 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
+            display: 'block',
           }}
           {...infoContainerProps}
         >
@@ -411,6 +413,7 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
+            display: 'block',
           }}
           {...infoContainerProps}
         >
@@ -452,6 +455,7 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
+            display: 'block',
           }}
           {...infoContainerProps}
         >

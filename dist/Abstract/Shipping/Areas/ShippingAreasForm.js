@@ -208,7 +208,8 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     setPlace: changePlace
   }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '96.5%'
+      width: '96.5%',
+      display: 'block'
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "C\xF3digos postales"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
@@ -231,7 +232,8 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     }, item)));
   })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '96.5%'
+      width: '96.5%',
+      display: 'block'
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "Ciudades"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
@@ -254,7 +256,8 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     }, item)));
   })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '96.5%'
+      width: '96.5%',
+      display: 'block'
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "Estados"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
@@ -277,7 +280,8 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     }, item)));
   })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '96.5%'
+      width: '96.5%',
+      display: 'block'
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "Paises"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)

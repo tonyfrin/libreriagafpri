@@ -77,7 +77,7 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
   const [cities, setCities] = useState<string[]>([]);
   const pushCities = (value: string): void => {
     if (!cities.includes(value)) {
-      setCities([...postalCodes, value]);
+      setCities([...cities, value]);
     }
   };
 
@@ -88,7 +88,7 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
   const [statesCountries, setStatesCountries] = useState<string[]>([]);
   const pushStatesCountries = (value: string): void => {
     if (!statesCountries.includes(value)) {
-      setStatesCountries([...postalCodes, value]);
+      setStatesCountries([...statesCountries, value]);
     }
   };
 
@@ -99,7 +99,7 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
   const [countries, setCountries] = useState<string[]>([]);
   const pushCountries = (value: string): void => {
     if (!countries.includes(value)) {
-      setCountries([...postalCodes, value]);
+      setCountries([...countries, value]);
     }
   };
 

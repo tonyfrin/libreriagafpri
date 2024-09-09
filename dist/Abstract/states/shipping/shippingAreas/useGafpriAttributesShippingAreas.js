@@ -39,7 +39,7 @@ function useGafpriAttributesShippingAreas() {
     setCities = _useState8[1];
   var pushCities = function pushCities(value) {
     if (!cities.includes(value)) {
-      setCities([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+      setCities([].concat((0, _toConsumableArray2["default"])(cities), [value]));
     }
   };
   var removeCities = function removeCities(value) {
@@ -53,7 +53,7 @@ function useGafpriAttributesShippingAreas() {
     setStatesCountries = _useState10[1];
   var pushStatesCountries = function pushStatesCountries(value) {
     if (!statesCountries.includes(value)) {
-      setStatesCountries([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+      setStatesCountries([].concat((0, _toConsumableArray2["default"])(statesCountries), [value]));
     }
   };
   var removeStatesCountries = function removeStatesCountries(value) {
@@ -67,7 +67,7 @@ function useGafpriAttributesShippingAreas() {
     setCountries = _useState12[1];
   var pushCountries = function pushCountries(value) {
     if (!countries.includes(value)) {
-      setCountries([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+      setCountries([].concat((0, _toConsumableArray2["default"])(countries), [value]));
     }
   };
   var removeCountries = function removeCountries(value) {
