@@ -210,9 +210,9 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     styles: {
       width: '96.5%'
     }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "C\xF3digos postales"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "C\xF3digos postales"), use.attributes.states.postalCodes.map(function (item) {
+  }, use.attributes.states.postalCodes.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       key: "container-postal-code-".concat(item),
       className: (0, _css.cx)(regionItemStyles)
@@ -229,13 +229,13 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       key: "button-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
     }, item)));
-  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "Ciudades"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "Ciudades"), use.attributes.states.cities.map(function (item) {
+  }, use.attributes.states.cities.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       key: "container-cities-".concat(item),
       className: (0, _css.cx)(regionItemStyles)
@@ -252,13 +252,13 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       key: "button-cities-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
     }, item)));
-  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "Estados"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "Estados"), use.attributes.states.statesCountries.map(function (item) {
+  }, use.attributes.states.statesCountries.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       key: "container-states-countries-".concat(item),
       className: (0, _css.cx)(regionItemStyles)
@@ -275,13 +275,13 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       key: "button-states-countries-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
     }, item)));
-  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", null, "Paises"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "Paises"), use.attributes.states.countries.map(function (item) {
+  }, use.attributes.states.countries.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       key: "container-countries-".concat(item),
       className: (0, _css.cx)(regionItemStyles)
@@ -298,7 +298,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       key: "button-countries-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
     }, item)));
-  }))), isUpdateForm && shippingMethods.length > 0 ? /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_List.ListContainer, {
+  })))), isUpdateForm && shippingMethods.length > 0 ? /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_List.ListContainer, {
     propsList: {
       title: 'Métodos de Envío',
       items: shippingMethodsItems,

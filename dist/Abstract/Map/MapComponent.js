@@ -8,7 +8,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.MapComponent = void 0;
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = _interopRequireWildcard(require("react"));
-var _Input = require("../Input");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 var MapComponent = exports.MapComponent = function MapComponent(_ref) {
@@ -273,22 +272,14 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
       });
     }
   };
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
-    style: {
-      display: 'flex'
-    }
-  }, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
-    ref: inputRef,
-    inputProps: {
-      type: 'text',
-      placeholder: 'Introduce una dirección',
-      value: location,
-      onChange: function onChange(e) {
-        return setLocation(e.target.value);
-      }
-    },
-    containerStyles: {
-      width: '80%'
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("input", {
+    ref: inputRef // Referencia para el input de autocompletado
+    ,
+    type: "text",
+    placeholder: "Introduce una direcci\xF3n",
+    value: location,
+    onChange: function onChange(e) {
+      return setLocation(e.target.value);
     }
   }), /*#__PURE__*/_react["default"].createElement("button", {
     onClick: handleGeocodeAddress

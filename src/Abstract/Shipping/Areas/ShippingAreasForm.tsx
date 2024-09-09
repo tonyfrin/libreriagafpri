@@ -332,38 +332,40 @@ export const ShippingAreasForm = ({
           }}
           {...infoContainerProps}
         >
-          <div className={cx(regionsContainerStyles)}>
+          <>
             <span>Códigos postales</span>
-            {use.attributes.states.postalCodes.map((item) => {
-              return (
-                <div
-                  key={`container-postal-code-${item}`}
-                  className={cx(regionItemStyles)}
-                >
+            <div className={cx(regionsContainerStyles)}>
+              {use.attributes.states.postalCodes.map((item) => {
+                return (
                   <div
-                    key={`postal-code-${item}`}
-                    className={cx(regionContainerStyles)}
+                    key={`container-postal-code-${item}`}
+                    className={cx(regionItemStyles)}
                   >
-                    <span
-                      key={`x-${item}`}
-                      className={cx(closeButtonStyles)}
-                      onClick={() =>
-                        use.attributes.actions.removePostalCode(item)
-                      }
+                    <div
+                      key={`postal-code-${item}`}
+                      className={cx(regionContainerStyles)}
                     >
-                      x
-                    </span>
-                    <button
-                      key={`button-${item}`}
-                      className={cx(regionButtonStyles)}
-                    >
-                      {item}
-                    </button>
+                      <span
+                        key={`x-${item}`}
+                        className={cx(closeButtonStyles)}
+                        onClick={() =>
+                          use.attributes.actions.removePostalCode(item)
+                        }
+                      >
+                        x
+                      </span>
+                      <button
+                        key={`button-${item}`}
+                        className={cx(regionButtonStyles)}
+                      >
+                        {item}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         </ContainerButton>
         <ContainerButton
           styles={{
@@ -371,36 +373,40 @@ export const ShippingAreasForm = ({
           }}
           {...infoContainerProps}
         >
-          <div className={cx(regionsContainerStyles)}>
+          <>
             <span>Ciudades</span>
-            {use.attributes.states.cities.map((item) => {
-              return (
-                <div
-                  key={`container-cities-${item}`}
-                  className={cx(regionItemStyles)}
-                >
+            <div className={cx(regionsContainerStyles)}>
+              {use.attributes.states.cities.map((item) => {
+                return (
                   <div
-                    key={`cities-${item}`}
-                    className={cx(regionContainerStyles)}
+                    key={`container-cities-${item}`}
+                    className={cx(regionItemStyles)}
                   >
-                    <span
-                      key={`x-cities-${item}`}
-                      className={cx(closeButtonStyles)}
-                      onClick={() => use.attributes.actions.removeCities(item)}
+                    <div
+                      key={`cities-${item}`}
+                      className={cx(regionContainerStyles)}
                     >
-                      x
-                    </span>
-                    <button
-                      key={`button-cities-${item}`}
-                      className={cx(regionButtonStyles)}
-                    >
-                      {item}
-                    </button>
+                      <span
+                        key={`x-cities-${item}`}
+                        className={cx(closeButtonStyles)}
+                        onClick={() =>
+                          use.attributes.actions.removeCities(item)
+                        }
+                      >
+                        x
+                      </span>
+                      <button
+                        key={`button-cities-${item}`}
+                        className={cx(regionButtonStyles)}
+                      >
+                        {item}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         </ContainerButton>
         <ContainerButton
           styles={{
@@ -408,38 +414,40 @@ export const ShippingAreasForm = ({
           }}
           {...infoContainerProps}
         >
-          <div className={cx(regionsContainerStyles)}>
+          <>
             <span>Estados</span>
-            {use.attributes.states.statesCountries.map((item) => {
-              return (
-                <div
-                  key={`container-states-countries-${item}`}
-                  className={cx(regionItemStyles)}
-                >
+            <div className={cx(regionsContainerStyles)}>
+              {use.attributes.states.statesCountries.map((item) => {
+                return (
                   <div
-                    key={`states-countries-${item}`}
-                    className={cx(regionContainerStyles)}
+                    key={`container-states-countries-${item}`}
+                    className={cx(regionItemStyles)}
                   >
-                    <span
-                      key={`x-states-countries-${item}`}
-                      className={cx(closeButtonStyles)}
-                      onClick={() =>
-                        use.attributes.actions.removeStatesCountries(item)
-                      }
+                    <div
+                      key={`states-countries-${item}`}
+                      className={cx(regionContainerStyles)}
                     >
-                      x
-                    </span>
-                    <button
-                      key={`button-states-countries-${item}`}
-                      className={cx(regionButtonStyles)}
-                    >
-                      {item}
-                    </button>
+                      <span
+                        key={`x-states-countries-${item}`}
+                        className={cx(closeButtonStyles)}
+                        onClick={() =>
+                          use.attributes.actions.removeStatesCountries(item)
+                        }
+                      >
+                        x
+                      </span>
+                      <button
+                        key={`button-states-countries-${item}`}
+                        className={cx(regionButtonStyles)}
+                      >
+                        {item}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         </ContainerButton>
         <ContainerButton
           styles={{
@@ -447,38 +455,40 @@ export const ShippingAreasForm = ({
           }}
           {...infoContainerProps}
         >
-          <div className={cx(regionsContainerStyles)}>
+          <>
             <span>Paises</span>
-            {use.attributes.states.countries.map((item) => {
-              return (
-                <div
-                  key={`container-countries-${item}`}
-                  className={cx(regionItemStyles)}
-                >
+            <div className={cx(regionsContainerStyles)}>
+              {use.attributes.states.countries.map((item) => {
+                return (
                   <div
-                    key={`countries-${item}`}
-                    className={cx(regionContainerStyles)}
+                    key={`container-countries-${item}`}
+                    className={cx(regionItemStyles)}
                   >
-                    <span
-                      key={`x-countries-${item}`}
-                      className={cx(closeButtonStyles)}
-                      onClick={() =>
-                        use.attributes.actions.removeCountries(item)
-                      }
+                    <div
+                      key={`countries-${item}`}
+                      className={cx(regionContainerStyles)}
                     >
-                      x
-                    </span>
-                    <button
-                      key={`button-countries-${item}`}
-                      className={cx(regionButtonStyles)}
-                    >
-                      {item}
-                    </button>
+                      <span
+                        key={`x-countries-${item}`}
+                        className={cx(closeButtonStyles)}
+                        onClick={() =>
+                          use.attributes.actions.removeCountries(item)
+                        }
+                      >
+                        x
+                      </span>
+                      <button
+                        key={`button-countries-${item}`}
+                        className={cx(regionButtonStyles)}
+                      >
+                        {item}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         </ContainerButton>
         {isUpdateForm && shippingMethods.length > 0 ? (
           <>

@@ -285,22 +285,13 @@ export const MapComponent = ({ setPlace }: MapComponentProps) => {
 
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-        }}
-      >
-        <Input
-          ref={inputRef}
-          inputProps={{
-            type: 'text',
-            placeholder: 'Introduce una dirección',
-            value: location,
-            onChange: (e) => setLocation(e.target.value),
-          }}
-          containerStyles={{
-            width: '80%',
-          }}
+      <div>
+        <input
+          ref={inputRef} // Referencia para el input de autocompletado
+          type="text"
+          placeholder="Introduce una dirección"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
         />
         <button onClick={handleGeocodeAddress}>Buscar</button>
       </div>
