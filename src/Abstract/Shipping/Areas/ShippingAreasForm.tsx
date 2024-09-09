@@ -7,7 +7,6 @@ import {
 import { ModelForm, ModelFormPropsExtended } from '../../Form';
 import { InputName, InputProps, GsSelect } from '../../Input';
 import { Button, ButtonOptionsContainer } from '../../Button';
-import { Countries, StatesCountries } from '../../../constants';
 import type { UseGafpriShippingAreasReturn } from '../../../states';
 import { ListContainer } from '../../List';
 import { Modal } from '../../Modal';
@@ -221,8 +220,6 @@ export const ShippingAreasForm = ({
       use.useShippingMethoods.paginations.states.itemsPerPage
     );
 
-  //id
-
   const shippingMethodsItems =
     shippingMethodsPaginated?.map((item) => {
       return [
@@ -240,43 +237,46 @@ export const ShippingAreasForm = ({
       use.useShippingMethoods.paginations.states.itemsPerPage
   );
 
-  const changePlace = (
-    value: {
-      lat: number;
-      lng: number;
-      placeId: string;
-      city?: string;
-      state?: string;
-      country?: string;
-      route?: string;
-      postalCode?: string;
-      formattedAddress?: string;
-    } | null
-  ) => {
-    if (value && type !== '') {
-      if (type === 'postalCodes') {
-        use.attributes.actions.changePostalCode(
-          value.postalCode || '',
-          value.city || '',
-          value.state || '',
-          value.country || ''
-        );
-      } else if (type === 'cities') {
-        use.attributes.actions.changeCities(
-          value.city || '',
-          value.state || '',
-          value.country || ''
-        );
-      } else if (type === 'statesCountries') {
-        use.attributes.actions.changeStateCountry(
-          value.state || '',
-          value.country || ''
-        );
-      } else if (type === 'countries') {
-        use.attributes.actions.changeCountry(value.country || '');
+  const changePlace = React.useCallback(
+    (
+      value: {
+        lat: number;
+        lng: number;
+        placeId: string;
+        city?: string;
+        state?: string;
+        country?: string;
+        route?: string;
+        postalCode?: string;
+        formattedAddress?: string;
+      } | null
+    ) => {
+      if (value && type !== '') {
+        if (type === 'postalCodes') {
+          use.attributes.actions.changePostalCode(
+            value.postalCode || '',
+            value.city || '',
+            value.state || '',
+            value.country || ''
+          );
+        } else if (type === 'cities') {
+          use.attributes.actions.changeCities(
+            value.city || '',
+            value.state || '',
+            value.country || ''
+          );
+        } else if (type === 'statesCountries') {
+          use.attributes.actions.changeStateCountry(
+            value.state || '',
+            value.country || ''
+          );
+        } else if (type === 'countries') {
+          use.attributes.actions.changeCountry(value.country || '');
+        }
       }
-    }
-  };
+    },
+    [type] // Aseguramos que changePlace se actualice cuando cambie 'type' o 'actions'
+  );
 
   return (
     <ModelForm
@@ -337,6 +337,7 @@ export const ShippingAreasForm = ({
             custom: `
               flex-direction: column;
               align-items: center;
+              margin-bottom: 15px;
             `,
           }}
           {...infoContainerProps}
@@ -382,6 +383,7 @@ export const ShippingAreasForm = ({
             custom: `
               flex-direction: column;
               align-items: center;
+              margin-bottom: 15px;
             `,
           }}
           {...infoContainerProps}
@@ -427,6 +429,7 @@ export const ShippingAreasForm = ({
             custom: `
               flex-direction: column;
               align-items: center;
+              margin-bottom: 15px;
             `,
           }}
           {...infoContainerProps}
@@ -472,6 +475,7 @@ export const ShippingAreasForm = ({
             custom: `
               flex-direction: column;
               align-items: center;
+              margin-bottom: 15px;
             `,
           }}
           {...infoContainerProps}

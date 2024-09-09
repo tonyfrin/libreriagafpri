@@ -146,9 +146,6 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     }
   });
   var shippingMethodsPaginated = use.useShippingMethoods.paginations.actions.getPaginated(shippingMethods, use.useShippingMethoods.paginations.states.currentPage, use.useShippingMethoods.paginations.states.itemsPerPage);
-
-  //id
-
   var shippingMethodsItems = (_shippingMethodsPagin = shippingMethodsPaginated === null || shippingMethodsPaginated === void 0 ? void 0 : shippingMethodsPaginated.map(function (item) {
     return [item.name, item.type, item.status, /*#__PURE__*/_react["default"].createElement(ButtonActionsShippingMethods, {
       id: item.id
@@ -156,7 +153,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   })) !== null && _shippingMethodsPagin !== void 0 ? _shippingMethodsPagin : [];
   var headers = ['Name', 'Tipo', 'Estatus', 'Acción'];
   var totalPages = Math.ceil(shippingMethods.length / use.useShippingMethoods.paginations.states.itemsPerPage);
-  var changePlace = function changePlace(value) {
+  var changePlace = _react["default"].useCallback(function (value) {
     if (value && type !== '') {
       if (type === 'postalCodes') {
         use.attributes.actions.changePostalCode(value.postalCode || '', value.city || '', value.state || '', value.country || '');
@@ -168,7 +165,8 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
         use.attributes.actions.changeCountry(value.country || '');
       }
     }
-  };
+  }, [type] // Aseguramos que changePlace se actualice cuando cambie 'type' o 'actions'
+  );
   return /*#__PURE__*/_react["default"].createElement(_Form.ModelForm, (0, _extends2["default"])({
     titles: {
       title1: title1Text,
@@ -210,7 +208,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%',
-      custom: "\n              flex-direction: column;\n              align-items: center;\n            "
+      custom: "\n              flex-direction: column;\n              align-items: center;\n              margin-bottom: 15px;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
@@ -236,7 +234,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%',
-      custom: "\n              flex-direction: column;\n              align-items: center;\n            "
+      custom: "\n              flex-direction: column;\n              align-items: center;\n              margin-bottom: 15px;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
@@ -262,7 +260,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%',
-      custom: "\n              flex-direction: column;\n              align-items: center;\n            "
+      custom: "\n              flex-direction: column;\n              align-items: center;\n              margin-bottom: 15px;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
@@ -288,7 +286,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   })))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%',
-      custom: "\n              flex-direction: column;\n              align-items: center;\n            "
+      custom: "\n              flex-direction: column;\n              align-items: center;\n              margin-bottom: 15px;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
