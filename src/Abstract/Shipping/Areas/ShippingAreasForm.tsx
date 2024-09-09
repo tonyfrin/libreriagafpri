@@ -345,15 +345,7 @@ export const ShippingAreasForm = ({
             />
           </ContainerButton>
         )}
-        {type !== '' && (
-          <ContainerButton
-            styles={{
-              width: '96.5%',
-            }}
-          >
-            <MapComponent setPlace={changePlace} />
-          </ContainerButton>
-        )}
+        {type !== '' && <MapComponent setPlace={changePlace} />}
 
         <ContainerButton
           styles={{
