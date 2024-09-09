@@ -272,7 +272,24 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
       });
     }
   };
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("input", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      margin: '15px 0px'
+    }
+  }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("input", {
+    style: {
+      width: '80%',
+      border: '2px solid #eaeaea',
+      padding: '8px 19px',
+      textAlign: 'left',
+      outline: '0',
+      borderRadius: '6px',
+      backgroundColor: '#fff',
+      fontSize: '15px',
+      fontWeight: '300',
+      color: '#8D8D8D',
+      boxSizing: 'border-box'
+    },
     ref: inputRef // Referencia para el input de autocompletado
     ,
     type: "text",
@@ -282,6 +299,23 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
       return setLocation(e.target.value);
     }
   }), /*#__PURE__*/_react["default"].createElement("button", {
+    style: {
+      marginLeft: '10px',
+      backgroundColor: 'rgb(7, 178, 231)',
+      fontSize: '16px',
+      borderRadius: '0.25rem',
+      padding: '0.375rem 0.75rem',
+      userSelect: 'none',
+      textAlign: 'center',
+      textDecoration: 'none',
+      verticalAlign: 'middle',
+      display: 'inlineBlock',
+      fontWeight: '400',
+      lineHeight: '1.5',
+      color: '#ffffff',
+      cursor: 'pointer',
+      boxShadow: '0 1px 6px 0 #20212447'
+    },
     onClick: handleGeocodeAddress
   }, "Buscar")), /*#__PURE__*/_react["default"].createElement("div", {
     id: "map",

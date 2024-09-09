@@ -284,16 +284,54 @@ export const MapComponent = ({ setPlace }: MapComponentProps) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        margin: '15px 0px',
+      }}
+    >
       <div>
         <input
+          style={{
+            width: '80%',
+            border: '2px solid #eaeaea',
+            padding: '8px 19px',
+            textAlign: 'left',
+            outline: '0',
+            borderRadius: '6px',
+            backgroundColor: '#fff',
+            fontSize: '15px',
+            fontWeight: '300',
+            color: '#8D8D8D',
+            boxSizing: 'border-box',
+          }}
           ref={inputRef} // Referencia para el input de autocompletado
           type="text"
           placeholder="Introduce una dirección"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-        <button onClick={handleGeocodeAddress}>Buscar</button>
+        <button
+          style={{
+            marginLeft: '10px',
+            backgroundColor: 'rgb(7, 178, 231)',
+            fontSize: '16px',
+            borderRadius: '0.25rem',
+            padding: '0.375rem 0.75rem',
+            userSelect: 'none',
+            textAlign: 'center',
+            textDecoration: 'none',
+            verticalAlign: 'middle',
+            display: 'inlineBlock',
+            fontWeight: '400',
+            lineHeight: '1.5',
+            color: '#ffffff',
+            cursor: 'pointer',
+            boxShadow: '0 1px 6px 0 #20212447',
+          }}
+          onClick={handleGeocodeAddress}
+        >
+          Buscar
+        </button>
       </div>
 
       <div
