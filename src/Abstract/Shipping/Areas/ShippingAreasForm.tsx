@@ -5,7 +5,7 @@ import {
   ContainerButtonPropsExtended,
 } from '../../Containers';
 import { ModelForm, ModelFormPropsExtended } from '../../Form';
-import { InputName, InputProps, GsSelect } from '../../Input';
+import { InputName, InputProps, GsSelect, Input } from '../../Input';
 import { Button, ButtonOptionsContainer } from '../../Button';
 import type { UseGafpriShippingAreasReturn } from '../../../states';
 import { ListContainer } from '../../List';
@@ -314,22 +314,46 @@ export const ShippingAreasForm = ({
             />
           </>
         </ContainerButton>
-        <ContainerButton
-          styles={{
-            width: '96.5%',
-          }}
-          {...infoContainerProps}
-        >
-          <>
-            <GsSelect
-              options={optionsType}
-              onChange={(e) => changeType(e)}
-              placeholder="Selecciona el tipo de Zona"
-              title="Tipo de Zona"
+        {!type ? (
+          <ContainerButton
+            styles={{
+              width: '96.5%',
+            }}
+            {...infoContainerProps}
+          >
+            <>
+              <GsSelect
+                options={optionsType}
+                onChange={(e) => changeType(e)}
+                placeholder="Selecciona el tipo de Zona"
+                title="Tipo de Zona"
+              />
+            </>
+          </ContainerButton>
+        ) : (
+          <ContainerButton
+            styles={{
+              width: '96.5%',
+            }}
+            {...infoContainerProps}
+          >
+            <Input
+              inputProps={{
+                readOnly: true,
+                value: type,
+              }}
             />
-          </>
-        </ContainerButton>
-        {type !== '' && <MapComponent setPlace={changePlace} />}
+          </ContainerButton>
+        )}
+        {type !== '' && (
+          <ContainerButton
+            styles={{
+              width: '96.5%',
+            }}
+          >
+            <MapComponent setPlace={changePlace} />
+          </ContainerButton>
+        )}
 
         <ContainerButton
           styles={{

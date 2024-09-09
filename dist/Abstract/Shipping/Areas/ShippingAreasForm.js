@@ -192,7 +192,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
         width: '100%'
       }
     }, nameInputProps)
-  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  }))), !type ? /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }
@@ -203,9 +203,22 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     },
     placeholder: "Selecciona el tipo de Zona",
     title: "Tipo de Zona"
-  }))), type !== '' && /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
+  }))) : /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '96.5%'
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      readOnly: true,
+      value: type
+    }
+  })), type !== '' && /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '96.5%'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
     setPlace: changePlace
-  }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  })), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%',
       custom: "\n              flex-direction: column;\n              align-items: center;\n              margin-bottom: 15px;\n            "
