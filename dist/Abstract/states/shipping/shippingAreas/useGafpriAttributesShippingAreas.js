@@ -24,9 +24,12 @@ function useGafpriAttributesShippingAreas() {
     postalCodes = _useState6[0],
     setPostalCodes = _useState6[1];
   var pushPostalCodes = function pushPostalCodes(value) {
-    if (!postalCodes.includes(value)) {
-      setPostalCodes([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
-    }
+    setPostalCodes(function (prevValue) {
+      if (!prevValue.includes(value)) {
+        return [].concat((0, _toConsumableArray2["default"])(prevValue), [value]);
+      }
+      return prevValue;
+    });
   };
   var removePostalCode = function removePostalCode(value) {
     setPostalCodes(postalCodes.filter(function (item) {
@@ -38,9 +41,12 @@ function useGafpriAttributesShippingAreas() {
     cities = _useState8[0],
     setCities = _useState8[1];
   var pushCities = function pushCities(value) {
-    if (!cities.includes(value)) {
-      setCities([].concat((0, _toConsumableArray2["default"])(cities), [value]));
-    }
+    setCities(function (prevValue) {
+      if (!prevValue.includes(value)) {
+        return [].concat((0, _toConsumableArray2["default"])(prevValue), [value]);
+      }
+      return prevValue;
+    });
   };
   var removeCities = function removeCities(value) {
     setCities(cities.filter(function (item) {
@@ -52,9 +58,12 @@ function useGafpriAttributesShippingAreas() {
     statesCountries = _useState10[0],
     setStatesCountries = _useState10[1];
   var pushStatesCountries = function pushStatesCountries(value) {
-    if (!statesCountries.includes(value)) {
-      setStatesCountries([].concat((0, _toConsumableArray2["default"])(statesCountries), [value]));
-    }
+    setStatesCountries(function (prevValue) {
+      if (!prevValue.includes(value)) {
+        return [].concat((0, _toConsumableArray2["default"])(prevValue), [value]);
+      }
+      return prevValue;
+    });
   };
   var removeStatesCountries = function removeStatesCountries(value) {
     setStatesCountries(statesCountries.filter(function (item) {
@@ -66,9 +75,12 @@ function useGafpriAttributesShippingAreas() {
     countries = _useState12[0],
     setCountries = _useState12[1];
   var pushCountries = function pushCountries(value) {
-    if (!countries.includes(value)) {
-      setCountries([].concat((0, _toConsumableArray2["default"])(countries), [value]));
-    }
+    setCountries(function (prevValue) {
+      if (!prevValue.includes(value)) {
+        return [].concat((0, _toConsumableArray2["default"])(prevValue), [value]);
+      }
+      return prevValue;
+    });
   };
   var removeCountries = function removeCountries(value) {
     setCountries(countries.filter(function (item) {

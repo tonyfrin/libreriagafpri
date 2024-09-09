@@ -65,9 +65,12 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
 
   const [postalCodes, setPostalCodes] = useState<string[]>([]);
   const pushPostalCodes = (value: string): void => {
-    if (!postalCodes.includes(value)) {
-      setPostalCodes([...postalCodes, value]);
-    }
+    setPostalCodes((prevValue) => {
+      if (!prevValue.includes(value)) {
+        return [...prevValue, value];
+      }
+      return prevValue;
+    });
   };
 
   const removePostalCode = (value: string): void => {
@@ -76,9 +79,12 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
 
   const [cities, setCities] = useState<string[]>([]);
   const pushCities = (value: string): void => {
-    if (!cities.includes(value)) {
-      setCities([...cities, value]);
-    }
+    setCities((prevValue) => {
+      if (!prevValue.includes(value)) {
+        return [...prevValue, value];
+      }
+      return prevValue;
+    });
   };
 
   const removeCities = (value: string): void => {
@@ -87,9 +93,12 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
 
   const [statesCountries, setStatesCountries] = useState<string[]>([]);
   const pushStatesCountries = (value: string): void => {
-    if (!statesCountries.includes(value)) {
-      setStatesCountries([...statesCountries, value]);
-    }
+    setStatesCountries((prevValue) => {
+      if (!prevValue.includes(value)) {
+        return [...prevValue, value];
+      }
+      return prevValue;
+    });
   };
 
   const removeStatesCountries = (value: string): void => {
@@ -98,9 +107,12 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
 
   const [countries, setCountries] = useState<string[]>([]);
   const pushCountries = (value: string): void => {
-    if (!countries.includes(value)) {
-      setCountries([...countries, value]);
-    }
+    setCountries((prevValue) => {
+      if (!prevValue.includes(value)) {
+        return [...prevValue, value];
+      }
+      return prevValue;
+    });
   };
 
   const removeCountries = (value: string): void => {

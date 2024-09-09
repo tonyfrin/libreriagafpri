@@ -34,11 +34,16 @@ const regionsContainerStyles = css`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 20px 10px;
+  margin: 0px 10px;
   padding: 15px 0px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 91%;
+`;
+
+const regionsTitleStyles = css`
+  font-size: x-small;
+  color: #8d8d8d;
 `;
 
 const containerButtonsStyles = css`
@@ -329,12 +334,15 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
-            display: 'block',
+            custom: `
+              flex-direction: column;
+              align-items: center;
+            `,
           }}
           {...infoContainerProps}
         >
           <>
-            <span>Códigos postales</span>
+            <span className={cx(regionsTitleStyles)}>Códigos postales</span>
             <div className={cx(regionsContainerStyles)}>
               {use.attributes.states.postalCodes.map((item) => {
                 return (
@@ -371,12 +379,15 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
-            display: 'block',
+            custom: `
+              flex-direction: column;
+              align-items: center;
+            `,
           }}
           {...infoContainerProps}
         >
           <>
-            <span>Ciudades</span>
+            <span className={cx(regionsTitleStyles)}>Ciudades</span>
             <div className={cx(regionsContainerStyles)}>
               {use.attributes.states.cities.map((item) => {
                 return (
@@ -413,12 +424,15 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
-            display: 'block',
+            custom: `
+              flex-direction: column;
+              align-items: center;
+            `,
           }}
           {...infoContainerProps}
         >
           <>
-            <span>Estados</span>
+            <span className={cx(regionsTitleStyles)}>Estados</span>
             <div className={cx(regionsContainerStyles)}>
               {use.attributes.states.statesCountries.map((item) => {
                 return (
@@ -455,12 +469,15 @@ export const ShippingAreasForm = ({
         <ContainerButton
           styles={{
             width: '96.5%',
-            display: 'block',
+            custom: `
+              flex-direction: column;
+              align-items: center;
+            `,
           }}
           {...infoContainerProps}
         >
           <>
-            <span>Paises</span>
+            <span className={cx(regionsTitleStyles)}>Paises</span>
             <div className={cx(regionsContainerStyles)}>
               {use.attributes.states.countries.map((item) => {
                 return (
