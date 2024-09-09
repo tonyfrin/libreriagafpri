@@ -16,8 +16,8 @@ exports.truncarTexto = truncarTexto;
 exports.validationHidden = validationHidden;
 exports.validationSelect = exports.validationInputPostcode = exports.validationInputPhone = exports.validationInputName = exports.validationInputEmail = exports.validationInput = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 var _constants = require("../constants");
@@ -193,48 +193,62 @@ var validationInputPhone = exports.validationInputPhone = function validationInp
   setValid(valid);
   return valid;
 };
-function gafpriFetch(_ref9) {
-  var initMethod = _ref9.initMethod,
-    _ref9$initApi = _ref9.initApi,
-    initApi = _ref9$initApi === void 0 ? _constants.API_URL : _ref9$initApi,
-    initRoute = _ref9.initRoute,
-    initToken = _ref9.initToken,
-    initCredentials = _ref9.initCredentials,
-    functionFetching = _ref9.functionFetching,
-    functionSuccess = _ref9.functionSuccess,
-    functionError = _ref9.functionError;
-  if (functionFetching !== undefined) {
-    functionFetching();
-  }
-  var headers = {
-    'Content-Type': 'application/json'
-  };
-  if (initToken !== undefined) {
-    headers = _objectSpread(_objectSpread({}, headers), {}, {
-      Authorization: "Bearer ".concat(initToken.token)
-    });
-  }
-  var options = {
-    method: initMethod,
-    headers: headers,
-    body: JSON.stringify(initCredentials)
-  };
-  fetch("".concat(initApi).concat(initRoute), options).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    console.log(data); // eslint-disable-line no-console
-    if (data.success) {
-      if (functionSuccess !== undefined) {
-        functionSuccess(data);
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function gafpriFetch(_x) {
+  return _gafpriFetch.apply(this, arguments);
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
+function _gafpriFetch() {
+  _gafpriFetch = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref9) {
+    var initMethod, _ref9$initApi, initApi, initRoute, initToken, initCredentials, functionFetching, functionSuccess, functionError, headers, options, resp;
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          initMethod = _ref9.initMethod, _ref9$initApi = _ref9.initApi, initApi = _ref9$initApi === void 0 ? _constants.API_URL : _ref9$initApi, initRoute = _ref9.initRoute, initToken = _ref9.initToken, initCredentials = _ref9.initCredentials, functionFetching = _ref9.functionFetching, functionSuccess = _ref9.functionSuccess, functionError = _ref9.functionError;
+          if (functionFetching !== undefined) {
+            functionFetching();
+          }
+          headers = {
+            'Content-Type': 'application/json'
+          };
+          if (initToken !== undefined) {
+            headers = _objectSpread(_objectSpread({}, headers), {}, {
+              Authorization: "Bearer ".concat(initToken.token)
+            });
+          }
+          options = {
+            method: initMethod,
+            headers: headers,
+            body: JSON.stringify(initCredentials)
+          };
+          _context2.next = 7;
+          return fetch("".concat(initApi).concat(initRoute), options).then(function (response) {
+            return response.json();
+          }).then(function (data) {
+            if (data.success) {
+              if (functionSuccess !== undefined) {
+                functionSuccess(data);
+              }
+            } else if (functionError !== undefined) {
+              functionError(data);
+            }
+            return data;
+          })["catch"](function (error) {
+            if (functionError !== undefined) {
+              functionError(error);
+            }
+            return error;
+          });
+        case 7:
+          resp = _context2.sent;
+          return _context2.abrupt("return", resp);
+        case 9:
+        case "end":
+          return _context2.stop();
       }
-    } else if (functionError !== undefined) {
-      functionError(data);
-    }
-  })["catch"](function (error) {
-    if (functionError !== undefined) {
-      functionError(error);
-    }
-  });
+    }, _callee2);
+  }));
+  return _gafpriFetch.apply(this, arguments);
 }
 var isSelectDefault = exports.isSelectDefault = function isSelectDefault(obj) {
   if ((0, _typeof2["default"])(obj) !== 'object' || obj === null) {
@@ -284,7 +298,7 @@ var getLastEntryDateAndCount = exports.getLastEntryDateAndCount = /*#__PURE__*/f
       }
     }, _callee, null, [[0, 10]]);
   }));
-  return function getLastEntryDateAndCount(_x) {
+  return function getLastEntryDateAndCount(_x2) {
     return _ref10.apply(this, arguments);
   };
 }();

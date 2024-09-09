@@ -110,9 +110,11 @@ function useGafpriAttributesShippingAreas() {
     });
   };
   var validationButtonNext = function validationButtonNext() {
-    (0, _Validations.generalValidationButtonNext)({
-      validations: [nameValid && postalCodes.length > 0 && cities.length > 0 && statesCountries.length > 0 && countries.length > 0]
+    var valid = (0, _Validations.generalValidationButtonNext)({
+      validations: [nameValid && postalCodes.length > 0 && cities.length > 0 && statesCountries.length > 0 && countries.length > 0],
+      inputId: 'shipping-form'
     });
+    return valid;
   };
 
   // Funciones de cambios

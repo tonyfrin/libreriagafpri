@@ -2,7 +2,7 @@ import type { UseErrorReturn } from '../../../../states';
 import { UseGafpriPagesShippingAreasReturn } from './useGafpriPagesShippingAreas';
 import { UseGafpriAttributesShippingAreasReturn } from './useGafpriAttributesShippingAreas';
 type Actions = {
-    add: () => void;
+    add: () => Promise<any>;
     update: () => void;
     erase: (id: number) => void;
 };

@@ -27,7 +27,7 @@ type Actions = {
     pushCountries: (value: string) => void;
     removeCountries: (value: string) => void;
     changeCountry: (country: string) => void;
-    validationButtonNext: () => void;
+    validationButtonNext: () => boolean;
     setCurrentId: (value: number) => void;
 };
 export type UseGafpriAttributesShippingAreasReturn = {

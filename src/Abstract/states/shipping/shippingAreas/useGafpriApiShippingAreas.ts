@@ -17,13 +17,19 @@ type Data = {
   data?: Items;
   success?: boolean;
   name: string;
+  postalCodes: string[];
+  cities: string[];
+  states: string[];
+  countries: string[];
 };
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type Actions = {
-  add: () => void;
+  add: () => Promise<any>;
   update: () => void;
   erase: (id: number) => void;
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type UseGafpriApiShippingAreasReturn = {
   actions: Actions;
@@ -42,30 +48,30 @@ export function useGafpriApiShippingAreas({
   pages,
   attributes,
 }: UseGafpriApiShippingAreasProps): UseGafpriApiShippingAreasReturn {
-  const newErrorAdd = (
-    newErrorValue: unknown | ErrorResponseProps | CustomErrorResponseProps
-  ): void => {
-    useError.actions.newError({
-      newErrorValue,
-      functionAction: pages.actions.onAdd,
-    });
-  };
-
-  const add = (): void => {
-    if (attributes.states.nameValid && token) {
-      gafpriFetch<Data>({
-        initMethod: 'POST',
-        initRoute: SHIPPING_AREAS_ROUTE,
-        initCredentials: {
-          name: attributes.states.name,
-        },
-        initToken: { token },
-        functionFetching: pages.actions.onFetching,
-        functionSuccess: (data: Data) => pages.actions.goUpdateFromAdd(data),
-        functionError: newErrorAdd,
-      });
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const add = async (): Promise<any> => {
+    try {
+      if (attributes.states.nameValid && token) {
+        const data = await gafpriFetch<Data>({
+          initMethod: 'POST',
+          initRoute: SHIPPING_AREAS_ROUTE,
+          initCredentials: {
+            name: attributes.states.name,
+            postalCodes: attributes.states.postalCodes,
+            cities: attributes.states.cities,
+            states: attributes.states.statesCountries,
+            countries: attributes.states.countries,
+          },
+          initToken: { token },
+        });
+        return data;
+      }
+      return null;
+    } catch (error) {
+      return error;
     }
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const newErrorUpdate = (
     newErrorValue: unknown | ErrorResponseProps | CustomErrorResponseProps

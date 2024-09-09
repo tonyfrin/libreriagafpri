@@ -309,7 +309,8 @@ interface FetchOptions<T = unknown> {
   functionError?: (data: T) => void;
 }
 
-export function gafpriFetch<T = unknown>({
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export async function gafpriFetch<T = unknown>({
   initMethod,
   initApi = API_URL,
   initRoute,
@@ -318,7 +319,7 @@ export function gafpriFetch<T = unknown>({
   functionFetching,
   functionSuccess,
   functionError,
-}: FetchOptions<T>): void {
+}: FetchOptions<T>): Promise<any> {
   if (functionFetching !== undefined) {
     functionFetching();
   }
@@ -340,10 +341,9 @@ export function gafpriFetch<T = unknown>({
     body: JSON.stringify(initCredentials),
   };
 
-  fetch(`${initApi}${initRoute}`, options)
+  const resp = await fetch(`${initApi}${initRoute}`, options)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data); // eslint-disable-line no-console
       if (data.success) {
         if (functionSuccess !== undefined) {
           functionSuccess(data);
@@ -351,13 +351,17 @@ export function gafpriFetch<T = unknown>({
       } else if (functionError !== undefined) {
         functionError(data);
       }
+      return data;
     })
     .catch((error) => {
       if (functionError !== undefined) {
         functionError(error);
       }
+      return error;
     });
+  return resp;
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export const isSelectDefault = (obj: unknown): obj is SelectDefault => {
   if (typeof obj !== 'object' || obj === null) {

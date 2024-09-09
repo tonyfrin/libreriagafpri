@@ -75,7 +75,7 @@ interface FetchOptions<T = unknown> {
     functionSuccess?: (data: T) => void;
     functionError?: (data: T) => void;
 }
-export declare function gafpriFetch<T = unknown>({ initMethod, initApi, initRoute, initToken, initCredentials, functionFetching, functionSuccess, functionError, }: FetchOptions<T>): void;
+export declare function gafpriFetch<T = unknown>({ initMethod, initApi, initRoute, initToken, initCredentials, functionFetching, functionSuccess, functionError, }: FetchOptions<T>): Promise<any>;
 export declare const isSelectDefault: (obj: unknown) => obj is SelectDefault;
 export declare const isSelectDefaultArray: (obj: unknown) => obj is SelectDefault[];
 export declare const getLastEntryDateAndCount: (service: string) => Promise<{

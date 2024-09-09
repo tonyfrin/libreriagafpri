@@ -121,7 +121,13 @@ export const ShippingAreasForm = ({
 
   React.useEffect(() => {
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.nameValid]);
+  }, [
+    use.attributes.states.nameValid,
+    use.attributes.states.postalCodes,
+    use.attributes.states.cities,
+    use.attributes.states.statesCountries,
+    use.attributes.states.countries,
+  ]);
 
   React.useEffect(() => {
     if (currentItem) {
@@ -134,8 +140,27 @@ export const ShippingAreasForm = ({
     ? 'Agrega una nueva Zona de Envío'
     : `Actualiza la información de la zona #${currentItem?.id}`;
 
+  const add = async (): Promise<void> => {
+    if (use.attributes.actions.validationButtonNext()) {
+      try {
+        use.pages.actions.onFetching();
+        const data = await use.api.actions.add();
+        if (data.success) {
+          use.data.actions.handleNewItem(data.item);
+          use.pages.actions.onInit();
+        } else {
+          use.error.actions.changeError([data.message]);
+          use.pages.actions.onAdd();
+        }
+      } catch (error) {
+        use.error.actions.changeError([`${error}`]);
+        use.pages.actions.onAdd();
+      }
+    }
+  };
+
   const buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  const buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
+  const buttonAction = isAddForm ? add : use.api.actions.update;
 
   const handleActions = (action: string, value: any) => {
     switch (action) {
@@ -291,6 +316,7 @@ export const ShippingAreasForm = ({
       handleActions={handleActions}
       error={use.error.states.error}
       {...modelFormProps}
+      buttonNextId="shipping-form"
     >
       <>
         <ContainerButton

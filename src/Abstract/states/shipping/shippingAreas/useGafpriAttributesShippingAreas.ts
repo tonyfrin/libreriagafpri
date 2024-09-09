@@ -49,7 +49,7 @@ type Actions = {
   removeCountries: (value: string) => void;
   changeCountry: (country: string) => void;
 
-  validationButtonNext: () => void;
+  validationButtonNext: () => boolean;
 
   setCurrentId: (value: number) => void;
 };
@@ -140,8 +140,8 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
     });
   };
 
-  const validationButtonNext = (): void => {
-    generalValidationButtonNext({
+  const validationButtonNext = (): boolean => {
+    const valid = generalValidationButtonNext({
       validations: [
         nameValid &&
           postalCodes.length > 0 &&
@@ -149,7 +149,9 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
           statesCountries.length > 0 &&
           countries.length > 0,
       ],
+      inputId: 'shipping-form',
     });
+    return valid;
   };
 
   // Funciones de cambios
