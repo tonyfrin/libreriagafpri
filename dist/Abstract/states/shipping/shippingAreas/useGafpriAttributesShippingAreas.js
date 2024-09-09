@@ -5,11 +5,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useGafpriAttributesShippingAreas = useGafpriAttributesShippingAreas;
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = require("react");
 var _Validations = require("../../../../Validations");
 var _Changes = require("../../../../Changes");
-var _constants = require("../../../../constants");
 function useGafpriAttributesShippingAreas() {
   var _useState = (0, _react.useState)(''),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -21,31 +21,71 @@ function useGafpriAttributesShippingAreas() {
     setNameValid = _useState4[1];
   var _useState5 = (0, _react.useState)([]),
     _useState6 = (0, _slicedToArray2["default"])(_useState5, 2),
-    region = _useState6[0],
-    setRegion = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
-    _useState8 = (0, _slicedToArray2["default"])(_useState7, 2),
-    regionValid = _useState8[0],
-    setRegionValid = _useState8[1];
-  var _useState9 = (0, _react.useState)(''),
-    _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
-    selectedRegionValue = _useState10[0],
-    setSelectedRegionValue = _useState10[1];
-  var regionDefault = {
-    value: '',
-    label: 'Selecciona una región'
+    postalCodes = _useState6[0],
+    setPostalCodes = _useState6[1];
+  var pushPostalCodes = function pushPostalCodes(value) {
+    if (!postalCodes.includes(value)) {
+      setPostalCodes([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+    }
   };
-  var regionOptions = (0, _constants.OPTIONS_REGION)();
-  var _useState11 = (0, _react.useState)(0),
+  var removePostalCode = function removePostalCode(value) {
+    setPostalCodes(postalCodes.filter(function (item) {
+      return item !== value;
+    }));
+  };
+  var _useState7 = (0, _react.useState)([]),
+    _useState8 = (0, _slicedToArray2["default"])(_useState7, 2),
+    cities = _useState8[0],
+    setCities = _useState8[1];
+  var pushCities = function pushCities(value) {
+    if (!cities.includes(value)) {
+      setCities([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+    }
+  };
+  var removeCities = function removeCities(value) {
+    setCities(cities.filter(function (item) {
+      return item !== value;
+    }));
+  };
+  var _useState9 = (0, _react.useState)([]),
+    _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
+    statesCountries = _useState10[0],
+    setStatesCountries = _useState10[1];
+  var pushStatesCountries = function pushStatesCountries(value) {
+    if (!statesCountries.includes(value)) {
+      setStatesCountries([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+    }
+  };
+  var removeStatesCountries = function removeStatesCountries(value) {
+    setStatesCountries(statesCountries.filter(function (item) {
+      return item !== value;
+    }));
+  };
+  var _useState11 = (0, _react.useState)([]),
     _useState12 = (0, _slicedToArray2["default"])(_useState11, 2),
-    currentId = _useState12[0],
-    setCurrentId = _useState12[1];
+    countries = _useState12[0],
+    setCountries = _useState12[1];
+  var pushCountries = function pushCountries(value) {
+    if (!countries.includes(value)) {
+      setCountries([].concat((0, _toConsumableArray2["default"])(postalCodes), [value]));
+    }
+  };
+  var removeCountries = function removeCountries(value) {
+    setCountries(countries.filter(function (item) {
+      return item !== value;
+    }));
+  };
+  var _useState13 = (0, _react.useState)(0),
+    _useState14 = (0, _slicedToArray2["default"])(_useState13, 2),
+    currentId = _useState14[0],
+    setCurrentId = _useState14[1];
   var infoReset = function infoReset() {
     setName('');
     setNameValid(false);
-    setRegion([]);
-    setRegionValid(false);
-    setSelectedRegionValue('');
+    setPostalCodes([]);
+    setCities([]);
+    setStatesCountries([]);
+    setCountries([]);
     setCurrentId(0);
   };
 
@@ -57,17 +97,9 @@ function useGafpriAttributesShippingAreas() {
       currentValid: nameValid
     });
   };
-  var validationRegion = function validationRegion(value) {
-    return (0, _Validations.generalValidationRegion)({
-      value: value,
-      setValid: setRegionValid,
-      currentValid: regionValid,
-      required: true
-    });
-  };
   var validationButtonNext = function validationButtonNext() {
     (0, _Validations.generalValidationButtonNext)({
-      validations: [nameValid, regionValid]
+      validations: [nameValid && postalCodes.length > 0 && cities.length > 0 && statesCountries.length > 0 && countries.length > 0]
     });
   };
 
@@ -79,21 +111,29 @@ function useGafpriAttributesShippingAreas() {
       setValue: setName
     });
   };
-  var changeRegion = function changeRegion(value) {
-    (0, _Changes.generalChangeRegion)({
-      options: value,
-      validation: validationRegion,
-      region: region,
-      setValue: setRegion,
-      setSelectedValue: setSelectedRegionValue
-    });
+  var changePostalCode = function changePostalCode(postalCode, city, stateCountry, country) {
+    pushPostalCodes(postalCode);
+    pushCities(city);
+    pushStatesCountries(stateCountry);
+    pushCountries(country);
   };
-  var removeRegion = function removeRegion(valueDelete) {
-    setRegion(function (prevRegions) {
-      return prevRegions.filter(function (r) {
-        return r !== valueDelete;
-      });
-    });
+  var changeCities = function changeCities(city, stateCountry, country) {
+    pushPostalCodes('*');
+    pushCities(city);
+    pushStatesCountries(stateCountry);
+    pushCountries(country);
+  };
+  var changeStateCountry = function changeStateCountry(stateCountry, country) {
+    pushPostalCodes('*');
+    pushCities('*');
+    pushStatesCountries(stateCountry);
+    pushCountries(country);
+  };
+  var changeCountry = function changeCountry(country) {
+    pushPostalCodes('*');
+    pushCities('*');
+    pushStatesCountries('*');
+    pushCountries(country);
   };
 
   /**
@@ -104,23 +144,34 @@ function useGafpriAttributesShippingAreas() {
   var states = {
     name: name,
     nameValid: nameValid,
-    region: region,
-    regionValid: regionValid,
-    selectedRegionValue: selectedRegionValue,
-    currentId: currentId,
-    regionDefault: regionDefault,
-    regionOptions: regionOptions
+    postalCodes: postalCodes,
+    cities: cities,
+    statesCountries: statesCountries,
+    countries: countries,
+    currentId: currentId
   };
   var actions = {
     infoReset: infoReset,
     validationName: validationName,
-    validationRegion: validationRegion,
-    setRegion: setRegion,
     validationButtonNext: validationButtonNext,
     changeName: changeName,
-    changeRegion: changeRegion,
-    setCurrentId: setCurrentId,
-    removeRegion: removeRegion
+    setPostalCodes: setPostalCodes,
+    pushPostalCodes: pushPostalCodes,
+    removePostalCode: removePostalCode,
+    changePostalCode: changePostalCode,
+    setCities: setCities,
+    pushCities: pushCities,
+    removeCities: removeCities,
+    changeCities: changeCities,
+    setStatesCountries: setStatesCountries,
+    pushStatesCountries: pushStatesCountries,
+    removeStatesCountries: removeStatesCountries,
+    changeStateCountry: changeStateCountry,
+    setCountries: setCountries,
+    pushCountries: pushCountries,
+    removeCountries: removeCountries,
+    changeCountry: changeCountry,
+    setCurrentId: setCurrentId
   };
   return {
     states: states,

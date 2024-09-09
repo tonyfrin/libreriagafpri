@@ -14,7 +14,6 @@ var _Button = require("../../Button");
 var _Header = require("../../Header");
 var _Error = require("../../Error");
 var _List = require("../../List");
-var _constants = require("../../../constants");
 var _templateObject;
 var defaultOptionsButtonMainContainerStyle = (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  justify-content: space-evenly;\n"])));
 var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_ref) {
@@ -75,17 +74,11 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
   var areas = use.paginations.actions.sortByName(filtered, use.paginations.states.orderList) || [];
   var paginated = use.paginations.actions.getPaginated(areas, use.paginations.states.currentPage, use.paginations.states.itemsPerPage);
   var items = (_paginated$map = paginated === null || paginated === void 0 ? void 0 : paginated.map(function (item) {
-    var _item$region;
-    var areasString = '';
-    item === null || item === void 0 || (_item$region = item.region) === null || _item$region === void 0 || _item$region.forEach(function (area) {
-      var label = _constants.Countries[0][area] || _constants.StatesCountries[0]['VE'][0][area] || area;
-      areasString += "".concat(label, ", ");
-    });
-    return [item.name, areasString, /*#__PURE__*/_react["default"].createElement(ButtonUpdate, {
+    return [item.name, /*#__PURE__*/_react["default"].createElement(ButtonUpdate, {
       id: item.id
     })];
   })) !== null && _paginated$map !== void 0 ? _paginated$map : [];
-  var headers = ['Nombre', 'Zonas', 'Opciones'];
+  var headers = ['Nombre', 'Opciones'];
   var options = [{
     value: 'asc',
     label: 'Ascendente'
@@ -105,7 +98,7 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
     title: "Zonas",
     items: items,
     headers: headers,
-    columns: 3,
+    columns: 2,
     selectProps: {
       options: options,
       onChange: function onChange(event) {

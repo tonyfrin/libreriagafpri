@@ -83,6 +83,7 @@ export type InputProps = {
   inputClass?: string | undefined;
   containerStyles?: ContainerStyles | undefined;
   containerClass?: string | undefined;
+  ref?: React.LegacyRef<HTMLInputElement>;
 };
 
 export const Input = ({
@@ -92,6 +93,7 @@ export const Input = ({
   inputProps = {},
   containerStyles = {},
   containerClass = '',
+  ref,
 }: InputProps) => {
   const randomName = useMemo(
     () => `input_${Math.random().toString(36).substring(7)}`,
@@ -111,6 +113,7 @@ export const Input = ({
           className={cx(InputStyles(styles), inputClass)}
           autoComplete="off"
           name={randomName}
+          ref={ref}
           {...inputProps}
         />
       </>

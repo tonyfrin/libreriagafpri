@@ -19,7 +19,7 @@
     "declaration": true, 
     "outDir": "dist",
     "rootDir": "src",
-    "types": ["node"]
+    "types": ["node", "google.maps"],
   },
   "include": [
     "src/**/*.tsx",

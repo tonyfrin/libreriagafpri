@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
-import { getItem, saveItem } from '../../../../Context';
-import {
-  getLastEntryDateAndCount,
-  gafpriFetch,
-  SelectDefault,
-} from '../../../../helpers';
-import {
-  SHIPPING_AREAS_STORAGE,
-  SHIPPING_AREAS_ROUTE,
-} from '../../../../constants';
-import { ShippingMethodsAttributes } from '../shippingMethods';
+import { useState } from 'react';
+import { gafpriFetch, SelectDefault } from '../../../../helpers';
+import { SHIPPING_AREAS_ROUTE } from '../../../../constants';
 
 export interface ShippingAreasAttributes {
   id: number;
   name: string;
-  region: string[];
-  shippingMethods: ShippingMethodsAttributes[];
-  createdAt: Date;
-  modifiedAt: Date;
+  postalCodes: string[];
+  cities: string[];
+  states: string[];
+  countries: string[];
 }
 
 interface ShippingAreasData {
@@ -59,7 +50,7 @@ export function useGafpriDataShippingAreas({
   const [isReady, setIsReady] = useState(false);
   const [items, setItems] = useState<ShippingAreasData>({
     data: {
-      items: getItem(SHIPPING_AREAS_STORAGE, null),
+      items: null,
     },
   });
 
@@ -73,20 +64,8 @@ export function useGafpriDataShippingAreas({
 
   // Manejo de la data
 
-  const getLastItem: ShippingAreasAttributes | null = items.data?.items
-    ? items.data.items.sort(
-        (a, b) =>
-          new Date(b.modifiedAt).getTime() - new Date(a.modifiedAt).getTime()
-      )[0]
-    : null;
-
-  const setDataStorage = (newData: ShippingAreasData): void => {
-    saveItem(SHIPPING_AREAS_STORAGE, newData.data.items);
-  };
-
   const setData = (newData: ShippingAreasData): void => {
     setItems(newData);
-    setDataStorage(newData);
   };
 
   const onItems = (newData: ShippingAreasData): void => {
@@ -104,30 +83,16 @@ export function useGafpriDataShippingAreas({
   };
 
   const getItems = async (): Promise<void> => {
-    const lastEntryDateAndCount = await getLastEntryDateAndCount(
-      SHIPPING_AREAS_ROUTE
-    );
-    const lastDate = getLastItem?.modifiedAt || null;
-    const count = items.data.items?.length || 0;
-
-    if (
-      items.data.items === null ||
-      `${lastEntryDateAndCount?.date}` !== `${lastDate}` ||
-      `${lastEntryDateAndCount?.count}` !== `${count}`
-    ) {
-      if (token) {
-        gafpriFetch({
-          initMethod: 'GET',
-          initRoute: SHIPPING_AREAS_ROUTE,
-          initToken: { token },
-          functionFetching: notReady,
-          functionSuccess: onItems,
-        });
-      } else {
-        notReady();
-      }
+    if (token) {
+      gafpriFetch({
+        initMethod: 'GET',
+        initRoute: SHIPPING_AREAS_ROUTE,
+        initToken: { token },
+        functionFetching: notReady,
+        functionSuccess: onItems,
+      });
     } else {
-      onIsReady();
+      notReady();
     }
   };
 
@@ -138,7 +103,6 @@ export function useGafpriDataShippingAreas({
           items: [...(prevState.data.items || []), newItem],
         },
       };
-      setDataStorage(newData);
       return newData;
     });
   };
@@ -154,7 +118,6 @@ export function useGafpriDataShippingAreas({
           items: updatedItems,
         },
       };
-      setDataStorage(newData);
       return newData;
     });
   };
@@ -170,8 +133,6 @@ export function useGafpriDataShippingAreas({
           items: filteredItems,
         },
       };
-
-      setDataStorage(newData);
       return newData;
     });
   };
@@ -191,16 +152,6 @@ export function useGafpriDataShippingAreas({
   }
 
   /**
-   * Effects
-   *
-   *
-   */
-
-  React.useEffect(() => {
-    getItems();
-  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
    * Export
    *
    *
@@ -217,6 +168,7 @@ export function useGafpriDataShippingAreas({
     handleDeleted,
     getById,
     getOptions,
+    getItems,
   };
 
   return {

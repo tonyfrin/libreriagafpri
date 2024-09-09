@@ -1,22 +1,18 @@
 import { useState } from 'react';
-import { SingleValue } from 'react-select';
 import {
   generalValidationButtonNext,
   generalValidationName,
-  generalValidationRegion,
 } from '../../../../Validations';
-import { generalChangeName, generalChangeRegion } from '../../../../Changes';
-import { OPTIONS_REGION } from '../../../../constants';
+import { generalChangeName } from '../../../../Changes';
 
 type State = {
   name: string;
   nameValid: boolean;
 
-  region: string[];
-  regionValid: boolean;
-  selectedRegionValue: string;
-  regionDefault: { value: string; label: string };
-  regionOptions: { value: string; label: string }[];
+  postalCodes: string[];
+  cities: string[];
+  statesCountries: string[];
+  countries: string[];
 
   currentId: number;
 };
@@ -26,18 +22,36 @@ type Actions = {
 
   validationName: (value: string) => boolean;
 
-  validationRegion: (value: string[]) => boolean;
-  setRegion: (value: string[]) => void;
+  changeName: (value: string) => void;
+
+  setPostalCodes: (value: string[]) => void;
+  pushPostalCodes: (value: string) => void;
+  removePostalCode: (value: string) => void;
+  changePostalCode: (
+    postalCode: string,
+    city: string,
+    stateCountry: string,
+    country: string
+  ) => void;
+
+  setCities: (value: string[]) => void;
+  pushCities: (value: string) => void;
+  removeCities: (value: string) => void;
+  changeCities: (city: string, stateCountry: string, country: string) => void;
+
+  setStatesCountries: (value: string[]) => void;
+  pushStatesCountries: (value: string) => void;
+  removeStatesCountries: (value: string) => void;
+  changeStateCountry: (stateCountry: string, country: string) => void;
+
+  setCountries: (value: string[]) => void;
+  pushCountries: (value: string) => void;
+  removeCountries: (value: string) => void;
+  changeCountry: (country: string) => void;
 
   validationButtonNext: () => void;
 
-  changeName: (value: string) => void;
-
-  changeRegion: (value: SingleValue<{ value: string; label: string }>) => void;
-
   setCurrentId: (value: number) => void;
-
-  removeRegion: (region: string) => void;
 };
 
 export type UseGafpriAttributesShippingAreasReturn = {
@@ -49,23 +63,59 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
   const [name, setName] = useState('');
   const [nameValid, setNameValid] = useState(false);
 
-  const [region, setRegion] = useState<string[]>([]);
-  const [regionValid, setRegionValid] = useState(false);
-  const [selectedRegionValue, setSelectedRegionValue] = useState('');
-  const regionDefault = {
-    value: '',
-    label: 'Selecciona una región',
+  const [postalCodes, setPostalCodes] = useState<string[]>([]);
+  const pushPostalCodes = (value: string): void => {
+    if (!postalCodes.includes(value)) {
+      setPostalCodes([...postalCodes, value]);
+    }
   };
-  const regionOptions = OPTIONS_REGION();
+
+  const removePostalCode = (value: string): void => {
+    setPostalCodes(postalCodes.filter((item) => item !== value));
+  };
+
+  const [cities, setCities] = useState<string[]>([]);
+  const pushCities = (value: string): void => {
+    if (!cities.includes(value)) {
+      setCities([...postalCodes, value]);
+    }
+  };
+
+  const removeCities = (value: string): void => {
+    setCities(cities.filter((item) => item !== value));
+  };
+
+  const [statesCountries, setStatesCountries] = useState<string[]>([]);
+  const pushStatesCountries = (value: string): void => {
+    if (!statesCountries.includes(value)) {
+      setStatesCountries([...postalCodes, value]);
+    }
+  };
+
+  const removeStatesCountries = (value: string): void => {
+    setStatesCountries(statesCountries.filter((item) => item !== value));
+  };
+
+  const [countries, setCountries] = useState<string[]>([]);
+  const pushCountries = (value: string): void => {
+    if (!countries.includes(value)) {
+      setCountries([...postalCodes, value]);
+    }
+  };
+
+  const removeCountries = (value: string): void => {
+    setCountries(countries.filter((item) => item !== value));
+  };
 
   const [currentId, setCurrentId] = useState(0);
 
   const infoReset = (): void => {
     setName('');
     setNameValid(false);
-    setRegion([]);
-    setRegionValid(false);
-    setSelectedRegionValue('');
+    setPostalCodes([]);
+    setCities([]);
+    setStatesCountries([]);
+    setCountries([]);
     setCurrentId(0);
   };
 
@@ -78,17 +128,16 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
     });
   };
 
-  const validationRegion = (value: string[]): boolean => {
-    return generalValidationRegion({
-      value,
-      setValid: setRegionValid,
-      currentValid: regionValid,
-      required: true,
-    });
-  };
-
   const validationButtonNext = (): void => {
-    generalValidationButtonNext({ validations: [nameValid, regionValid] });
+    generalValidationButtonNext({
+      validations: [
+        nameValid &&
+          postalCodes.length > 0 &&
+          cities.length > 0 &&
+          statesCountries.length > 0 &&
+          countries.length > 0,
+      ],
+    });
   };
 
   // Funciones de cambios
@@ -100,20 +149,41 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
     });
   };
 
-  const changeRegion = (
-    value: SingleValue<{ value: string; label: string }>
+  const changePostalCode = (
+    postalCode: string,
+    city: string,
+    stateCountry: string,
+    country: string
   ): void => {
-    generalChangeRegion({
-      options: value,
-      validation: validationRegion,
-      region,
-      setValue: setRegion,
-      setSelectedValue: setSelectedRegionValue,
-    });
+    pushPostalCodes(postalCode);
+    pushCities(city);
+    pushStatesCountries(stateCountry);
+    pushCountries(country);
   };
 
-  const removeRegion = (valueDelete: string): void => {
-    setRegion((prevRegions) => prevRegions.filter((r) => r !== valueDelete));
+  const changeCities = (
+    city: string,
+    stateCountry: string,
+    country: string
+  ): void => {
+    pushPostalCodes('*');
+    pushCities(city);
+    pushStatesCountries(stateCountry);
+    pushCountries(country);
+  };
+
+  const changeStateCountry = (stateCountry: string, country: string): void => {
+    pushPostalCodes('*');
+    pushCities('*');
+    pushStatesCountries(stateCountry);
+    pushCountries(country);
+  };
+
+  const changeCountry = (country: string): void => {
+    pushPostalCodes('*');
+    pushCities('*');
+    pushStatesCountries('*');
+    pushCountries(country);
   };
 
   /**
@@ -124,24 +194,42 @@ export function useGafpriAttributesShippingAreas(): UseGafpriAttributesShippingA
   const states = {
     name,
     nameValid,
-    region,
-    regionValid,
-    selectedRegionValue,
+
+    postalCodes,
+    cities,
+    statesCountries,
+    countries,
+
     currentId,
-    regionDefault,
-    regionOptions,
   };
 
   const actions = {
     infoReset,
     validationName,
-    validationRegion,
-    setRegion,
     validationButtonNext,
     changeName,
-    changeRegion,
+
+    setPostalCodes,
+    pushPostalCodes,
+    removePostalCode,
+    changePostalCode,
+
+    setCities,
+    pushCities,
+    removeCities,
+    changeCities,
+
+    setStatesCountries,
+    pushStatesCountries,
+    removeStatesCountries,
+    changeStateCountry,
+
+    setCountries,
+    pushCountries,
+    removeCountries,
+    changeCountry,
+
     setCurrentId,
-    removeRegion,
   };
 
   return {

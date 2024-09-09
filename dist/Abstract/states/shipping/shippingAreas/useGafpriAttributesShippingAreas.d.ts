@@ -1,33 +1,34 @@
-import { SingleValue } from 'react-select';
 type State = {
     name: string;
     nameValid: boolean;
-    region: string[];
-    regionValid: boolean;
-    selectedRegionValue: string;
-    regionDefault: {
-        value: string;
-        label: string;
-    };
-    regionOptions: {
-        value: string;
-        label: string;
-    }[];
+    postalCodes: string[];
+    cities: string[];
+    statesCountries: string[];
+    countries: string[];
     currentId: number;
 };
 type Actions = {
     infoReset: () => void;
     validationName: (value: string) => boolean;
-    validationRegion: (value: string[]) => boolean;
-    setRegion: (value: string[]) => void;
-    validationButtonNext: () => void;
     changeName: (value: string) => void;
-    changeRegion: (value: SingleValue<{
-        value: string;
-        label: string;
-    }>) => void;
+    setPostalCodes: (value: string[]) => void;
+    pushPostalCodes: (value: string) => void;
+    removePostalCode: (value: string) => void;
+    changePostalCode: (postalCode: string, city: string, stateCountry: string, country: string) => void;
+    setCities: (value: string[]) => void;
+    pushCities: (value: string) => void;
+    removeCities: (value: string) => void;
+    changeCities: (city: string, stateCountry: string, country: string) => void;
+    setStatesCountries: (value: string[]) => void;
+    pushStatesCountries: (value: string) => void;
+    removeStatesCountries: (value: string) => void;
+    changeStateCountry: (stateCountry: string, country: string) => void;
+    setCountries: (value: string[]) => void;
+    pushCountries: (value: string) => void;
+    removeCountries: (value: string) => void;
+    changeCountry: (country: string) => void;
+    validationButtonNext: () => void;
     setCurrentId: (value: number) => void;
-    removeRegion: (region: string) => void;
 };
 export type UseGafpriAttributesShippingAreasReturn = {
     states: State;

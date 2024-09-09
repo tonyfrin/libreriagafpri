@@ -1,24 +1,28 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ShippingAreasForm = void 0;
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _css = require("@emotion/css");
 var _Containers = require("../../Containers");
 var _Form = require("../../Form");
 var _Input = require("../../Input");
 var _Button = require("../../Button");
-var _constants = require("../../../constants");
 var _List = require("../../List");
 var _Modal = require("../../Modal");
 var _Components = require("../../../Components");
+var _Map = require("../../Map");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var regionsContainerStyles = (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin: 20px 10px;\n  padding: 15px 0px;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  width: 91%;\n"])));
@@ -34,21 +38,41 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     modelFormProps = _ref.modelFormProps,
     infoContainerProps = _ref.infoContainerProps,
     nameInputProps = _ref.nameInputProps;
+  var _useState = (0, _react.useState)(''),
+    _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
+    type = _useState2[0],
+    SetType = _useState2[1];
+  var optionsType = [{
+    label: 'Código Potal',
+    value: 'postalCodes'
+  }, {
+    label: 'Ciudades',
+    value: 'cities'
+  }, {
+    label: 'Estados',
+    value: 'statesCountries'
+  }, {
+    label: 'Paises',
+    value: 'countries'
+  }];
+  var changeType = function changeType(e) {
+    if (e) {
+      SetType(e.value);
+    }
+  };
   var isAddForm = formType === 'add';
   var isUpdateForm = formType === 'update';
   var currentItem = isUpdateForm ? use.data.actions.getById(use.attributes.states.currentId) : null;
   _react["default"].useEffect(function () {
     use.attributes.actions.validationName(use.attributes.states.name);
-    use.attributes.actions.validationRegion(use.attributes.states.region);
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.name, use.attributes.states.region]);
+  }, [use.attributes.states.name]);
   _react["default"].useEffect(function () {
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.nameValid, use.attributes.states.regionValid]);
+  }, [use.attributes.states.nameValid]);
   _react["default"].useEffect(function () {
     if (currentItem) {
       use.attributes.actions.changeName(currentItem.name);
-      use.attributes.actions.setRegion(currentItem.region);
     }
   }, []);
   var title1Text = isAddForm ? 'Nueva Zona' : 'Actualizar Zona';
@@ -131,6 +155,19 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   })) !== null && _shippingMethodsPagin !== void 0 ? _shippingMethodsPagin : [];
   var headers = ['Name', 'Tipo', 'Estatus', 'Acción'];
   var totalPages = Math.ceil(shippingMethods.length / use.useShippingMethoods.paginations.states.itemsPerPage);
+  var changePlace = function changePlace(value) {
+    if (value && type !== '') {
+      if (type === 'postalCodes') {
+        use.attributes.actions.changePostalCode(value.postalCode || '', value.city || '', value.state || '', value.country || '');
+      } else if (type === 'cities') {
+        use.attributes.actions.changeCities(value.city || '', value.state || '', value.country || '');
+      } else if (type === 'statesCountries') {
+        use.attributes.actions.changeStateCountry(value.state || '', value.country || '');
+      } else if (type === 'countries') {
+        use.attributes.actions.changeCountry(value.country || '');
+      }
+    }
+  };
   return /*#__PURE__*/_react["default"].createElement(_Form.ModelForm, (0, _extends2["default"])({
     titles: {
       title1: title1Text,
@@ -160,38 +197,107 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     styles: {
       width: '96.5%'
     }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectRegion, {
-    changeRegion: function changeRegion(event) {
-      return use.attributes.actions.changeRegion(event);
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.GsSelect, {
+    options: optionsType,
+    onChange: function onChange(e) {
+      return changeType(e);
     },
-    props: {
-      defaultValue: use.attributes.states.regionDefault,
-      styles: {
-        width: '100%'
-      },
-      options: use.attributes.states.regionOptions
+    placeholder: "Selecciona el tipo de Zona",
+    title: "Tipo de Zona"
+  }))), type !== '' && /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
+    setPlace: changePlace
+  }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '96.5%'
     }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.cx)(regionsContainerStyles)
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "C\xF3digos postales"), use.attributes.states.postalCodes.map(function (item) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: "container-postal-code-".concat(item),
+      className: (0, _css.cx)(regionItemStyles)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      key: "postal-code-".concat(item),
+      className: (0, _css.cx)(regionContainerStyles)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      key: "x-".concat(item),
+      className: (0, _css.cx)(closeButtonStyles),
+      onClick: function onClick() {
+        return use.attributes.actions.removePostalCode(item);
+      }
+    }, "x"), /*#__PURE__*/_react["default"].createElement("button", {
+      key: "button-".concat(item),
+      className: (0, _css.cx)(regionButtonStyles)
+    }, item)));
   }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
-  }, use.attributes.states.region.map(function (region) {
-    var label = _constants.Countries[0][region] || _constants.StatesCountries[0]['VE'][0][region] || region;
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "Ciudades"), use.attributes.states.cities.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement("div", {
-      key: region,
+      key: "container-cities-".concat(item),
       className: (0, _css.cx)(regionItemStyles)
     }, /*#__PURE__*/_react["default"].createElement("div", {
+      key: "cities-".concat(item),
       className: (0, _css.cx)(regionContainerStyles)
     }, /*#__PURE__*/_react["default"].createElement("span", {
+      key: "x-cities-".concat(item),
       className: (0, _css.cx)(closeButtonStyles),
       onClick: function onClick() {
-        return use.attributes.actions.removeRegion(region);
+        return use.attributes.actions.removeCities(item);
       }
     }, "x"), /*#__PURE__*/_react["default"].createElement("button", {
+      key: "button-cities-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
-    }, label)));
+    }, item)));
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '96.5%'
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.cx)(regionsContainerStyles)
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "Estados"), use.attributes.states.statesCountries.map(function (item) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: "container-states-countries-".concat(item),
+      className: (0, _css.cx)(regionItemStyles)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      key: "states-countries-".concat(item),
+      className: (0, _css.cx)(regionContainerStyles)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      key: "x-states-countries-".concat(item),
+      className: (0, _css.cx)(closeButtonStyles),
+      onClick: function onClick() {
+        return use.attributes.actions.removeStatesCountries(item);
+      }
+    }, "x"), /*#__PURE__*/_react["default"].createElement("button", {
+      key: "button-states-countries-".concat(item),
+      className: (0, _css.cx)(regionButtonStyles)
+    }, item)));
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '96.5%'
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.cx)(regionsContainerStyles)
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "Paises"), use.attributes.states.countries.map(function (item) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: "container-countries-".concat(item),
+      className: (0, _css.cx)(regionItemStyles)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      key: "countries-".concat(item),
+      className: (0, _css.cx)(regionContainerStyles)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      key: "x-countries-".concat(item),
+      className: (0, _css.cx)(closeButtonStyles),
+      onClick: function onClick() {
+        return use.attributes.actions.removeCountries(item);
+      }
+    }, "x"), /*#__PURE__*/_react["default"].createElement("button", {
+      key: "button-countries-".concat(item),
+      className: (0, _css.cx)(regionButtonStyles)
+    }, item)));
   }))), isUpdateForm && shippingMethods.length > 0 ? /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_List.ListContainer, {
     propsList: {
       title: 'Métodos de Envío',

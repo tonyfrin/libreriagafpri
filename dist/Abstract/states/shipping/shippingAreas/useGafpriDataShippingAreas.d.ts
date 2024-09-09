@@ -1,12 +1,11 @@
 import { SelectDefault } from '../../../../helpers';
-import { ShippingMethodsAttributes } from '../shippingMethods';
 export interface ShippingAreasAttributes {
     id: number;
     name: string;
-    region: string[];
-    shippingMethods: ShippingMethodsAttributes[];
-    createdAt: Date;
-    modifiedAt: Date;
+    postalCodes: string[];
+    cities: string[];
+    states: string[];
+    countries: string[];
 }
 interface ShippingAreasData {
     data: {

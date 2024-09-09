@@ -18,13 +18,12 @@ function useGafpriApiShippingAreas(_ref) {
     });
   };
   var add = function add() {
-    if (attributes.states.nameValid && attributes.states.regionValid && token) {
+    if (attributes.states.nameValid && token) {
       (0, _helpers.gafpriFetch)({
         initMethod: 'POST',
         initRoute: _constants.SHIPPING_AREAS_ROUTE,
         initCredentials: {
-          name: attributes.states.name,
-          region: attributes.states.region
+          name: attributes.states.name
         },
         initToken: {
           token: token
@@ -44,13 +43,12 @@ function useGafpriApiShippingAreas(_ref) {
     });
   };
   var update = function update() {
-    if (attributes.states.nameValid && attributes.states.regionValid && token) {
+    if (attributes.states.nameValid && token) {
       (0, _helpers.gafpriFetch)({
         initMethod: 'PATCH',
         initRoute: "".concat(_constants.SHIPPING_AREAS_ROUTE, "/").concat(attributes.states.currentId),
         initCredentials: {
-          name: attributes.states.name,
-          region: attributes.states.region
+          name: attributes.states.name
         },
         initToken: {
           token: token

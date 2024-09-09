@@ -40,8 +40,9 @@ export type InputProps = {
     inputClass?: string | undefined;
     containerStyles?: ContainerStyles | undefined;
     containerClass?: string | undefined;
+    ref?: React.LegacyRef<HTMLInputElement>;
 };
-export declare const Input: ({ styles, stylesSpan, inputClass, inputProps, containerStyles, containerClass, }: InputProps) => React.JSX.Element;
+export declare const Input: ({ styles, stylesSpan, inputClass, inputProps, containerStyles, containerClass, ref, }: InputProps) => React.JSX.Element;
 type media = {
     width?: string;
     fontSize?: string;

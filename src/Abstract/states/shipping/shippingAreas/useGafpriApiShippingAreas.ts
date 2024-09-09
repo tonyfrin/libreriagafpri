@@ -17,7 +17,6 @@ type Data = {
   data?: Items;
   success?: boolean;
   name: string;
-  region: string[];
 };
 
 type Actions = {
@@ -53,13 +52,12 @@ export function useGafpriApiShippingAreas({
   };
 
   const add = (): void => {
-    if (attributes.states.nameValid && attributes.states.regionValid && token) {
+    if (attributes.states.nameValid && token) {
       gafpriFetch<Data>({
         initMethod: 'POST',
         initRoute: SHIPPING_AREAS_ROUTE,
         initCredentials: {
           name: attributes.states.name,
-          region: attributes.states.region,
         },
         initToken: { token },
         functionFetching: pages.actions.onFetching,
@@ -79,13 +77,12 @@ export function useGafpriApiShippingAreas({
   };
 
   const update = (): void => {
-    if (attributes.states.nameValid && attributes.states.regionValid && token) {
+    if (attributes.states.nameValid && token) {
       gafpriFetch({
         initMethod: 'PATCH',
         initRoute: `${SHIPPING_AREAS_ROUTE}/${attributes.states.currentId}`,
         initCredentials: {
           name: attributes.states.name,
-          region: attributes.states.region,
         },
         initToken: { token },
         functionFetching: pages.actions.onFetching,

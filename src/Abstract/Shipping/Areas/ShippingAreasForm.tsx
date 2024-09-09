@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css, cx } from '@emotion/css';
 import {
   ContainerButton,
   ContainerButtonPropsExtended,
 } from '../../Containers';
 import { ModelForm, ModelFormPropsExtended } from '../../Form';
-import { InputName, InputProps, SelectRegion } from '../../Input';
+import { InputName, InputProps, GsSelect } from '../../Input';
 import { Button, ButtonOptionsContainer } from '../../Button';
 import { Countries, StatesCountries } from '../../../constants';
 import type { UseGafpriShippingAreasReturn } from '../../../states';
 import { ListContainer } from '../../List';
 import { Modal } from '../../Modal';
 import { ShippingMethods } from '../../../Components';
+import { MapComponent } from '../../Map';
 
 export type ShippingAreasFormProps = {
   use: UseGafpriShippingAreasReturn;
@@ -88,6 +89,20 @@ export const ShippingAreasForm = ({
   infoContainerProps,
   nameInputProps,
 }: ShippingAreasFormProps): JSX.Element => {
+  const [type, SetType] = useState<string>('');
+  const optionsType = [
+    { label: 'Código Potal', value: 'postalCodes' },
+    { label: 'Ciudades', value: 'cities' },
+    { label: 'Estados', value: 'statesCountries' },
+    { label: 'Paises', value: 'countries' },
+  ];
+
+  const changeType = (e: { label: string; value: string } | null) => {
+    if (e) {
+      SetType(e.value);
+    }
+  };
+
   const isAddForm = formType === 'add';
   const isUpdateForm = formType === 'update';
 
@@ -97,18 +112,16 @@ export const ShippingAreasForm = ({
 
   React.useEffect(() => {
     use.attributes.actions.validationName(use.attributes.states.name);
-    use.attributes.actions.validationRegion(use.attributes.states.region);
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.name, use.attributes.states.region]);
+  }, [use.attributes.states.name]);
 
   React.useEffect(() => {
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.nameValid, use.attributes.states.regionValid]);
+  }, [use.attributes.states.nameValid]);
 
   React.useEffect(() => {
     if (currentItem) {
       use.attributes.actions.changeName(currentItem.name);
-      use.attributes.actions.setRegion(currentItem.region);
     }
   }, []);
 
@@ -222,6 +235,44 @@ export const ShippingAreasForm = ({
       use.useShippingMethoods.paginations.states.itemsPerPage
   );
 
+  const changePlace = (
+    value: {
+      lat: number;
+      lng: number;
+      placeId: string;
+      city?: string;
+      state?: string;
+      country?: string;
+      route?: string;
+      postalCode?: string;
+      formattedAddress?: string;
+    } | null
+  ) => {
+    if (value && type !== '') {
+      if (type === 'postalCodes') {
+        use.attributes.actions.changePostalCode(
+          value.postalCode || '',
+          value.city || '',
+          value.state || '',
+          value.country || ''
+        );
+      } else if (type === 'cities') {
+        use.attributes.actions.changeCities(
+          value.city || '',
+          value.state || '',
+          value.country || ''
+        );
+      } else if (type === 'statesCountries') {
+        use.attributes.actions.changeStateCountry(
+          value.state || '',
+          value.country || ''
+        );
+      } else if (type === 'countries') {
+        use.attributes.actions.changeCountry(value.country || '');
+      }
+    }
+  };
+
   return (
     <ModelForm
       titles={{
@@ -265,19 +316,54 @@ export const ShippingAreasForm = ({
           {...infoContainerProps}
         >
           <>
-            <SelectRegion
-              changeRegion={(event) =>
-                use.attributes.actions.changeRegion(event)
-              }
-              props={{
-                defaultValue: use.attributes.states.regionDefault,
-                styles: {
-                  width: '100%',
-                },
-                options: use.attributes.states.regionOptions,
-              }}
+            <GsSelect
+              options={optionsType}
+              onChange={(e) => changeType(e)}
+              placeholder="Selecciona el tipo de Zona"
+              title="Tipo de Zona"
             />
           </>
+        </ContainerButton>
+        {type !== '' && <MapComponent setPlace={changePlace} />}
+
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+          {...infoContainerProps}
+        >
+          <div className={cx(regionsContainerStyles)}>
+            <span>Códigos postales</span>
+            {use.attributes.states.postalCodes.map((item) => {
+              return (
+                <div
+                  key={`container-postal-code-${item}`}
+                  className={cx(regionItemStyles)}
+                >
+                  <div
+                    key={`postal-code-${item}`}
+                    className={cx(regionContainerStyles)}
+                  >
+                    <span
+                      key={`x-${item}`}
+                      className={cx(closeButtonStyles)}
+                      onClick={() =>
+                        use.attributes.actions.removePostalCode(item)
+                      }
+                    >
+                      x
+                    </span>
+                    <button
+                      key={`button-${item}`}
+                      className={cx(regionButtonStyles)}
+                    >
+                      {item}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </ContainerButton>
         <ContainerButton
           styles={{
@@ -286,23 +372,108 @@ export const ShippingAreasForm = ({
           {...infoContainerProps}
         >
           <div className={cx(regionsContainerStyles)}>
-            {use.attributes.states.region.map((region) => {
-              const label =
-                Countries[0][region] ||
-                StatesCountries[0]['VE'][0][region] ||
-                region;
+            <span>Ciudades</span>
+            {use.attributes.states.cities.map((item) => {
               return (
-                <div key={region} className={cx(regionItemStyles)}>
-                  <div className={cx(regionContainerStyles)}>
+                <div
+                  key={`container-cities-${item}`}
+                  className={cx(regionItemStyles)}
+                >
+                  <div
+                    key={`cities-${item}`}
+                    className={cx(regionContainerStyles)}
+                  >
                     <span
+                      key={`x-cities-${item}`}
+                      className={cx(closeButtonStyles)}
+                      onClick={() => use.attributes.actions.removeCities(item)}
+                    >
+                      x
+                    </span>
+                    <button
+                      key={`button-cities-${item}`}
+                      className={cx(regionButtonStyles)}
+                    >
+                      {item}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+          {...infoContainerProps}
+        >
+          <div className={cx(regionsContainerStyles)}>
+            <span>Estados</span>
+            {use.attributes.states.statesCountries.map((item) => {
+              return (
+                <div
+                  key={`container-states-countries-${item}`}
+                  className={cx(regionItemStyles)}
+                >
+                  <div
+                    key={`states-countries-${item}`}
+                    className={cx(regionContainerStyles)}
+                  >
+                    <span
+                      key={`x-states-countries-${item}`}
                       className={cx(closeButtonStyles)}
                       onClick={() =>
-                        use.attributes.actions.removeRegion(region)
+                        use.attributes.actions.removeStatesCountries(item)
                       }
                     >
                       x
                     </span>
-                    <button className={cx(regionButtonStyles)}>{label}</button>
+                    <button
+                      key={`button-states-countries-${item}`}
+                      className={cx(regionButtonStyles)}
+                    >
+                      {item}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+          {...infoContainerProps}
+        >
+          <div className={cx(regionsContainerStyles)}>
+            <span>Paises</span>
+            {use.attributes.states.countries.map((item) => {
+              return (
+                <div
+                  key={`container-countries-${item}`}
+                  className={cx(regionItemStyles)}
+                >
+                  <div
+                    key={`countries-${item}`}
+                    className={cx(regionContainerStyles)}
+                  >
+                    <span
+                      key={`x-countries-${item}`}
+                      className={cx(closeButtonStyles)}
+                      onClick={() =>
+                        use.attributes.actions.removeCountries(item)
+                      }
+                    >
+                      x
+                    </span>
+                    <button
+                      key={`button-countries-${item}`}
+                      className={cx(regionButtonStyles)}
+                    >
+                      {item}
+                    </button>
                   </div>
                 </div>
               );

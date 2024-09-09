@@ -4,7 +4,6 @@ type Data = {
     item?: ShippingAreasAttributes;
     success?: boolean;
     name: string;
-    region: string[];
 };
 type State = {
     isFetching: boolean;

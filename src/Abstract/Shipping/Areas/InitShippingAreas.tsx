@@ -5,7 +5,6 @@ import { Button, ButtonProps } from '../../Button';
 import { Header, HeaderProps } from '../../Header';
 import { Error, ErrorProps } from '../../Error';
 import { List, ListPropsExtended } from '../../List';
-import { Countries, StatesCountries } from '../../../constants';
 import type { UseGafpriShippingAreasReturn } from '../../../states';
 
 export type InitShippingAreasProps = {
@@ -101,18 +100,10 @@ export const InitShippingAreas = ({
 
   const items =
     paginated?.map((item) => {
-      let areasString = '';
-
-      item?.region?.forEach((area) => {
-        const label =
-          Countries[0][area] || StatesCountries[0]['VE'][0][area] || area;
-        areasString += `${label}, `;
-      });
-
-      return [item.name, areasString, <ButtonUpdate id={item.id} />];
+      return [item.name, <ButtonUpdate id={item.id} />];
     }) ?? [];
 
-  const headers = ['Nombre', 'Zonas', 'Opciones'];
+  const headers = ['Nombre', 'Opciones'];
 
   const options = [
     { value: 'asc', label: 'Ascendente' },
@@ -136,7 +127,7 @@ export const InitShippingAreas = ({
         title="Zonas"
         items={items}
         headers={headers}
-        columns={3}
+        columns={2}
         selectProps={{
           options: options,
           onChange: (event) => {

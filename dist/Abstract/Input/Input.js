@@ -34,7 +34,8 @@ var Input = exports.Input = function Input(_ref) {
     _ref$containerStyles = _ref.containerStyles,
     containerStyles = _ref$containerStyles === void 0 ? {} : _ref$containerStyles,
     _ref$containerClass = _ref.containerClass,
-    containerClass = _ref$containerClass === void 0 ? '' : _ref$containerClass;
+    containerClass = _ref$containerClass === void 0 ? '' : _ref$containerClass,
+    ref = _ref.ref;
   var randomName = (0, _react.useMemo)(function () {
     return "input_".concat(Math.random().toString(36).substring(7));
   }, []);
@@ -46,7 +47,8 @@ var Input = exports.Input = function Input(_ref) {
   }, inputProps === null || inputProps === void 0 ? void 0 : inputProps.title) : '', /*#__PURE__*/_react["default"].createElement("input", (0, _extends2["default"])({
     className: (0, _css.cx)(InputStyles(styles), inputClass),
     autoComplete: "off",
-    name: randomName
+    name: randomName,
+    ref: ref
   }, inputProps))));
 };
 var SelectStyles = function SelectStyles(styles) {
