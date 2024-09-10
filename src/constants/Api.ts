@@ -1,5 +1,7 @@
 export const getApiUrl = (): string | undefined => process.env.API_URL;
+export const getApiGoogle = (): string | undefined => process.env.API_GOOGLE;
 export const API_URL = getApiUrl();
+export const API_GOOGLE = getApiGoogle();
 export const UPLOAD_PHOTO_ROUTE = `${getApiUrl()}//upload-file`;
 export const CATEGORY_ROUTE = '/category';
 export const CURRENCIES_ROUTE = '/currencies';

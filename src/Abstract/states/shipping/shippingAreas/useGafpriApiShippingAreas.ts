@@ -27,7 +27,7 @@ type Data = {
 type Actions = {
   add: () => Promise<any>;
   update: () => void;
-  erase: (id: number) => void;
+  erase: (id: number) => Promise<any>;
 };
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -98,27 +98,23 @@ export function useGafpriApiShippingAreas({
     }
   };
 
-  const newErrorDelete = (
-    newErrorValue: unknown | ErrorResponseProps | CustomErrorResponseProps
-  ): void => {
-    useError.actions.newError({
-      newErrorValue,
-      functionAction: pages.actions.returnInit,
-    });
-  };
-
-  const erase = (id: number): void => {
-    if (token) {
-      gafpriFetch({
-        initMethod: 'DELETE',
-        initRoute: `${SHIPPING_AREAS_ROUTE}/${id}`,
-        initToken: { token },
-        functionFetching: pages.actions.onFetching,
-        functionSuccess: pages.actions.returnInit,
-        functionError: newErrorDelete,
-      });
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const erase = async (id: number): Promise<any> => {
+    try {
+      if (token) {
+        const data = await gafpriFetch<Data>({
+          initMethod: 'DELETE',
+          initRoute: `${SHIPPING_AREAS_ROUTE}/${id}`,
+          initToken: { token },
+        });
+        return data;
+      }
+      return null;
+    } catch (error) {
+      return error;
     }
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   /**
    * Export

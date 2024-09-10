@@ -51,6 +51,12 @@ Object.defineProperty(exports, "ALERT", {
     return _Class.ALERT;
   }
 });
+Object.defineProperty(exports, "API_GOOGLE", {
+  enumerable: true,
+  get: function get() {
+    return _Api.API_GOOGLE;
+  }
+});
 Object.defineProperty(exports, "API_URL", {
   enumerable: true,
   get: function get() {

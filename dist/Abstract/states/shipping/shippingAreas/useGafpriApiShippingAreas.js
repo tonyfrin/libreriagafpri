@@ -89,26 +89,47 @@ function useGafpriApiShippingAreas(_ref) {
       });
     }
   };
-  var newErrorDelete = function newErrorDelete(newErrorValue) {
-    useError.actions.newError({
-      newErrorValue: newErrorValue,
-      functionAction: pages.actions.returnInit
-    });
-  };
-  var erase = function erase(id) {
-    if (token) {
-      (0, _helpers.gafpriFetch)({
-        initMethod: 'DELETE',
-        initRoute: "".concat(_constants.SHIPPING_AREAS_ROUTE, "/").concat(id),
-        initToken: {
-          token: token
-        },
-        functionFetching: pages.actions.onFetching,
-        functionSuccess: pages.actions.returnInit,
-        functionError: newErrorDelete
-      });
-    }
-  };
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  var erase = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(id) {
+      var data;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            if (!token) {
+              _context2.next = 6;
+              break;
+            }
+            _context2.next = 4;
+            return (0, _helpers.gafpriFetch)({
+              initMethod: 'DELETE',
+              initRoute: "".concat(_constants.SHIPPING_AREAS_ROUTE, "/").concat(id),
+              initToken: {
+                token: token
+              }
+            });
+          case 4:
+            data = _context2.sent;
+            return _context2.abrupt("return", data);
+          case 6:
+            return _context2.abrupt("return", null);
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](0);
+            return _context2.abrupt("return", _context2.t0);
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 9]]);
+    }));
+    return function erase(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   /**
    * Export

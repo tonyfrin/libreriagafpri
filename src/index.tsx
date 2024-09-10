@@ -1400,6 +1400,7 @@ export {
   PAYMENT_ORDER_RETURN_ROUTE,
   WALLET_ACCOUNT_ROUTE,
   WALLET_ACCOUNT_STORAGE,
+  API_GOOGLE,
 } from './constants';
 export { getItem, saveItem } from './Context';
 export {

@@ -69,6 +69,24 @@ export const InitShippingAreas = ({
   },
   listProps,
 }: InitShippingAreasProps): JSX.Element => {
+  const erase = async (id: number): Promise<void> => {
+    if (use.attributes.actions.validationButtonNext()) {
+      try {
+        use.pages.actions.onFetching();
+        const data = await use.api.actions.erase(id);
+        if (data.success) {
+          use.data.actions.handleDeleted({ itemId: id });
+        } else {
+          use.error.actions.changeError([data.message]);
+        }
+      } catch (error) {
+        use.error.actions.changeError([`${error}`]);
+      } finally {
+        use.pages.actions.onInit();
+      }
+    }
+  };
+
   const ButtonUpdate: React.FC<{ id: number }> = ({ id }) => {
     return (
       <div className={css(optionsButtonMainContainerStyle)}>
@@ -80,7 +98,7 @@ export const InitShippingAreas = ({
         />
         <Button
           buttonProps={{
-            onClick: () => use.api.actions.erase(id),
+            onClick: () => erase(id),
           }}
           {...deleteButtonProps}
         />

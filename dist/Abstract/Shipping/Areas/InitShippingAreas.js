@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InitShippingAreas = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 var _react = _interopRequireWildcard(require("react"));
 var _fa = require("react-icons/fa");
@@ -58,8 +58,51 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
       error: use.error.states.error
     } : _ref$errorProps,
     listProps = _ref.listProps;
-  var ButtonUpdate = function ButtonUpdate(_ref2) {
-    var id = _ref2.id;
+  var erase = /*#__PURE__*/function () {
+    var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(id) {
+      var data;
+      return _regenerator["default"].wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (!use.attributes.actions.validationButtonNext()) {
+              _context.next = 15;
+              break;
+            }
+            _context.prev = 1;
+            use.pages.actions.onFetching();
+            _context.next = 5;
+            return use.api.actions.erase(id);
+          case 5:
+            data = _context.sent;
+            if (data.success) {
+              use.data.actions.handleDeleted({
+                itemId: id
+              });
+            } else {
+              use.error.actions.changeError([data.message]);
+            }
+            _context.next = 12;
+            break;
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](1);
+            use.error.actions.changeError(["".concat(_context.t0)]);
+          case 12:
+            _context.prev = 12;
+            use.pages.actions.onInit();
+            return _context.finish(12);
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 9, 12, 15]]);
+    }));
+    return function erase(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var ButtonUpdate = function ButtonUpdate(_ref3) {
+    var id = _ref3.id;
     return /*#__PURE__*/_react["default"].createElement("div", {
       className: (0, _css.css)(optionsButtonMainContainerStyle)
     }, /*#__PURE__*/_react["default"].createElement(_Button.Button, (0, _extends2["default"])({
@@ -71,7 +114,7 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
     }, updateButtonProps)), /*#__PURE__*/_react["default"].createElement(_Button.Button, (0, _extends2["default"])({
       buttonProps: {
         onClick: function onClick() {
-          return use.api.actions.erase(id);
+          return erase(id);
         }
       }
     }, deleteButtonProps)));
@@ -102,22 +145,22 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
   var totalPages = Math.ceil(areas.length / use.paginations.states.itemsPerPage);
   (0, _react.useEffect)(function () {
     var get = /*#__PURE__*/function () {
-      var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
         var data;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
+        return _regenerator["default"].wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
             case 0:
               if (!(useLogin.states.token && !use.data.states.isReady)) {
-                _context.next = 17;
+                _context2.next = 17;
                 break;
               }
-              _context.prev = 1;
+              _context2.prev = 1;
               use.pages.actions.onFetching();
               use.data.actions.setIsReady(false);
-              _context.next = 6;
+              _context2.next = 6;
               return use.data.actions.getItems();
             case 6:
-              data = _context.sent;
+              data = _context2.sent;
               if (data.success) {
                 use.data.actions.setItems(data.data.items);
                 use.data.actions.setIsReady(true);
@@ -125,25 +168,25 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
                 use.error.actions.changeError([data.message]);
                 use.data.actions.setIsReady(false);
               }
-              _context.next = 14;
+              _context2.next = 14;
               break;
             case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](1);
-              use.error.actions.changeError(["".concat(_context.t0)]);
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](1);
+              use.error.actions.changeError(["".concat(_context2.t0)]);
               use.data.actions.setIsReady(false);
             case 14:
-              _context.prev = 14;
+              _context2.prev = 14;
               use.pages.actions.onInit();
-              return _context.finish(14);
+              return _context2.finish(14);
             case 17:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
-        }, _callee, null, [[1, 10, 14, 17]]);
+        }, _callee2, null, [[1, 10, 14, 17]]);
       }));
       return function get() {
-        return _ref3.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       };
     }();
     get();

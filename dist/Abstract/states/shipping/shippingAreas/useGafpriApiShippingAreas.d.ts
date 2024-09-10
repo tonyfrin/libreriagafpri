@@ -4,7 +4,7 @@ import { UseGafpriAttributesShippingAreasReturn } from './useGafpriAttributesShi
 type Actions = {
     add: () => Promise<any>;
     update: () => void;
-    erase: (id: number) => void;
+    erase: (id: number) => Promise<any>;
 };
 export type UseGafpriApiShippingAreasReturn = {
     actions: Actions;

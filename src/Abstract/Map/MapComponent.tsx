@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Input } from '../Input';
+import { API_GOOGLE } from '../../constants';
 
 declare global {
   interface Window {
@@ -113,7 +113,7 @@ export const MapComponent = ({ setPlace }: MapComponentProps) => {
 
     // Cargar el script de Google Maps con Autocomplete
     const googleMapsScript = document.createElement('script');
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBmc5I-7-vXi-TJ3_oZnmpEYd1MYBxbVA8&callback=initMap&v=weekly&libraries=places&language=en`;
+    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${API_GOOGLE}&v=weekly&libraries=places&language=en`;
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
     document.body.appendChild(googleMapsScript);
