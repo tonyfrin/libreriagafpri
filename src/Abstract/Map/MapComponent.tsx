@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { API_GOOGLE } from '../../constants';
 
 declare global {
   interface Window {
@@ -21,10 +20,11 @@ type MapComponentProps = {
       formattedAddress?: string;
     } | null
   ) => void;
+  key: string;
 };
 
-export const MapComponent = ({ setPlace }: MapComponentProps) => {
-  console.log('api_google', API_GOOGLE);
+export const MapComponent = ({ setPlace, key }: MapComponentProps) => {
+  console.log('api_google', key);
   const mapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null); // Referencia al input para autocompletar
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -114,7 +114,7 @@ export const MapComponent = ({ setPlace }: MapComponentProps) => {
 
     // Cargar el script de Google Maps con Autocomplete
     const googleMapsScript = document.createElement('script');
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${API_GOOGLE}&v=weekly&libraries=places&language=en`;
+    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${key}&v=weekly&libraries=places&language=en`;
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
     document.body.appendChild(googleMapsScript);

@@ -12,6 +12,7 @@ import { ListContainer } from '../../List';
 import { Modal } from '../../Modal';
 import { ShippingMethods } from '../../../Components';
 import { MapComponent } from '../../Map';
+import { API_GOOGLE } from '../../../constants';
 
 export type ShippingAreasFormProps = {
   use: UseGafpriShippingAreasReturn;
@@ -100,6 +101,7 @@ export const ShippingAreasForm = ({
     { label: 'Estados', value: 'statesCountries' },
     { label: 'Paises', value: 'countries' },
   ];
+  const key = API_GOOGLE;
 
   const changeType = (e: { label: string; value: string } | null) => {
     if (e) {
@@ -375,7 +377,9 @@ export const ShippingAreasForm = ({
             />
           </ContainerButton>
         )}
-        {type !== '' && <MapComponent setPlace={changePlace} />}
+        {type !== '' && key && (
+          <MapComponent setPlace={changePlace} key={key} />
+        )}
 
         <ContainerButton
           styles={{
