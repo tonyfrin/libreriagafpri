@@ -60,6 +60,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     value: 'countries'
   }];
   var key = _constants.API_GOOGLE;
+  console.log('key', key);
   var changeType = function changeType(e) {
     if (e) {
       SetType(e.value);

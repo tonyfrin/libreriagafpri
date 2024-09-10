@@ -102,6 +102,7 @@ export const ShippingAreasForm = ({
     { label: 'Paises', value: 'countries' },
   ];
   const key = API_GOOGLE;
+  console.log('key', key);
 
   const changeType = (e: { label: string; value: string } | null) => {
     if (e) {
