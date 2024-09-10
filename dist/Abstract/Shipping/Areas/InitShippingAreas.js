@@ -108,7 +108,7 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              if (!(useLogin.states.token && use.data.states.isReady)) {
+              if (!(useLogin.states.token && !use.data.states.isReady)) {
                 _context.next = 17;
                 break;
               }

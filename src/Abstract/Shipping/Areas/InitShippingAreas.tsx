@@ -130,7 +130,7 @@ export const InitShippingAreas = ({
 
   useEffect(() => {
     const get = async (): Promise<void> => {
-      if (useLogin.states.token && use.data.states.isReady) {
+      if (useLogin.states.token && !use.data.states.isReady) {
         try {
           use.pages.actions.onFetching();
           use.data.actions.setIsReady(false);
