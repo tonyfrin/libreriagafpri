@@ -76,7 +76,6 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
       }
     }, deleteButtonProps)));
   };
-  console.log('items', use.data.states.items);
   var filtered = use.paginations.actions.filterByName(use.data.states.items, use.paginations.states.searchTerm);
   var areas = use.paginations.actions.sortByName(filtered, use.paginations.states.orderList) || [];
   var paginated = use.paginations.actions.getPaginated(areas, use.paginations.states.currentPage, use.paginations.states.itemsPerPage);
@@ -102,10 +101,6 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
   };
   var totalPages = Math.ceil(areas.length / use.paginations.states.itemsPerPage);
   (0, _react.useEffect)(function () {
-    console.log('useEffect', {
-      token: useLogin.states.token,
-      isReady: use.data.states.isReady
-    });
     var get = /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
         var data;
@@ -113,16 +108,15 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!(useLogin.states.token && !use.data.states.isReady)) {
-                _context.next = 18;
+                _context.next = 17;
                 break;
               }
               _context.prev = 1;
-              console.log('entre aquí');
               use.pages.actions.onFetching();
               use.data.actions.setIsReady(false);
-              _context.next = 7;
+              _context.next = 6;
               return use.data.actions.getItems();
-            case 7:
+            case 6:
               data = _context.sent;
               if (data.success) {
                 use.data.actions.setItems(data.data.items);
@@ -131,22 +125,22 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
                 use.error.actions.changeError([data.message]);
                 use.data.actions.setIsReady(false);
               }
-              _context.next = 15;
+              _context.next = 14;
               break;
-            case 11:
-              _context.prev = 11;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](1);
               use.error.actions.changeError(["".concat(_context.t0)]);
               use.data.actions.setIsReady(false);
-            case 15:
-              _context.prev = 15;
+            case 14:
+              _context.prev = 14;
               use.pages.actions.onInit();
-              return _context.finish(15);
-            case 18:
+              return _context.finish(14);
+            case 17:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[1, 11, 15, 18]]);
+        }, _callee, null, [[1, 10, 14, 17]]);
       }));
       return function get() {
         return _ref3.apply(this, arguments);

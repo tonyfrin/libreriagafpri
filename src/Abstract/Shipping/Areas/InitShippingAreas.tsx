@@ -88,8 +88,6 @@ export const InitShippingAreas = ({
     );
   };
 
-  console.log('items', use.data.states.items);
-
   const filtered = use.paginations.actions.filterByName(
     use.data.states.items,
     use.paginations.states.searchTerm
@@ -129,14 +127,9 @@ export const InitShippingAreas = ({
   );
 
   useEffect(() => {
-    console.log('useEffect', {
-      token: useLogin.states.token,
-      isReady: use.data.states.isReady
-    })
     const get = async (): Promise<void> => {
       if (useLogin.states.token && !use.data.states.isReady) {
         try {
-          console.log('entre aquí')
           use.pages.actions.onFetching();
           use.data.actions.setIsReady(false);
           const data = await use.data.actions.getItems();
