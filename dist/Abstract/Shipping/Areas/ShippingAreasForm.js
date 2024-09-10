@@ -242,7 +242,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
         width: '100%'
       }
     }, nameInputProps)
-  }))), !type ? /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  }))), !type && key !== undefined ? /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }
@@ -262,7 +262,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       readOnly: true,
       value: type
     }
-  })), type !== '' && key && /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
+  })), type !== '' && key !== undefined && /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
     setPlace: changePlace,
     key: key
   }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({

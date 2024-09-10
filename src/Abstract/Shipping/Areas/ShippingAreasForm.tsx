@@ -346,7 +346,7 @@ export const ShippingAreasForm = ({
             />
           </>
         </ContainerButton>
-        {!type ? (
+        {!type && key !== undefined ? (
           <ContainerButton
             styles={{
               width: '96.5%',
@@ -377,7 +377,7 @@ export const ShippingAreasForm = ({
             />
           </ContainerButton>
         )}
-        {type !== '' && key && (
+        {type !== '' && key !== undefined && (
           <MapComponent setPlace={changePlace} key={key} />
         )}
 
