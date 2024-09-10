@@ -63,11 +63,13 @@ export function useGafpriDataShippingAreas({
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const getItems = async (): Promise<any> => {
     if (token) {
+      console.log('entré a get items');
       const data = await gafpriFetch({
         initMethod: 'GET',
         initRoute: SHIPPING_AREAS_ROUTE,
         initToken: { token },
       });
+      console.log('data shiping', data);
       return data;
     }
     return null;
