@@ -88,7 +88,7 @@ export const InitShippingAreas = ({
     );
   };
 
-  console.log(use.data.states.items);
+  console.log('items', use.data.states.items);
 
   const filtered = use.paginations.actions.filterByName(
     use.data.states.items,

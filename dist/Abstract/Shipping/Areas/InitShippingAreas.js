@@ -76,7 +76,7 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
       }
     }, deleteButtonProps)));
   };
-  console.log(use.data.states.items);
+  console.log('items', use.data.states.items);
   var filtered = use.paginations.actions.filterByName(use.data.states.items, use.paginations.states.searchTerm);
   var areas = use.paginations.actions.sortByName(filtered, use.paginations.states.orderList) || [];
   var paginated = use.paginations.actions.getPaginated(areas, use.paginations.states.currentPage, use.paginations.states.itemsPerPage);
