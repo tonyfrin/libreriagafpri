@@ -7,4 +7,4 @@ export type { ShippingAreasAttributes, UseGafpriDataShippingAreasProps, UseGafpr
 export { useGafpriApiShippingAreas } from './useGafpriApiShippingAreas';
 export type { UseGafpriApiShippingAreasReturn, UseGafpriApiShippingAreasProps, } from './useGafpriApiShippingAreas';
 export { useGafpriPaginationsShippingAreas } from './useGafpriPaginationsShippingAreas';
-export type { UseGafpriPaginationsShippingAreasReturn, UseGafpriPaginationsShippingAreasProps, } from './useGafpriPaginationsShippingAreas';
+export type { UseGafpriPaginationsShippingAreasReturn } from './useGafpriPaginationsShippingAreas';

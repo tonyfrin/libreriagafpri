@@ -76,7 +76,8 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
       }
     }, deleteButtonProps)));
   };
-  var filtered = use.paginations.actions.filterByName(use.paginations.states.searchTerm);
+  console.log(use.data.states.items);
+  var filtered = use.paginations.actions.filterByName(use.data.states.items, use.paginations.states.searchTerm);
   var areas = use.paginations.actions.sortByName(filtered, use.paginations.states.orderList) || [];
   var paginated = use.paginations.actions.getPaginated(areas, use.paginations.states.currentPage, use.paginations.states.itemsPerPage);
   var items = (_paginated$map = paginated === null || paginated === void 0 ? void 0 : paginated.map(function (item) {

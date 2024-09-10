@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { UseGafpriDataShippingAreasReturn } from './useGafpriDataShippingAreas';
 import type { ShippingAreasAttributes } from './useGafpriDataShippingAreas';
 
 type State = {
@@ -26,7 +25,10 @@ type Actions = {
     order: 'asc' | 'desc'
   ) => ShippingAreasAttributes[] | null;
 
-  filterByName: (search: string) => ShippingAreasAttributes[] | null;
+  filterByName: (
+    items: ShippingAreasAttributes[] | null,
+    search: string
+  ) => ShippingAreasAttributes[] | null;
 
   getPaginated: (
     items: ShippingAreasAttributes[] | null,
@@ -40,13 +42,7 @@ export type UseGafpriPaginationsShippingAreasReturn = {
   actions: Actions;
 };
 
-export type UseGafpriPaginationsShippingAreasProps = {
-  data: UseGafpriDataShippingAreasReturn;
-};
-
-export function useGafpriPaginationsShippingAreas({
-  data,
-}: UseGafpriPaginationsShippingAreasProps): UseGafpriPaginationsShippingAreasReturn {
+export function useGafpriPaginationsShippingAreas(): UseGafpriPaginationsShippingAreasReturn {
   const [orderList, setOrderList] = useState<'asc' | 'desc'>('asc');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,9 +63,12 @@ export function useGafpriPaginationsShippingAreas({
     return null;
   }
 
-  const filterByName = (search: string): ShippingAreasAttributes[] | null => {
-    if (data.states.items) {
-      return data.states.items.filter((item) =>
+  const filterByName = (
+    items: ShippingAreasAttributes[] | null,
+    search: string
+  ): ShippingAreasAttributes[] | null => {
+    if (items) {
+      return items.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
       );
     }

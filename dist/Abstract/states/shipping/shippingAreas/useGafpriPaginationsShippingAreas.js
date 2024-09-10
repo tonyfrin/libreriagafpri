@@ -10,8 +10,7 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 var _react = _interopRequireWildcard(require("react"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
-function useGafpriPaginationsShippingAreas(_ref) {
-  var data = _ref.data;
+function useGafpriPaginationsShippingAreas() {
   var _useState = (0, _react.useState)('asc'),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
     orderList = _useState2[0],
@@ -39,9 +38,9 @@ function useGafpriPaginationsShippingAreas(_ref) {
     }
     return null;
   }
-  var filterByName = function filterByName(search) {
-    if (data.states.items) {
-      return data.states.items.filter(function (item) {
+  var filterByName = function filterByName(items, search) {
+    if (items) {
+      return items.filter(function (item) {
         return item.name.toLowerCase().includes(search.toLowerCase());
       });
     }

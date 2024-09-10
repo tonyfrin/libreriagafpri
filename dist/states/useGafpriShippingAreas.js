@@ -22,9 +22,7 @@ function useGafpriShippingAreas(_ref) {
   var data = (0, _Abstract.useGafpriDataShippingAreas)({
     token: token
   });
-  var paginations = (0, _Abstract.useGafpriPaginationsShippingAreas)({
-    data: data
-  });
+  var paginations = (0, _Abstract.useGafpriPaginationsShippingAreas)();
   var api = (0, _Abstract.useGafpriApiShippingAreas)({
     token: token,
     useError: error,

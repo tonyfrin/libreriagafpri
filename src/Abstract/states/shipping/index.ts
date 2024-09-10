@@ -34,5 +34,4 @@ export type {
   UseGafpriApiShippingAreasReturn,
   UseGafpriApiShippingAreasProps,
   UseGafpriPaginationsShippingAreasReturn,
-  UseGafpriPaginationsShippingAreasProps,
 } from './shippingAreas';

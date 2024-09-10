@@ -17,7 +17,4 @@ export type {
   UseGafpriApiShippingAreasProps,
 } from './useGafpriApiShippingAreas';
 export { useGafpriPaginationsShippingAreas } from './useGafpriPaginationsShippingAreas';
-export type {
-  UseGafpriPaginationsShippingAreasReturn,
-  UseGafpriPaginationsShippingAreasProps,
-} from './useGafpriPaginationsShippingAreas';
+export type { UseGafpriPaginationsShippingAreasReturn } from './useGafpriPaginationsShippingAreas';

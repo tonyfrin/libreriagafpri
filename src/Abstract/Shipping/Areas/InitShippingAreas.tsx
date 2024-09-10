@@ -88,7 +88,10 @@ export const InitShippingAreas = ({
     );
   };
 
+  console.log(use.data.states.items);
+
   const filtered = use.paginations.actions.filterByName(
+    use.data.states.items,
     use.paginations.states.searchTerm
   );
 

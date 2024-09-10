@@ -680,7 +680,6 @@ export type {
   UseGafpriApiShippingAreasReturn,
   UseGafpriApiShippingAreasProps,
   UseGafpriPaginationsShippingAreasReturn,
-  UseGafpriPaginationsShippingAreasProps,
   InputCostProps,
   SelectTypeProps,
   InputShippingTimeDaysProps,

@@ -636,7 +636,6 @@ export type {
   UseGafpriApiShippingAreasReturn,
   UseGafpriApiShippingAreasProps,
   UseGafpriPaginationsShippingAreasReturn,
-  UseGafpriPaginationsShippingAreasProps,
   UseGafpriApiProjectsProps,
   UseGafpriApiProjectsReturn,
   UseGafpriPagesProjectsProps,

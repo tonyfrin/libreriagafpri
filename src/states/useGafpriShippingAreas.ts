@@ -43,7 +43,7 @@ export function useGafpriShippingAreas({
   const attributes = useGafpriAttributesShippingAreas();
   const pages = useGafpriPagesShippingAreas({ attributes });
   const data = useGafpriDataShippingAreas({ token });
-  const paginations = useGafpriPaginationsShippingAreas({ data });
+  const paginations = useGafpriPaginationsShippingAreas();
   const api = useGafpriApiShippingAreas({
     token,
     useError: error,
