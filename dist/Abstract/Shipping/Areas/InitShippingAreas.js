@@ -102,6 +102,10 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
   };
   var totalPages = Math.ceil(areas.length / use.paginations.states.itemsPerPage);
   (0, _react.useEffect)(function () {
+    console.log('useEffect', {
+      token: useLogin.states.token,
+      isReady: use.data.states.isReady
+    });
     var get = /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
         var data;
@@ -109,15 +113,16 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!(useLogin.states.token && !use.data.states.isReady)) {
-                _context.next = 17;
+                _context.next = 18;
                 break;
               }
               _context.prev = 1;
+              console.log('entre aquí');
               use.pages.actions.onFetching();
               use.data.actions.setIsReady(false);
-              _context.next = 6;
+              _context.next = 7;
               return use.data.actions.getItems();
-            case 6:
+            case 7:
               data = _context.sent;
               if (data.success) {
                 use.data.actions.setItems(data.data.items);
@@ -126,22 +131,22 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
                 use.error.actions.changeError([data.message]);
                 use.data.actions.setIsReady(false);
               }
-              _context.next = 14;
+              _context.next = 15;
               break;
-            case 10:
-              _context.prev = 10;
+            case 11:
+              _context.prev = 11;
               _context.t0 = _context["catch"](1);
               use.error.actions.changeError(["".concat(_context.t0)]);
               use.data.actions.setIsReady(false);
-            case 14:
-              _context.prev = 14;
+            case 15:
+              _context.prev = 15;
               use.pages.actions.onInit();
-              return _context.finish(14);
-            case 17:
+              return _context.finish(15);
+            case 18:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[1, 10, 14, 17]]);
+        }, _callee, null, [[1, 11, 15, 18]]);
       }));
       return function get() {
         return _ref3.apply(this, arguments);
