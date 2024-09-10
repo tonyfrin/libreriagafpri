@@ -24,6 +24,7 @@ type MapComponentProps = {
 };
 
 export const MapComponent = ({ setPlace }: MapComponentProps) => {
+  console.log('api_google', API_GOOGLE);
   const mapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null); // Referencia al input para autocompletar
   const [map, setMap] = useState<google.maps.Map | null>(null);
