@@ -76,6 +76,10 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   _react["default"].useEffect(function () {
     if (currentItem) {
       use.attributes.actions.changeName(currentItem.name);
+      use.attributes.actions.setPostalCodes(currentItem.postalCodes);
+      use.attributes.actions.setCities(currentItem.cities);
+      use.attributes.actions.setStatesCountries(currentItem.states);
+      use.attributes.actions.setCountries(currentItem.countries);
     }
   }, []);
   var title1Text = isAddForm ? 'Nueva Zona' : 'Actualizar Zona';

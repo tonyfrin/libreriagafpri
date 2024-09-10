@@ -5,19 +5,26 @@ import {
   InitShippingAreas,
   ShippingAreasForm,
 } from '../../../Abstract';
-import type { UseGafpriShippingAreasReturn } from '../../../states';
+import type {
+  UseGafpriShippingAreasReturn,
+  UseLoginReturn,
+} from '../../../states';
 
 export type ShippingAreasProps = {
   use: UseGafpriShippingAreasReturn;
+  useLogin: UseLoginReturn;
 };
 
-export const ShippingAreas = ({ use }: ShippingAreasProps): JSX.Element => {
+export const ShippingAreas = ({
+  use,
+  useLogin,
+}: ShippingAreasProps): JSX.Element => {
   return (
     <>
       {use.pages.states.isFetching && <Loading />}
       {use.pages.states.isInit && (
         <FadeIn keyName="init" isVisible={use.pages.states.isInit}>
-          <InitShippingAreas use={use} />
+          <InitShippingAreas use={use} useLogin={useLogin} />
         </FadeIn>
       )}
       {use.pages.states.isAdd && (

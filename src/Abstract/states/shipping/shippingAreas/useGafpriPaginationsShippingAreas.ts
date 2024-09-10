@@ -68,8 +68,8 @@ export function useGafpriPaginationsShippingAreas({
   }
 
   const filterByName = (search: string): ShippingAreasAttributes[] | null => {
-    if (data.states.items.data.items) {
-      return data.states.items.data.items.filter((item) =>
+    if (data.states.items) {
+      return data.states.items.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
       );
     }

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { css } from '@emotion/css';
 import { Button, ButtonProps } from '../../Button';
 import { Header, HeaderProps } from '../../Header';
 import { Error, ErrorProps } from '../../Error';
 import { List, ListPropsExtended } from '../../List';
-import type { UseGafpriShippingAreasReturn } from '../../../states';
+import type {
+  UseGafpriShippingAreasReturn,
+  UseLoginReturn,
+} from '../../../states';
 
 export type InitShippingAreasProps = {
   use: UseGafpriShippingAreasReturn;
+  useLogin: UseLoginReturn;
   optionsButtonMainContainerStyle?: string;
   updateButtonProps?: ButtonProps;
   deleteButtonProps?: ButtonProps;
@@ -19,6 +23,7 @@ export type InitShippingAreasProps = {
 
 export type InitShippingAreasExtended = {
   use?: UseGafpriShippingAreasReturn;
+  useLogin?: UseLoginReturn;
   optionsButtonMainContainerStyle?: string;
   updateButtonProps?: ButtonProps;
   deleteButtonProps?: ButtonProps;
@@ -34,6 +39,7 @@ const defaultOptionsButtonMainContainerStyle = css`
 
 export const InitShippingAreas = ({
   use,
+  useLogin,
   optionsButtonMainContainerStyle = defaultOptionsButtonMainContainerStyle,
   updateButtonProps = {
     title: 'Actualizar',
@@ -118,6 +124,32 @@ export const InitShippingAreas = ({
   const totalPages = Math.ceil(
     areas.length / use.paginations.states.itemsPerPage
   );
+
+  useEffect(() => {
+    const get = async (): Promise<void> => {
+      if (useLogin.states.token && use.data.states.isReady) {
+        try {
+          use.pages.actions.onFetching();
+          use.data.actions.setIsReady(false);
+          const data = await use.data.actions.getItems();
+          if (data.success) {
+            use.data.actions.setItems(data.data.items);
+            use.data.actions.setIsReady(true);
+          } else {
+            use.error.actions.changeError([data.message]);
+            use.data.actions.setIsReady(false);
+          }
+        } catch (error) {
+          use.error.actions.changeError([`${error}`]);
+          use.data.actions.setIsReady(false);
+        } finally {
+          use.pages.actions.onInit();
+        }
+      }
+    };
+
+    get();
+  }, [useLogin.states.token, use.data.states.isReady]);
 
   return (
     <>

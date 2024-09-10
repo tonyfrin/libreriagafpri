@@ -1,13 +1,16 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.InitShippingAreas = void 0;
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _fa = require("react-icons/fa");
 var _css = require("@emotion/css");
 var _Button = require("../../Button");
@@ -15,10 +18,13 @@ var _Header = require("../../Header");
 var _Error = require("../../Error");
 var _List = require("../../List");
 var _templateObject;
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 var defaultOptionsButtonMainContainerStyle = (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  justify-content: space-evenly;\n"])));
 var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_ref) {
   var _paginated$map;
   var use = _ref.use,
+    useLogin = _ref.useLogin,
     _ref$optionsButtonMai = _ref.optionsButtonMainContainerStyle,
     optionsButtonMainContainerStyle = _ref$optionsButtonMai === void 0 ? defaultOptionsButtonMainContainerStyle : _ref$optionsButtonMai,
     _ref$updateButtonProp = _ref.updateButtonProps,
@@ -94,6 +100,54 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
     label: 'Descendente'
   };
   var totalPages = Math.ceil(areas.length / use.paginations.states.itemsPerPage);
+  (0, _react.useEffect)(function () {
+    var get = /*#__PURE__*/function () {
+      var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+        var data;
+        return _regenerator["default"].wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!(useLogin.states.token && use.data.states.isReady)) {
+                _context.next = 17;
+                break;
+              }
+              _context.prev = 1;
+              use.pages.actions.onFetching();
+              use.data.actions.setIsReady(false);
+              _context.next = 6;
+              return use.data.actions.getItems();
+            case 6:
+              data = _context.sent;
+              if (data.success) {
+                use.data.actions.setItems(data.data.items);
+                use.data.actions.setIsReady(true);
+              } else {
+                use.error.actions.changeError([data.message]);
+                use.data.actions.setIsReady(false);
+              }
+              _context.next = 14;
+              break;
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](1);
+              use.error.actions.changeError(["".concat(_context.t0)]);
+              use.data.actions.setIsReady(false);
+            case 14:
+              _context.prev = 14;
+              use.pages.actions.onInit();
+              return _context.finish(14);
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[1, 10, 14, 17]]);
+      }));
+      return function get() {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+    get();
+  }, [useLogin.states.token, use.data.states.isReady]);
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Header.Header, headerProps), /*#__PURE__*/_react["default"].createElement(_Error.Error, errorProps), /*#__PURE__*/_react["default"].createElement(_List.List, (0, _extends2["default"])({
     title: "Zonas",
     items: items,

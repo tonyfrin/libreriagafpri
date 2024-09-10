@@ -7,16 +7,11 @@ export interface ShippingAreasAttributes {
     states: string[];
     countries: string[];
 }
-interface ShippingAreasData {
-    data: {
-        items: ShippingAreasAttributes[] | [] | null;
-    };
-}
 type DeletedShippingAreas = {
     itemId: number;
 };
 type State = {
-    items: ShippingAreasData;
+    items: ShippingAreasAttributes[] | null;
     isReady: boolean;
 };
 type Actions = {
@@ -26,6 +21,9 @@ type Actions = {
     handleDeleted: ({ itemId }: DeletedShippingAreas) => void;
     getById: (id: number) => ShippingAreasAttributes | null;
     getOptions: () => SelectDefault[];
+    getItems: () => Promise<any>;
+    setItems: (value: ShippingAreasAttributes[] | null) => void;
+    setIsReady: (value: boolean) => void;
 };
 export type UseGafpriDataShippingAreasReturn = {
     states: State;

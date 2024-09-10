@@ -11,18 +11,12 @@ export interface ShippingAreasAttributes {
   countries: string[];
 }
 
-interface ShippingAreasData {
-  data: {
-    items: ShippingAreasAttributes[] | [] | null;
-  };
-}
-
 type DeletedShippingAreas = {
   itemId: number;
 };
 
 type State = {
-  items: ShippingAreasData;
+  items: ShippingAreasAttributes[] | null;
   isReady: boolean;
 };
 
@@ -33,6 +27,11 @@ type Actions = {
   handleDeleted: ({ itemId }: DeletedShippingAreas) => void;
   getById: (id: number) => ShippingAreasAttributes | null;
   getOptions: () => SelectDefault[];
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  getItems: () => Promise<any>;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+  setItems: (value: ShippingAreasAttributes[] | null) => void;
+  setIsReady: (value: boolean) => void;
 };
 
 export type UseGafpriDataShippingAreasReturn = {
@@ -48,61 +47,36 @@ export function useGafpriDataShippingAreas({
   token,
 }: UseGafpriDataShippingAreasProps): UseGafpriDataShippingAreasReturn {
   const [isReady, setIsReady] = useState(false);
-  const [items, setItems] = useState<ShippingAreasData>({
-    data: {
-      items: null,
-    },
-  });
-
-  const onIsReady = (): void => {
-    setIsReady(true);
-  };
+  const [items, setItems] = useState<ShippingAreasAttributes[] | null>(null);
 
   const notReady = (): void => {
     setIsReady(false);
   };
 
-  // Manejo de la data
-
-  const setData = (newData: ShippingAreasData): void => {
-    setItems(newData);
-  };
-
-  const onItems = (newData: ShippingAreasData): void => {
-    setData(newData);
-    onIsReady();
-  };
+  // Manejo de la dat
 
   const offItems = (): void => {
-    setData({
-      data: {
-        items: null,
-      },
-    });
+    setItems(null);
     notReady();
   };
 
-  const getItems = async (): Promise<void> => {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const getItems = async (): Promise<any> => {
     if (token) {
-      gafpriFetch({
+      const data = await gafpriFetch({
         initMethod: 'GET',
         initRoute: SHIPPING_AREAS_ROUTE,
         initToken: { token },
-        functionFetching: notReady,
-        functionSuccess: onItems,
       });
-    } else {
-      notReady();
+      return data;
     }
+    return null;
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const handleNewItem = (newItem: ShippingAreasAttributes): void => {
     setItems((prevState) => {
-      const newData = {
-        data: {
-          items: [...(prevState.data.items || []), newItem],
-        },
-      };
+      const newData = [...(prevState || []), newItem];
       return newData;
     });
   };
@@ -110,14 +84,10 @@ export function useGafpriDataShippingAreas({
   const handleUpdated = (updatedItem: ShippingAreasAttributes): void => {
     setItems((prevState) => {
       const updatedItems =
-        prevState.data.items?.map((item) =>
+        prevState?.map((item) =>
           item.id === updatedItem.id ? updatedItem : item
         ) || [];
-      const newData = {
-        data: {
-          items: updatedItems,
-        },
-      };
+      const newData = updatedItems;
       return newData;
     });
   };
@@ -125,26 +95,21 @@ export function useGafpriDataShippingAreas({
   const handleDeleted = ({ itemId }: DeletedShippingAreas): void => {
     setItems((prevState) => {
       const filteredItems =
-        prevState.data.items?.filter((item) => `${item.id}` !== `${itemId}`) ||
-        [];
+        prevState?.filter((item) => `${item.id}` !== `${itemId}`) || [];
 
-      const newData = {
-        data: {
-          items: filteredItems,
-        },
-      };
+      const newData = filteredItems;
       return newData;
     });
   };
 
   function getById(id: number): ShippingAreasAttributes | null {
-    return items.data.items?.find((item) => item.id === id) || null;
+    return items?.find((item) => item.id === id) || null;
   }
 
   function getOptions(): SelectDefault[] {
     const options: SelectDefault[] = [];
 
-    items.data.items?.forEach((item) => {
+    items?.forEach((item) => {
       options.push({ label: item.name, value: `${item.id}` });
     });
 
@@ -169,6 +134,8 @@ export function useGafpriDataShippingAreas({
     getById,
     getOptions,
     getItems,
+    setItems,
+    setIsReady,
   };
 
   return {

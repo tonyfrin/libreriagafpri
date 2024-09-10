@@ -2,9 +2,10 @@ import { ButtonProps } from '../../Button';
 import { HeaderProps } from '../../Header';
 import { ErrorProps } from '../../Error';
 import { ListPropsExtended } from '../../List';
-import type { UseGafpriShippingAreasReturn } from '../../../states';
+import type { UseGafpriShippingAreasReturn, UseLoginReturn } from '../../../states';
 export type InitShippingAreasProps = {
     use: UseGafpriShippingAreasReturn;
+    useLogin: UseLoginReturn;
     optionsButtonMainContainerStyle?: string;
     updateButtonProps?: ButtonProps;
     deleteButtonProps?: ButtonProps;
@@ -14,6 +15,7 @@ export type InitShippingAreasProps = {
 };
 export type InitShippingAreasExtended = {
     use?: UseGafpriShippingAreasReturn;
+    useLogin?: UseLoginReturn;
     optionsButtonMainContainerStyle?: string;
     updateButtonProps?: ButtonProps;
     deleteButtonProps?: ButtonProps;
@@ -21,4 +23,4 @@ export type InitShippingAreasExtended = {
     errorProps?: ErrorProps;
     listProps?: ListPropsExtended;
 };
-export declare const InitShippingAreas: ({ use, optionsButtonMainContainerStyle, updateButtonProps, deleteButtonProps, headerProps, errorProps, listProps, }: InitShippingAreasProps) => JSX.Element;
+export declare const InitShippingAreas: ({ use, useLogin, optionsButtonMainContainerStyle, updateButtonProps, deleteButtonProps, headerProps, errorProps, listProps, }: InitShippingAreasProps) => JSX.Element;

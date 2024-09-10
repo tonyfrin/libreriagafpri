@@ -18,57 +18,46 @@ function useGafpriDataShippingAreas(_ref) {
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
     isReady = _useState2[0],
     setIsReady = _useState2[1];
-  var _useState3 = (0, _react.useState)({
-      data: {
-        items: null
-      }
-    }),
+  var _useState3 = (0, _react.useState)(null),
     _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
     items = _useState4[0],
     setItems = _useState4[1];
-  var onIsReady = function onIsReady() {
-    setIsReady(true);
-  };
   var notReady = function notReady() {
     setIsReady(false);
   };
 
-  // Manejo de la data
+  // Manejo de la dat
 
-  var setData = function setData(newData) {
-    setItems(newData);
-  };
-  var onItems = function onItems(newData) {
-    setData(newData);
-    onIsReady();
-  };
   var offItems = function offItems() {
-    setData({
-      data: {
-        items: null
-      }
-    });
+    setItems(null);
     notReady();
   };
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   var getItems = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var data;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            if (token) {
-              (0, _helpers.gafpriFetch)({
-                initMethod: 'GET',
-                initRoute: _constants.SHIPPING_AREAS_ROUTE,
-                initToken: {
-                  token: token
-                },
-                functionFetching: notReady,
-                functionSuccess: onItems
-              });
-            } else {
-              notReady();
+            if (!token) {
+              _context.next = 5;
+              break;
             }
-          case 1:
+            _context.next = 3;
+            return (0, _helpers.gafpriFetch)({
+              initMethod: 'GET',
+              initRoute: _constants.SHIPPING_AREAS_ROUTE,
+              initToken: {
+                token: token
+              }
+            });
+          case 3:
+            data = _context.sent;
+            return _context.abrupt("return", data);
+          case 5:
+            return _context.abrupt("return", null);
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -78,55 +67,41 @@ function useGafpriDataShippingAreas(_ref) {
       return _ref2.apply(this, arguments);
     };
   }();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
   var handleNewItem = function handleNewItem(newItem) {
     setItems(function (prevState) {
-      var newData = {
-        data: {
-          items: [].concat((0, _toConsumableArray2["default"])(prevState.data.items || []), [newItem])
-        }
-      };
+      var newData = [].concat((0, _toConsumableArray2["default"])(prevState || []), [newItem]);
       return newData;
     });
   };
   var handleUpdated = function handleUpdated(updatedItem) {
     setItems(function (prevState) {
-      var _prevState$data$items;
-      var updatedItems = ((_prevState$data$items = prevState.data.items) === null || _prevState$data$items === void 0 ? void 0 : _prevState$data$items.map(function (item) {
+      var updatedItems = (prevState === null || prevState === void 0 ? void 0 : prevState.map(function (item) {
         return item.id === updatedItem.id ? updatedItem : item;
       })) || [];
-      var newData = {
-        data: {
-          items: updatedItems
-        }
-      };
+      var newData = updatedItems;
       return newData;
     });
   };
   var handleDeleted = function handleDeleted(_ref3) {
     var itemId = _ref3.itemId;
     setItems(function (prevState) {
-      var _prevState$data$items2;
-      var filteredItems = ((_prevState$data$items2 = prevState.data.items) === null || _prevState$data$items2 === void 0 ? void 0 : _prevState$data$items2.filter(function (item) {
+      var filteredItems = (prevState === null || prevState === void 0 ? void 0 : prevState.filter(function (item) {
         return "".concat(item.id) !== "".concat(itemId);
       })) || [];
-      var newData = {
-        data: {
-          items: filteredItems
-        }
-      };
+      var newData = filteredItems;
       return newData;
     });
   };
   function getById(id) {
-    var _items$data$items;
-    return ((_items$data$items = items.data.items) === null || _items$data$items === void 0 ? void 0 : _items$data$items.find(function (item) {
+    return (items === null || items === void 0 ? void 0 : items.find(function (item) {
       return item.id === id;
     })) || null;
   }
   function getOptions() {
-    var _items$data$items2;
     var options = [];
-    (_items$data$items2 = items.data.items) === null || _items$data$items2 === void 0 || _items$data$items2.forEach(function (item) {
+    items === null || items === void 0 || items.forEach(function (item) {
       options.push({
         label: item.name,
         value: "".concat(item.id)
@@ -151,7 +126,9 @@ function useGafpriDataShippingAreas(_ref) {
     handleDeleted: handleDeleted,
     getById: getById,
     getOptions: getOptions,
-    getItems: getItems
+    getItems: getItems,
+    setItems: setItems,
+    setIsReady: setIsReady
   };
   return {
     states: states,

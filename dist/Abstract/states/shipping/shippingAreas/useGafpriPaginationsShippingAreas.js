@@ -40,8 +40,8 @@ function useGafpriPaginationsShippingAreas(_ref) {
     return null;
   }
   var filterByName = function filterByName(search) {
-    if (data.states.items.data.items) {
-      return data.states.items.data.items.filter(function (item) {
+    if (data.states.items) {
+      return data.states.items.filter(function (item) {
         return item.name.toLowerCase().includes(search.toLowerCase());
       });
     }

@@ -132,6 +132,10 @@ export const ShippingAreasForm = ({
   React.useEffect(() => {
     if (currentItem) {
       use.attributes.actions.changeName(currentItem.name);
+      use.attributes.actions.setPostalCodes(currentItem.postalCodes);
+      use.attributes.actions.setCities(currentItem.cities);
+      use.attributes.actions.setStatesCountries(currentItem.states);
+      use.attributes.actions.setCountries(currentItem.countries);
     }
   }, []);
 
