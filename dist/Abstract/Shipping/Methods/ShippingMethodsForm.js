@@ -237,7 +237,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     boxProps: {
       styles: {
         width: '100%',
-        height: '75vh',
+        height: 'auto',
         margin: '30px auto 0px'
       }
     },
@@ -331,7 +331,11 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
         width: '90%'
       }
     }
-  }), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      width: '90%'
+    }
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
   }, "Roles"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
@@ -355,7 +359,8 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     }, label)));
   })))))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '100%'
+      width: '100%',
+      custom: "\n              align-items: center;\n              margin: 10px 0px;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
     changeType: changeWorkDay,
@@ -363,7 +368,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       title: 'Día',
       options: optionsWorkDays,
       styles: {
-        width: '90%'
+        width: '50%'
       }
     }
   }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
@@ -375,6 +380,10 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       onKeyUp: function onKeyUp(event) {
         return setWorkOpenHour(event.currentTarget.value);
       }
+    },
+    containerStyles: {
+      width: '50%',
+      margin: '0px 10px 0px 0px'
     }
   }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
     inputProps: {
@@ -385,18 +394,29 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       onKeyUp: function onKeyUp(event) {
         return setWorkCloseHour(event.currentTarget.value);
       }
+    },
+    containerStyles: {
+      width: '50%',
+      margin: '0px 10px 0px 0px'
     }
   }), /*#__PURE__*/_react["default"].createElement(_Button.Button, {
     title: "Agregar",
-    Class: !buttonAddValid ? _constants.ALERT : '',
+    Class: !buttonAddValid ? 'gs-disabled' : '',
     buttonProps: {
       onClick: addWorkDayHours
+    },
+    styles: {
+      height: 'fit-content'
     }
   }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '100%'
     }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
   }, "D\xEDas laborales"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)

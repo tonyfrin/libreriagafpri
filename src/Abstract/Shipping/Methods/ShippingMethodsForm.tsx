@@ -357,7 +357,7 @@ export const ShippingMethodsForm = ({
       boxProps={{
         styles: {
           width: '100%',
-          height: '75vh',
+          height: 'auto',
           margin: '30px auto 0px',
         },
       }}
@@ -478,7 +478,11 @@ export const ShippingMethodsForm = ({
               }}
             />
             <>
-              <div>
+              <div
+                style={{
+                  width: '90%',
+                }}
+              >
                 <span className={cx(regionsTitleStyles)}>Roles</span>
                 <div className={cx(regionsContainerStyles)}>
                   {use.attributes.states.roles.map((item) => {
@@ -519,6 +523,10 @@ export const ShippingMethodsForm = ({
         <ContainerButton
           styles={{
             width: '100%',
+            custom: `
+              align-items: center;
+              margin: 10px 0px;
+            `,
           }}
           {...infoContainerProps}
         >
@@ -529,7 +537,7 @@ export const ShippingMethodsForm = ({
                 title: 'Día',
                 options: optionsWorkDays,
                 styles: {
-                  width: '90%',
+                  width: '50%',
                 },
               }}
             />
@@ -542,6 +550,10 @@ export const ShippingMethodsForm = ({
                 onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
                   setWorkOpenHour(event.currentTarget.value),
               }}
+              containerStyles={{
+                width: '50%',
+                margin: '0px 10px 0px 0px',
+              }}
             />
             <Input
               inputProps={{
@@ -552,12 +564,19 @@ export const ShippingMethodsForm = ({
                 onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
                   setWorkCloseHour(event.currentTarget.value),
               }}
+              containerStyles={{
+                width: '50%',
+                margin: '0px 10px 0px 0px',
+              }}
             />
             <Button
               title="Agregar"
-              Class={!buttonAddValid ? ALERT : ''}
+              Class={!buttonAddValid ? 'gs-disabled' : ''}
               buttonProps={{
                 onClick: addWorkDayHours,
+              }}
+              styles={{
+                height: 'fit-content',
               }}
             />
           </>
@@ -569,7 +588,11 @@ export const ShippingMethodsForm = ({
           {...infoContainerProps}
         >
           <>
-            <div>
+            <div
+              style={{
+                width: '100%',
+              }}
+            >
               <span className={cx(regionsTitleStyles)}>Días laborales</span>
               <div className={cx(regionsContainerStyles)}>
                 {workDaysHoursToArray(use.attributes.states.workDaysHours).map(
