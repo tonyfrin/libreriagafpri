@@ -115,6 +115,7 @@ export const MapComponent = ({ setPlace, key }: MapComponentProps) => {
     // Cargar el script de Google Maps con Autocomplete
     const googleMapsScript = document.createElement('script');
     googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${key}&v=weekly&libraries=places&language=en`;
+    console.log('googleMapsScript.src', googleMapsScript.src);
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
     document.body.appendChild(googleMapsScript);

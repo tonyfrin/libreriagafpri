@@ -111,6 +111,7 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
     // Cargar el script de Google Maps con Autocomplete
     var googleMapsScript = document.createElement('script');
     googleMapsScript.src = "https://maps.googleapis.com/maps/api/js?key=".concat(key, "&v=weekly&libraries=places&language=en");
+    console.log('googleMapsScript.src', googleMapsScript.src);
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
     document.body.appendChild(googleMapsScript);
