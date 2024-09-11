@@ -96,7 +96,6 @@ export const ShippingAreasForm = ({
   nameInputProps,
   keyApi,
 }: ShippingAreasFormProps): JSX.Element => {
-  const [inputMap, SetInputMap] = useState(<></>);
   const [type, SetType] = useState<string>('');
   const optionsType = [
     { label: 'Código Potal', value: 'postalCodes' },
@@ -105,7 +104,6 @@ export const ShippingAreasForm = ({
     { label: 'Paises', value: 'countries' },
   ];
   const key = keyApi;
-  console.log('key', key);
 
   const changeType = (e: { label: string; value: string } | null) => {
     if (e) {
@@ -313,12 +311,6 @@ export const ShippingAreasForm = ({
     [type] // Aseguramos que changePlace se actualice cuando cambie 'type' o 'actions'
   );
 
-  React.useEffect(() => {
-    if (key !== undefined) {
-      SetInputMap(() => <MapComponent setPlace={changePlace} keyApi={key} />);
-    }
-  }, [key]);
-
   return (
     <ModelForm
       titles={{
@@ -387,7 +379,9 @@ export const ShippingAreasForm = ({
             />
           </ContainerButton>
         )}
-        {type !== '' && key !== undefined && inputMap}
+        {type !== '' && key !== undefined && (
+          <MapComponent setPlace={changePlace} keyApi={key} />
+        )}
 
         <ContainerButton
           styles={{
