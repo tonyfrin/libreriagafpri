@@ -94,6 +94,7 @@ export const ShippingAreasForm = ({
   infoContainerProps,
   nameInputProps,
 }: ShippingAreasFormProps): JSX.Element => {
+  const [inputMap, SetInputMap] = useState(<></>);
   const [type, SetType] = useState<string>('');
   const optionsType = [
     { label: 'Código Potal', value: 'postalCodes' },
@@ -310,6 +311,12 @@ export const ShippingAreasForm = ({
     [type] // Aseguramos que changePlace se actualice cuando cambie 'type' o 'actions'
   );
 
+  React.useEffect(() => {
+    if (key !== undefined) {
+      SetInputMap(() => <MapComponent setPlace={changePlace} key={key} />);
+    }
+  }, [key]);
+
   return (
     <ModelForm
       titles={{
@@ -378,9 +385,7 @@ export const ShippingAreasForm = ({
             />
           </ContainerButton>
         )}
-        {type !== '' && key !== undefined && (
-          <MapComponent setPlace={changePlace} key={key} />
-        )}
+        {type !== '' && key !== undefined && inputMap}
 
         <ContainerButton
           styles={{

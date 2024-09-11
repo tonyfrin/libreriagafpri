@@ -42,10 +42,14 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     modelFormProps = _ref.modelFormProps,
     infoContainerProps = _ref.infoContainerProps,
     nameInputProps = _ref.nameInputProps;
-  var _useState = (0, _react.useState)(''),
+  var _useState = (0, _react.useState)( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
-    type = _useState2[0],
-    SetType = _useState2[1];
+    inputMap = _useState2[0],
+    SetInputMap = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
+    type = _useState4[0],
+    SetType = _useState4[1];
   var optionsType = [{
     label: 'Código Potal',
     value: 'postalCodes'
@@ -216,6 +220,16 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     }
   }, [type] // Aseguramos que changePlace se actualice cuando cambie 'type' o 'actions'
   );
+  _react["default"].useEffect(function () {
+    if (key !== undefined) {
+      SetInputMap(function () {
+        return /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
+          setPlace: changePlace,
+          key: key
+        });
+      });
+    }
+  }, [key]);
   return /*#__PURE__*/_react["default"].createElement(_Form.ModelForm, (0, _extends2["default"])({
     titles: {
       title1: title1Text,
@@ -263,10 +277,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       readOnly: true,
       value: type
     }
-  })), type !== '' && key !== undefined && /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
-    setPlace: changePlace,
-    key: key
-  }), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  })), type !== '' && key !== undefined && inputMap, /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%',
       custom: "\n              flex-direction: column;\n              align-items: center;\n              margin-bottom: 15px;\n            "
