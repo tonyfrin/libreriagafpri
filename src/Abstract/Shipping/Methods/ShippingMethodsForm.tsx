@@ -1,4 +1,6 @@
 import React from 'react';
+import { SingleValue } from 'react-select';
+import { css, cx } from '@emotion/css';
 import {
   ContainerButton,
   ContainerButtonPropsExtended,
@@ -11,12 +13,17 @@ import {
   InputProps,
   InputCost,
   SelectType,
+  SelectRoles,
 } from '../../Input';
-import type { UseGafpriShippingMethodsReturn } from '../../../states';
+import type {
+  UseGafpriShippingMethodsReturn,
+  UseRolesReturn,
+} from '../../../states';
 import { SHIPPING_METHODS_ROUTE } from '../../../constants';
 
 export type ShippingMethodsFormProps = {
   use: UseGafpriShippingMethodsReturn;
+  useRoles: UseRolesReturn;
   formType: 'add' | 'update';
   modelFormProps?: ModelFormPropsExtended;
   infoContainerProps?: ContainerButtonPropsExtended;
@@ -33,8 +40,61 @@ export type ShippingMethodsFormPropsExtended = {
   descriptionInputProps?: InputProps;
 };
 
+const regionsContainerStyles = css`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0px 10px;
+  padding: 15px 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 91%;
+`;
+
+const regionsTitleStyles = css`
+  font-size: x-small;
+  color: #8d8d8d;
+`;
+
+const regionItemStyles = css`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+`;
+
+const regionContainerStyles = css`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+`;
+
+const regionButtonStyles = css`
+  margin-right: 8px;
+  padding: 8px;
+  color: #8d8d8d;
+  border-radius: 4px;
+  border: 1px solid #dfdbdb;
+`;
+
+const closeButtonStyles = css`
+  position: absolute;
+  top: 0px;
+  transform: translateY(-50%);
+  right: 0px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #f44336;
+  border-radius: 100%;
+  padding: 2px 5px 4px 5px;
+  font-size: 8px;
+`;
+
 export const ShippingMethodsForm = ({
   use,
+  useRoles,
   formType,
   modelFormProps,
   infoContainerProps,
@@ -198,6 +258,25 @@ export const ShippingMethodsForm = ({
     ? 'Agrega un nuevo metodo de envío'
     : `Actualiza la información del metodo de envío #${currentItem?.id}`;
 
+  const optionsRoles: {
+    value: string;
+    label: string;
+  }[] = [];
+
+  useRoles.states.roles.data.items?.map((item) => {
+    const option = {
+      label: item.name,
+      value: item.id.toString(),
+    };
+    optionsRoles.push(option);
+    return null;
+  });
+
+  const getLabelByValue = (value: string) => {
+    const option = optionsRoles.find((option) => option.value === value);
+    return option ? option.label : 'Etiqueta no encontrada';
+  };
+
   const buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
   const buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
 
@@ -211,6 +290,14 @@ export const ShippingMethodsForm = ({
         break;
       default:
         console.log('Acción desconocida:', action);
+    }
+  };
+
+  const changeRoles = (
+    options: SingleValue<{ value: string; label: string }>
+  ): void => {
+    if (options) {
+      use.attributes.actions.pushRole(options.value);
     }
   };
 
@@ -320,6 +407,60 @@ export const ShippingMethodsForm = ({
               }}
               inputId={SHIPPING_METHODS_ROUTE}
             />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+          }}
+          {...infoContainerProps}
+        >
+          <>
+            <SelectRoles
+              changeRoles={changeRoles}
+              props={{
+                title: 'Rol',
+                options: optionsRoles,
+                styles: {
+                  width: '90%',
+                },
+              }}
+            />
+            <>
+              <span className={cx(regionsTitleStyles)}>Estados</span>
+              <div className={cx(regionsContainerStyles)}>
+                {use.attributes.states.roles.map((item) => {
+                  const label = getLabelByValue(item.toString());
+                  return (
+                    <div
+                      key={`container-states-countries-${item}`}
+                      className={cx(regionItemStyles)}
+                    >
+                      <div
+                        key={`states-countries-${item}`}
+                        className={cx(regionContainerStyles)}
+                      >
+                        <span
+                          key={`x-states-countries-${item}`}
+                          className={cx(closeButtonStyles)}
+                          onClick={() =>
+                            use.attributes.actions.removeRole(item)
+                          }
+                        >
+                          x
+                        </span>
+                        <button
+                          key={`button-states-countries-${item}`}
+                          className={cx(regionButtonStyles)}
+                        >
+                          {label}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           </>
         </ContainerButton>
       </>

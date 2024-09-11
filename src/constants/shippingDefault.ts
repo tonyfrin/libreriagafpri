@@ -47,6 +47,7 @@ export const OPTIONS_SHIPPING_METHODS_TYPE: { value: string; label: string }[] =
     { value: 'percent', label: 'Porcentaje' },
     { value: 'flat_rate', label: 'Costo fijo' },
     { value: 'free_shipping', label: 'Grátis' },
+    { value: 'volume', label: 'Volumen' },
   ];
 
 export const OPTIONS_SHIPPING_METHODS_TYPE_DEFAULT: {

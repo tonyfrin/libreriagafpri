@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useGafpriAttributesShippingMethods = useGafpriAttributesShippingMethods;
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = require("react");
 var _Validations = require("../../../../Validations");
@@ -73,6 +74,22 @@ function useGafpriAttributesShippingMethods() {
     _useState30 = (0, _slicedToArray2["default"])(_useState29, 2),
     roles = _useState30[0],
     setRoles = _useState30[1];
+  var pushRole = function pushRole(value) {
+    var role = parseInt(value, 10);
+    if (!Number.isNaN(role) && role > 0) {
+      setRoles(function (prevValue) {
+        if (!prevValue.includes(role)) {
+          return [].concat((0, _toConsumableArray2["default"])(prevValue), [role]);
+        }
+        return prevValue;
+      });
+    }
+  };
+  var removeRole = function removeRole(value) {
+    setRoles(roles.filter(function (item) {
+      return item !== value;
+    }));
+  };
   var _useState31 = (0, _react.useState)({}),
     _useState32 = (0, _slicedToArray2["default"])(_useState31, 2),
     workDaysHours = _useState32[0],
@@ -335,7 +352,9 @@ function useGafpriAttributesShippingMethods() {
     changeConditional: changeConditional,
     changeTypeConditional: changeTypeConditional,
     changeValueConditional: changeValueConditional,
-    setCurrentId: setCurrentId
+    setCurrentId: setCurrentId,
+    pushRole: pushRole,
+    removeRole: removeRole
   };
   return {
     states: states,

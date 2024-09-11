@@ -71,6 +71,8 @@ type Actions = {
         label: string;
     }>) => void;
     setCurrentId: (value: number) => void;
+    pushRole: (value: string) => void;
+    removeRole: (value: number) => void;
 };
 export type UseGafpriAttributesShippingMethodsReturn = {
     states: State;

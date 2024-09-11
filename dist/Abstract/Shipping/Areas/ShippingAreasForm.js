@@ -37,6 +37,7 @@ var closeButtonStyles = (0, _css.css)(_templateObject7 || (_templateObject7 = (0
 var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_ref) {
   var _shippingMethodsPagin;
   var use = _ref.use,
+    useRoles = _ref.useRoles,
     formType = _ref.formType,
     modelFormProps = _ref.modelFormProps,
     infoContainerProps = _ref.infoContainerProps,
@@ -403,6 +404,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
   }))), /*#__PURE__*/_react["default"].createElement(_Modal.Modal, {
     open: use.pages.states.modalPage
   }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Components.ShippingMethods, {
-    use: use.useShippingMethoods
+    use: use.useShippingMethoods,
+    useRoles: useRoles
   })))));
 };

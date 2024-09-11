@@ -1,9 +1,10 @@
 import { ContainerButtonPropsExtended } from '../../Containers';
 import { ModelFormPropsExtended } from '../../Form';
 import { InputProps } from '../../Input';
-import type { UseGafpriShippingMethodsReturn } from '../../../states';
+import type { UseGafpriShippingMethodsReturn, UseRolesReturn } from '../../../states';
 export type ShippingMethodsFormProps = {
     use: UseGafpriShippingMethodsReturn;
+    useRoles: UseRolesReturn;
     formType: 'add' | 'update';
     modelFormProps?: ModelFormPropsExtended;
     infoContainerProps?: ContainerButtonPropsExtended;
@@ -18,4 +19,4 @@ export type ShippingMethodsFormPropsExtended = {
     nameInputProps?: InputProps;
     descriptionInputProps?: InputProps;
 };
-export declare const ShippingMethodsForm: ({ use, formType, modelFormProps, infoContainerProps, nameInputProps, }: ShippingMethodsFormProps) => JSX.Element;
+export declare const ShippingMethodsForm: ({ use, useRoles, formType, modelFormProps, infoContainerProps, nameInputProps, }: ShippingMethodsFormProps) => JSX.Element;

@@ -102,6 +102,8 @@ type Actions = {
   ) => void;
 
   setCurrentId: (value: number) => void;
+  pushRole: (value: string) => void;
+  removeRole: (value: number) => void;
 };
 
 export type UseGafpriAttributesShippingMethodsReturn = {
@@ -139,6 +141,22 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
   const statusOptions: SelectDefault[] = OPTIONS_SHIPPING_METHODS_STATUS;
 
   const [roles, setRoles] = useState<number[]>([]);
+
+  const pushRole = (value: string): void => {
+    const role = parseInt(value, 10);
+    if (!Number.isNaN(role) && role > 0) {
+      setRoles((prevValue) => {
+        if (!prevValue.includes(role)) {
+          return [...prevValue, role];
+        }
+        return prevValue;
+      });
+    }
+  };
+
+  const removeRole = (value: number): void => {
+    setRoles(roles.filter((item) => item !== value));
+  };
 
   const [workDaysHours, setWorkDaysHours] = useState<Record<number, string>>(
     {}
@@ -440,6 +458,8 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     changeValueConditional,
 
     setCurrentId,
+    pushRole,
+    removeRole,
   };
 
   return {

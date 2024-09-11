@@ -7,7 +7,10 @@ import {
 import { ModelForm, ModelFormPropsExtended } from '../../Form';
 import { InputName, InputProps, GsSelect, Input } from '../../Input';
 import { Button, ButtonOptionsContainer } from '../../Button';
-import type { UseGafpriShippingAreasReturn } from '../../../states';
+import type {
+  UseGafpriShippingAreasReturn,
+  UseRolesReturn,
+} from '../../../states';
 import { ListContainer } from '../../List';
 import { Modal } from '../../Modal';
 import { ShippingMethods } from '../../../Components';
@@ -16,6 +19,7 @@ import { API_GOOGLE } from '../../../constants';
 
 export type ShippingAreasFormProps = {
   use: UseGafpriShippingAreasReturn;
+  useRoles: UseRolesReturn;
   formType: 'add' | 'update';
   modelFormProps?: ModelFormPropsExtended;
   infoContainerProps?: ContainerButtonPropsExtended;
@@ -90,6 +94,7 @@ const closeButtonStyles = css`
 
 export const ShippingAreasForm = ({
   use,
+  useRoles,
   formType,
   modelFormProps,
   infoContainerProps,
@@ -611,7 +616,10 @@ export const ShippingAreasForm = ({
         )}
         <Modal open={use.pages.states.modalPage}>
           <>
-            <ShippingMethods use={use.useShippingMethoods} />
+            <ShippingMethods
+              use={use.useShippingMethoods}
+              useRoles={useRoles}
+            />
           </>
         </Modal>
       </>

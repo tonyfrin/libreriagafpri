@@ -60,6 +60,9 @@ var OPTIONS_SHIPPING_METHODS_TYPE = exports.OPTIONS_SHIPPING_METHODS_TYPE = [{
 }, {
   value: 'free_shipping',
   label: 'Grátis'
+}, {
+  value: 'volume',
+  label: 'Volumen'
 }];
 var OPTIONS_SHIPPING_METHODS_TYPE_DEFAULT = exports.OPTIONS_SHIPPING_METHODS_TYPE_DEFAULT = {
   value: '',
