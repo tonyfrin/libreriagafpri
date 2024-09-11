@@ -20,11 +20,11 @@ type MapComponentProps = {
       formattedAddress?: string;
     } | null
   ) => void;
-  key: string;
+  keyApi: string;
 };
 
-export const MapComponent = ({ setPlace, key }: MapComponentProps) => {
-  console.log('api_google', key);
+export const MapComponent = ({ setPlace, keyApi }: MapComponentProps) => {
+  console.log('keyApi', keyApi);
   const mapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null); // Referencia al input para autocompletar
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -114,7 +114,7 @@ export const MapComponent = ({ setPlace, key }: MapComponentProps) => {
 
     // Cargar el script de Google Maps con Autocomplete
     const googleMapsScript = document.createElement('script');
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${key}&v=weekly&libraries=places&language=en`;
+    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${keyApi}&v=weekly&libraries=places&language=en`;
     console.log('googleMapsScript.src', googleMapsScript.src);
     googleMapsScript.async = true;
     googleMapsScript.defer = true;

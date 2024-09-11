@@ -16,7 +16,7 @@ type MapComponentProps = {
         postalCode?: string;
         formattedAddress?: string;
     } | null) => void;
-    key: string;
+    keyApi: string;
 };
-export declare const MapComponent: ({ setPlace, key }: MapComponentProps) => React.JSX.Element;
+export declare const MapComponent: ({ setPlace, keyApi }: MapComponentProps) => React.JSX.Element;
 export {};

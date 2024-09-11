@@ -13,11 +13,13 @@ import type {
 export type ShippingAreasProps = {
   use: UseGafpriShippingAreasReturn;
   useLogin: UseLoginReturn;
+  keyApi: string;
 };
 
 export const ShippingAreas = ({
   use,
   useLogin,
+  keyApi,
 }: ShippingAreasProps): JSX.Element => {
   return (
     <>
@@ -29,12 +31,12 @@ export const ShippingAreas = ({
       )}
       {use.pages.states.isAdd && (
         <FadeIn keyName="add" isVisible={use.pages.states.isAdd}>
-          <ShippingAreasForm use={use} formType="add" />
+          <ShippingAreasForm use={use} formType="add" keyApi={keyApi} />
         </FadeIn>
       )}
       {use.pages.states.isUpdate && (
         <FadeIn keyName="update" isVisible={use.pages.states.isUpdate}>
-          <ShippingAreasForm use={use} formType="update" />
+          <ShippingAreasForm use={use} formType="update" keyApi={keyApi} />
         </FadeIn>
       )}
       {/* {use.states.isView && 

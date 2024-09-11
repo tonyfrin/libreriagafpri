@@ -20,6 +20,7 @@ export type ShippingAreasFormProps = {
   modelFormProps?: ModelFormPropsExtended;
   infoContainerProps?: ContainerButtonPropsExtended;
   nameInputProps?: InputProps;
+  keyApi: string;
 };
 
 export type ShippingAreasFormPropsExtended = {
@@ -93,6 +94,7 @@ export const ShippingAreasForm = ({
   modelFormProps,
   infoContainerProps,
   nameInputProps,
+  keyApi,
 }: ShippingAreasFormProps): JSX.Element => {
   const [inputMap, SetInputMap] = useState(<></>);
   const [type, SetType] = useState<string>('');
@@ -102,7 +104,7 @@ export const ShippingAreasForm = ({
     { label: 'Estados', value: 'statesCountries' },
     { label: 'Paises', value: 'countries' },
   ];
-  const key = API_GOOGLE;
+  const key = keyApi;
   console.log('key', key);
 
   const changeType = (e: { label: string; value: string } | null) => {
@@ -313,7 +315,7 @@ export const ShippingAreasForm = ({
 
   React.useEffect(() => {
     if (key !== undefined) {
-      SetInputMap(() => <MapComponent setPlace={changePlace} key={key} />);
+      SetInputMap(() => <MapComponent setPlace={changePlace} keyApi={key} />);
     }
   }, [key]);
 

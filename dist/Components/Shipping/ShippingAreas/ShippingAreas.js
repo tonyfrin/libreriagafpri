@@ -10,7 +10,8 @@ var _Loading = require("../../Loading");
 var _Abstract = require("../../../Abstract");
 var ShippingAreas = exports.ShippingAreas = function ShippingAreas(_ref) {
   var use = _ref.use,
-    useLogin = _ref.useLogin;
+    useLogin = _ref.useLogin,
+    keyApi = _ref.keyApi;
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, use.pages.states.isFetching && /*#__PURE__*/_react["default"].createElement(_Loading.Loading, null), use.pages.states.isInit && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
     keyName: "init",
     isVisible: use.pages.states.isInit
@@ -22,12 +23,14 @@ var ShippingAreas = exports.ShippingAreas = function ShippingAreas(_ref) {
     isVisible: use.pages.states.isAdd
   }, /*#__PURE__*/_react["default"].createElement(_Abstract.ShippingAreasForm, {
     use: use,
-    formType: "add"
+    formType: "add",
+    keyApi: keyApi
   })), use.pages.states.isUpdate && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
     keyName: "update",
     isVisible: use.pages.states.isUpdate
   }, /*#__PURE__*/_react["default"].createElement(_Abstract.ShippingAreasForm, {
     use: use,
-    formType: "update"
+    formType: "update",
+    keyApi: keyApi
   })));
 };

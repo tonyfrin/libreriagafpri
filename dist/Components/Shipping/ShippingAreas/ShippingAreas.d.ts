@@ -2,5 +2,6 @@ import type { UseGafpriShippingAreasReturn, UseLoginReturn } from '../../../stat
 export type ShippingAreasProps = {
     use: UseGafpriShippingAreasReturn;
     useLogin: UseLoginReturn;
+    keyApi: string;
 };
-export declare const ShippingAreas: ({ use, useLogin, }: ShippingAreasProps) => JSX.Element;
+export declare const ShippingAreas: ({ use, useLogin, keyApi, }: ShippingAreasProps) => JSX.Element;

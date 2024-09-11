@@ -8,6 +8,7 @@ export type ShippingAreasFormProps = {
     modelFormProps?: ModelFormPropsExtended;
     infoContainerProps?: ContainerButtonPropsExtended;
     nameInputProps?: InputProps;
+    keyApi: string;
 };
 export type ShippingAreasFormPropsExtended = {
     use?: UseGafpriShippingAreasReturn;
@@ -16,4 +17,4 @@ export type ShippingAreasFormPropsExtended = {
     infoContainerProps?: ContainerButtonPropsExtended;
     nameInputProps?: InputProps;
 };
-export declare const ShippingAreasForm: ({ use, formType, modelFormProps, infoContainerProps, nameInputProps, }: ShippingAreasFormProps) => JSX.Element;
+export declare const ShippingAreasForm: ({ use, formType, modelFormProps, infoContainerProps, nameInputProps, keyApi, }: ShippingAreasFormProps) => JSX.Element;

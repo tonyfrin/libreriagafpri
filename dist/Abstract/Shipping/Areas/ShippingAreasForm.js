@@ -22,7 +22,6 @@ var _List = require("../../List");
 var _Modal = require("../../Modal");
 var _Components = require("../../../Components");
 var _Map = require("../../Map");
-var _constants = require("../../../constants");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
@@ -41,7 +40,8 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     formType = _ref.formType,
     modelFormProps = _ref.modelFormProps,
     infoContainerProps = _ref.infoContainerProps,
-    nameInputProps = _ref.nameInputProps;
+    nameInputProps = _ref.nameInputProps,
+    keyApi = _ref.keyApi;
   var _useState = (0, _react.useState)( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
     inputMap = _useState2[0],
@@ -63,7 +63,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     label: 'Paises',
     value: 'countries'
   }];
-  var key = _constants.API_GOOGLE;
+  var key = keyApi;
   console.log('key', key);
   var changeType = function changeType(e) {
     if (e) {
@@ -225,7 +225,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       SetInputMap(function () {
         return /*#__PURE__*/_react["default"].createElement(_Map.MapComponent, {
           setPlace: changePlace,
-          key: key
+          keyApi: key
         });
       });
     }

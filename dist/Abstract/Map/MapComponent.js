@@ -12,8 +12,8 @@ function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return 
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 var MapComponent = exports.MapComponent = function MapComponent(_ref) {
   var setPlace = _ref.setPlace,
-    key = _ref.key;
-  console.log('api_google', key);
+    keyApi = _ref.keyApi;
+  console.log('keyApi', keyApi);
   var mapRef = (0, _react.useRef)(null);
   var inputRef = (0, _react.useRef)(null); // Referencia al input para autocompletar
   var _useState = (0, _react.useState)(null),
@@ -110,7 +110,7 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
 
     // Cargar el script de Google Maps con Autocomplete
     var googleMapsScript = document.createElement('script');
-    googleMapsScript.src = "https://maps.googleapis.com/maps/api/js?key=".concat(key, "&v=weekly&libraries=places&language=en");
+    googleMapsScript.src = "https://maps.googleapis.com/maps/api/js?key=".concat(keyApi, "&v=weekly&libraries=places&language=en");
     console.log('googleMapsScript.src', googleMapsScript.src);
     googleMapsScript.async = true;
     googleMapsScript.defer = true;
