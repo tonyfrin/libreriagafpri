@@ -1124,6 +1124,9 @@ export {
   decimalFormatPriceConverter,
   formatDate,
   truncarTexto,
+  dayNames,
+  formatHours,
+  workDaysHoursToArray,
 } from './helpers';
 export type {
   ChangeInputText,

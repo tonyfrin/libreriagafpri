@@ -104,6 +104,9 @@ type Actions = {
   setCurrentId: (value: number) => void;
   pushRole: (value: string) => void;
   removeRole: (value: number) => void;
+
+  pushWorkDayHour: (day: number, hours: string) => void;
+  removeWorkDayHour: (day: number) => void;
 };
 
 export type UseGafpriAttributesShippingMethodsReturn = {
@@ -161,6 +164,20 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
   const [workDaysHours, setWorkDaysHours] = useState<Record<number, string>>(
     {}
   );
+
+  const pushWorkDayHour = (day: number, hours: string): void => {
+    setWorkDaysHours((prevValue) => ({
+      ...prevValue,
+      [day]: hours,
+    }));
+  };
+
+  const removeWorkDayHour = (day: number): void => {
+    setWorkDaysHours((prevValue) => {
+      const { [day]: _, ...rest } = prevValue; // eslint-disable-line @typescript-eslint/no-unused-vars
+      return rest;
+    });
+  };
 
   const [preparationTime, setPreparationTime] = useState<string>('');
 
@@ -460,6 +477,8 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     setCurrentId,
     pushRole,
     removeRole,
+    pushWorkDayHour,
+    removeWorkDayHour,
   };
 
   return {

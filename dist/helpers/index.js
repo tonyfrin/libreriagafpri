@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.formatDate = exports.decimalFormatPriceConverter = exports.changeSelect = exports.changeMultipleObjectAttributesInput = exports.changeMultipleArrayStringSelect = exports.changeMultipleArrayStringInput = exports.changeInputText = exports.changeInputNumers = exports.addClass = void 0;
+exports.formatHours = exports.formatDate = exports.decimalFormatPriceConverter = exports.dayNames = exports.changeSelect = exports.changeMultipleObjectAttributesInput = exports.changeMultipleArrayStringSelect = exports.changeMultipleArrayStringInput = exports.changeInputText = exports.changeInputNumers = exports.addClass = void 0;
 exports.formatPhoneNumber = formatPhoneNumber;
 exports.gafpriFetch = gafpriFetch;
 exports.getLastEntryDateAndCount = exports.getBase64 = exports.generatePermanentLink = void 0;
@@ -14,9 +14,10 @@ exports.scrollToTop = exports.removeClass = exports.removeAccentsAndSpecialChars
 exports.toTitleCase = toTitleCase;
 exports.truncarTexto = truncarTexto;
 exports.validationHidden = validationHidden;
-exports.validationSelect = exports.validationInputPostcode = exports.validationInputPhone = exports.validationInputName = exports.validationInputEmail = exports.validationInput = void 0;
+exports.workDaysHoursToArray = exports.validationSelect = exports.validationInputPostcode = exports.validationInputPhone = exports.validationInputName = exports.validationInputEmail = exports.validationInput = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
@@ -442,3 +443,37 @@ function truncarTexto(texto, longitudMaxima) {
   }
   return "".concat(texto.substring(0, longitudMaxima - 3), "...");
 }
+var dayNames = exports.dayNames = {
+  1: 'Lunes',
+  2: 'Martes',
+  3: 'Miércoles',
+  4: 'Jueves',
+  5: 'Viernes',
+  6: 'Sábado',
+  7: 'Domingo'
+};
+var formatHours = exports.formatHours = function formatHours(hours) {
+  var _hours$split$map = hours.split('-').map(function (hour) {
+      return parseInt(hour, 10);
+    }),
+    _hours$split$map2 = (0, _slicedToArray2["default"])(_hours$split$map, 2),
+    start = _hours$split$map2[0],
+    end = _hours$split$map2[1];
+  var formatHour = function formatHour(hour) {
+    return "".concat(hour.toString().padStart(2, '0'), ":00");
+  };
+  return "de ".concat(formatHour(start), " a ").concat(formatHour(end));
+};
+var workDaysHoursToArray = exports.workDaysHoursToArray = function workDaysHoursToArray(workDaysHours) {
+  return Object.entries(workDaysHours).map(function (_ref12) {
+    var _ref13 = (0, _slicedToArray2["default"])(_ref12, 2),
+      day = _ref13[0],
+      hours = _ref13[1];
+    var dayName = dayNames[parseInt(day, 10)];
+    var formattedHours = formatHours(hours);
+    return {
+      day: parseInt(day, 10),
+      hoursString: "".concat(dayName, " ").concat(formattedHours)
+    };
+  });
+};

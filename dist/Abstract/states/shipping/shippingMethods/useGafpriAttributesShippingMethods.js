@@ -1,16 +1,23 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useGafpriAttributesShippingMethods = useGafpriAttributesShippingMethods;
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = require("react");
 var _Validations = require("../../../../Validations");
 var _Changes = require("../../../../Changes");
 var _constants = require("../../../../constants");
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function useGafpriAttributesShippingMethods() {
   var _useState = (0, _react.useState)(''),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -94,6 +101,18 @@ function useGafpriAttributesShippingMethods() {
     _useState32 = (0, _slicedToArray2["default"])(_useState31, 2),
     workDaysHours = _useState32[0],
     setWorkDaysHours = _useState32[1];
+  var pushWorkDayHour = function pushWorkDayHour(day, hours) {
+    setWorkDaysHours(function (prevValue) {
+      return _objectSpread(_objectSpread({}, prevValue), {}, (0, _defineProperty2["default"])({}, day, hours));
+    });
+  };
+  var removeWorkDayHour = function removeWorkDayHour(day) {
+    setWorkDaysHours(function (prevValue) {
+      var _ = prevValue[day],
+        rest = (0, _objectWithoutProperties2["default"])(prevValue, [day].map(_toPropertyKey)); // eslint-disable-line @typescript-eslint/no-unused-vars
+      return rest;
+    });
+  };
   var _useState33 = (0, _react.useState)(''),
     _useState34 = (0, _slicedToArray2["default"])(_useState33, 2),
     preparationTime = _useState34[0],
@@ -354,7 +373,9 @@ function useGafpriAttributesShippingMethods() {
     changeValueConditional: changeValueConditional,
     setCurrentId: setCurrentId,
     pushRole: pushRole,
-    removeRole: removeRole
+    removeRole: removeRole,
+    pushWorkDayHour: pushWorkDayHour,
+    removeWorkDayHour: removeWorkDayHour
   };
   return {
     states: states,

@@ -15,6 +15,8 @@ var _Containers = require("../../Containers");
 var _Form = require("../../Form");
 var _Input = require("../../Input");
 var _constants = require("../../../constants");
+var _Button = require("../../Button");
+var _helpers = require("../../../helpers");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -42,7 +44,35 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     _React$useState4 = (0, _slicedToArray2["default"])(_React$useState3, 2),
     inputStatus = _React$useState4[0],
     setInputStatus = _React$useState4[1];
+  var _React$useState5 = _react["default"].useState(''),
+    _React$useState6 = (0, _slicedToArray2["default"])(_React$useState5, 2),
+    workDay = _React$useState6[0],
+    setWorkDay = _React$useState6[1];
+  var _React$useState7 = _react["default"].useState(''),
+    _React$useState8 = (0, _slicedToArray2["default"])(_React$useState7, 2),
+    workOpenHour = _React$useState8[0],
+    setWorkOpenHour = _React$useState8[1];
+  var _React$useState9 = _react["default"].useState(''),
+    _React$useState10 = (0, _slicedToArray2["default"])(_React$useState9, 2),
+    workCloseHour = _React$useState10[0],
+    setWorkCloseHour = _React$useState10[1];
+  var _React$useState11 = _react["default"].useState(false),
+    _React$useState12 = (0, _slicedToArray2["default"])(_React$useState11, 2),
+    buttonAddValid = _React$useState12[0],
+    setButtonAddValid = _React$useState12[1];
+  var validationButtonAdd = function validationButtonAdd() {
+    return workDay !== '' && workOpenHour !== '' && workCloseHour !== '' && parseInt(workOpenHour) < parseInt(workCloseHour);
+  };
   var currentItem = isUpdateForm ? use.data.actions.getById(use.attributes.states.currentId) : null;
+  _react["default"].useEffect(function () {
+    var valid = validationButtonAdd();
+    setButtonAddValid(valid);
+  }, [workDay, workOpenHour, workCloseHour]);
+  var addWorkDayHours = function addWorkDayHours() {
+    if (validationButtonAdd()) {
+      use.attributes.actions.pushWorkDayHour(parseInt(workDay, 10), "".concat(workOpenHour, "-").concat(workCloseHour));
+    }
+  };
   _react["default"].useEffect(function () {
     use.attributes.actions.validationShippingAreasId(parseInt(use.attributes.states.shippingAreasId, 10));
     use.attributes.actions.validationName(use.attributes.states.name);
@@ -151,6 +181,28 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     optionsRoles.push(option);
     return null;
   });
+  var optionsWorkDays = [{
+    label: 'Lunes',
+    value: '1'
+  }, {
+    label: 'Martes',
+    value: '2'
+  }, {
+    label: 'Miércoles',
+    value: '3'
+  }, {
+    label: 'Jueves',
+    value: '4'
+  }, {
+    label: 'Viernes',
+    value: '5'
+  }, {
+    label: 'Sábado',
+    value: '6'
+  }, {
+    label: 'Domingo',
+    value: '7'
+  }];
   var getLabelByValue = function getLabelByValue(value) {
     var option = optionsRoles.find(function (option) {
       return option.value === value;
@@ -174,6 +226,11 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
   var changeRoles = function changeRoles(options) {
     if (options) {
       use.attributes.actions.pushRole(options.value);
+    }
+  };
+  var changeWorkDay = function changeWorkDay(options) {
+    if (options) {
+      setWorkDay(options.value);
     }
   };
   return /*#__PURE__*/_react["default"].createElement(_Form.ModelForm, (0, _extends2["default"])({
@@ -274,9 +331,9 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
         width: '90%'
       }
     }
-  }), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.cx)(regionsTitleStyles)
-  }, "Estados"), /*#__PURE__*/_react["default"].createElement("div", {
+  }, "Roles"), /*#__PURE__*/_react["default"].createElement("div", {
     className: (0, _css.cx)(regionsContainerStyles)
   }, use.attributes.states.roles.map(function (item) {
     var label = getLabelByValue(item.toString());
@@ -296,5 +353,69 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       key: "button-states-countries-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
     }, label)));
+  })))))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '100%'
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
+    changeType: changeWorkDay,
+    props: {
+      title: 'Día',
+      options: optionsWorkDays,
+      styles: {
+        width: '90%'
+      }
+    }
+  }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'number',
+      min: '1',
+      max: '23',
+      title: 'Hora de Apertura',
+      onKeyUp: function onKeyUp(event) {
+        return setWorkOpenHour(event.currentTarget.value);
+      }
+    }
+  }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'number',
+      min: '1',
+      max: '23',
+      title: 'Hora de Cierre',
+      onKeyUp: function onKeyUp(event) {
+        return setWorkCloseHour(event.currentTarget.value);
+      }
+    }
+  }), /*#__PURE__*/_react["default"].createElement(_Button.Button, {
+    title: "Agregar",
+    Class: !buttonAddValid ? _constants.ALERT : '',
+    buttonProps: {
+      onClick: addWorkDayHours
+    }
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '100%'
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
+    className: (0, _css.cx)(regionsTitleStyles)
+  }, "D\xEDas laborales"), /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.cx)(regionsContainerStyles)
+  }, (0, _helpers.workDaysHoursToArray)(use.attributes.states.workDaysHours).map(function (item) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      key: "container-states-countries-".concat(item),
+      className: (0, _css.cx)(regionItemStyles)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      key: "states-countries-".concat(item),
+      className: (0, _css.cx)(regionContainerStyles)
+    }, /*#__PURE__*/_react["default"].createElement("span", {
+      key: "x-states-countries-".concat(item),
+      className: (0, _css.cx)(closeButtonStyles),
+      onClick: function onClick() {
+        return use.attributes.actions.removeRole(item.day);
+      }
+    }, "x"), /*#__PURE__*/_react["default"].createElement("button", {
+      key: "button-states-countries-".concat(item),
+      className: (0, _css.cx)(regionButtonStyles)
+    }, item.hoursString)));
   })))))));
 };

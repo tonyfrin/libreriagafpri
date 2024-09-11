@@ -14,12 +14,15 @@ import {
   InputCost,
   SelectType,
   SelectRoles,
+  Input,
 } from '../../Input';
 import type {
   UseGafpriShippingMethodsReturn,
   UseRolesReturn,
 } from '../../../states';
-import { SHIPPING_METHODS_ROUTE } from '../../../constants';
+import { SHIPPING_METHODS_ROUTE, ALERT } from '../../../constants';
+import { Button } from '../../Button';
+import { workDaysHoursToArray } from '../../../helpers';
 
 export type ShippingMethodsFormProps = {
   use: UseGafpriShippingMethodsReturn;
@@ -104,10 +107,37 @@ export const ShippingMethodsForm = ({
   const isUpdateForm = formType === 'update';
   const [inputType, setInputType] = React.useState(<></>);
   const [inputStatus, setInputStatus] = React.useState(<></>);
+  const [workDay, setWorkDay] = React.useState('');
+  const [workOpenHour, setWorkOpenHour] = React.useState('');
+  const [workCloseHour, setWorkCloseHour] = React.useState('');
+  const [buttonAddValid, setButtonAddValid] = React.useState(false);
+
+  const validationButtonAdd = (): boolean => {
+    return (
+      workDay !== '' &&
+      workOpenHour !== '' &&
+      workCloseHour !== '' &&
+      parseInt(workOpenHour) < parseInt(workCloseHour)
+    );
+  };
 
   const currentItem = isUpdateForm
     ? use.data.actions.getById(use.attributes.states.currentId)
     : null;
+
+  React.useEffect(() => {
+    const valid = validationButtonAdd();
+    setButtonAddValid(valid);
+  }, [workDay, workOpenHour, workCloseHour]);
+
+  const addWorkDayHours = (): void => {
+    if (validationButtonAdd()) {
+      use.attributes.actions.pushWorkDayHour(
+        parseInt(workDay, 10),
+        `${workOpenHour}-${workCloseHour}`
+      );
+    }
+  };
 
   React.useEffect(() => {
     use.attributes.actions.validationShippingAreasId(
@@ -272,6 +302,19 @@ export const ShippingMethodsForm = ({
     return null;
   });
 
+  const optionsWorkDays: {
+    value: string;
+    label: string;
+  }[] = [
+    { label: 'Lunes', value: '1' },
+    { label: 'Martes', value: '2' },
+    { label: 'Miércoles', value: '3' },
+    { label: 'Jueves', value: '4' },
+    { label: 'Viernes', value: '5' },
+    { label: 'Sábado', value: '6' },
+    { label: 'Domingo', value: '7' },
+  ];
+
   const getLabelByValue = (value: string) => {
     const option = optionsRoles.find((option) => option.value === value);
     return option ? option.label : 'Etiqueta no encontrada';
@@ -298,6 +341,14 @@ export const ShippingMethodsForm = ({
   ): void => {
     if (options) {
       use.attributes.actions.pushRole(options.value);
+    }
+  };
+
+  const changeWorkDay = (
+    options: SingleValue<{ value: string; label: string }>
+  ): void => {
+    if (options) {
+      setWorkDay(options.value);
     }
   };
 
@@ -427,40 +478,133 @@ export const ShippingMethodsForm = ({
               }}
             />
             <>
-              <span className={cx(regionsTitleStyles)}>Estados</span>
-              <div className={cx(regionsContainerStyles)}>
-                {use.attributes.states.roles.map((item) => {
-                  const label = getLabelByValue(item.toString());
-                  return (
-                    <div
-                      key={`container-states-countries-${item}`}
-                      className={cx(regionItemStyles)}
-                    >
+              <div>
+                <span className={cx(regionsTitleStyles)}>Roles</span>
+                <div className={cx(regionsContainerStyles)}>
+                  {use.attributes.states.roles.map((item) => {
+                    const label = getLabelByValue(item.toString());
+                    return (
                       <div
-                        key={`states-countries-${item}`}
-                        className={cx(regionContainerStyles)}
+                        key={`container-states-countries-${item}`}
+                        className={cx(regionItemStyles)}
                       >
-                        <span
-                          key={`x-states-countries-${item}`}
-                          className={cx(closeButtonStyles)}
-                          onClick={() =>
-                            use.attributes.actions.removeRole(item)
-                          }
+                        <div
+                          key={`states-countries-${item}`}
+                          className={cx(regionContainerStyles)}
                         >
-                          x
-                        </span>
-                        <button
-                          key={`button-states-countries-${item}`}
-                          className={cx(regionButtonStyles)}
-                        >
-                          {label}
-                        </button>
+                          <span
+                            key={`x-states-countries-${item}`}
+                            className={cx(closeButtonStyles)}
+                            onClick={() =>
+                              use.attributes.actions.removeRole(item)
+                            }
+                          >
+                            x
+                          </span>
+                          <button
+                            key={`button-states-countries-${item}`}
+                            className={cx(regionButtonStyles)}
+                          >
+                            {label}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </>
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+          }}
+          {...infoContainerProps}
+        >
+          <>
+            <SelectType
+              changeType={changeWorkDay}
+              props={{
+                title: 'Día',
+                options: optionsWorkDays,
+                styles: {
+                  width: '90%',
+                },
+              }}
+            />
+            <Input
+              inputProps={{
+                type: 'number',
+                min: '1',
+                max: '23',
+                title: 'Hora de Apertura',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  setWorkOpenHour(event.currentTarget.value),
+              }}
+            />
+            <Input
+              inputProps={{
+                type: 'number',
+                min: '1',
+                max: '23',
+                title: 'Hora de Cierre',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  setWorkCloseHour(event.currentTarget.value),
+              }}
+            />
+            <Button
+              title="Agregar"
+              Class={!buttonAddValid ? ALERT : ''}
+              buttonProps={{
+                onClick: addWorkDayHours,
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+          }}
+          {...infoContainerProps}
+        >
+          <>
+            <div>
+              <span className={cx(regionsTitleStyles)}>Días laborales</span>
+              <div className={cx(regionsContainerStyles)}>
+                {workDaysHoursToArray(use.attributes.states.workDaysHours).map(
+                  (item) => {
+                    return (
+                      <div
+                        key={`container-states-countries-${item}`}
+                        className={cx(regionItemStyles)}
+                      >
+                        <div
+                          key={`states-countries-${item}`}
+                          className={cx(regionContainerStyles)}
+                        >
+                          <span
+                            key={`x-states-countries-${item}`}
+                            className={cx(closeButtonStyles)}
+                            onClick={() =>
+                              use.attributes.actions.removeRole(item.day)
+                            }
+                          >
+                            x
+                          </span>
+                          <button
+                            key={`button-states-countries-${item}`}
+                            className={cx(regionButtonStyles)}
+                          >
+                            {item.hoursString}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
+              </div>
+            </div>
           </>
         </ContainerButton>
       </>

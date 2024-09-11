@@ -73,6 +73,8 @@ type Actions = {
     setCurrentId: (value: number) => void;
     pushRole: (value: string) => void;
     removeRole: (value: number) => void;
+    pushWorkDayHour: (day: number, hours: string) => void;
+    removeWorkDayHour: (day: number) => void;
 };
 export type UseGafpriAttributesShippingMethodsReturn = {
     states: State;

@@ -653,3 +653,34 @@ export function truncarTexto(texto: string, longitudMaxima: number): string {
 
   return `${texto.substring(0, longitudMaxima - 3)}...`;
 }
+
+export const dayNames: Record<number, string> = {
+  1: 'Lunes',
+  2: 'Martes',
+  3: 'Miércoles',
+  4: 'Jueves',
+  5: 'Viernes',
+  6: 'Sábado',
+  7: 'Domingo',
+};
+
+export const formatHours = (hours: string): string => {
+  const [start, end] = hours.split('-').map((hour) => parseInt(hour, 10));
+  const formatHour = (hour: number): string =>
+    `${hour.toString().padStart(2, '0')}:00`;
+
+  return `de ${formatHour(start)} a ${formatHour(end)}`;
+};
+
+export const workDaysHoursToArray = (
+  workDaysHours: Record<number, string>
+): { day: number; hoursString: string }[] => {
+  return Object.entries(workDaysHours).map(([day, hours]) => {
+    const dayName = dayNames[parseInt(day, 10)];
+    const formattedHours = formatHours(hours);
+    return {
+      day: parseInt(day, 10),
+      hoursString: `${dayName} ${formattedHours}`,
+    };
+  });
+};
