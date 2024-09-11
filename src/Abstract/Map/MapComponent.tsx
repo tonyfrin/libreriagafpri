@@ -77,13 +77,10 @@ export const MapComponent = ({ setPlace, keyApi }: MapComponentProps) => {
             inputRef.current,
             {
               fields: ['geometry', 'formatted_address'],
-              types: ['geocode'], // Puedes personalizar los tipos de lugares aquí
+              types: ['geocode'],
             }
           );
 
-          setAutocomplete(autocompleteInstance);
-
-          // Manejar la selección de un lugar desde el autocompletado
           autocompleteInstance.addListener('place_changed', () => {
             const place = autocompleteInstance.getPlace();
 
@@ -97,12 +94,12 @@ export const MapComponent = ({ setPlace, keyApi }: MapComponentProps) => {
 
             // Actualizar la posición del mapa y el marcador
             mapInstance.setCenter(place.geometry.location);
-            mapInstance.setZoom(MAX_ZOOM); // Zoom máximo cuando se selecciona una ubicación
+            mapInstance.setZoom(MAX_ZOOM);
             markerInstance.setPosition(place.geometry.location);
 
             // Llamar a la función geocode con la nueva ubicación
             geocode({
-              location: place.geometry.location.toJSON(), // Convertir a lat/lng object
+              location: place.geometry.location.toJSON(),
             });
 
             // Calcular la distancia
@@ -112,19 +109,36 @@ export const MapComponent = ({ setPlace, keyApi }: MapComponentProps) => {
       }
     };
 
-    // Cargar el script de Google Maps con Autocomplete
-    const googleMapsScript = document.createElement('script');
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${keyApi}&v=weekly&libraries=places&language=en`;
-    console.log('googleMapsScript.src', googleMapsScript.src);
-    googleMapsScript.async = true;
-    googleMapsScript.defer = true;
-    document.body.appendChild(googleMapsScript);
+    // Verifica si el script de Google Maps ya está en el DOM
+    if (
+      !document.querySelector(
+        `script[src*="https://maps.googleapis.com/maps/api/js?key=${keyApi}"]`
+      )
+    ) {
+      const googleMapsScript = document.createElement('script');
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${keyApi}&v=weekly&libraries=places&language=en`;
+      googleMapsScript.async = true;
+      googleMapsScript.defer = true;
+      document.body.appendChild(googleMapsScript);
+
+      googleMapsScript.onload = () => {
+        window.initMap();
+      };
+    } else {
+      // Si el script ya está cargado, llama a initMap directamente
+      window.initMap();
+    }
 
     // Limpiar el script cuando el componente se desmonte
     return () => {
-      document.body.removeChild(googleMapsScript);
+      const scriptElement = document.querySelector(
+        `script[src*="https://maps.googleapis.com/maps/api/js?key=${keyApi}"]`
+      );
+      if (scriptElement) {
+        document.body.removeChild(scriptElement);
+      }
     };
-  }, []);
+  }, [keyApi]);
 
   useEffect(() => {
     if (geocoder && map && marker && inputRef.current) {

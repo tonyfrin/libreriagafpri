@@ -76,11 +76,8 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
         if (inputRef.current) {
           var autocompleteInstance = new google.maps.places.Autocomplete(inputRef.current, {
             fields: ['geometry', 'formatted_address'],
-            types: ['geocode'] // Puedes personalizar los tipos de lugares aquí
+            types: ['geocode']
           });
-          setAutocomplete(autocompleteInstance);
-
-          // Manejar la selección de un lugar desde el autocompletado
           autocompleteInstance.addListener('place_changed', function () {
             var place = autocompleteInstance.getPlace();
             if (!place.geometry || !place.geometry.location) {
@@ -93,12 +90,12 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
 
             // Actualizar la posición del mapa y el marcador
             mapInstance.setCenter(place.geometry.location);
-            mapInstance.setZoom(MAX_ZOOM); // Zoom máximo cuando se selecciona una ubicación
+            mapInstance.setZoom(MAX_ZOOM);
             markerInstance.setPosition(place.geometry.location);
 
             // Llamar a la función geocode con la nueva ubicación
             geocode({
-              location: place.geometry.location.toJSON() // Convertir a lat/lng object
+              location: place.geometry.location.toJSON()
             });
 
             // Calcular la distancia
@@ -108,19 +105,29 @@ var MapComponent = exports.MapComponent = function MapComponent(_ref) {
       }
     };
 
-    // Cargar el script de Google Maps con Autocomplete
-    var googleMapsScript = document.createElement('script');
-    googleMapsScript.src = "https://maps.googleapis.com/maps/api/js?key=".concat(keyApi, "&v=weekly&libraries=places&language=en");
-    console.log('googleMapsScript.src', googleMapsScript.src);
-    googleMapsScript.async = true;
-    googleMapsScript.defer = true;
-    document.body.appendChild(googleMapsScript);
+    // Verifica si el script de Google Maps ya está en el DOM
+    if (!document.querySelector("script[src*=\"https://maps.googleapis.com/maps/api/js?key=".concat(keyApi, "\"]"))) {
+      var googleMapsScript = document.createElement('script');
+      googleMapsScript.src = "https://maps.googleapis.com/maps/api/js?key=".concat(keyApi, "&v=weekly&libraries=places&language=en");
+      googleMapsScript.async = true;
+      googleMapsScript.defer = true;
+      document.body.appendChild(googleMapsScript);
+      googleMapsScript.onload = function () {
+        window.initMap();
+      };
+    } else {
+      // Si el script ya está cargado, llama a initMap directamente
+      window.initMap();
+    }
 
     // Limpiar el script cuando el componente se desmonte
     return function () {
-      document.body.removeChild(googleMapsScript);
+      var scriptElement = document.querySelector("script[src*=\"https://maps.googleapis.com/maps/api/js?key=".concat(keyApi, "\"]"));
+      if (scriptElement) {
+        document.body.removeChild(scriptElement);
+      }
     };
-  }, []);
+  }, [keyApi]);
   (0, _react.useEffect)(function () {
     if (geocoder && map && marker && inputRef.current) {
       // Inicializar Autocomplete cuando geocoder, map y marker están disponibles
