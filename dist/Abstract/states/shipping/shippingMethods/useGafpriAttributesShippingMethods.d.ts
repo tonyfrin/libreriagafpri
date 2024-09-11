@@ -13,24 +13,24 @@ type State = {
     typeValid: boolean;
     typeDefault: SelectDefault;
     typeOptions: SelectDefault[];
-    shippingTimeDays: string;
-    shippingTimeDaysValid: boolean;
-    availableShippingServices: string;
-    availableShippingServicesValid: boolean;
-    availableShippingServicesDefault: SelectDefault;
-    availableShippingServicesOptions: SelectDefault[];
-    taxStatus: string;
-    taxStatusValid: boolean;
-    taxStatusDefault: SelectDefault;
-    taxStatusOptions: SelectDefault[];
-    taxClass: string;
-    taxClassValid: boolean;
-    taxClassDefault: SelectDefault;
-    taxClassOptions: SelectDefault[];
     status: string;
     statusValid: boolean;
     statusDefault: SelectDefault;
     statusOptions: SelectDefault[];
+    roles: number[];
+    workDaysHours: Record<number, string>;
+    preparationTime: string;
+    pickupTime: string;
+    deliveryTime: string;
+    typeStart: string;
+    valueStart: string;
+    conditional: boolean;
+    typeConditional?: string;
+    typeConditionalOptions: {
+        label: string;
+        value: string;
+    }[];
+    valueConditional?: string;
     currentId: number;
 };
 type Actions = {
@@ -40,10 +40,6 @@ type Actions = {
     validationDescription: (value: string) => boolean;
     validationCost: (value: number) => boolean;
     validationType: (value: string) => boolean;
-    validationShippingTimeDays: (value: number) => boolean;
-    validationAvailableShippingServices: (value: string) => boolean;
-    validationTaxStatus: (value: string) => boolean;
-    validationTaxClass: (value: string) => boolean;
     validationStatus: (value: string) => boolean;
     validationButtonNext: () => void;
     changeShippingAreasId: (value: string) => void;
@@ -54,20 +50,23 @@ type Actions = {
         value: string;
         label: string;
     }>) => void;
-    changeShippingTimeDays: (value: string) => void;
-    changeAvailableShippingServices: (options: SingleValue<{
-        value: string;
-        label: string;
-    }>) => void;
-    changeTaxStatus: (options: SingleValue<{
-        value: string;
-        label: string;
-    }>) => void;
-    changeTaxClass: (options: SingleValue<{
-        value: string;
-        label: string;
-    }>) => void;
     changeStatus: (options: SingleValue<{
+        value: string;
+        label: string;
+    }>) => void;
+    setRoles: (value: number[]) => void;
+    setWorkDaysHours: (value: Record<number, string>) => void;
+    setPreparationTime: (value: string) => void;
+    setPickupTime: (value: string) => void;
+    setDeliveryTime: (value: string) => void;
+    setTypeStart: (value: string) => void;
+    setValueStart: (value: string) => void;
+    changeConditional: (value: boolean) => void;
+    changeTypeConditional: (option: SingleValue<{
+        value: string;
+        label: string;
+    }>) => void;
+    changeValueConditional: (option: SingleValue<{
         value: string;
         label: string;
     }>) => void;

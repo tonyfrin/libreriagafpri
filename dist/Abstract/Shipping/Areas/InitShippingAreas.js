@@ -189,8 +189,49 @@ var InitShippingAreas = exports.InitShippingAreas = function InitShippingAreas(_
         return _ref4.apply(this, arguments);
       };
     }();
+    var getMethods = /*#__PURE__*/function () {
+      var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
+        var data;
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              if (!(useLogin.states.token && !use.useShippingMethoods.data.states.isReady)) {
+                _context3.next = 13;
+                break;
+              }
+              _context3.prev = 1;
+              use.useShippingMethoods.data.actions.setIsReady(false);
+              _context3.next = 5;
+              return use.useShippingMethoods.data.actions.getItems();
+            case 5:
+              data = _context3.sent;
+              if (data.success) {
+                use.useShippingMethoods.data.actions.setItems(data.data.items);
+                use.useShippingMethoods.data.actions.setIsReady(true);
+              } else {
+                use.error.actions.changeError([data.message]);
+                use.useShippingMethoods.data.actions.setIsReady(false);
+              }
+              _context3.next = 13;
+              break;
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](1);
+              use.error.actions.changeError(["".concat(_context3.t0)]);
+              use.useShippingMethoods.data.actions.setIsReady(false);
+            case 13:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[1, 9]]);
+      }));
+      return function getMethods() {
+        return _ref5.apply(this, arguments);
+      };
+    }();
     get();
-  }, [useLogin.states.token, use.data.states.isReady]);
+    getMethods();
+  }, [useLogin.states.token, use.useShippingMethoods.data.states.isReady]);
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Header.Header, headerProps), /*#__PURE__*/_react["default"].createElement(_Error.Error, errorProps), /*#__PURE__*/_react["default"].createElement(_List.List, (0, _extends2["default"])({
     title: "Zonas",
     items: items,

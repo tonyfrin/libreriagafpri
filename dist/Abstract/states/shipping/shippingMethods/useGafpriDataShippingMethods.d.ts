@@ -1,37 +1,40 @@
 export interface ShippingMethodsAttributes {
     id: number;
-    shippingAreasId: string;
+    shippingAreasId: number;
     name: string;
     description: string;
-    cost: string;
+    cost: number;
     type: string;
-    shippingTimeDays: string;
-    availableShippingServices: string;
-    taxStatus: string;
-    taxClass: string;
+    roles: number[];
+    workDaysHours: Record<number, string>;
+    preparationTime: number;
+    pickupTime: number;
+    deliveryTime: number;
+    typeStart: string;
+    valueStart: string;
+    conditional: boolean;
+    typeConditional?: string;
+    valueConditional?: string;
     status: string;
     createdAt: Date;
     modifiedAt: Date;
-}
-interface ShippingMethodsData {
-    data: {
-        items: ShippingMethodsAttributes[] | [] | null;
-    };
 }
 type DeletedShippingMethods = {
     itemId: number;
 };
 type State = {
-    items: ShippingMethodsData;
+    items: ShippingMethodsAttributes[] | null;
     isReady: boolean;
 };
 type Actions = {
-    offItems: () => void;
+    setIsReady: (value: boolean) => void;
     handleNewItem: (newItem: ShippingMethodsAttributes) => void;
     handleUpdated: (updatedItem: ShippingMethodsAttributes) => void;
     handleDeleted: ({ itemId }: DeletedShippingMethods) => void;
     getById: (id: number) => ShippingMethodsAttributes | null;
-    filterByShippingAreasId: (targetShippingAreasId: number) => ShippingMethodsAttributes[];
+    filterByShippingAreasId: (methods: ShippingMethodsAttributes[], targetShippingAreasId: number) => ShippingMethodsAttributes[];
+    getItems: () => Promise<any>;
+    setItems: (value: ShippingMethodsAttributes[]) => void;
 };
 export type UseGafpriDataShippingMethodsReturn = {
     states: State;

@@ -167,8 +167,31 @@ export const InitShippingAreas = ({
       }
     };
 
+    const getMethods = async (): Promise<void> => {
+      if (
+        useLogin.states.token &&
+        !use.useShippingMethoods.data.states.isReady
+      ) {
+        try {
+          use.useShippingMethoods.data.actions.setIsReady(false);
+          const data = await use.useShippingMethoods.data.actions.getItems();
+          if (data.success) {
+            use.useShippingMethoods.data.actions.setItems(data.data.items);
+            use.useShippingMethoods.data.actions.setIsReady(true);
+          } else {
+            use.error.actions.changeError([data.message]);
+            use.useShippingMethoods.data.actions.setIsReady(false);
+          }
+        } catch (error) {
+          use.error.actions.changeError([`${error}`]);
+          use.useShippingMethoods.data.actions.setIsReady(false);
+        }
+      }
+    };
+
     get();
-  }, [useLogin.states.token, use.data.states.isReady]);
+    getMethods();
+  }, [useLogin.states.token, use.useShippingMethoods.data.states.isReady]);
 
   return (
     <>

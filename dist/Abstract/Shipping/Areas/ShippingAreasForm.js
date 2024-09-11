@@ -185,7 +185,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
       }
     })));
   };
-  var shippingMethods = currentItem !== null && currentItem !== void 0 && currentItem.id ? use.useShippingMethoods.data.actions.filterByShippingAreasId(currentItem === null || currentItem === void 0 ? void 0 : currentItem.id) : [];
+  var shippingMethods = currentItem !== null && currentItem !== void 0 && currentItem.id ? use.useShippingMethoods.data.actions.filterByShippingAreasId(use.useShippingMethoods.data.states.items || [], currentItem === null || currentItem === void 0 ? void 0 : currentItem.id) : [];
   shippingMethods.sort(function (a, b) {
     if (a.id && b.id) {
       return a.id - b.id;

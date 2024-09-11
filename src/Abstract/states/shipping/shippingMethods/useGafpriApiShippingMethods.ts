@@ -1,18 +1,14 @@
-import {
-  gafpriFetch,
-  ErrorResponseProps,
-  CustomErrorResponseProps,
-} from '../../../../helpers';
-import { UseErrorReturn } from '../../../../states';
-import { UseGafpriPagesShippingMethodsReturn } from './useGafpriPagesShippingMethods';
+import { gafpriFetch } from '../../../../helpers';
 import { UseGafpriAttributesShippingMethodsReturn } from './useGafpriAttributesShippingMethods';
 import { SHIPPING_METHODS_ROUTE } from '../../../../constants';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type Actions = {
-  add: () => void;
-  update: () => void;
-  erase: (id: number) => void;
+  add: () => Promise<any>;
+  update: () => Promise<any>;
+  erase: (id: number) => Promise<any>;
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type UseGafpriApiShippingMethodsReturn = {
   actions: Actions;
@@ -20,130 +16,102 @@ export type UseGafpriApiShippingMethodsReturn = {
 
 export type UseGafpriApiShippingMethodsProps = {
   token: string | null;
-  useError: UseErrorReturn;
-  pages: UseGafpriPagesShippingMethodsReturn;
   attributes: UseGafpriAttributesShippingMethodsReturn;
 };
 
 export function useGafpriApiShippingMethods({
   token,
-  useError,
-  pages,
   attributes,
 }: UseGafpriApiShippingMethodsProps): UseGafpriApiShippingMethodsReturn {
-  const newErrorAdd = (
-    newErrorValue: unknown | ErrorResponseProps | CustomErrorResponseProps
-  ): void => {
-    useError.actions.newError({
-      newErrorValue,
-      functionAction: pages.actions.onAdd,
-    });
-  };
-
-  const add = (): void => {
-    if (
-      attributes.states.shippingAreasIdValid &&
-      attributes.states.nameValid &&
-      attributes.states.descriptionValid &&
-      attributes.states.costValid &&
-      attributes.states.typeValid &&
-      attributes.states.shippingTimeDaysValid &&
-      attributes.states.availableShippingServicesValid &&
-      attributes.states.taxStatusValid &&
-      attributes.states.taxClassValid &&
-      attributes.states.statusValid &&
-      token
-    ) {
-      gafpriFetch({
-        initMethod: 'POST',
-        initRoute: SHIPPING_METHODS_ROUTE,
-        initCredentials: {
-          shippingAreasId: attributes.states.shippingAreasId,
-          name: attributes.states.name,
-          description: attributes.states.description,
-          cost: attributes.states.cost,
-          type: attributes.states.type,
-          shippingTimeDays: attributes.states.shippingTimeDays,
-          availableShippingServices:
-            attributes.states.availableShippingServices,
-          taxStatus: attributes.states.taxStatus,
-          taxClass: attributes.states.taxClass,
-          status: attributes.states.status,
-        },
-        initToken: { token },
-        functionFetching: pages.actions.onFetching,
-        functionSuccess: pages.actions.returnInit,
-        functionError: newErrorAdd,
-      });
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const add = async (): Promise<any> => {
+    try {
+      if (token) {
+        const data = await gafpriFetch({
+          initMethod: 'POST',
+          initRoute: SHIPPING_METHODS_ROUTE,
+          initCredentials: {
+            shippingAreasId: attributes.states.shippingAreasId,
+            name: attributes.states.name,
+            description: attributes.states.description,
+            cost: attributes.states.cost,
+            type: attributes.states.type,
+            roles: attributes.states.roles,
+            workDaysHours: attributes.states.workDaysHours,
+            preparationTime: attributes.states.preparationTime,
+            pickupTime: attributes.states.pickupTime,
+            deliveryTime: attributes.states.deliveryTime,
+            typeStart: attributes.states.typeStart,
+            valueStart: attributes.states.valueStart,
+            conditional: attributes.states.conditional,
+            typeConditional: attributes.states.typeConditional,
+            valueConditional: attributes.states.valueConditional,
+            status: attributes.states.status,
+          },
+          initToken: { token },
+        });
+        return data;
+      }
+      return null;
+    } catch (error) {
+      return error;
     }
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
-  const newErrorUpdate = (
-    newErrorValue: unknown | ErrorResponseProps | CustomErrorResponseProps
-  ): void => {
-    useError.actions.newError({
-      newErrorValue,
-      functionAction: pages.actions.onUpdate,
-    });
-  };
-
-  const update = (): void => {
-    if (
-      attributes.states.nameValid &&
-      attributes.states.descriptionValid &&
-      attributes.states.costValid &&
-      attributes.states.typeValid &&
-      attributes.states.shippingTimeDaysValid &&
-      attributes.states.availableShippingServicesValid &&
-      attributes.states.taxStatusValid &&
-      attributes.states.taxClassValid &&
-      attributes.states.statusValid &&
-      token
-    ) {
-      gafpriFetch({
-        initMethod: 'PATCH',
-        initRoute: `${SHIPPING_METHODS_ROUTE}/${attributes.states.currentId}`,
-        initCredentials: {
-          name: attributes.states.name,
-          description: attributes.states.description,
-          cost: attributes.states.cost,
-          type: attributes.states.type,
-          shippingTimeDays: attributes.states.shippingTimeDays,
-          availableShippingServices:
-            attributes.states.availableShippingServices,
-          taxStatus: attributes.states.taxStatus,
-          taxClass: attributes.states.taxClass,
-          status: attributes.states.status,
-        },
-        initToken: { token },
-        functionFetching: pages.actions.onFetching,
-        functionSuccess: pages.actions.returnInit,
-        functionError: newErrorUpdate,
-      });
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const update = async (): Promise<any> => {
+    try {
+      if (token) {
+        const data = await gafpriFetch({
+          initMethod: 'PATCH',
+          initRoute: `${SHIPPING_METHODS_ROUTE}/${attributes.states.currentId}`,
+          initCredentials: {
+            shippingAreasId: attributes.states.shippingAreasId,
+            name: attributes.states.name,
+            description: attributes.states.description,
+            cost: attributes.states.cost,
+            type: attributes.states.type,
+            roles: attributes.states.roles,
+            workDaysHours: attributes.states.workDaysHours,
+            preparationTime: attributes.states.preparationTime,
+            pickupTime: attributes.states.pickupTime,
+            deliveryTime: attributes.states.deliveryTime,
+            typeStart: attributes.states.typeStart,
+            valueStart: attributes.states.valueStart,
+            conditional: attributes.states.conditional,
+            typeConditional: attributes.states.typeConditional,
+            valueConditional: attributes.states.valueConditional,
+            status: attributes.states.status,
+          },
+          initToken: { token },
+        });
+        return data;
+      }
+      return null;
+    } catch (error) {
+      return error;
     }
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
-  const newErrorDelete = (
-    newErrorValue: unknown | ErrorResponseProps | CustomErrorResponseProps
-  ): void => {
-    useError.actions.newError({
-      newErrorValue,
-      functionAction: pages.actions.returnInit,
-    });
-  };
-
-  const erase = (id: number): void => {
-    if (token) {
-      gafpriFetch({
-        initMethod: 'DELETE',
-        initRoute: `${SHIPPING_METHODS_ROUTE}/${id}`,
-        initToken: { token },
-        functionFetching: pages.actions.onFetching,
-        functionSuccess: pages.actions.returnInit,
-        functionError: newErrorDelete,
-      });
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const erase = async (id: number): Promise<any> => {
+    try {
+      if (token) {
+        const data = await gafpriFetch({
+          initMethod: 'DELETE',
+          initRoute: `${SHIPPING_METHODS_ROUTE}/${id}`,
+          initToken: { token },
+        });
+        return data;
+      }
+      return null;
+    } catch (error) {
+      return error;
     }
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   /**
    * Export

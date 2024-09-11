@@ -11,87 +11,49 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = _interopRequireWildcard(require("react"));
-var _Context = require("../../../../Context");
 var _helpers = require("../../../../helpers");
 var _constants = require("../../../../constants");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
 function useGafpriDataShippingMethods(_ref) {
-  var _items$data;
   var token = _ref.token;
   var _useState = (0, _react.useState)(false),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
     isReady = _useState2[0],
     setIsReady = _useState2[1];
-  var _useState3 = (0, _react.useState)({
-      data: {
-        items: (0, _Context.getItem)(_constants.SHIPPING_METHODS_STORAGE, null)
-      }
-    }),
+  var _useState3 = (0, _react.useState)(null),
     _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
     items = _useState4[0],
     setItems = _useState4[1];
-  var onIsReady = function onIsReady() {
-    setIsReady(true);
-  };
-  var notReady = function notReady() {
-    setIsReady(false);
-  };
 
-  // Manejo de la data
-
-  var getLastItem = (_items$data = items.data) !== null && _items$data !== void 0 && _items$data.items ? items.data.items.sort(function (a, b) {
-    return new Date(b.modifiedAt).getTime() - new Date(a.modifiedAt).getTime();
-  })[0] : null;
-  var setDataStorage = function setDataStorage(newData) {
-    (0, _Context.saveItem)(_constants.SHIPPING_METHODS_STORAGE, newData.data.items);
-  };
-  var setData = function setData(newData) {
-    setItems(newData);
-    setDataStorage(newData);
-  };
-  var onItems = function onItems(newData) {
-    setData(newData);
-    onIsReady();
-  };
-  var offItems = function offItems() {
-    setData({
-      data: {
-        items: null
-      }
-    });
-    notReady();
-  };
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   var getItems = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-      var _items$data$items;
-      var lastEntryDateAndCount, lastDate, count;
+      var data;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return (0, _helpers.getLastEntryDateAndCount)(_constants.SHIPPING_METHODS_ROUTE);
-          case 2:
-            lastEntryDateAndCount = _context.sent;
-            lastDate = (getLastItem === null || getLastItem === void 0 ? void 0 : getLastItem.modifiedAt) || null;
-            count = ((_items$data$items = items.data.items) === null || _items$data$items === void 0 ? void 0 : _items$data$items.length) || 0;
-            if (items.data.items === null || "".concat(lastEntryDateAndCount === null || lastEntryDateAndCount === void 0 ? void 0 : lastEntryDateAndCount.date) !== "".concat(lastDate) || "".concat(lastEntryDateAndCount === null || lastEntryDateAndCount === void 0 ? void 0 : lastEntryDateAndCount.count) !== "".concat(count)) {
-              if (token) {
-                (0, _helpers.gafpriFetch)({
-                  initMethod: 'GET',
-                  initRoute: _constants.SHIPPING_METHODS_ROUTE,
-                  initToken: {
-                    token: token
-                  },
-                  functionFetching: notReady,
-                  functionSuccess: onItems
-                });
-              } else {
-                notReady();
-              }
-            } else {
-              onIsReady();
+            if (!token) {
+              _context.next = 5;
+              break;
             }
+            _context.next = 3;
+            return (0, _helpers.gafpriFetch)({
+              initMethod: 'GET',
+              initRoute: _constants.SHIPPING_METHODS_ROUTE,
+              initToken: {
+                token: token
+              }
+            });
+          case 3:
+            data = _context.sent;
+            return _context.abrupt("return", data);
+          case 5:
+            return _context.abrupt("return", null);
           case 6:
           case "end":
             return _context.stop();
@@ -102,59 +64,42 @@ function useGafpriDataShippingMethods(_ref) {
       return _ref2.apply(this, arguments);
     };
   }();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
   var handleNewItem = function handleNewItem(newItem) {
     setItems(function (prevState) {
-      var newData = {
-        data: {
-          items: [].concat((0, _toConsumableArray2["default"])(prevState.data.items || []), [newItem])
-        }
-      };
-      setDataStorage(newData);
+      var newData = [].concat((0, _toConsumableArray2["default"])(prevState || []), [newItem]);
       return newData;
     });
   };
   var handleUpdated = function handleUpdated(updatedItem) {
     setItems(function (prevState) {
-      var _prevState$data$items;
-      var updatedItems = ((_prevState$data$items = prevState.data.items) === null || _prevState$data$items === void 0 ? void 0 : _prevState$data$items.map(function (item) {
+      var updatedItems = (prevState === null || prevState === void 0 ? void 0 : prevState.map(function (item) {
         return item.id === updatedItem.id ? updatedItem : item;
       })) || [];
-      var newData = {
-        data: {
-          items: updatedItems
-        }
-      };
-      setDataStorage(newData);
+      var newData = updatedItems;
       return newData;
     });
   };
   var handleDeleted = function handleDeleted(_ref3) {
     var itemId = _ref3.itemId;
     setItems(function (prevState) {
-      var _prevState$data$items2;
-      var filteredItems = ((_prevState$data$items2 = prevState.data.items) === null || _prevState$data$items2 === void 0 ? void 0 : _prevState$data$items2.filter(function (item) {
+      var filteredItems = (prevState === null || prevState === void 0 ? void 0 : prevState.filter(function (item) {
         return "".concat(item.id) !== "".concat(itemId);
       })) || [];
-      var newData = {
-        data: {
-          items: filteredItems
-        }
-      };
-      setDataStorage(newData);
+      var newData = filteredItems;
       return newData;
     });
   };
   function getById(id) {
-    var _items$data$items2;
-    return ((_items$data$items2 = items.data.items) === null || _items$data$items2 === void 0 ? void 0 : _items$data$items2.find(function (item) {
+    return (items === null || items === void 0 ? void 0 : items.find(function (item) {
       return item.id === id;
     })) || null;
   }
-  function filterByShippingAreasId(targetShippingAreasId) {
-    var _items$data$items3;
-    return ((_items$data$items3 = items.data.items) === null || _items$data$items3 === void 0 ? void 0 : _items$data$items3.filter(function (method) {
+  function filterByShippingAreasId(methods, targetShippingAreasId) {
+    return methods.filter(function (method) {
       return "".concat(method.shippingAreasId) === "".concat(targetShippingAreasId);
-    })) || [];
+    }) || [];
   }
 
   /**
@@ -177,12 +122,14 @@ function useGafpriDataShippingMethods(_ref) {
     isReady: isReady
   };
   var actions = {
-    offItems: offItems,
+    setIsReady: setIsReady,
     handleNewItem: handleNewItem,
     handleUpdated: handleUpdated,
     handleDeleted: handleDeleted,
     getById: getById,
-    filterByShippingAreasId: filterByShippingAreasId
+    filterByShippingAreasId: filterByShippingAreasId,
+    getItems: getItems,
+    setItems: setItems
   };
   return {
     states: states,

@@ -1,31 +1,27 @@
 import React, { useState } from 'react';
-import { getItem, saveItem } from '../../../../Context';
-import { getLastEntryDateAndCount, gafpriFetch } from '../../../../helpers';
-import {
-  SHIPPING_METHODS_ROUTE,
-  SHIPPING_METHODS_STORAGE,
-} from '../../../../constants';
+import { gafpriFetch } from '../../../../helpers';
+import { SHIPPING_METHODS_ROUTE } from '../../../../constants';
 
 export interface ShippingMethodsAttributes {
   id: number;
-  shippingAreasId: string;
+  shippingAreasId: number;
   name: string;
   description: string;
-  cost: string;
+  cost: number;
   type: string;
-  shippingTimeDays: string;
-  availableShippingServices: string;
-  taxStatus: string;
-  taxClass: string;
+  roles: number[];
+  workDaysHours: Record<number, string>;
+  preparationTime: number;
+  pickupTime: number;
+  deliveryTime: number;
+  typeStart: string;
+  valueStart: string;
+  conditional: boolean;
+  typeConditional?: string;
+  valueConditional?: string;
   status: string;
   createdAt: Date;
   modifiedAt: Date;
-}
-
-interface ShippingMethodsData {
-  data: {
-    items: ShippingMethodsAttributes[] | [] | null;
-  };
 }
 
 type DeletedShippingMethods = {
@@ -33,20 +29,25 @@ type DeletedShippingMethods = {
 };
 
 type State = {
-  items: ShippingMethodsData;
+  items: ShippingMethodsAttributes[] | null;
   isReady: boolean;
 };
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type Actions = {
-  offItems: () => void;
+  setIsReady: (value: boolean) => void;
   handleNewItem: (newItem: ShippingMethodsAttributes) => void;
   handleUpdated: (updatedItem: ShippingMethodsAttributes) => void;
   handleDeleted: ({ itemId }: DeletedShippingMethods) => void;
   getById: (id: number) => ShippingMethodsAttributes | null;
   filterByShippingAreasId: (
+    methods: ShippingMethodsAttributes[],
     targetShippingAreasId: number
   ) => ShippingMethodsAttributes[];
+  getItems: () => Promise<any>;
+  setItems: (value: ShippingMethodsAttributes[]) => void;
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type UseGafpriDataShippingMethodsReturn = {
   states: State;
@@ -61,88 +62,25 @@ export function useGafpriDataShippingMethods({
   token,
 }: UseGafpriDataShippingMethodsProps): UseGafpriDataShippingMethodsReturn {
   const [isReady, setIsReady] = useState(false);
-  const [items, setItems] = useState<ShippingMethodsData>({
-    data: {
-      items: getItem(SHIPPING_METHODS_STORAGE, null),
-    },
-  });
+  const [items, setItems] = useState<ShippingMethodsAttributes[] | null>(null);
 
-  const onIsReady = (): void => {
-    setIsReady(true);
-  };
-
-  const notReady = (): void => {
-    setIsReady(false);
-  };
-
-  // Manejo de la data
-
-  const getLastItem: ShippingMethodsAttributes | null = items.data?.items
-    ? items.data.items.sort(
-        (a, b) =>
-          new Date(b.modifiedAt).getTime() - new Date(a.modifiedAt).getTime()
-      )[0]
-    : null;
-
-  const setDataStorage = (newData: ShippingMethodsData): void => {
-    saveItem(SHIPPING_METHODS_STORAGE, newData.data.items);
-  };
-
-  const setData = (newData: ShippingMethodsData): void => {
-    setItems(newData);
-    setDataStorage(newData);
-  };
-
-  const onItems = (newData: ShippingMethodsData): void => {
-    setData(newData);
-    onIsReady();
-  };
-
-  const offItems = (): void => {
-    setData({
-      data: {
-        items: null,
-      },
-    });
-    notReady();
-  };
-
-  const getItems = async (): Promise<void> => {
-    const lastEntryDateAndCount = await getLastEntryDateAndCount(
-      SHIPPING_METHODS_ROUTE
-    );
-    const lastDate = getLastItem?.modifiedAt || null;
-    const count = items.data.items?.length || 0;
-
-    if (
-      items.data.items === null ||
-      `${lastEntryDateAndCount?.date}` !== `${lastDate}` ||
-      `${lastEntryDateAndCount?.count}` !== `${count}`
-    ) {
-      if (token) {
-        gafpriFetch({
-          initMethod: 'GET',
-          initRoute: SHIPPING_METHODS_ROUTE,
-          initToken: { token },
-          functionFetching: notReady,
-          functionSuccess: onItems,
-        });
-      } else {
-        notReady();
-      }
-    } else {
-      onIsReady();
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const getItems = async (): Promise<any> => {
+    if (token) {
+      const data = await gafpriFetch({
+        initMethod: 'GET',
+        initRoute: SHIPPING_METHODS_ROUTE,
+        initToken: { token },
+      });
+      return data;
     }
+    return null;
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const handleNewItem = (newItem: ShippingMethodsAttributes): void => {
     setItems((prevState) => {
-      const newData = {
-        data: {
-          items: [...(prevState.data.items || []), newItem],
-        },
-      };
-      setDataStorage(newData);
+      const newData = [...(prevState || []), newItem];
       return newData;
     });
   };
@@ -150,15 +88,10 @@ export function useGafpriDataShippingMethods({
   const handleUpdated = (updatedItem: ShippingMethodsAttributes): void => {
     setItems((prevState) => {
       const updatedItems =
-        prevState.data.items?.map((item) =>
+        prevState?.map((item) =>
           item.id === updatedItem.id ? updatedItem : item
         ) || [];
-      const newData = {
-        data: {
-          items: updatedItems,
-        },
-      };
-      setDataStorage(newData);
+      const newData = updatedItems;
       return newData;
     });
   };
@@ -166,29 +99,23 @@ export function useGafpriDataShippingMethods({
   const handleDeleted = ({ itemId }: DeletedShippingMethods): void => {
     setItems((prevState) => {
       const filteredItems =
-        prevState.data.items?.filter((item) => `${item.id}` !== `${itemId}`) ||
-        [];
+        prevState?.filter((item) => `${item.id}` !== `${itemId}`) || [];
 
-      const newData = {
-        data: {
-          items: filteredItems,
-        },
-      };
-
-      setDataStorage(newData);
+      const newData = filteredItems;
       return newData;
     });
   };
 
   function getById(id: number): ShippingMethodsAttributes | null {
-    return items.data.items?.find((item) => item.id === id) || null;
+    return items?.find((item) => item.id === id) || null;
   }
 
   function filterByShippingAreasId(
+    methods: ShippingMethodsAttributes[],
     targetShippingAreasId: number
   ): ShippingMethodsAttributes[] {
     return (
-      items.data.items?.filter(
+      methods.filter(
         (method) => `${method.shippingAreasId}` === `${targetShippingAreasId}`
       ) || []
     );
@@ -215,12 +142,14 @@ export function useGafpriDataShippingMethods({
   };
 
   const actions = {
-    offItems,
+    setIsReady,
     handleNewItem,
     handleUpdated,
     handleDeleted,
     getById,
     filterByShippingAreasId,
+    getItems,
+    setItems,
   };
 
   return {

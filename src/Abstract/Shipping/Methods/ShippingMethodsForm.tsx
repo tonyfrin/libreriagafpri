@@ -11,10 +11,6 @@ import {
   InputProps,
   InputCost,
   SelectType,
-  InputShippingTimeDays,
-  SelectAvailableShippingServices,
-  SelectTaxStatus,
-  SelectTaxClass,
 } from '../../Input';
 import type { UseGafpriShippingMethodsReturn } from '../../../states';
 import { SHIPPING_METHODS_ROUTE } from '../../../constants';
@@ -47,10 +43,6 @@ export const ShippingMethodsForm = ({
   const isAddForm = formType === 'add';
   const isUpdateForm = formType === 'update';
   const [inputType, setInputType] = React.useState(<></>);
-  const [inputAvailableShippingServices, setInputAvailableShippingServices] =
-    React.useState(<></>);
-  const [inputTaxStatus, setInputTaxStatus] = React.useState(<></>);
-  const [inputTaxClass, setInputTaxClass] = React.useState(<></>);
   const [inputStatus, setInputStatus] = React.useState(<></>);
 
   const currentItem = isUpdateForm
@@ -68,15 +60,6 @@ export const ShippingMethodsForm = ({
     use.attributes.actions.validationCost(
       parseFloat(use.attributes.states.cost)
     );
-    use.attributes.actions.validationShippingTimeDays(
-      parseFloat(use.attributes.states.shippingTimeDays)
-    );
-    use.attributes.actions.validationType(use.attributes.states.type);
-    use.attributes.actions.validationAvailableShippingServices(
-      use.attributes.states.availableShippingServices
-    );
-    use.attributes.actions.validationTaxStatus(use.attributes.states.taxStatus);
-    use.attributes.actions.validationTaxClass(use.attributes.states.taxClass);
     use.attributes.actions.validationStatus(use.attributes.states.status);
     use.attributes.actions.validationButtonNext();
   }, [
@@ -84,20 +67,11 @@ export const ShippingMethodsForm = ({
     use.attributes.states.name,
     use.attributes.states.description,
     use.attributes.states.cost,
-    use.attributes.states.shippingTimeDays,
     use.attributes.states.type,
-    use.attributes.states.availableShippingServices,
-    use.attributes.states.taxStatus,
-    use.attributes.states.taxClass,
     use.attributes.states.status,
     inputType,
-    inputAvailableShippingServices,
-    inputTaxStatus,
-    inputTaxClass,
     inputStatus,
   ]);
-
-  console.log('cost', use.attributes.states.cost);
 
   React.useEffect(() => {
     use.attributes.actions.validationButtonNext();
@@ -106,12 +80,18 @@ export const ShippingMethodsForm = ({
     use.attributes.states.nameValid,
     use.attributes.states.descriptionValid,
     use.attributes.states.costValid,
-    use.attributes.states.shippingTimeDaysValid,
     use.attributes.states.typeValid,
-    use.attributes.states.availableShippingServicesValid,
-    use.attributes.states.taxStatusValid,
-    use.attributes.states.taxClassValid,
     use.attributes.states.statusValid,
+    use.attributes.states.roles,
+    use.attributes.states.workDaysHours,
+    use.attributes.states.preparationTime,
+    use.attributes.states.pickupTime,
+    use.attributes.states.deliveryTime,
+    use.attributes.states.typeStart,
+    use.attributes.states.valueStart,
+    use.attributes.states.conditional,
+    use.attributes.states.typeConditional,
+    use.attributes.states.valueConditional,
   ]);
 
   React.useEffect(() => {
@@ -121,34 +101,12 @@ export const ShippingMethodsForm = ({
       );
       use.attributes.actions.changeName(currentItem.name);
       use.attributes.actions.changeDescription(currentItem.description);
-      console.log('currentItem.cost', currentItem.cost);
-      use.attributes.actions.changeCost(currentItem.cost);
-      use.attributes.actions.changeShippingTimeDays(
-        currentItem.shippingTimeDays
-      );
+      use.attributes.actions.changeCost(`${currentItem.cost}`);
 
       const type = use.attributes.states.typeOptions.find(
         (item) => item.value === currentItem.type
       ) || { value: '', label: 'Elija tipo' };
       use.attributes.actions.changeType(type);
-
-      const availableShippingServices =
-        use.attributes.states.availableShippingServicesOptions.find(
-          (item) => item.value === currentItem.availableShippingServices
-        ) || { value: '', label: 'Elija servicio de envío' };
-      use.attributes.actions.changeAvailableShippingServices(
-        availableShippingServices
-      );
-
-      const taxStatus = use.attributes.states.taxStatusOptions.find(
-        (item) => item.value === currentItem.taxStatus
-      ) || { value: '', label: 'Elija estado de impuestos' };
-      use.attributes.actions.changeTaxStatus(taxStatus);
-
-      const taxClass = use.attributes.states.taxClassOptions.find(
-        (item) => item.value === currentItem.taxClass
-      ) || { value: '', label: 'Elija clase de impuestos' };
-      use.attributes.actions.changeTaxClass(taxClass);
 
       const status = use.attributes.states.statusOptions.find(
         (item) => item.value === currentItem.status
@@ -159,23 +117,6 @@ export const ShippingMethodsForm = ({
 
   React.useEffect(() => {
     if (isAddForm) {
-      setInputAvailableShippingServices(
-        <SelectAvailableShippingServices
-          change={use.attributes.actions.changeAvailableShippingServices}
-          props={{
-            title: 'Servicios de envío disponibles',
-            options: use.attributes.states.availableShippingServicesOptions,
-            defaultValue:
-              use.attributes.states.availableShippingServicesDefault,
-            styles: {
-              width: '90%',
-            },
-            // ...nameInputProps
-          }}
-          inputId={SHIPPING_METHODS_ROUTE}
-        />
-      );
-
       setInputType(
         <SelectType
           changeType={use.attributes.actions.changeType}
@@ -183,38 +124,6 @@ export const ShippingMethodsForm = ({
             title: 'Tipo',
             options: use.attributes.states.typeOptions,
             defaultValue: use.attributes.states.typeDefault,
-            styles: {
-              width: '90%',
-            },
-            // ...nameInputProps
-          }}
-          inputId={SHIPPING_METHODS_ROUTE}
-        />
-      );
-
-      setInputTaxStatus(
-        <SelectTaxStatus
-          change={use.attributes.actions.changeTaxStatus}
-          props={{
-            title: 'Estado de impuestos',
-            options: use.attributes.states.taxStatusOptions,
-            defaultValue: use.attributes.states.taxStatusDefault,
-            styles: {
-              width: '90%',
-            },
-            // ...nameInputProps
-          }}
-          inputId={SHIPPING_METHODS_ROUTE}
-        />
-      );
-
-      setInputTaxClass(
-        <SelectTaxClass
-          change={use.attributes.actions.changeTaxClass}
-          props={{
-            title: 'Clase de impuestos',
-            options: use.attributes.states.taxClassOptions,
-            defaultValue: use.attributes.states.taxClassDefault,
             styles: {
               width: '90%',
             },
@@ -244,25 +153,6 @@ export const ShippingMethodsForm = ({
 
   React.useEffect(() => {
     if (isUpdateForm) {
-      if (use.attributes.states.availableShippingServicesDefault.value !== '') {
-        setInputAvailableShippingServices(
-          <SelectAvailableShippingServices
-            change={use.attributes.actions.changeAvailableShippingServices}
-            props={{
-              title: 'Servicios de envío disponibles',
-              options: use.attributes.states.availableShippingServicesOptions,
-              defaultValue:
-                use.attributes.states.availableShippingServicesDefault,
-              styles: {
-                width: '90%',
-              },
-              // ...nameInputProps
-            }}
-            inputId={SHIPPING_METHODS_ROUTE}
-          />
-        );
-      }
-
       if (use.attributes.states.typeDefault.value !== '') {
         setInputType(
           <SelectType
@@ -271,42 +161,6 @@ export const ShippingMethodsForm = ({
               title: 'Tipo',
               options: use.attributes.states.typeOptions,
               defaultValue: use.attributes.states.typeDefault,
-              styles: {
-                width: '90%',
-              },
-              // ...nameInputProps
-            }}
-            inputId={SHIPPING_METHODS_ROUTE}
-          />
-        );
-      }
-
-      if (use.attributes.states.taxStatusDefault.value !== '') {
-        setInputTaxStatus(
-          <SelectTaxStatus
-            change={use.attributes.actions.changeTaxStatus}
-            props={{
-              title: 'Estado de impuestos',
-              options: use.attributes.states.taxStatusOptions,
-              defaultValue: use.attributes.states.taxStatusDefault,
-              styles: {
-                width: '90%',
-              },
-              // ...nameInputProps
-            }}
-            inputId={SHIPPING_METHODS_ROUTE}
-          />
-        );
-      }
-
-      if (use.attributes.states.taxClassDefault.value !== '') {
-        setInputTaxClass(
-          <SelectTaxClass
-            change={use.attributes.actions.changeTaxClass}
-            props={{
-              title: 'Clase de impuestos',
-              options: use.attributes.states.taxClassOptions,
-              defaultValue: use.attributes.states.taxClassDefault,
               styles: {
                 width: '90%',
               },
@@ -335,13 +189,7 @@ export const ShippingMethodsForm = ({
         );
       }
     }
-  }, [
-    use.attributes.states.availableShippingServicesDefault.value,
-    use.attributes.states.typeDefault,
-    use.attributes.states.taxStatusDefault,
-    use.attributes.states.taxClassDefault,
-    use.attributes.states.statusDefault,
-  ]);
+  }, [use.attributes.states.typeDefault, use.attributes.states.statusDefault]);
 
   const title1Text = isAddForm
     ? 'Nuevo metodo de envío'
@@ -472,42 +320,6 @@ export const ShippingMethodsForm = ({
               }}
               inputId={SHIPPING_METHODS_ROUTE}
             />
-          </>
-        </ContainerButton>
-        <ContainerButton
-          styles={{
-            width: '100%',
-          }}
-          {...infoContainerProps}
-        >
-          <>
-            <InputShippingTimeDays
-              change={use.attributes.actions.changeShippingTimeDays}
-              props={{
-                inputProps: {
-                  defaultValue: use.attributes.states.shippingTimeDays,
-                  title: 'Días de envío',
-                },
-                styles: {
-                  width: '90%',
-                },
-                // ...nameInputProps
-              }}
-              inputId={SHIPPING_METHODS_ROUTE}
-            />
-
-            {inputAvailableShippingServices}
-          </>
-        </ContainerButton>
-        <ContainerButton
-          styles={{
-            width: '100%',
-          }}
-          {...infoContainerProps}
-        >
-          <>
-            {inputTaxStatus}
-            {inputTaxClass}
           </>
         </ContainerButton>
       </>

@@ -45,8 +45,6 @@ export function useGafpriShippingMethods({
   const paginations = useGafpriPaginationsShippingMethods();
   const api = useGafpriApiShippingMethods({
     token,
-    useError: error,
-    pages,
     attributes,
   });
 

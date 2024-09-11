@@ -234,6 +234,7 @@ export const ShippingAreasForm = ({
 
   const shippingMethods = currentItem?.id
     ? use.useShippingMethoods.data.actions.filterByShippingAreasId(
+        use.useShippingMethoods.data.states.items || [],
         currentItem?.id
       )
     : [];

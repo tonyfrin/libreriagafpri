@@ -26,8 +26,6 @@ function useGafpriShippingMethods(_ref) {
   var paginations = (0, _Abstract.useGafpriPaginationsShippingMethods)();
   var api = (0, _Abstract.useGafpriApiShippingMethods)({
     token: token,
-    useError: error,
-    pages: pages,
     attributes: attributes
   });
   return {

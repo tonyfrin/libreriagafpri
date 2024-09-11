@@ -29,46 +29,26 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     setInputType = _React$useState2[1];
   var _React$useState3 = _react["default"].useState( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
     _React$useState4 = (0, _slicedToArray2["default"])(_React$useState3, 2),
-    inputAvailableShippingServices = _React$useState4[0],
-    setInputAvailableShippingServices = _React$useState4[1];
-  var _React$useState5 = _react["default"].useState( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
-    _React$useState6 = (0, _slicedToArray2["default"])(_React$useState5, 2),
-    inputTaxStatus = _React$useState6[0],
-    setInputTaxStatus = _React$useState6[1];
-  var _React$useState7 = _react["default"].useState( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
-    _React$useState8 = (0, _slicedToArray2["default"])(_React$useState7, 2),
-    inputTaxClass = _React$useState8[0],
-    setInputTaxClass = _React$useState8[1];
-  var _React$useState9 = _react["default"].useState( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
-    _React$useState10 = (0, _slicedToArray2["default"])(_React$useState9, 2),
-    inputStatus = _React$useState10[0],
-    setInputStatus = _React$useState10[1];
+    inputStatus = _React$useState4[0],
+    setInputStatus = _React$useState4[1];
   var currentItem = isUpdateForm ? use.data.actions.getById(use.attributes.states.currentId) : null;
   _react["default"].useEffect(function () {
     use.attributes.actions.validationShippingAreasId(parseInt(use.attributes.states.shippingAreasId, 10));
     use.attributes.actions.validationName(use.attributes.states.name);
     use.attributes.actions.validationDescription(use.attributes.states.description);
     use.attributes.actions.validationCost(parseFloat(use.attributes.states.cost));
-    use.attributes.actions.validationShippingTimeDays(parseFloat(use.attributes.states.shippingTimeDays));
-    use.attributes.actions.validationType(use.attributes.states.type);
-    use.attributes.actions.validationAvailableShippingServices(use.attributes.states.availableShippingServices);
-    use.attributes.actions.validationTaxStatus(use.attributes.states.taxStatus);
-    use.attributes.actions.validationTaxClass(use.attributes.states.taxClass);
     use.attributes.actions.validationStatus(use.attributes.states.status);
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.shippingAreasId, use.attributes.states.name, use.attributes.states.description, use.attributes.states.cost, use.attributes.states.shippingTimeDays, use.attributes.states.type, use.attributes.states.availableShippingServices, use.attributes.states.taxStatus, use.attributes.states.taxClass, use.attributes.states.status, inputType, inputAvailableShippingServices, inputTaxStatus, inputTaxClass, inputStatus]);
-  console.log('cost', use.attributes.states.cost);
+  }, [use.attributes.states.shippingAreasId, use.attributes.states.name, use.attributes.states.description, use.attributes.states.cost, use.attributes.states.type, use.attributes.states.status, inputType, inputStatus]);
   _react["default"].useEffect(function () {
     use.attributes.actions.validationButtonNext();
-  }, [use.attributes.states.shippingAreasIdValid, use.attributes.states.nameValid, use.attributes.states.descriptionValid, use.attributes.states.costValid, use.attributes.states.shippingTimeDaysValid, use.attributes.states.typeValid, use.attributes.states.availableShippingServicesValid, use.attributes.states.taxStatusValid, use.attributes.states.taxClassValid, use.attributes.states.statusValid]);
+  }, [use.attributes.states.shippingAreasIdValid, use.attributes.states.nameValid, use.attributes.states.descriptionValid, use.attributes.states.costValid, use.attributes.states.typeValid, use.attributes.states.statusValid, use.attributes.states.roles, use.attributes.states.workDaysHours, use.attributes.states.preparationTime, use.attributes.states.pickupTime, use.attributes.states.deliveryTime, use.attributes.states.typeStart, use.attributes.states.valueStart, use.attributes.states.conditional, use.attributes.states.typeConditional, use.attributes.states.valueConditional]);
   _react["default"].useEffect(function () {
     if (isUpdateForm && currentItem) {
       use.attributes.actions.changeShippingAreasId("".concat(currentItem.shippingAreasId));
       use.attributes.actions.changeName(currentItem.name);
       use.attributes.actions.changeDescription(currentItem.description);
-      console.log('currentItem.cost', currentItem.cost);
-      use.attributes.actions.changeCost(currentItem.cost);
-      use.attributes.actions.changeShippingTimeDays(currentItem.shippingTimeDays);
+      use.attributes.actions.changeCost("".concat(currentItem.cost));
       var type = use.attributes.states.typeOptions.find(function (item) {
         return item.value === currentItem.type;
       }) || {
@@ -76,27 +56,6 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
         label: 'Elija tipo'
       };
       use.attributes.actions.changeType(type);
-      var availableShippingServices = use.attributes.states.availableShippingServicesOptions.find(function (item) {
-        return item.value === currentItem.availableShippingServices;
-      }) || {
-        value: '',
-        label: 'Elija servicio de envío'
-      };
-      use.attributes.actions.changeAvailableShippingServices(availableShippingServices);
-      var taxStatus = use.attributes.states.taxStatusOptions.find(function (item) {
-        return item.value === currentItem.taxStatus;
-      }) || {
-        value: '',
-        label: 'Elija estado de impuestos'
-      };
-      use.attributes.actions.changeTaxStatus(taxStatus);
-      var taxClass = use.attributes.states.taxClassOptions.find(function (item) {
-        return item.value === currentItem.taxClass;
-      }) || {
-        value: '',
-        label: 'Elija clase de impuestos'
-      };
-      use.attributes.actions.changeTaxClass(taxClass);
       var status = use.attributes.states.statusOptions.find(function (item) {
         return item.value === currentItem.status;
       }) || {
@@ -108,51 +67,12 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
   }, []);
   _react["default"].useEffect(function () {
     if (isAddForm) {
-      setInputAvailableShippingServices( /*#__PURE__*/_react["default"].createElement(_Input.SelectAvailableShippingServices, {
-        change: use.attributes.actions.changeAvailableShippingServices,
-        props: {
-          title: 'Servicios de envío disponibles',
-          options: use.attributes.states.availableShippingServicesOptions,
-          defaultValue: use.attributes.states.availableShippingServicesDefault,
-          styles: {
-            width: '90%'
-          }
-          // ...nameInputProps
-        },
-        inputId: _constants.SHIPPING_METHODS_ROUTE
-      }));
       setInputType( /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
         changeType: use.attributes.actions.changeType,
         props: {
           title: 'Tipo',
           options: use.attributes.states.typeOptions,
           defaultValue: use.attributes.states.typeDefault,
-          styles: {
-            width: '90%'
-          }
-          // ...nameInputProps
-        },
-        inputId: _constants.SHIPPING_METHODS_ROUTE
-      }));
-      setInputTaxStatus( /*#__PURE__*/_react["default"].createElement(_Input.SelectTaxStatus, {
-        change: use.attributes.actions.changeTaxStatus,
-        props: {
-          title: 'Estado de impuestos',
-          options: use.attributes.states.taxStatusOptions,
-          defaultValue: use.attributes.states.taxStatusDefault,
-          styles: {
-            width: '90%'
-          }
-          // ...nameInputProps
-        },
-        inputId: _constants.SHIPPING_METHODS_ROUTE
-      }));
-      setInputTaxClass( /*#__PURE__*/_react["default"].createElement(_Input.SelectTaxClass, {
-        change: use.attributes.actions.changeTaxClass,
-        props: {
-          title: 'Clase de impuestos',
-          options: use.attributes.states.taxClassOptions,
-          defaultValue: use.attributes.states.taxClassDefault,
           styles: {
             width: '90%'
           }
@@ -177,21 +97,6 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
   }, []);
   _react["default"].useEffect(function () {
     if (isUpdateForm) {
-      if (use.attributes.states.availableShippingServicesDefault.value !== '') {
-        setInputAvailableShippingServices( /*#__PURE__*/_react["default"].createElement(_Input.SelectAvailableShippingServices, {
-          change: use.attributes.actions.changeAvailableShippingServices,
-          props: {
-            title: 'Servicios de envío disponibles',
-            options: use.attributes.states.availableShippingServicesOptions,
-            defaultValue: use.attributes.states.availableShippingServicesDefault,
-            styles: {
-              width: '90%'
-            }
-            // ...nameInputProps
-          },
-          inputId: _constants.SHIPPING_METHODS_ROUTE
-        }));
-      }
       if (use.attributes.states.typeDefault.value !== '') {
         setInputType( /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
           changeType: use.attributes.actions.changeType,
@@ -199,36 +104,6 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
             title: 'Tipo',
             options: use.attributes.states.typeOptions,
             defaultValue: use.attributes.states.typeDefault,
-            styles: {
-              width: '90%'
-            }
-            // ...nameInputProps
-          },
-          inputId: _constants.SHIPPING_METHODS_ROUTE
-        }));
-      }
-      if (use.attributes.states.taxStatusDefault.value !== '') {
-        setInputTaxStatus( /*#__PURE__*/_react["default"].createElement(_Input.SelectTaxStatus, {
-          change: use.attributes.actions.changeTaxStatus,
-          props: {
-            title: 'Estado de impuestos',
-            options: use.attributes.states.taxStatusOptions,
-            defaultValue: use.attributes.states.taxStatusDefault,
-            styles: {
-              width: '90%'
-            }
-            // ...nameInputProps
-          },
-          inputId: _constants.SHIPPING_METHODS_ROUTE
-        }));
-      }
-      if (use.attributes.states.taxClassDefault.value !== '') {
-        setInputTaxClass( /*#__PURE__*/_react["default"].createElement(_Input.SelectTaxClass, {
-          change: use.attributes.actions.changeTaxClass,
-          props: {
-            title: 'Clase de impuestos',
-            options: use.attributes.states.taxClassOptions,
-            defaultValue: use.attributes.states.taxClassDefault,
             styles: {
               width: '90%'
             }
@@ -253,7 +128,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
         }));
       }
     }
-  }, [use.attributes.states.availableShippingServicesDefault.value, use.attributes.states.typeDefault, use.attributes.states.taxStatusDefault, use.attributes.states.taxClassDefault, use.attributes.states.statusDefault]);
+  }, [use.attributes.states.typeDefault, use.attributes.states.statusDefault]);
   var title1Text = isAddForm ? 'Nuevo metodo de envío' : 'Actualizar metodo de envío';
   var title2Text = isAddForm ? 'Agrega un nuevo metodo de envío' : "Actualiza la informaci\xF3n del metodo de env\xEDo #".concat(currentItem === null || currentItem === void 0 ? void 0 : currentItem.id);
   var buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
@@ -355,26 +230,5 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       }
     },
     inputId: _constants.SHIPPING_METHODS_ROUTE
-  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
-    styles: {
-      width: '100%'
-    }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.InputShippingTimeDays, {
-    change: use.attributes.actions.changeShippingTimeDays,
-    props: {
-      inputProps: {
-        defaultValue: use.attributes.states.shippingTimeDays,
-        title: 'Días de envío'
-      },
-      styles: {
-        width: '90%'
-      }
-      // ...nameInputProps
-    },
-    inputId: _constants.SHIPPING_METHODS_ROUTE
-  }), inputAvailableShippingServices)), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
-    styles: {
-      width: '100%'
-    }
-  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, inputTaxStatus, inputTaxClass))));
+  })))));
 };

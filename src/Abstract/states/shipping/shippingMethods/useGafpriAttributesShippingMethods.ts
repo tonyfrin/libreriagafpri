@@ -4,10 +4,6 @@ import { SelectDefault } from '../../../../helpers';
 import {
   generalValidationCost,
   generalValidationShippingAreasId,
-  generalValidationShippingTimeDays,
-  generalValidationAvailableShippingServices,
-  generalValidationTaxStatus,
-  generalValidationTaxClass,
   generalValidationStatus,
   generalValidationType,
   generalValidationButtonNext,
@@ -18,10 +14,6 @@ import {
   generalChangeName,
   generalChangeShippingAreas,
   generalChangeCost,
-  generalChangeShippingTimeDays,
-  generalChangeAvailableShippingServices,
-  generalChangeTaxStatus,
-  generalChangeTaxClass,
   generalChangeDescription,
   generalChangeStatus,
   generalChangeType,
@@ -29,12 +21,8 @@ import {
 import {
   OPTIONS_SHIPPING_METHODS_TYPE,
   OPTIONS_SHIPPING_METHODS_TYPE_DEFAULT,
-  OPTIONS_SHIPPING_SERVICES,
-  OPTIONS_SHIPPING_SERVICES_DEFAULT,
   OPTIONS_SHIPPING_METHODS_STATUS,
   OPTIONS_SHIPPING_METHODS_STATUS_DEFAULT,
-  TAX_STATUS,
-  TAX_STATUS_DEFAULT,
   SHIPPING_METHODS_ROUTE,
 } from '../../../../constants';
 
@@ -56,28 +44,24 @@ type State = {
   typeDefault: SelectDefault;
   typeOptions: SelectDefault[];
 
-  shippingTimeDays: string;
-  shippingTimeDaysValid: boolean;
-
-  availableShippingServices: string;
-  availableShippingServicesValid: boolean;
-  availableShippingServicesDefault: SelectDefault;
-  availableShippingServicesOptions: SelectDefault[];
-
-  taxStatus: string;
-  taxStatusValid: boolean;
-  taxStatusDefault: SelectDefault;
-  taxStatusOptions: SelectDefault[];
-
-  taxClass: string;
-  taxClassValid: boolean;
-  taxClassDefault: SelectDefault;
-  taxClassOptions: SelectDefault[];
-
   status: string;
   statusValid: boolean;
   statusDefault: SelectDefault;
   statusOptions: SelectDefault[];
+
+  roles: number[];
+  workDaysHours: Record<number, string>;
+  preparationTime: string;
+  pickupTime: string;
+  deliveryTime: string;
+  typeStart: string;
+  valueStart: string;
+  conditional: boolean;
+
+  typeConditional?: string;
+  typeConditionalOptions: { label: string; value: string }[];
+
+  valueConditional?: string;
 
   currentId: number;
 };
@@ -90,10 +74,6 @@ type Actions = {
   validationDescription: (value: string) => boolean;
   validationCost: (value: number) => boolean;
   validationType: (value: string) => boolean;
-  validationShippingTimeDays: (value: number) => boolean;
-  validationAvailableShippingServices: (value: string) => boolean;
-  validationTaxStatus: (value: string) => boolean;
-  validationTaxClass: (value: string) => boolean;
   validationStatus: (value: string) => boolean;
   validationButtonNext: () => void;
 
@@ -102,18 +82,23 @@ type Actions = {
   changeDescription: (value: string) => void;
   changeCost: (value: string) => void;
   changeType: (options: SingleValue<{ value: string; label: string }>) => void;
-  changeShippingTimeDays: (value: string) => void;
-  changeAvailableShippingServices: (
-    options: SingleValue<{ value: string; label: string }>
-  ) => void;
-  changeTaxStatus: (
-    options: SingleValue<{ value: string; label: string }>
-  ) => void;
-  changeTaxClass: (
-    options: SingleValue<{ value: string; label: string }>
-  ) => void;
   changeStatus: (
     options: SingleValue<{ value: string; label: string }>
+  ) => void;
+
+  setRoles: (value: number[]) => void;
+  setWorkDaysHours: (value: Record<number, string>) => void;
+  setPreparationTime: (value: string) => void;
+  setPickupTime: (value: string) => void;
+  setDeliveryTime: (value: string) => void;
+  setTypeStart: (value: string) => void;
+  setValueStart: (value: string) => void;
+  changeConditional: (value: boolean) => void;
+  changeTypeConditional: (
+    option: SingleValue<{ value: string; label: string }>
+  ) => void;
+  changeValueConditional: (
+    option: SingleValue<{ value: string; label: string }>
   ) => void;
 
   setCurrentId: (value: number) => void;
@@ -144,37 +129,6 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
   );
   const typeOptions: SelectDefault[] = OPTIONS_SHIPPING_METHODS_TYPE;
 
-  const [shippingTimeDays, setShippingTimeDays] = useState('');
-  const [shippingTimeDaysValid, setShippingTimeDaysValid] = useState(false);
-
-  const [availableShippingServices, setAvailableShippingServices] =
-    useState('');
-  const [availableShippingServicesValid, setAvailableShippingServicesValid] =
-    useState(false);
-  const [
-    availableShippingServicesDefault,
-    setAvailableShippingServicesDefault,
-  ] = useState<SelectDefault>(OPTIONS_SHIPPING_SERVICES_DEFAULT);
-  const availableShippingServicesOptions: SelectDefault[] =
-    OPTIONS_SHIPPING_SERVICES;
-
-  const [taxStatus, setTaxStatus] = useState('');
-  const [taxStatusValid, setTaxStatusValid] = useState(false);
-  const [taxStatusDefault, setTaxStatusDefault] =
-    useState<SelectDefault>(TAX_STATUS_DEFAULT);
-  const [taxStatusOptions, setTaxStatusOptions] =
-    useState<SelectDefault[]>(TAX_STATUS);
-
-  const [taxClass, setTaxClass] = useState('');
-  const [taxClassValid, setTaxClassValid] = useState(false);
-  const [taxClassDefault, setTaxClassDefault] = useState<SelectDefault>({
-    label: '',
-    value: '',
-  });
-  const taxClassOptions: SelectDefault[] = [
-    { label: 'prueba', value: 'Prueba' },
-  ];
-
   const [status, setStatus] = useState(
     OPTIONS_SHIPPING_METHODS_STATUS_DEFAULT.value
   );
@@ -183,6 +137,36 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     OPTIONS_SHIPPING_METHODS_STATUS_DEFAULT
   );
   const statusOptions: SelectDefault[] = OPTIONS_SHIPPING_METHODS_STATUS;
+
+  const [roles, setRoles] = useState<number[]>([]);
+
+  const [workDaysHours, setWorkDaysHours] = useState<Record<number, string>>(
+    {}
+  );
+
+  const [preparationTime, setPreparationTime] = useState<string>('');
+
+  const [pickupTime, setPickupTime] = useState<string>('');
+
+  const [deliveryTime, setDeliveryTime] = useState<string>('');
+
+  const [typeStart, setTypeStart] = useState<string>('');
+
+  const [valueStart, setValueStart] = useState<string>('');
+
+  const [conditional, setConditional] = useState(false);
+
+  const [typeConditional, setTypeConditional] = useState<string | undefined>(
+    undefined
+  );
+  const typeConditionalOptions: { label: string; value: string }[] = [
+    { label: 'Valor de pedido', value: 'total_order' },
+    { label: 'Cantidad de productos', value: 'total_qty' },
+  ];
+
+  const [valueConditional, setValueConditional] = useState<string | undefined>(
+    undefined
+  );
 
   const [currentId, setCurrentId] = useState(0);
 
@@ -198,21 +182,21 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     setType('');
     setTypeValid(false);
     setTypeDefault(OPTIONS_SHIPPING_METHODS_TYPE_DEFAULT);
-    setShippingTimeDays('');
-    setShippingTimeDaysValid(false);
-    setAvailableShippingServices('');
-    setAvailableShippingServicesValid(false);
-    setAvailableShippingServicesDefault(OPTIONS_SHIPPING_SERVICES_DEFAULT);
-    setTaxStatus('');
-    setTaxStatusValid(false);
-    setTaxStatusDefault(TAX_STATUS_DEFAULT);
-    setTaxStatusOptions(TAX_STATUS);
-    setTaxClass('');
-    setTaxClassValid(false);
     setStatus(OPTIONS_SHIPPING_METHODS_STATUS_DEFAULT.value);
     setStatusValid(true);
     setStatusDefault(OPTIONS_SHIPPING_METHODS_STATUS_DEFAULT);
     setCurrentId(0);
+
+    setRoles([]);
+    setWorkDaysHours({});
+    setPreparationTime('');
+    setPickupTime('');
+    setDeliveryTime('');
+    setTypeStart('');
+    setValueStart('');
+    setConditional(false);
+    setTypeConditional(undefined);
+    setValueConditional(undefined);
   };
 
   // Funciones de Validacion
@@ -265,43 +249,6 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     });
   };
 
-  const validationShippingTimeDays = (value: number): boolean => {
-    return generalValidationShippingTimeDays({
-      value,
-      setValid: setShippingTimeDaysValid,
-      currentValid: shippingTimeDaysValid,
-      required: true,
-      inputId: SHIPPING_METHODS_ROUTE,
-    });
-  };
-
-  const validationAvailableShippingServices = (value: string): boolean => {
-    return generalValidationAvailableShippingServices({
-      newValue: value,
-      setValid: setAvailableShippingServicesValid,
-      currentValid: availableShippingServicesValid,
-      inputId: SHIPPING_METHODS_ROUTE,
-    });
-  };
-
-  const validationTaxStatus = (value: string): boolean => {
-    return generalValidationTaxStatus({
-      newValue: value,
-      setValid: setTaxStatusValid,
-      currentValid: taxStatusValid,
-      inputId: SHIPPING_METHODS_ROUTE,
-    });
-  };
-
-  const validationTaxClass = (value: string): boolean => {
-    return generalValidationTaxClass({
-      newValue: value,
-      setValid: setTaxClassValid,
-      currentValid: taxClassValid,
-      inputId: SHIPPING_METHODS_ROUTE,
-    });
-  };
-
   const validationStatus = (value: string): boolean => {
     return generalValidationStatus({
       value,
@@ -311,6 +258,10 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     });
   };
 
+  const validationWorkDaysHours = (): boolean => {
+    return Object.keys(workDaysHours).length > 0;
+  };
+
   const validationButtonNext = (): void => {
     generalValidationButtonNext({
       validations: [
@@ -318,11 +269,19 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
         descriptionValid,
         costValid,
         typeValid,
-        shippingTimeDaysValid,
-        availableShippingServicesValid,
-        taxStatusValid,
-        taxClassValid,
         statusValid,
+        roles.length > 0,
+        validationWorkDaysHours(),
+        parseInt(preparationTime, 10) > 0,
+        parseInt(pickupTime, 10) > 0,
+        parseInt(deliveryTime, 10) > 0,
+        typeStart !== '',
+        valueStart !== '',
+        !conditional ||
+          (typeConditional !== undefined &&
+            typeConditional !== '' &&
+            valueConditional !== undefined &&
+            valueConditional !== ''),
       ],
       inputId: SHIPPING_METHODS_ROUTE,
     });
@@ -373,47 +332,6 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     });
   };
 
-  const changeShippingTimeDays = (value: string): void => {
-    generalChangeShippingTimeDays({
-      value,
-      validation: validationShippingTimeDays,
-      setValue: setShippingTimeDays,
-    });
-  };
-
-  const changeAvailableShippingServices = (
-    options: SingleValue<{ value: string; label: string }>
-  ): void => {
-    generalChangeAvailableShippingServices({
-      newValue: options,
-      validation: validationAvailableShippingServices,
-      setDefault: setAvailableShippingServicesDefault,
-      setValue: setAvailableShippingServices,
-    });
-  };
-
-  const changeTaxStatus = (
-    options: SingleValue<{ value: string; label: string }>
-  ): void => {
-    generalChangeTaxStatus({
-      options,
-      validation: validationTaxStatus,
-      setDefault: setTaxStatusDefault,
-      setValue: setTaxStatus,
-    });
-  };
-
-  const changeTaxClass = (
-    options: SingleValue<{ value: string; label: string }>
-  ): void => {
-    generalChangeTaxClass({
-      options,
-      validation: validationTaxClass,
-      setDefault: setTaxClassDefault,
-      setValue: setTaxClass,
-    });
-  };
-
   const changeStatus = (
     options: SingleValue<{ value: string; label: string }>
   ): void => {
@@ -423,6 +341,30 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
       setDefault: setStatusDefault,
       setValue: setStatus,
     });
+  };
+
+  const changeConditional = (value: boolean): void => {
+    setConditional(value);
+    if (!value) {
+      setTypeConditional(undefined);
+      setValueConditional(undefined);
+    }
+  };
+
+  const changeTypeConditional = (
+    option: SingleValue<{ value: string; label: string }>
+  ): void => {
+    if (option) {
+      setTypeConditional(option.value);
+    }
+  };
+
+  const changeValueConditional = (
+    option: SingleValue<{ value: string; label: string }>
+  ): void => {
+    if (option) {
+      setValueConditional(option.value);
+    }
   };
 
   /**
@@ -448,28 +390,22 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     typeDefault,
     typeOptions,
 
-    shippingTimeDays,
-    shippingTimeDaysValid,
-
-    availableShippingServices,
-    availableShippingServicesValid,
-    availableShippingServicesDefault,
-    availableShippingServicesOptions,
-
-    taxStatus,
-    taxStatusValid,
-    taxStatusDefault,
-    taxStatusOptions,
-
-    taxClass,
-    taxClassValid,
-    taxClassDefault,
-    taxClassOptions,
-
     status,
     statusValid,
     statusDefault,
     statusOptions,
+
+    roles,
+    workDaysHours,
+    preparationTime,
+    pickupTime,
+    deliveryTime,
+    typeStart,
+    valueStart,
+    conditional,
+    typeConditional,
+    typeConditionalOptions,
+    valueConditional,
 
     currentId,
   };
@@ -482,10 +418,6 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     validationDescription,
     validationCost,
     validationType,
-    validationShippingTimeDays,
-    validationAvailableShippingServices,
-    validationTaxStatus,
-    validationTaxClass,
     validationStatus,
     validationButtonNext,
 
@@ -494,11 +426,18 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     changeDescription,
     changeCost,
     changeType,
-    changeShippingTimeDays,
-    changeAvailableShippingServices,
-    changeTaxStatus,
-    changeTaxClass,
     changeStatus,
+
+    setRoles,
+    setWorkDaysHours,
+    setPreparationTime,
+    setPickupTime,
+    setDeliveryTime,
+    setTypeStart,
+    setValueStart,
+    changeConditional,
+    changeTypeConditional,
+    changeValueConditional,
 
     setCurrentId,
   };
