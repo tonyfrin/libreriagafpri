@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { SingleValue } from 'react-select';
 import { css, cx } from '@emotion/css';
 import {
@@ -94,6 +94,41 @@ const closeButtonStyles = css`
   padding: 2px 5px 4px 5px;
   font-size: 8px;
 `;
+
+const mainContainerStyle = css`
+  margin-bottom: 1rem;
+`;
+
+const titleContainerStyle = css`
+  transition: all 1s ease 0s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: rgb(38, 35, 33);
+  display: table-cell;
+  width: auto;
+  padding-bottom: 20px;
+  vertical-align: middle;
+  line-height: 1.25rem;
+`;
+
+const checkBoxContainerStyle = css`
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+`;
+
+const nameStyle = css`
+  margin-left: 0.25rem;
+`;
+
+const infoContainerStyle = css`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 45px;
+`;
+
+const checkBoxStyle = css``;
 
 export const ShippingMethodsForm = ({
   use,
@@ -315,6 +350,14 @@ export const ShippingMethodsForm = ({
     { label: 'Domingo', value: '7' },
   ];
 
+  const optionsTypeStart: {
+    value: string;
+    label: string;
+  }[] = [
+    { label: 'Al instante', value: 'immediate' },
+    { label: 'Personalizado', value: 'custom' },
+  ];
+
   const getLabelByValue = (value: string) => {
     const option = optionsRoles.find((option) => option.value === value);
     return option ? option.label : 'Etiqueta no encontrada';
@@ -350,6 +393,20 @@ export const ShippingMethodsForm = ({
     if (options) {
       setWorkDay(options.value);
     }
+  };
+
+  const changeTypeStart = (
+    options: SingleValue<{ value: string; label: string }>
+  ): void => {
+    if (options) {
+      use.attributes.actions.setTypeStart(options.value);
+    }
+  };
+
+  const handlePermissionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    use.attributes.actions.changeConditional(
+      !use.attributes.states.conditional
+    );
   };
 
   return (
@@ -633,6 +690,169 @@ export const ShippingMethodsForm = ({
             </div>
           </>
         </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+          }}
+          {...infoContainerProps}
+        >
+          <>
+            <Input
+              inputProps={{
+                type: 'number',
+                min: '1',
+                title: 'Tiempo de preparación',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  use.attributes.actions.setPreparationTime(
+                    event.currentTarget.value
+                  ),
+              }}
+              containerStyles={{
+                width: '30%',
+                margin: '0px 10px 0px 0px',
+              }}
+            />
+            <Input
+              inputProps={{
+                type: 'number',
+                min: '1',
+                title: 'Tiempo de recogida',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  use.attributes.actions.setPickupTime(
+                    event.currentTarget.value
+                  ),
+              }}
+              containerStyles={{
+                width: '30%',
+                margin: '0px 10px 0px 0px',
+              }}
+            />
+            <Input
+              inputProps={{
+                type: 'number',
+                min: '1',
+                max: '23',
+                title: 'Tiempo de entrega',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  use.attributes.actions.setPickupTime(
+                    event.currentTarget.value
+                  ),
+              }}
+              containerStyles={{
+                width: '30%',
+                margin: '0px 10px 0px 0px',
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+            custom: `
+              align-items: center;
+              margin: 10px 0px;
+            `,
+          }}
+          {...infoContainerProps}
+        >
+          <>
+            <SelectType
+              changeType={changeTypeStart}
+              props={{
+                title: 'Tipo de inicio',
+                options: optionsTypeStart,
+                styles: {
+                  width: '90%',
+                },
+                containerStyles: {
+                  width: '70%',
+                },
+              }}
+            />
+            <Input
+              inputProps={{
+                type: 'text',
+                title: 'Valor de inicio',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  use.attributes.actions.setValueStart(
+                    event.currentTarget.value
+                  ),
+              }}
+              containerStyles={{
+                width: '90%',
+                margin: '0px 10px 0px 0px',
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+        >
+          <>
+            <div className={css(mainContainerStyle)}>
+              <div className={css(titleContainerStyle)}>
+                {'¿Tiene otra condicional?'}
+              </div>
+              <div className={css(infoContainerStyle)}>
+                <label className={css(checkBoxContainerStyle)}>
+                  <input
+                    type="checkbox"
+                    onChange={handlePermissionChange}
+                    checked={use.attributes.states.conditional}
+                    className={css(checkBoxStyle)}
+                  />
+                  <span className={css(nameStyle)}>{'Si'}</span>
+                </label>
+              </div>
+            </div>
+          </>
+        </ContainerButton>
+        {use.attributes.states.conditional && (
+          <ContainerButton
+            styles={{
+              width: '96.5%',
+            }}
+          >
+            <>
+              <SelectType
+                changeType={use.attributes.actions.changeTypeConditional}
+                props={{
+                  title: 'Tipo de condicional',
+                  options: use.attributes.states.typeConditionalOptions,
+                  styles: {
+                    width: '85%',
+                  },
+                }}
+              />
+            </>
+          </ContainerButton>
+        )}
+        {use.attributes.states.typeConditional !== undefined && (
+          <ContainerButton
+            styles={{
+              width: '96.5%',
+            }}
+          >
+            <>
+              <Input
+                inputProps={{
+                  type: 'text',
+                  title: 'Valor de la condicional',
+                  onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                    use.attributes.actions.changeValueConditional(
+                      event.currentTarget.value
+                    ),
+                }}
+                containerStyles={{
+                  width: '90%',
+                  margin: '0px 10px 0px 0px',
+                }}
+              />
+            </>
+          </ContainerButton>
+        )}
       </>
     </ModelForm>
   );

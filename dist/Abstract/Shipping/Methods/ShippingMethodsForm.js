@@ -17,7 +17,7 @@ var _Input = require("../../Input");
 var _constants = require("../../../constants");
 var _Button = require("../../Button");
 var _helpers = require("../../../helpers");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var regionsContainerStyles = (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin: 0px 10px;\n  padding: 15px 0px;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  width: 91%;\n"])));
@@ -26,6 +26,12 @@ var regionItemStyles = (0, _css.css)(_templateObject3 || (_templateObject3 = (0,
 var regionContainerStyles = (0, _css.css)(_templateObject4 || (_templateObject4 = (0, _taggedTemplateLiteral2["default"])(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  margin-right: 5px;\n  margin-bottom: 5px;\n"])));
 var regionButtonStyles = (0, _css.css)(_templateObject5 || (_templateObject5 = (0, _taggedTemplateLiteral2["default"])(["\n  margin-right: 8px;\n  padding: 8px;\n  color: #8d8d8d;\n  border-radius: 4px;\n  border: 1px solid #dfdbdb;\n"])));
 var closeButtonStyles = (0, _css.css)(_templateObject6 || (_templateObject6 = (0, _taggedTemplateLiteral2["default"])(["\n  position: absolute;\n  top: 0px;\n  transform: translateY(-50%);\n  right: 0px;\n  cursor: pointer;\n  color: #fff;\n  background-color: #f44336;\n  border-radius: 100%;\n  padding: 2px 5px 4px 5px;\n  font-size: 8px;\n"])));
+var mainContainerStyle = (0, _css.css)(_templateObject7 || (_templateObject7 = (0, _taggedTemplateLiteral2["default"])(["\n  margin-bottom: 1rem;\n"])));
+var titleContainerStyle = (0, _css.css)(_templateObject8 || (_templateObject8 = (0, _taggedTemplateLiteral2["default"])(["\n  transition: all 1s ease 0s;\n  font-family: 'Poppins', sans-serif;\n  font-weight: 700;\n  font-size: 1rem;\n  color: rgb(38, 35, 33);\n  display: table-cell;\n  width: auto;\n  padding-bottom: 20px;\n  vertical-align: middle;\n  line-height: 1.25rem;\n"])));
+var checkBoxContainerStyle = (0, _css.css)(_templateObject9 || (_templateObject9 = (0, _taggedTemplateLiteral2["default"])(["\n  display: inline-flex;\n  align-items: center;\n  margin-right: 1rem;\n"])));
+var nameStyle = (0, _css.css)(_templateObject10 || (_templateObject10 = (0, _taggedTemplateLiteral2["default"])(["\n  margin-left: 0.25rem;\n"])));
+var infoContainerStyle = (0, _css.css)(_templateObject11 || (_templateObject11 = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  justify-content: space-around;\n  margin-bottom: 45px;\n"])));
+var checkBoxStyle = (0, _css.css)(_templateObject12 || (_templateObject12 = (0, _taggedTemplateLiteral2["default"])([""])));
 var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethodsForm(_ref) {
   var _useRoles$states$role;
   var use = _ref.use,
@@ -203,6 +209,13 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     label: 'Domingo',
     value: '7'
   }];
+  var optionsTypeStart = [{
+    label: 'Al instante',
+    value: 'immediate'
+  }, {
+    label: 'Personalizado',
+    value: 'custom'
+  }];
   var getLabelByValue = function getLabelByValue(value) {
     var option = optionsRoles.find(function (option) {
       return option.value === value;
@@ -232,6 +245,14 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     if (options) {
       setWorkDay(options.value);
     }
+  };
+  var changeTypeStart = function changeTypeStart(options) {
+    if (options) {
+      use.attributes.actions.setTypeStart(options.value);
+    }
+  };
+  var handlePermissionChange = function handlePermissionChange(event) {
+    use.attributes.actions.changeConditional(!use.attributes.states.conditional);
   };
   return /*#__PURE__*/_react["default"].createElement(_Form.ModelForm, (0, _extends2["default"])({
     boxProps: {
@@ -440,5 +461,126 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       key: "button-states-countries-".concat(item),
       className: (0, _css.cx)(regionButtonStyles)
     }, item.hoursString)));
-  })))))));
+  }))))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '100%'
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'number',
+      min: '1',
+      title: 'Tiempo de preparación',
+      onKeyUp: function onKeyUp(event) {
+        return use.attributes.actions.setPreparationTime(event.currentTarget.value);
+      }
+    },
+    containerStyles: {
+      width: '30%',
+      margin: '0px 10px 0px 0px'
+    }
+  }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'number',
+      min: '1',
+      title: 'Tiempo de recogida',
+      onKeyUp: function onKeyUp(event) {
+        return use.attributes.actions.setPickupTime(event.currentTarget.value);
+      }
+    },
+    containerStyles: {
+      width: '30%',
+      margin: '0px 10px 0px 0px'
+    }
+  }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'number',
+      min: '1',
+      max: '23',
+      title: 'Tiempo de entrega',
+      onKeyUp: function onKeyUp(event) {
+        return use.attributes.actions.setPickupTime(event.currentTarget.value);
+      }
+    },
+    containerStyles: {
+      width: '30%',
+      margin: '0px 10px 0px 0px'
+    }
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+    styles: {
+      width: '100%',
+      custom: "\n              align-items: center;\n              margin: 10px 0px;\n            "
+    }
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
+    changeType: changeTypeStart,
+    props: {
+      title: 'Tipo de inicio',
+      options: optionsTypeStart,
+      styles: {
+        width: '90%'
+      },
+      containerStyles: {
+        width: '70%'
+      }
+    }
+  }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'text',
+      title: 'Valor de inicio',
+      onKeyUp: function onKeyUp(event) {
+        return use.attributes.actions.setValueStart(event.currentTarget.value);
+      }
+    },
+    containerStyles: {
+      width: '90%',
+      margin: '0px 10px 0px 0px'
+    }
+  }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '96.5%'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.css)(mainContainerStyle)
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.css)(titleContainerStyle)
+  }, '¿Tiene otra condicional?'), /*#__PURE__*/_react["default"].createElement("div", {
+    className: (0, _css.css)(infoContainerStyle)
+  }, /*#__PURE__*/_react["default"].createElement("label", {
+    className: (0, _css.css)(checkBoxContainerStyle)
+  }, /*#__PURE__*/_react["default"].createElement("input", {
+    type: "checkbox",
+    onChange: handlePermissionChange,
+    checked: use.attributes.states.conditional,
+    className: (0, _css.css)(checkBoxStyle)
+  }), /*#__PURE__*/_react["default"].createElement("span", {
+    className: (0, _css.css)(nameStyle)
+  }, 'Si')))))), use.attributes.states.conditional && /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '96.5%'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
+    changeType: use.attributes.actions.changeTypeConditional,
+    props: {
+      title: 'Tipo de condicional',
+      options: use.attributes.states.typeConditionalOptions,
+      styles: {
+        width: '85%'
+      }
+    }
+  }))), use.attributes.states.typeConditional !== undefined && /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+    styles: {
+      width: '96.5%'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+    inputProps: {
+      type: 'text',
+      title: 'Valor de la condicional',
+      onKeyUp: function onKeyUp(event) {
+        return use.attributes.actions.changeValueConditional(event.currentTarget.value);
+      }
+    },
+    containerStyles: {
+      width: '90%',
+      margin: '0px 10px 0px 0px'
+    }
+  })))));
 };

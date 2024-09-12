@@ -97,9 +97,7 @@ type Actions = {
   changeTypeConditional: (
     option: SingleValue<{ value: string; label: string }>
   ) => void;
-  changeValueConditional: (
-    option: SingleValue<{ value: string; label: string }>
-  ) => void;
+  changeValueConditional: (value: string) => void;
 
   setCurrentId: (value: number) => void;
   pushRole: (value: string) => void;
@@ -394,12 +392,8 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     }
   };
 
-  const changeValueConditional = (
-    option: SingleValue<{ value: string; label: string }>
-  ): void => {
-    if (option) {
-      setValueConditional(option.value);
-    }
+  const changeValueConditional = (value: string): void => {
+    setValueConditional(value);
   };
 
   /**

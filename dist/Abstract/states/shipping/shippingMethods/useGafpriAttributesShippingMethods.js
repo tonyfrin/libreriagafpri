@@ -305,10 +305,8 @@ function useGafpriAttributesShippingMethods() {
       setTypeConditional(option.value);
     }
   };
-  var changeValueConditional = function changeValueConditional(option) {
-    if (option) {
-      setValueConditional(option.value);
-    }
+  var changeValueConditional = function changeValueConditional(value) {
+    setValueConditional(value);
   };
 
   /**
