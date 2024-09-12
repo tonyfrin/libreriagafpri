@@ -241,10 +241,11 @@ function useGafpriAttributesShippingMethods() {
     return Object.keys(workDaysHours).length > 0;
   };
   var validationButtonNext = function validationButtonNext() {
-    (0, _Validations.generalValidationButtonNext)({
+    var valid = (0, _Validations.generalValidationButtonNext)({
       validations: [nameValid, descriptionValid, costValid, typeValid, statusValid, roles.length > 0, validationWorkDaysHours(), parseInt(preparationTime, 10) > 0, parseInt(pickupTime, 10) > 0, parseInt(deliveryTime, 10) > 0, typeStart !== '', valueStart !== '', !conditional || typeConditional !== undefined && typeConditional !== '' && valueConditional !== undefined && valueConditional !== ''],
       inputId: _constants.SHIPPING_METHODS_ROUTE
     });
+    return valid;
   };
 
   // Funciones de cambios

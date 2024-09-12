@@ -75,7 +75,7 @@ type Actions = {
   validationCost: (value: number) => boolean;
   validationType: (value: string) => boolean;
   validationStatus: (value: string) => boolean;
-  validationButtonNext: () => void;
+  validationButtonNext: () => boolean;
 
   changeShippingAreasId: (value: string) => void;
   changeName: (value: string) => void;
@@ -295,8 +295,8 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
     return Object.keys(workDaysHours).length > 0;
   };
 
-  const validationButtonNext = (): void => {
-    generalValidationButtonNext({
+  const validationButtonNext = (): boolean => {
+    const valid = generalValidationButtonNext({
       validations: [
         nameValid,
         descriptionValid,
@@ -318,6 +318,7 @@ export function useGafpriAttributesShippingMethods(): UseGafpriAttributesShippin
       ],
       inputId: SHIPPING_METHODS_ROUTE,
     });
+    return valid;
   };
 
   // Funciones de cambios

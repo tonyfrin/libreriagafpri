@@ -5,8 +5,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ShippingMethodsForm = void 0;
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 var _react = _interopRequireDefault(require("react"));
@@ -222,8 +224,48 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     });
     return option ? option.label : 'Etiqueta no encontrada';
   };
+  var add = /*#__PURE__*/function () {
+    var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var data;
+      return _regenerator["default"].wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (!use.attributes.actions.validationButtonNext()) {
+              _context.next = 13;
+              break;
+            }
+            _context.prev = 1;
+            use.pages.actions.onFetching();
+            _context.next = 5;
+            return use.api.actions.add();
+          case 5:
+            data = _context.sent;
+            if (data.success) {
+              use.data.actions.handleNewItem(data.item);
+              use.pages.actions.onInit();
+            } else {
+              use.error.actions.changeError([data.message]);
+              use.pages.actions.onAdd();
+            }
+            _context.next = 13;
+            break;
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](1);
+            use.error.actions.changeError(["".concat(_context.t0)]);
+            use.pages.actions.onAdd();
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+    return function add() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
   var buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  var buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
+  var buttonAction = isAddForm ? add : use.api.actions.update;
   var handleActions = function handleActions(action, value) {
     switch (action) {
       case 'submit':
@@ -503,7 +545,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       max: '23',
       title: 'Tiempo de entrega',
       onKeyUp: function onKeyUp(event) {
-        return use.attributes.actions.setPickupTime(event.currentTarget.value);
+        return use.attributes.actions.setDeliveryTime(event.currentTarget.value);
       }
     },
     containerStyles: {

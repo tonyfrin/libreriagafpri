@@ -360,8 +360,27 @@ export const ShippingMethodsForm = ({
     return option ? option.label : 'Etiqueta no encontrada';
   };
 
+  const add = async (): Promise<void> => {
+    if (use.attributes.actions.validationButtonNext()) {
+      try {
+        use.pages.actions.onFetching();
+        const data = await use.api.actions.add();
+        if (data.success) {
+          use.data.actions.handleNewItem(data.item);
+          use.pages.actions.onInit();
+        } else {
+          use.error.actions.changeError([data.message]);
+          use.pages.actions.onAdd();
+        }
+      } catch (error) {
+        use.error.actions.changeError([`${error}`]);
+        use.pages.actions.onAdd();
+      }
+    }
+  };
+
   const buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  const buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
+  const buttonAction = isAddForm ? add : use.api.actions.update;
 
   const handleActions = (action: string, value: any) => {
     switch (action) {
@@ -743,7 +762,7 @@ export const ShippingMethodsForm = ({
                 max: '23',
                 title: 'Tiempo de entrega',
                 onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
-                  use.attributes.actions.setPickupTime(
+                  use.attributes.actions.setDeliveryTime(
                     event.currentTarget.value
                   ),
               }}
