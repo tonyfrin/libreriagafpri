@@ -368,7 +368,10 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       title: 'Día',
       options: optionsWorkDays,
       styles: {
-        width: '50%'
+        width: '90%'
+      },
+      containerStyles: {
+        width: '70%'
       }
     }
   }), /*#__PURE__*/_react["default"].createElement(_Input.Input, {
@@ -431,7 +434,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       key: "x-states-countries-".concat(item),
       className: (0, _css.cx)(closeButtonStyles),
       onClick: function onClick() {
-        return use.attributes.actions.removeRole(item.day);
+        return use.attributes.actions.removeWorkDayHour(item.day);
       }
     }, "x"), /*#__PURE__*/_react["default"].createElement("button", {
       key: "button-states-countries-".concat(item),

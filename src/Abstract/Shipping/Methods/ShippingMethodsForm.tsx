@@ -537,7 +537,10 @@ export const ShippingMethodsForm = ({
                 title: 'Día',
                 options: optionsWorkDays,
                 styles: {
-                  width: '50%',
+                  width: '90%',
+                },
+                containerStyles: {
+                  width: '70%',
                 },
               }}
             />
@@ -610,7 +613,7 @@ export const ShippingMethodsForm = ({
                             key={`x-states-countries-${item}`}
                             className={cx(closeButtonStyles)}
                             onClick={() =>
-                              use.attributes.actions.removeRole(item.day)
+                              use.attributes.actions.removeWorkDayHour(item.day)
                             }
                           >
                             x
