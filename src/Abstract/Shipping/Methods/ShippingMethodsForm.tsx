@@ -379,8 +379,27 @@ export const ShippingMethodsForm = ({
     }
   };
 
+  const update = async (): Promise<void> => {
+    if (use.attributes.actions.validationButtonNext()) {
+      try {
+        use.pages.actions.onFetching();
+        const data = await use.api.actions.update();
+        if (data.success) {
+          use.data.actions.handleUpdated(data.item);
+          use.pages.actions.onInit();
+        } else {
+          use.error.actions.changeError([data.message]);
+          use.pages.actions.onUpdate();
+        }
+      } catch (error) {
+        use.error.actions.changeError([`${error}`]);
+        use.pages.actions.onUpdate();
+      }
+    }
+  };
+
   const buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  const buttonAction = isAddForm ? add : use.api.actions.update;
+  const buttonAction = isAddForm ? add : update;
 
   const handleActions = (action: string, value: any) => {
     switch (action) {

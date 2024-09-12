@@ -154,8 +154,47 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
     use.useShippingMethoods.pages.actions.goUpdate(id);
     use.pages.actions.openModalPage();
   };
-  var ButtonActionsShippingMethods = function ButtonActionsShippingMethods(_ref3) {
-    var id = _ref3.id;
+  var eraseShippingMethoods = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(id) {
+      var action, data;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            action = isAddForm ? use.pages.actions.onAdd : use.pages.actions.onUpdate;
+            _context2.prev = 1;
+            use.pages.actions.onFetching();
+            _context2.next = 5;
+            return use.useShippingMethoods.api.actions.erase(id);
+          case 5:
+            data = _context2.sent;
+            if (data.success) {
+              use.useShippingMethoods.data.actions.handleDeleted({
+                itemId: id
+              });
+              action();
+            } else {
+              use.error.actions.changeError([data.message]);
+              action();
+            }
+            _context2.next = 13;
+            break;
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](1);
+            use.error.actions.changeError(["".concat(_context2.t0)]);
+            action();
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[1, 9]]);
+    }));
+    return function eraseShippingMethoods(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  var ButtonActionsShippingMethods = function ButtonActionsShippingMethods(_ref4) {
+    var id = _ref4.id;
     return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
       className: (0, _css.css)(containerButtonsStyles)
     }, /*#__PURE__*/_react["default"].createElement(_Button.ButtonOptionsContainer, {
@@ -176,7 +215,7 @@ var ShippingAreasForm = exports.ShippingAreasForm = function ShippingAreasForm(_
         title: 'Borrar',
         buttonProps: {
           onClick: function onClick() {
-            return use.useShippingMethoods.api.actions.erase(id);
+            return eraseShippingMethoods(id);
           }
         },
         styles: {

@@ -204,6 +204,26 @@ export const ShippingAreasForm = ({
     use.pages.actions.openModalPage();
   };
 
+  const eraseShippingMethoods = async (id: number) => {
+    const action = isAddForm
+      ? use.pages.actions.onAdd
+      : use.pages.actions.onUpdate;
+    try {
+      use.pages.actions.onFetching();
+      const data = await use.useShippingMethoods.api.actions.erase(id);
+      if (data.success) {
+        use.useShippingMethoods.data.actions.handleDeleted({ itemId: id });
+        action();
+      } else {
+        use.error.actions.changeError([data.message]);
+        action();
+      }
+    } catch (error) {
+      use.error.actions.changeError([`${error}`]);
+      action();
+    }
+  };
+
   const ButtonActionsShippingMethods: React.FC<{ id: number }> = ({ id }) => {
     return (
       <>
@@ -224,7 +244,7 @@ export const ShippingAreasForm = ({
             props={{
               title: 'Borrar',
               buttonProps: {
-                onClick: () => use.useShippingMethoods.api.actions.erase(id),
+                onClick: () => eraseShippingMethoods(id),
               },
               styles: {
                 fontSize: '10px',

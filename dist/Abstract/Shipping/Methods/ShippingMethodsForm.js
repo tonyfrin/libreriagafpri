@@ -264,8 +264,48 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       return _ref2.apply(this, arguments);
     };
   }();
+  var update = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+      var data;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (!use.attributes.actions.validationButtonNext()) {
+              _context2.next = 13;
+              break;
+            }
+            _context2.prev = 1;
+            use.pages.actions.onFetching();
+            _context2.next = 5;
+            return use.api.actions.update();
+          case 5:
+            data = _context2.sent;
+            if (data.success) {
+              use.data.actions.handleUpdated(data.item);
+              use.pages.actions.onInit();
+            } else {
+              use.error.actions.changeError([data.message]);
+              use.pages.actions.onUpdate();
+            }
+            _context2.next = 13;
+            break;
+          case 9:
+            _context2.prev = 9;
+            _context2.t0 = _context2["catch"](1);
+            use.error.actions.changeError(["".concat(_context2.t0)]);
+            use.pages.actions.onUpdate();
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[1, 9]]);
+    }));
+    return function update() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   var buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  var buttonAction = isAddForm ? add : use.api.actions.update;
+  var buttonAction = isAddForm ? add : update;
   var handleActions = function handleActions(action, value) {
     switch (action) {
       case 'submit':
