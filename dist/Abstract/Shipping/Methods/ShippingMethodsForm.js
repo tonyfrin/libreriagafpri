@@ -26,11 +26,11 @@ var regionItemStyles = (0, _css.css)(_templateObject3 || (_templateObject3 = (0,
 var regionContainerStyles = (0, _css.css)(_templateObject4 || (_templateObject4 = (0, _taggedTemplateLiteral2["default"])(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  margin-right: 5px;\n  margin-bottom: 5px;\n"])));
 var regionButtonStyles = (0, _css.css)(_templateObject5 || (_templateObject5 = (0, _taggedTemplateLiteral2["default"])(["\n  margin-right: 8px;\n  padding: 8px;\n  color: #8d8d8d;\n  border-radius: 4px;\n  border: 1px solid #dfdbdb;\n"])));
 var closeButtonStyles = (0, _css.css)(_templateObject6 || (_templateObject6 = (0, _taggedTemplateLiteral2["default"])(["\n  position: absolute;\n  top: 0px;\n  transform: translateY(-50%);\n  right: 0px;\n  cursor: pointer;\n  color: #fff;\n  background-color: #f44336;\n  border-radius: 100%;\n  padding: 2px 5px 4px 5px;\n  font-size: 8px;\n"])));
-var mainContainerStyle = (0, _css.css)(_templateObject7 || (_templateObject7 = (0, _taggedTemplateLiteral2["default"])(["\n  margin-bottom: 1rem;\n"])));
+var mainContainerStyle = (0, _css.css)(_templateObject7 || (_templateObject7 = (0, _taggedTemplateLiteral2["default"])([""])));
 var titleContainerStyle = (0, _css.css)(_templateObject8 || (_templateObject8 = (0, _taggedTemplateLiteral2["default"])(["\n  transition: all 1s ease 0s;\n  font-family: 'Poppins', sans-serif;\n  font-weight: 700;\n  font-size: 1rem;\n  color: rgb(38, 35, 33);\n  display: table-cell;\n  width: auto;\n  padding-bottom: 20px;\n  vertical-align: middle;\n  line-height: 1.25rem;\n"])));
 var checkBoxContainerStyle = (0, _css.css)(_templateObject9 || (_templateObject9 = (0, _taggedTemplateLiteral2["default"])(["\n  display: inline-flex;\n  align-items: center;\n  margin-right: 1rem;\n"])));
 var nameStyle = (0, _css.css)(_templateObject10 || (_templateObject10 = (0, _taggedTemplateLiteral2["default"])(["\n  margin-left: 0.25rem;\n"])));
-var infoContainerStyle = (0, _css.css)(_templateObject11 || (_templateObject11 = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  justify-content: space-around;\n  margin-bottom: 45px;\n"])));
+var infoContainerStyle = (0, _css.css)(_templateObject11 || (_templateObject11 = (0, _taggedTemplateLiteral2["default"])(["\n  display: flex;\n  justify-content: space-around;\n"])));
 var checkBoxStyle = (0, _css.css)(_templateObject12 || (_templateObject12 = (0, _taggedTemplateLiteral2["default"])([""])));
 var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethodsForm(_ref) {
   var _useRoles$states$role;
@@ -341,7 +341,8 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     inputId: _constants.SHIPPING_METHODS_ROUTE
   }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '100%'
+      width: '100%',
+      custom: "\n              align-items: center;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectRoles, {
     changeRoles: changeRoles,
@@ -553,24 +554,21 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     className: (0, _css.css)(checkBoxStyle)
   }), /*#__PURE__*/_react["default"].createElement("span", {
     className: (0, _css.css)(nameStyle)
-  }, 'Si')))))), use.attributes.states.conditional && /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
+  }, 'Si')))))), use.attributes.states.conditional && /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '96.5%'
+      width: '100%',
+      custom: "\n              align-items: center;\n              margin: 10px 0px;\n            "
     }
-  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
+  }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
     changeType: use.attributes.actions.changeTypeConditional,
     props: {
       title: 'Tipo de condicional',
       options: use.attributes.states.typeConditionalOptions,
       styles: {
-        width: '85%'
+        width: '90%'
       }
     }
-  }))), use.attributes.states.typeConditional !== undefined && /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
-    styles: {
-      width: '96.5%'
-    }
-  }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Input.Input, {
+  }), use.attributes.states.typeConditional !== undefined && /*#__PURE__*/_react["default"].createElement(_Input.Input, {
     inputProps: {
       type: 'text',
       title: 'Valor de la condicional',

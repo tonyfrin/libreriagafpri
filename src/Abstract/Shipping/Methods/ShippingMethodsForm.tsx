@@ -95,9 +95,7 @@ const closeButtonStyles = css`
   font-size: 8px;
 `;
 
-const mainContainerStyle = css`
-  margin-bottom: 1rem;
-`;
+const mainContainerStyle = css``;
 
 const titleContainerStyle = css`
   transition: all 1s ease 0s;
@@ -125,7 +123,6 @@ const nameStyle = css`
 const infoContainerStyle = css`
   display: flex;
   justify-content: space-around;
-  margin-bottom: 45px;
 `;
 
 const checkBoxStyle = css``;
@@ -520,6 +517,9 @@ export const ShippingMethodsForm = ({
         <ContainerButton
           styles={{
             width: '100%',
+            custom: `
+              align-items: center;
+            `,
           }}
           {...infoContainerProps}
         >
@@ -812,8 +812,13 @@ export const ShippingMethodsForm = ({
         {use.attributes.states.conditional && (
           <ContainerButton
             styles={{
-              width: '96.5%',
+              width: '100%',
+              custom: `
+              align-items: center;
+              margin: 10px 0px;
+            `,
             }}
+            {...infoContainerProps}
           >
             <>
               <SelectType
@@ -822,34 +827,26 @@ export const ShippingMethodsForm = ({
                   title: 'Tipo de condicional',
                   options: use.attributes.states.typeConditionalOptions,
                   styles: {
-                    width: '85%',
+                    width: '90%',
                   },
                 }}
               />
-            </>
-          </ContainerButton>
-        )}
-        {use.attributes.states.typeConditional !== undefined && (
-          <ContainerButton
-            styles={{
-              width: '96.5%',
-            }}
-          >
-            <>
-              <Input
-                inputProps={{
-                  type: 'text',
-                  title: 'Valor de la condicional',
-                  onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
-                    use.attributes.actions.changeValueConditional(
-                      event.currentTarget.value
-                    ),
-                }}
-                containerStyles={{
-                  width: '90%',
-                  margin: '0px 10px 0px 0px',
-                }}
-              />
+              {use.attributes.states.typeConditional !== undefined && (
+                <Input
+                  inputProps={{
+                    type: 'text',
+                    title: 'Valor de la condicional',
+                    onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                      use.attributes.actions.changeValueConditional(
+                        event.currentTarget.value
+                      ),
+                  }}
+                  containerStyles={{
+                    width: '90%',
+                    margin: '0px 10px 0px 0px',
+                  }}
+                />
+              )}
             </>
           </ContainerButton>
         )}
