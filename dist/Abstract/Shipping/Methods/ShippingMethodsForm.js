@@ -325,7 +325,8 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, inputStatus)), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
-      width: '100%'
+      width: '100%',
+      custom: "\n              align-items: center;\n            "
     }
   }, infoContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, inputType, /*#__PURE__*/_react["default"].createElement(_Input.InputCost, {
     changeCost: use.attributes.actions.changeCost,
@@ -336,6 +337,9 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
       },
       styles: {
         width: '90%'
+      },
+      containerStyles: {
+        custom: "\n                    display: flex;\n                    flex-direction: column;\n                  "
       }
     },
     inputId: _constants.SHIPPING_METHODS_ROUTE

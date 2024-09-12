@@ -494,6 +494,9 @@ export const ShippingMethodsForm = ({
         <ContainerButton
           styles={{
             width: '100%',
+            custom: `
+              align-items: center;
+            `,
           }}
           {...infoContainerProps}
         >
@@ -508,6 +511,12 @@ export const ShippingMethodsForm = ({
                 },
                 styles: {
                   width: '90%',
+                },
+                containerStyles: {
+                  custom: `
+                    display: flex;
+                    flex-direction: column;
+                  `,
                 },
               }}
               inputId={SHIPPING_METHODS_ROUTE}
