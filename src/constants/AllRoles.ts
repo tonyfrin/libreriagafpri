@@ -277,4 +277,22 @@ export const AllRoles = [
       { name: 'Obtener', value: 'discountGet' },
     ],
   },
+  {
+    name: 'Zona de Envíos',
+    permissions: [
+      { name: 'Crear', value: 'shipping-areasCreate' },
+      { name: 'Actualizar', value: 'shipping-areasUpdate' },
+      { name: 'Borrar', value: 'shipping-areasDelete' },
+      { name: 'Obtener', value: 'shipping-areasGet' },
+    ],
+  },
+  {
+    name: 'Métodos de Envíos',
+    permissions: [
+      { name: 'Crear', value: 'shipping-methodsCreate' },
+      { name: 'Actualizar', value: 'shipping-methodsUpdate' },
+      { name: 'Borrar', value: 'shipping-methodsDelete' },
+      { name: 'Obtener', value: 'shipping-methodsGet' },
+    ],
+  },
 ];

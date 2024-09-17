@@ -242,7 +242,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
             data = _context.sent;
             if (data.success) {
               use.data.actions.handleNewItem(data.item);
-              use.pages.actions.onInit();
+              use.pages.actions.returnInit();
             } else {
               use.error.actions.changeError([data.message]);
               use.pages.actions.onAdd();
@@ -282,7 +282,7 @@ var ShippingMethodsForm = exports.ShippingMethodsForm = function ShippingMethods
             data = _context2.sent;
             if (data.success) {
               use.data.actions.handleUpdated(data.item);
-              use.pages.actions.onInit();
+              use.pages.actions.returnInit();
             } else {
               use.error.actions.changeError([data.message]);
               use.pages.actions.onUpdate();

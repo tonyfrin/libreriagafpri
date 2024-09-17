@@ -367,7 +367,7 @@ export const ShippingMethodsForm = ({
         const data = await use.api.actions.add();
         if (data.success) {
           use.data.actions.handleNewItem(data.item);
-          use.pages.actions.onInit();
+          use.pages.actions.returnInit();
         } else {
           use.error.actions.changeError([data.message]);
           use.pages.actions.onAdd();
@@ -386,7 +386,7 @@ export const ShippingMethodsForm = ({
         const data = await use.api.actions.update();
         if (data.success) {
           use.data.actions.handleUpdated(data.item);
-          use.pages.actions.onInit();
+          use.pages.actions.returnInit();
         } else {
           use.error.actions.changeError([data.message]);
           use.pages.actions.onUpdate();
