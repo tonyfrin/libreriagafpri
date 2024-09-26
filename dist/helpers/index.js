@@ -69,12 +69,8 @@ var changeInputText = exports.changeInputText = function changeInputText(_ref) {
   var value = _ref.value,
     validation = _ref.validation,
     setValue = _ref.setValue;
-  var newValue = '';
-  var valid = validation(value);
-  if (valid) {
-    newValue = value;
-  }
-  setValue(newValue);
+  validation(value);
+  setValue(value);
 };
 var changeInputNumers = exports.changeInputNumers = function changeInputNumers(value, validation, setValue) {
   var numericValue = typeof value === 'string' ? parseFloat(value) : value;

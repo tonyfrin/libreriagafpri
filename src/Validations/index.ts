@@ -60,7 +60,7 @@ export const validationInputNameLastNameUserName = ({
 }: ValidationInput): boolean => {
   const valid = validationInput(
     value,
-    /^[-a-zA-Z0-9áéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_,./&'@-\s]+$/,
+    /^[-a-zA-Z0-9áéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_,./&'@"*:;<>+=\s]+$/,
     inputId,
     required
   );

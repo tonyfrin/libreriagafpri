@@ -565,7 +565,7 @@ var validationInputNameLastNameUserName = exports.validationInputNameLastNameUse
     setValid = _ref.setValid,
     _ref$required = _ref.required,
     required = _ref$required === void 0 ? true : _ref$required;
-  var valid = (0, _helpers.validationInput)(value, /^[-a-zA-Z0-9áéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_,./&'@-\s]+$/, inputId, required);
+  var valid = (0, _helpers.validationInput)(value, /^[-a-zA-Z0-9áéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ_,./&'@"*:;<>+=\s]+$/, inputId, required);
   if (valid !== currentValid) {
     setValid(valid);
   }

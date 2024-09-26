@@ -79,13 +79,8 @@ export const changeInputText = ({
   validation,
   setValue,
 }: ChangeInputText): void => {
-  let newValue = '';
-  const valid: boolean = validation(value);
-  if (valid) {
-    newValue = value;
-  }
-
-  setValue(newValue);
+  validation(value);
+  setValue(value);
 };
 
 export const changeInputNumers = (
