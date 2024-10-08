@@ -1,5 +1,5 @@
 import { SingleValue } from 'react-select';
-import { UseSitesReturn, UseErrorReturn } from '../../../states';
+import { UseGafpriSitesReturn, UseErrorReturn } from '../../../states';
 import { SelectDefault } from '../../../helpers';
 type State = {
     name: string;
@@ -71,7 +71,7 @@ export type UseGafpriAttributesStorageReturn = {
 };
 export type UseGafpriAttributesStorageProps = {
     useError: UseErrorReturn;
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
 };
 export declare function useGafpriAttributesStorage({ useError, useSites, }: UseGafpriAttributesStorageProps): UseGafpriAttributesStorageReturn;
 export {};

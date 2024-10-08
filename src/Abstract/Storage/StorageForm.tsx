@@ -2,7 +2,7 @@ import React from 'react';
 import { ContainerButton, ContainerButtonPropsExtended } from '../Containers';
 import { ModelForm, ModelFormPropsExtended } from '../Form';
 import { StatesCountries, Countries } from '../../constants';
-import { UseGafpriStorageReturn, UseSitesReturn } from '../../states';
+import { UseGafpriStorageReturn, UseGafpriSitesReturn } from '../../states';
 import {
   Input,
   InputProps,
@@ -21,7 +21,7 @@ import {
 
 export type StorageFormProps = {
   use: UseGafpriStorageReturn;
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
   formType: 'add' | 'update';
   modelFormProps?: ModelFormPropsExtended;
 
@@ -46,7 +46,7 @@ export type StorageFormProps = {
 export type StorageFormPropsExtended = {
   use?: UseGafpriStorageReturn;
   formType?: 'add' | 'update';
-  useSites?: UseSitesReturn;
+  useSites?: UseGafpriSitesReturn;
   modelFormProps?: ModelFormPropsExtended;
   nameContainerProps?: ContainerButtonPropsExtended;
   nameInputProps?: InputProps;
@@ -162,7 +162,9 @@ export const StorageForm = ({
         use.attributes.actions.changePostCode(currentStorage.postCode);
 
       if (currentStorage.sitesId) {
-        const currentSite = useSites.actions.getById(currentStorage.sitesId);
+        const currentSite = useSites.data.actions.getById(
+          currentStorage.sitesId
+        );
         if (currentSite) {
           const sitesValue = {
             label: currentSite.name,

@@ -20,7 +20,7 @@ import {
   generalChangeName,
   generalChangeParentId,
   generalChangeDescription,
-  generalChangePhoto,
+  generalChangePhotoWebSockets,
   generalChangeStatus,
 } from '../Changes';
 import { CATEGORY_STORAGE, CATEGORY_ROUTE } from '../constants';
@@ -408,12 +408,13 @@ export function useGafpriCategory({
   const changePhoto = async (
     e: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
-    generalChangePhoto({
+    generalChangePhotoWebSockets({
       e,
       changeError,
       setSubmitting,
       setPhoto,
       validation: validationPhoto,
+      from: 'category-photo',
     });
   };
 

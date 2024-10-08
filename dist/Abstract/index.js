@@ -1797,6 +1797,12 @@ Object.defineProperty(exports, "useGafpriApiShippingMethods", {
     return _states.useGafpriApiShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriApiSites", {
+  enumerable: true,
+  get: function get() {
+    return _states.useGafpriApiSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriApiStorage", {
   enumerable: true,
   get: function get() {
@@ -1983,6 +1989,12 @@ Object.defineProperty(exports, "useGafpriAttributesShippingMethods", {
     return _states.useGafpriAttributesShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriAttributesSites", {
+  enumerable: true,
+  get: function get() {
+    return _states.useGafpriAttributesSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriAttributesStorage", {
   enumerable: true,
   get: function get() {
@@ -2089,6 +2101,12 @@ Object.defineProperty(exports, "useGafpriDataShippingMethods", {
   enumerable: true,
   get: function get() {
     return _states.useGafpriDataShippingMethods;
+  }
+});
+Object.defineProperty(exports, "useGafpriDataSites", {
+  enumerable: true,
+  get: function get() {
+    return _states.useGafpriDataSites;
   }
 });
 Object.defineProperty(exports, "useGafpriDataStorage", {
@@ -2229,6 +2247,12 @@ Object.defineProperty(exports, "useGafpriPagesShippingMethods", {
     return _states.useGafpriPagesShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriPagesSites", {
+  enumerable: true,
+  get: function get() {
+    return _states.useGafpriPagesSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriPagesStorage", {
   enumerable: true,
   get: function get() {
@@ -2335,6 +2359,12 @@ Object.defineProperty(exports, "useGafpriPaginationsShippingMethods", {
   enumerable: true,
   get: function get() {
     return _states.useGafpriPaginationsShippingMethods;
+  }
+});
+Object.defineProperty(exports, "useGafpriPaginationsSites", {
+  enumerable: true,
+  get: function get() {
+    return _states.useGafpriPaginationsSites;
   }
 });
 Object.defineProperty(exports, "useGafpriPaginationsStorage", {

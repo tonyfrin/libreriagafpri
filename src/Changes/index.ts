@@ -138,3 +138,7 @@ export { generalChangeCreditLimit } from './generalChangeCreditLimit';
 export type { GeneralChangeCreditLimitProps } from './generalChangeCreditLimit';
 export { generalChangeCreditTimeToPay } from './generalChangeCreditTimeToPay';
 export type { GeneralChangeCreditTimeToPayProps } from './generalChangeCreditTimeToPay';
+export { generalChangePhotoWebSockets } from './generalChangePhotoWebSockets';
+export type { GeneralChangePhotoWebSocketsProps } from './generalChangePhotoWebSockets';
+export { generalChangeGalleryPhotoWebSockets } from './generalChangeGalleryPhotoWebSockets';
+export type { GeneralChangeGalleryPhotoWebSocketsProps } from './generalChangeGalleryPhotoWebSockets';

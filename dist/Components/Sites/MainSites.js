@@ -16,21 +16,21 @@ var MainSites = exports.MainSites = function MainSites(_ref) {
     initProps = _ref.initProps,
     addFormProps = _ref.addFormProps,
     updateFormProps = _ref.updateFormProps;
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, useSites.states.isFetching && /*#__PURE__*/_react["default"].createElement(_Loading.Loading, loadingProps), useSites.states.isInit && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, (0, _extends2["default"])({
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, useSites.pages.states.isFetching && /*#__PURE__*/_react["default"].createElement(_Loading.Loading, loadingProps), useSites.pages.states.isInit && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, (0, _extends2["default"])({
     keyName: "init",
-    isVisible: useSites.states.isInit
+    isVisible: useSites.pages.states.isInit
   }, initProps), /*#__PURE__*/_react["default"].createElement(_Abstract.InitSites, {
     use: useSites
-  })), useSites.states.isAdd && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
+  })), useSites.pages.states.isAdd && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
     keyName: "add",
-    isVisible: useSites.states.isAdd
+    isVisible: useSites.pages.states.isAdd
   }, /*#__PURE__*/_react["default"].createElement(_Abstract.SitesForm, (0, _extends2["default"])({
     use: useSites,
     formType: "add",
     useCurrencies: useCurrencies
-  }, addFormProps))), useSites.states.isUpdate && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
+  }, addFormProps))), useSites.pages.states.isUpdate && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
     keyName: "update",
-    isVisible: useSites.states.isUpdate
+    isVisible: useSites.pages.states.isUpdate
   }, /*#__PURE__*/_react["default"].createElement(_Abstract.SitesForm, (0, _extends2["default"])({
     formType: "update",
     use: useSites,

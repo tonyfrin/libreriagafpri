@@ -5,12 +5,10 @@ import type { InputProps } from '../Input';
 import { formatPhoneNumber } from '../../helpers';
 import { Button } from '../Button';
 import type { ButtonPropsExtended } from '../Button';
-import { List } from '../List';
 import type { ListPropsExtended } from '../List';
 import { ModelForm } from '../Form';
 import type { ModelFormPropsExtended } from '../Form';
-import type { UseUserReturn, UseSitesReturn } from '../../states';
-import type { RoleArray } from '../../helpers';
+import type { UseUserReturn } from '../../states';
 
 export type UserViewProps = {
   use: UseUserReturn;

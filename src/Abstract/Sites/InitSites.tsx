@@ -10,10 +10,10 @@ import { Error } from '../Error';
 import type { ErrorProps } from '../Error';
 import { Header } from '../Header';
 import type { HeaderProps } from '../Header';
-import type { UseSitesReturn } from '../../states';
+import type { UseGafpriSitesReturn } from '../../states';
 
 export type InitSitesProps = {
-  use: UseSitesReturn;
+  use: UseGafpriSitesReturn;
   optionButtonContainerStyle?: string;
   updateButtonProps?: ButtonProps;
   deleteButtonProps?: ButtonProps;
@@ -23,7 +23,7 @@ export type InitSitesProps = {
 };
 
 export type InitSitesPropsExtended = {
-  use?: UseSitesReturn;
+  use?: UseGafpriSitesReturn;
   optionButtonContainerStyle?: string;
   updateButtonProps?: ButtonProps;
   deleteButtonProps?: ButtonProps;
@@ -57,14 +57,14 @@ export const InitSites = ({
     title: 'Sitios',
     buttonLargeProps: {
       label: 'Añadir sitios',
-      onClick: use.actions.goAdd,
+      onClick: use.pages.actions.goAdd,
       Icon: FaPlus,
       titleButton: 'Agregar',
       description: 'Agrega un nuevo Sitio.',
     },
   },
   errorProps = {
-    error: use.states.error,
+    error: use.attributes.states.error,
   },
   listProps,
 }: InitSitesProps): JSX.Element => {
@@ -73,13 +73,13 @@ export const InitSites = ({
       <div className={css(optionButtonContainerStyle)}>
         <Button
           buttonProps={{
-            onClick: () => use.actions.goUpdate(id),
+            onClick: () => use.pages.actions.goUpdate(id),
           }}
           {...updateButtonProps}
         />
         <Button
           buttonProps={{
-            onClick: () => use.actions.deleteSites(id),
+            onClick: () => use.api.actions.erase(id),
           }}
           {...deleteButtonProps}
         />
@@ -87,15 +87,21 @@ export const InitSites = ({
     );
   };
 
-  const filteredSites = use.actions.filterByName(use.states.searchTerm);
+  const filteredSites = use.paginations.actions.filterByName(
+    use.paginations.states.searchTerm,
+    use.data.states.sites
+  );
 
   const sites =
-    use.actions.sortByName(filteredSites, use.states.orderList) || [];
+    use.paginations.actions.sortByName(
+      filteredSites,
+      use.paginations.states.orderList
+    ) || [];
 
-  const paginatedSites = use.actions.getPaginated(
+  const paginatedSites = use.paginations.actions.getPaginated(
     sites,
-    use.states.currentPage,
-    use.states.itemsPerPage
+    use.paginations.states.currentPage,
+    use.paginations.states.itemsPerPage
   );
 
   const items =
@@ -120,11 +126,13 @@ export const InitSites = ({
   ];
 
   const valueDefaul =
-    use.states.orderList === 'asc'
+    use.paginations.states.orderList === 'asc'
       ? { value: 'asc', label: 'Ascendente' }
       : { value: 'desc', label: 'Descendente' };
 
-  const totalPages = Math.ceil(sites.length / use.states.itemsPerPage);
+  const totalPages = Math.ceil(
+    sites.length / use.paginations.states.itemsPerPage
+  );
 
   return (
     <>
@@ -139,7 +147,9 @@ export const InitSites = ({
           options: options,
           onChange: (event) => {
             if (event?.value) {
-              use.actions.setOrderList(event.value as 'asc' | 'desc');
+              use.paginations.actions.setOrderList(
+                event.value as 'asc' | 'desc'
+              );
             }
           },
           defaultValue: valueDefaul,
@@ -148,13 +158,14 @@ export const InitSites = ({
           },
         }}
         inputProps={{
-          value: use.states.searchTerm,
-          onChange: (e) => use.actions.setSearchTerm(e.target.value),
+          value: use.paginations.states.searchTerm,
+          onChange: (e) =>
+            use.paginations.actions.setSearchTerm(e.target.value),
           placeholder: 'Buscar por nombre...',
         }}
         propsPagination={{
-          currentPage: use.states.currentPage,
-          setCurrentPage: use.actions.setCurrentPage,
+          currentPage: use.paginations.states.currentPage,
+          setCurrentPage: use.paginations.actions.setCurrentPage,
           totalPages: totalPages,
         }}
         {...listProps}

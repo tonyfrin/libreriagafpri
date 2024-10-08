@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SingleValue } from 'react-select';
-import { UseSitesReturn, UseErrorReturn } from '../../../states';
+import { UseGafpriSitesReturn, UseErrorReturn } from '../../../states';
 import { SelectDefault } from '../../../helpers';
 import {
   generalValidationName,
@@ -107,7 +107,7 @@ export type UseGafpriAttributesStorageReturn = {
 
 export type UseGafpriAttributesStorageProps = {
   useError: UseErrorReturn;
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
 };
 
 export function useGafpriAttributesStorage({
@@ -158,7 +158,7 @@ export function useGafpriAttributesStorage({
     label: 'Elija sucursal',
   });
   const siteOptions =
-    useSites.states.sites.data?.items?.map((item) => {
+    useSites.data.states.sites?.map((item) => {
       return { value: `${item.id}`, label: item.name };
     }) || [];
   const [isReset, setIsReset] = useState(true);

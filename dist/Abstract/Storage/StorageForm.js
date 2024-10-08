@@ -81,7 +81,7 @@ var StorageForm = exports.StorageForm = function StorageForm(_ref) {
       });
       if (currentStorage.postCode) use.attributes.actions.changePostCode(currentStorage.postCode);
       if (currentStorage.sitesId) {
-        var currentSite = useSites.actions.getById(currentStorage.sitesId);
+        var currentSite = useSites.data.actions.getById(currentStorage.sitesId);
         if (currentSite) {
           var sitesValue = {
             label: currentSite.name,

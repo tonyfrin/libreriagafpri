@@ -1,5 +1,5 @@
 import type { UseErrorReturn } from './useGafpriError';
-import { UseSitesReturn } from './useGafpriSites';
+import { UseGafpriSitesReturn } from './useGafpriSites';
 import { UseGafpriApiStorageReturn, UseGafpriPagesStorageReturn, UseGafpriAttributesStorageReturn, UseGafpriDataStorageReturn, UseGafpriPaginationsStorageReturn } from '../Abstract';
 export interface UseGafpriStorageReturn {
     attributes: UseGafpriAttributesStorageReturn;
@@ -11,6 +11,6 @@ export interface UseGafpriStorageReturn {
 }
 export type UseGafpriStorageProps = {
     token: string | null;
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
 };
 export declare function useGafpriStorage({ token, useSites, }: UseGafpriStorageProps): UseGafpriStorageReturn;

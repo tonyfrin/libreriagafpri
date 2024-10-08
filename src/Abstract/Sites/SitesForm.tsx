@@ -20,17 +20,19 @@ import {
   InputPhone,
   InputEmail,
   InputWebSite,
+  SelectType,
 } from '../Input';
 import type { InputProps, GsSelectPropsExtended } from '../Input';
 import { ContainerButton } from '../Containers';
 import type { ContainerButtonPropsExtended } from '../Containers';
-import { ModelForm } from '../Form';
+import { ModelForm, PhotoGalleryForm, PhotoProduct } from '../Form';
 import type { ModelFormPropsExtended } from '../Form';
-import type { UseSitesReturn, UseCurrenciesReturn } from '../../states';
+import type { UseGafpriSitesReturn, UseCurrenciesReturn } from '../../states';
 import { StatesCountries, Countries } from '../../constants';
+import { SliderHorizontal } from '../Slider';
 
 export type SitesFormProps = {
-  use: UseSitesReturn;
+  use: UseGafpriSitesReturn;
   formType: 'add' | 'update';
   useCurrencies: UseCurrenciesReturn;
   modelFormProps?: ModelFormPropsExtended;
@@ -66,7 +68,7 @@ export type SitesFormProps = {
 };
 
 export type SitesFormPropsExtended = {
-  use?: UseSitesReturn;
+  use?: UseGafpriSitesReturn;
   formType?: 'add' | 'update';
   useCurrencies?: UseCurrenciesReturn;
   modelFormProps?: ModelFormPropsExtended;
@@ -149,54 +151,70 @@ export const SitesForm = ({
   const [InputSeparator, setInputSeparator] = React.useState(<></>);
   const [InputDecimalNumbers, setInputDecimalNumbers] = React.useState(<></>);
   const [InputTaxes, setInputTaxes] = React.useState(<></>);
+  const [InputType, setInputType] = React.useState(<></>);
 
   const currentSite = isUpdateForm
-    ? use.actions.getById(use.states.siteId)
+    ? use.data.actions.getById(use.attributes.states.siteId)
     : null;
 
   React.useEffect(() => {
-    use.actions.validationName(use.states.name);
-    use.actions.validationDocumentIndex(use.states.documentIndex);
-    use.actions.validationDocumentNumber(use.states.documentNumber);
-    use.actions.validationAddress1(use.states.address1);
-    use.actions.validationAddress2(use.states.address2);
-    use.actions.validationCity(use.states.city);
-    use.actions.validationStateCountry(use.states.state);
-    use.actions.validationCountry(use.states.country);
-    use.actions.validationPostCode(use.states.postCode);
-    use.actions.validationEmail(use.states.email);
-    use.actions.validationPhone(use.states.phone);
+    use.attributes.actions.validationName(use.attributes.states.name);
+    use.attributes.actions.validationDocumentIndex(
+      use.attributes.states.documentIndex
+    );
+    use.attributes.actions.validationDocumentNumber(
+      use.attributes.states.documentNumber
+    );
+    use.attributes.actions.validationAddress1(use.attributes.states.address1);
+    use.attributes.actions.validationAddress2(use.attributes.states.address2);
+    use.attributes.actions.validationCity(use.attributes.states.city);
+    use.attributes.actions.validationStateCountry(use.attributes.states.state);
+    use.attributes.actions.validationCountry(use.attributes.states.country);
+    use.attributes.actions.validationPostCode(use.attributes.states.postCode);
+    use.attributes.actions.validationEmail(use.attributes.states.email);
+    use.attributes.actions.validationPhone(use.attributes.states.phone);
 
     const currenciesId =
-      use.states.currenciesId === 0 ? '' : use.states.currenciesId;
-    use.actions.validationCurrenciesId(`${currenciesId}`);
-    use.actions.validationCurrencyLocation(use.states.currencyLocation);
-    use.actions.validationSeparator(use.states.thousandsSeparator);
-    use.actions.validationSeparator(use.states.decimalSeparator);
+      use.attributes.states.currenciesId === 0
+        ? ''
+        : use.attributes.states.currenciesId;
+    use.attributes.actions.validationCurrenciesId(`${currenciesId}`);
+    use.attributes.actions.validationCurrencyLocation(
+      use.attributes.states.currencyLocation
+    );
+    use.attributes.actions.validationSeparator(
+      use.attributes.states.thousandsSeparator
+    );
+    use.attributes.actions.validationSeparator(
+      use.attributes.states.decimalSeparator
+    );
 
-    use.actions.validationDecimalNumbers(`${use.states.decimalNumbers}`);
-    use.actions.validationTaxes(`${use.states.taxes}`);
-    use.actions.validationHost(use.states.host);
-    use.actions.validationButtonNext();
+    use.attributes.actions.validationDecimalNumbers(
+      `${use.attributes.states.decimalNumbers}`
+    );
+    use.attributes.actions.validationTaxes(`${use.attributes.states.taxes}`);
+    use.attributes.actions.validationHost(use.attributes.states.host);
+    use.attributes.actions.validationType(use.attributes.states.type);
+    use.attributes.actions.validationButtonNext();
   }, [
-    use.states.name,
-    use.states.documentIndex,
-    use.states.documentNumber,
-    use.states.address1,
-    use.states.address2,
-    use.states.city,
-    use.states.state,
-    use.states.postCode,
-    use.states.country,
-    use.states.email,
-    use.states.phone,
-    use.states.currenciesId,
-    use.states.currencyLocation,
-    use.states.thousandsSeparator,
-    use.states.decimalSeparator,
-    use.states.decimalNumbers,
-    use.states.taxes,
-    use.states.host,
+    use.attributes.states.name,
+    use.attributes.states.documentIndex,
+    use.attributes.states.documentNumber,
+    use.attributes.states.address1,
+    use.attributes.states.address2,
+    use.attributes.states.city,
+    use.attributes.states.state,
+    use.attributes.states.postCode,
+    use.attributes.states.country,
+    use.attributes.states.email,
+    use.attributes.states.phone,
+    use.attributes.states.currenciesId,
+    use.attributes.states.currencyLocation,
+    use.attributes.states.thousandsSeparator,
+    use.attributes.states.decimalSeparator,
+    use.attributes.states.decimalNumbers,
+    use.attributes.states.taxes,
+    use.attributes.states.host,
     InputTypeDocument,
     InputCity,
     InputState,
@@ -206,76 +224,81 @@ export const SitesForm = ({
     InputSeparator,
     InputDecimalNumbers,
     InputTaxes,
+    InputType,
   ]);
 
   React.useEffect(() => {
-    use.actions.validationButtonNext();
+    use.attributes.actions.validationButtonNext();
   }, [
-    use.states.nameValid,
-    use.states.documentIndexValid,
-    use.states.documentNumberValid,
-    use.states.address1Valid,
-    use.states.address2Valid,
-    use.states.cityValid,
-    use.states.stateCountryValid,
-    use.states.countryValid,
-    use.states.postCodeValid,
-    use.states.emailValid,
-    use.states.phoneValid,
-    use.states.currenciesIdValid,
-    use.states.currencyLocationValid,
-    use.states.separatorValid,
-    use.states.decimalNumbersValid,
-    use.states.taxesValid,
-    use.states.hostValid,
+    use.attributes.states.nameValid,
+    use.attributes.states.documentIndexValid,
+    use.attributes.states.documentNumberValid,
+    use.attributes.states.address1Valid,
+    use.attributes.states.address2Valid,
+    use.attributes.states.cityValid,
+    use.attributes.states.stateCountryValid,
+    use.attributes.states.countryValid,
+    use.attributes.states.postCodeValid,
+    use.attributes.states.emailValid,
+    use.attributes.states.phoneValid,
+    use.attributes.states.currenciesIdValid,
+    use.attributes.states.currencyLocationValid,
+    use.attributes.states.separatorValid,
+    use.attributes.states.decimalNumbersValid,
+    use.attributes.states.taxesValid,
+    use.attributes.states.hostValid,
   ]);
 
   React.useEffect(() => {
     if (currentSite) {
-      if (currentSite.name) use.actions.changeName(currentSite.name);
+      if (currentSite.name) use.attributes.actions.changeName(currentSite.name);
 
       if (currentSite.documentIndex) {
         const labelDocumentIndex =
           currentSite.documentIndex === 'null'
             ? 'No Aplica'
             : currentSite.documentIndex;
-        use.actions.changeDocumentIndex({
+        use.attributes.actions.changeDocumentIndex({
           label: labelDocumentIndex,
           value: currentSite.documentIndex,
         });
       }
 
       if (currentSite.documentNumber)
-        use.actions.changeDocumentNumber(currentSite.documentNumber);
+        use.attributes.actions.changeDocumentNumber(currentSite.documentNumber);
 
       if (currentSite.address1)
-        use.actions.changeAddress1(currentSite.address1);
+        use.attributes.actions.changeAddress1(currentSite.address1);
 
       if (currentSite.address2)
-        use.actions.changeAddress2(currentSite.address2);
+        use.attributes.actions.changeAddress2(currentSite.address2);
 
-      if (currentSite.country) use.actions.setCountry(currentSite.country);
+      if (currentSite.country)
+        use.attributes.actions.setCountry(currentSite.country);
 
-      if (currentSite.state) use.actions.setStateCountry(currentSite.state);
+      if (currentSite.state)
+        use.attributes.actions.setStateCountry(currentSite.state);
 
       if (currentSite.city)
-        use.actions.changeCity({
+        use.attributes.actions.changeCity({
           label: currentSite.city,
           value: currentSite.city,
         });
 
       if (currentSite.postCode)
-        use.actions.changePostCode(currentSite.postCode);
+        use.attributes.actions.changePostCode(currentSite.postCode);
 
-      if (currentSite.email) use.actions.changeEmail(currentSite.email);
+      if (currentSite.email)
+        use.attributes.actions.changeEmail(currentSite.email);
 
-      if (currentSite.phone) use.actions.changePhone(currentSite.phone);
+      if (currentSite.phone)
+        use.attributes.actions.changePhone(currentSite.phone);
 
       if (currentSite.currenciesId) {
         const labelCurrenciesId = useCurrencies.actions.getById(
           currentSite.currenciesId
         )?.name;
-        use.actions.changeCurrenciesId({
+        use.attributes.actions.changeCurrenciesId({
           label: `${labelCurrenciesId}`,
           value: `${currentSite.currenciesId}`,
         });
@@ -288,7 +311,7 @@ export const SitesForm = ({
             : currentSite.currencyLocation === 'right'
             ? 'Derecha'
             : '';
-        use.actions.changeCurrencyLocation({
+        use.attributes.actions.changeCurrencyLocation({
           label: labelCurrencyLocation,
           value: currentSite.currencyLocation,
         });
@@ -301,14 +324,14 @@ export const SitesForm = ({
             : currentSite.thousandsSeparator === ','
             ? 'Miles: " , "    Decimal: " . "'
             : '';
-        use.actions.changeSeparator({
+        use.attributes.actions.changeSeparator({
           label: labelSeparator,
           value: currentSite.thousandsSeparator,
         });
       }
 
       if (typeof currentSite.decimalNumbers !== 'undefined') {
-        use.actions.changeDecimalNumbers({
+        use.attributes.actions.changeDecimalNumbers({
           label: `${currentSite.decimalNumbers}`,
           value: `${currentSite.decimalNumbers}`,
         });
@@ -318,23 +341,25 @@ export const SitesForm = ({
         const labelTaxes = currentSite.taxes
           ? 'Si trabaja con impuestos'
           : 'No trabaja con impuestos';
-        use.actions.changeTaxes({
+        use.attributes.actions.changeTaxes({
           label: labelTaxes,
           value: `${currentSite.taxes}`,
         });
       }
 
-      if (currentSite.host) use.actions.changeHost(currentSite.host);
+      if (currentSite.host) use.attributes.actions.changeHost(currentSite.host);
     }
 
     if (isAddForm) {
       setInputTypeDocument((): JSX.Element => {
         return (
           <SelectDocumentIdIndex
-            changeIndex={(event) => use.actions.changeDocumentIndex(event)}
+            changeIndex={(event) =>
+              use.attributes.actions.changeDocumentIndex(event)
+            }
             props={{
-              options: use.states.documentIndexOptions,
-              defaultValue: use.states.documentIndexDefault,
+              options: use.attributes.states.documentIndexOptions,
+              defaultValue: use.attributes.states.documentIndexDefault,
               styles: {
                 width: '90%',
               },
@@ -347,10 +372,12 @@ export const SitesForm = ({
       setInputCountry((): JSX.Element => {
         return (
           <SelectCountry
-            changeCountry={(event) => use.actions.changeCountry(event)}
+            changeCountry={(event) =>
+              use.attributes.actions.changeCountry(event)
+            }
             props={{
-              options: use.states.countryOptions,
-              defaultValue: use.states.countryDefault,
+              options: use.attributes.states.countryOptions,
+              defaultValue: use.attributes.states.countryDefault,
               styles: {
                 width: '90%',
               },
@@ -363,10 +390,12 @@ export const SitesForm = ({
       setInputCurrency((): JSX.Element => {
         return (
           <SelectCurrencies
-            changeCurrencies={(event) => use.actions.changeCurrenciesId(event)}
+            changeCurrencies={(event) =>
+              use.attributes.actions.changeCurrenciesId(event)
+            }
             props={{
-              options: use.states.currenciesIdOptions,
-              defaultValue: use.states.currenciesIdDefault,
+              options: use.attributes.states.currenciesIdOptions,
+              defaultValue: use.attributes.states.currenciesIdDefault,
               styles: {
                 width: '90%',
               },
@@ -380,11 +409,11 @@ export const SitesForm = ({
         return (
           <SelectCurrenciesLocations
             changeCurrenciesLocations={(event) =>
-              use.actions.changeCurrencyLocation(event)
+              use.attributes.actions.changeCurrencyLocation(event)
             }
             props={{
-              options: use.states.currencyLocationOptions,
-              defaultValue: use.states.currencyLocationDefault,
+              options: use.attributes.states.currencyLocationOptions,
+              defaultValue: use.attributes.states.currencyLocationDefault,
               styles: {
                 width: '90%',
               },
@@ -398,11 +427,11 @@ export const SitesForm = ({
         return (
           <SelectCurrenciesSeparator
             changeCurrenciesSeparator={(event) =>
-              use.actions.changeSeparator(event)
+              use.attributes.actions.changeSeparator(event)
             }
             props={{
-              options: use.states.separatorOptions,
-              defaultValue: use.states.separatorDefault,
+              options: use.attributes.states.separatorOptions,
+              defaultValue: use.attributes.states.separatorDefault,
               styles: {
                 width: '90%',
               },
@@ -416,11 +445,11 @@ export const SitesForm = ({
         return (
           <SelectCurrenciesDecimalNumbers
             changeCurrenciesDecimalNumbers={(event) =>
-              use.actions.changeDecimalNumbers(event)
+              use.attributes.actions.changeDecimalNumbers(event)
             }
             props={{
-              options: use.states.decimalNumbersOptions,
-              defaultValue: use.states.decimalNumbersDefault,
+              options: use.attributes.states.decimalNumbersOptions,
+              defaultValue: use.attributes.states.decimalNumbersDefault,
               styles: {
                 width: '90%',
               },
@@ -433,14 +462,29 @@ export const SitesForm = ({
       setInputTaxes((): JSX.Element => {
         return (
           <SelectTaxes
-            changeTaxes={(event) => use.actions.changeTaxes(event)}
+            changeTaxes={(event) => use.attributes.actions.changeTaxes(event)}
             props={{
-              options: use.states.taxesOptions,
-              defaultValue: use.states.taxesDefault,
+              options: use.attributes.states.taxesOptions,
+              defaultValue: use.attributes.states.taxesDefault,
               styles: {
                 width: '90%',
               },
               ...taxesSelectProps,
+            }}
+          />
+        );
+      });
+
+      setInputType((): JSX.Element => {
+        return (
+          <SelectType
+            changeType={(event) => use.attributes.actions.changeType(event)}
+            props={{
+              options: use.attributes.states.typeOptions,
+              defaultValue: use.attributes.states.typeDefault,
+              styles: {
+                width: '90%',
+              },
             }}
           />
         );
@@ -450,16 +494,16 @@ export const SitesForm = ({
 
   React.useEffect(() => {
     if (isAddForm) {
-      if (use.states.stateCountryOptions.length > 0) {
+      if (use.attributes.states.stateCountryOptions.length > 0) {
         setInputState((): JSX.Element => {
           return (
             <SelectStateCountry
               changeStateCountry={(event) =>
-                use.actions.changeStateCountry(event)
+                use.attributes.actions.changeStateCountry(event)
               }
               props={{
-                options: use.states.stateCountryOptions,
-                defaultValue: use.states.stateCountryDefault,
+                options: use.attributes.states.stateCountryOptions,
+                defaultValue: use.attributes.states.stateCountryDefault,
                 styles: {
                   width: '90%',
                 },
@@ -473,11 +517,11 @@ export const SitesForm = ({
           return (
             <InputStateCountry
               changeStateCountry={(event) =>
-                use.actions.changeStateCountry(event)
+                use.attributes.actions.changeStateCountry(event)
               }
               props={{
                 inputProps: {
-                  defaultValue: use.states.state,
+                  defaultValue: use.attributes.states.state,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -490,14 +534,14 @@ export const SitesForm = ({
         });
       }
 
-      if (use.states.cityOptions.length > 0) {
+      if (use.attributes.states.cityOptions.length > 0) {
         setInputCity((): JSX.Element => {
           return (
             <SelectCity
-              changeCity={(event) => use.actions.changeCity(event)}
+              changeCity={(event) => use.attributes.actions.changeCity(event)}
               props={{
-                options: use.states.cityOptions,
-                defaultValue: use.states.cityDefault,
+                options: use.attributes.states.cityOptions,
+                defaultValue: use.attributes.states.cityDefault,
                 styles: {
                   width: '90%',
                 },
@@ -510,10 +554,10 @@ export const SitesForm = ({
         setInputCity((): JSX.Element => {
           return (
             <GeneralInputCity
-              changeCity={(event) => use.actions.changeCity(event)}
+              changeCity={(event) => use.attributes.actions.changeCity(event)}
               props={{
                 inputProps: {
-                  defaultValue: use.states.city,
+                  defaultValue: use.attributes.states.city,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -527,23 +571,26 @@ export const SitesForm = ({
       }
     }
   }, [
-    use.states.country,
-    use.states.stateCountryOptions,
-    use.states.cityOptions,
+    use.attributes.states.country,
+    use.attributes.states.stateCountryOptions,
+    use.attributes.states.cityOptions,
   ]);
 
   React.useEffect(() => {
     if (isUpdateForm) {
       if (
-        use.states.documentIndexDefault?.label !== 'Elija el tipo de Documento'
+        use.attributes.states.documentIndexDefault?.label !==
+        'Elija el tipo de Documento'
       ) {
         setInputTypeDocument((): JSX.Element => {
           return (
             <SelectDocumentIdIndex
-              changeIndex={(event) => use.actions.changeDocumentIndex(event)}
+              changeIndex={(event) =>
+                use.attributes.actions.changeDocumentIndex(event)
+              }
               props={{
-                options: use.states.documentIndexOptions,
-                defaultValue: use.states.documentIndexDefault,
+                options: use.attributes.states.documentIndexOptions,
+                defaultValue: use.attributes.states.documentIndexDefault,
                 styles: {
                   width: '90%',
                 },
@@ -555,17 +602,18 @@ export const SitesForm = ({
       }
 
       if (
-        use.states.currenciesIdDefault?.label !== 'Elija la moneda del Sitio'
+        use.attributes.states.currenciesIdDefault?.label !==
+        'Elija la moneda del Sitio'
       ) {
         setInputCurrency((): JSX.Element => {
           return (
             <SelectCurrencies
               changeCurrencies={(event) =>
-                use.actions.changeCurrenciesId(event)
+                use.attributes.actions.changeCurrenciesId(event)
               }
               props={{
-                options: use.states.currenciesIdOptions,
-                defaultValue: use.states.currenciesIdDefault,
+                options: use.attributes.states.currenciesIdOptions,
+                defaultValue: use.attributes.states.currenciesIdDefault,
                 styles: {
                   width: '90%',
                 },
@@ -577,18 +625,18 @@ export const SitesForm = ({
       }
 
       if (
-        use.states.currencyLocationDefault?.label !==
+        use.attributes.states.currencyLocationDefault?.label !==
         'Elija la ubicación del símbolo de la moneda'
       ) {
         setInputCurrencyLocation((): JSX.Element => {
           return (
             <SelectCurrenciesLocations
               changeCurrenciesLocations={(event) =>
-                use.actions.changeCurrencyLocation(event)
+                use.attributes.actions.changeCurrencyLocation(event)
               }
               props={{
-                options: use.states.currencyLocationOptions,
-                defaultValue: use.states.currencyLocationDefault,
+                options: use.attributes.states.currencyLocationOptions,
+                defaultValue: use.attributes.states.currencyLocationDefault,
                 styles: {
                   width: '90%',
                 },
@@ -600,18 +648,18 @@ export const SitesForm = ({
       }
 
       if (
-        use.states.separatorDefault?.label !==
+        use.attributes.states.separatorDefault?.label !==
         'Selecciona los separadores de la moneda'
       ) {
         setInputSeparator((): JSX.Element => {
           return (
             <SelectCurrenciesSeparator
               changeCurrenciesSeparator={(event) =>
-                use.actions.changeSeparator(event)
+                use.attributes.actions.changeSeparator(event)
               }
               props={{
-                options: use.states.separatorOptions,
-                defaultValue: use.states.separatorDefault,
+                options: use.attributes.states.separatorOptions,
+                defaultValue: use.attributes.states.separatorDefault,
                 styles: {
                   width: '90%',
                 },
@@ -623,18 +671,18 @@ export const SitesForm = ({
       }
 
       if (
-        use.states.decimalNumbersDefault?.label !==
+        use.attributes.states.decimalNumbersDefault?.label !==
         'Selecciona el número de decimales'
       ) {
         setInputDecimalNumbers((): JSX.Element => {
           return (
             <SelectCurrenciesDecimalNumbers
               changeCurrenciesDecimalNumbers={(event) =>
-                use.actions.changeDecimalNumbers(event)
+                use.attributes.actions.changeDecimalNumbers(event)
               }
               props={{
-                options: use.states.decimalNumbersOptions,
-                defaultValue: use.states.decimalNumbersDefault,
+                options: use.attributes.states.decimalNumbersOptions,
+                defaultValue: use.attributes.states.decimalNumbersDefault,
                 styles: {
                   width: '90%',
                 },
@@ -646,16 +694,16 @@ export const SitesForm = ({
       }
 
       if (
-        use.states.taxesDefault?.label !==
+        use.attributes.states.taxesDefault?.label !==
         'Selecciona la opción para los impuestos'
       ) {
         setInputTaxes((): JSX.Element => {
           return (
             <SelectTaxes
-              changeTaxes={(event) => use.actions.changeTaxes(event)}
+              changeTaxes={(event) => use.attributes.actions.changeTaxes(event)}
               props={{
-                options: use.states.taxesOptions,
-                defaultValue: use.states.taxesDefault,
+                options: use.attributes.states.taxesOptions,
+                defaultValue: use.attributes.states.taxesDefault,
                 styles: {
                   width: '90%',
                 },
@@ -665,8 +713,25 @@ export const SitesForm = ({
           );
         });
       }
+
+      if (use.attributes.states.typeDefault?.value !== '') {
+        setInputType((): JSX.Element => {
+          return (
+            <SelectType
+              changeType={(event) => use.attributes.actions.changeType(event)}
+              props={{
+                options: use.attributes.states.typeOptions,
+                defaultValue: use.attributes.states.typeDefault,
+                styles: {
+                  width: '90%',
+                },
+              }}
+            />
+          );
+        });
+      }
     }
-  }, [use.states.documentIndexDefault]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [use.attributes.states.documentIndexDefault]); // eslint-disable-line react-hooks/exhaustive-deps
 
   React.useEffect(() => {
     if (isUpdateForm && currentSite) {
@@ -697,7 +762,7 @@ export const SitesForm = ({
         return (
           <InputStateCountry
             changeStateCountry={(event) =>
-              use.actions.changeStateCountry(event)
+              use.attributes.actions.changeStateCountry(event)
             }
             props={{
               inputProps: {
@@ -717,10 +782,10 @@ export const SitesForm = ({
       setInputCity((): JSX.Element => {
         return (
           <GeneralInputCity
-            changeCity={(event) => use.actions.changeCity(event)}
+            changeCity={(event) => use.attributes.actions.changeCity(event)}
             props={{
               inputProps: {
-                defaultValue: use.states.city,
+                defaultValue: use.attributes.states.city,
                 readOnly: true,
               },
               styles: {
@@ -733,19 +798,19 @@ export const SitesForm = ({
         );
       });
     }
-  }, [currentSite, use.states.city]);
+  }, [currentSite, use.attributes.states.city]);
 
   React.useEffect(() => {
     if (isAddForm) {
-      use.actions.changeCityOptions();
+      use.attributes.actions.changeCityOptions();
     }
-  }, [use.actions.changeCityOptions]);
+  }, [use.attributes.actions.changeCityOptions]);
 
   React.useEffect(() => {
     if (isAddForm) {
-      use.actions.changeStateCountryOptions();
+      use.attributes.actions.changeStateCountryOptions();
     }
-  }, [use.actions.changeStateCountryOptions]);
+  }, [use.attributes.actions.changeStateCountryOptions]);
 
   const title1Text = isAddForm ? 'Nuevo Sitio' : 'Actualizar Sitio';
   const title2Text = isAddForm
@@ -753,7 +818,7 @@ export const SitesForm = ({
     : `Actualiza la información del sitio #${currentSite?.id}`;
 
   const buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  const buttonAction = isAddForm ? use.actions.add : use.actions.update;
+  const buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
 
   const handleActions = (action: string, value: any) => {
     switch (action) {
@@ -761,7 +826,7 @@ export const SitesForm = ({
         buttonAction();
         break;
       case 'return':
-        use.actions.returnInit();
+        use.pages.actions.returnInit();
         break;
       default:
         console.log('Acción desconocida:', action);
@@ -779,7 +844,7 @@ export const SitesForm = ({
         returnButton: 'Volver',
       }}
       handleActions={handleActions}
-      error={use.states.error}
+      error={use.attributes.states.error}
       {...modelFormProps}
     >
       <>
@@ -792,10 +857,10 @@ export const SitesForm = ({
         >
           <>
             <InputName
-              changeName={(event) => use.actions.changeName(event)}
+              changeName={(event) => use.attributes.actions.changeName(event)}
               props={{
                 inputProps: {
-                  defaultValue: use.states.name,
+                  defaultValue: use.attributes.states.name,
                 },
                 styles: {
                   width: '100%',
@@ -817,11 +882,11 @@ export const SitesForm = ({
 
             <InputDocumentiIdDigit
               changeDocumentiIdDigit={(event) =>
-                use.actions.changeDocumentNumber(event)
+                use.attributes.actions.changeDocumentNumber(event)
               }
               props={{
                 inputProps: {
-                  defaultValue: use.states.documentNumber,
+                  defaultValue: use.attributes.states.documentNumber,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -840,10 +905,12 @@ export const SitesForm = ({
         >
           <>
             <InputAddress1
-              changeAddress1={(event) => use.actions.changeAddress1(event)}
+              changeAddress1={(event) =>
+                use.attributes.actions.changeAddress1(event)
+              }
               props={{
                 inputProps: {
-                  defaultValue: use.states.address1,
+                  defaultValue: use.attributes.states.address1,
                 },
                 styles: {
                   width: '90%',
@@ -854,10 +921,12 @@ export const SitesForm = ({
             />
 
             <InputAddress2
-              changeAddress2={(event) => use.actions.changeAddress2(event)}
+              changeAddress2={(event) =>
+                use.attributes.actions.changeAddress2(event)
+              }
               props={{
                 inputProps: {
-                  defaultValue: use.states.address2,
+                  defaultValue: use.attributes.states.address2,
                 },
                 styles: {
                   width: '90%',
@@ -888,10 +957,12 @@ export const SitesForm = ({
           <>
             {InputCountry}
             <InputZipCode
-              changeZipCode={(event) => use.actions.changePostCode(event)}
+              changeZipCode={(event) =>
+                use.attributes.actions.changePostCode(event)
+              }
               props={{
                 inputProps: {
-                  defaultValue: use.states.postCode,
+                  defaultValue: use.attributes.states.postCode,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -906,14 +977,53 @@ export const SitesForm = ({
           styles={{
             width: '96.5%',
           }}
+          {...taxesHostContainerProps}
+        >
+          <>
+            <Input
+              styles={{
+                padding: '10px 19px',
+                width: '90%',
+              }}
+              inputProps={{
+                placeholder: 'Latitud',
+                type: 'text',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  use.attributes.actions.setLatitude(
+                    (event.target as HTMLInputElement).value
+                  ),
+                defaultValue: use.attributes.states.latitude,
+              }}
+            />
+            <Input
+              styles={{
+                padding: '10px 19px',
+                width: '90%',
+              }}
+              inputProps={{
+                placeholder: 'Longitud',
+                type: 'text',
+                onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) =>
+                  use.attributes.actions.setLongitude(
+                    (event.target as HTMLInputElement).value
+                  ),
+                defaultValue: use.attributes.states.longitude,
+              }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
           {...phoneEmailContainerProps}
         >
           <>
             <InputPhone
-              changePhone={(event) => use.actions.changePhone(event)}
+              changePhone={(event) => use.attributes.actions.changePhone(event)}
               props={{
                 inputProps: {
-                  defaultValue: use.states.phone,
+                  defaultValue: use.attributes.states.phone,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -923,10 +1033,10 @@ export const SitesForm = ({
               }}
             />
             <InputEmail
-              changeEmail={(event) => use.actions.changeEmail(event)}
+              changeEmail={(event) => use.attributes.actions.changeEmail(event)}
               props={{
                 inputProps: {
-                  defaultValue: use.states.email,
+                  defaultValue: use.attributes.states.email,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -968,10 +1078,12 @@ export const SitesForm = ({
           <>
             {InputTaxes}
             <InputWebSite
-              changeWebSite={(event) => use.actions.changeHost(event)}
+              changeWebSite={(event) =>
+                use.attributes.actions.changeHost(event)
+              }
               props={{
                 inputProps: {
-                  defaultValue: use.states.host,
+                  defaultValue: use.attributes.states.host,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -979,6 +1091,56 @@ export const SitesForm = ({
                 },
                 ...hostInputProps,
               }}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+          {...taxesHostContainerProps}
+        >
+          <>{InputType}</>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+          {...taxesHostContainerProps}
+        >
+          <>{InputType}</>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '96.5%',
+          }}
+          {...taxesHostContainerProps}
+        >
+          <>
+            <PhotoProduct
+              photo={use.attributes.states.image}
+              changePhoto={use.attributes.actions.changeImage}
+              changeError={use.error.actions.changeError}
+              submitting={use.attributes.states.submitting}
+              setSubmitting={use.attributes.actions.setSubmitting}
+            />
+          </>
+        </ContainerButton>
+        <ContainerButton
+          styles={{
+            width: '100%',
+            display: 'block',
+          }}
+        >
+          <>
+            <SliderHorizontal
+              title="Galería de Imágenes"
+              images={use.attributes.states.galleryImage}
+              remove={use.attributes.actions.removeGalleryImage}
+            />
+            <PhotoGalleryForm
+              changePhoto={use.attributes.actions.changeGalleryImage}
+              formId="photo-form"
             />
           </>
         </ContainerButton>

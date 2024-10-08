@@ -1,5 +1,5 @@
 import type { UseErrorReturn } from './useGafpriError';
-import { UseSitesReturn } from './useGafpriSites';
+import { UseGafpriSitesReturn } from './useGafpriSites';
 import { UseCurrenciesReturn } from './useGafpriCurrencies';
 import { UseGafpriApiBankTypeReturn, UseGafpriPagesBankTypeReturn, UseGafpriAttributesBankTypeReturn, UseGafpriDataBankTypeReturn, UseGafpriPaginationsBankTypeReturn, UseGafpriSubPagesBankTypeReturn } from '../Abstract';
 export interface UseGafpriBankTypeReturn {
@@ -13,7 +13,7 @@ export interface UseGafpriBankTypeReturn {
 }
 export type UseGafpriBankTypeProps = {
     token: string | null;
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
     useCurrencies: UseCurrenciesReturn;
 };
 export declare function useGafpriBankType({ token, useSites, useCurrencies, }: UseGafpriBankTypeProps): UseGafpriBankTypeReturn;

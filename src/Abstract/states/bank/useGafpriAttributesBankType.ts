@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SingleValue } from 'react-select';
-import { UseSitesReturn, UseCurrenciesReturn } from '../../../states';
+import { UseGafpriSitesReturn, UseCurrenciesReturn } from '../../../states';
 import { SelectDefault } from '../../../helpers';
 import {
   generalValidationName,
@@ -86,7 +86,7 @@ export type UseGafpriAttributesBankTypeReturn = {
 };
 
 export type UseGafpriAttributesBankTypeProps = {
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
   useCurrencies: UseCurrenciesReturn;
 };
 
@@ -101,7 +101,7 @@ export function useGafpriAttributesBankType({
     label: 'Elija sucursal',
   });
   const sitesIdOptions =
-    useSites.states.sites.data?.items?.map((item) => {
+    useSites.data.states.sites?.map((item) => {
       return { value: `${item.id}`, label: item.name };
     }) || [];
 

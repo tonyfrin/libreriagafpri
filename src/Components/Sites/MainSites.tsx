@@ -1,7 +1,7 @@
 import React from 'react';
 import { Loading } from '../Loading';
 import type { LoadingProps } from '../Loading';
-import type { UseCurrenciesReturn, UseSitesReturn } from '../../states';
+import type { UseCurrenciesReturn, UseGafpriSitesReturn } from '../../states';
 import { SitesForm, InitSites, FadeIn } from '../../Abstract';
 import type {
   InitSitesPropsExtended,
@@ -9,7 +9,7 @@ import type {
 } from '../../Abstract';
 
 export type MainSitesProps = {
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
   useCurrencies: UseCurrenciesReturn;
   loadingProps?: LoadingProps;
   initProps?: InitSitesPropsExtended;
@@ -18,7 +18,7 @@ export type MainSitesProps = {
 };
 
 export type MainSitesPropsExtended = {
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
   useCurrencies: UseCurrenciesReturn;
   loadingProps?: LoadingProps;
   initProps?: InitSitesPropsExtended;
@@ -36,18 +36,18 @@ export const MainSites = ({
 }: MainSitesProps): JSX.Element => {
   return (
     <>
-      {useSites.states.isFetching && <Loading {...loadingProps} />}
-      {useSites.states.isInit && (
+      {useSites.pages.states.isFetching && <Loading {...loadingProps} />}
+      {useSites.pages.states.isInit && (
         <FadeIn
           keyName="init"
-          isVisible={useSites.states.isInit}
+          isVisible={useSites.pages.states.isInit}
           {...initProps}
         >
           <InitSites use={useSites} />
         </FadeIn>
       )}
-      {useSites.states.isAdd && (
-        <FadeIn keyName="add" isVisible={useSites.states.isAdd}>
+      {useSites.pages.states.isAdd && (
+        <FadeIn keyName="add" isVisible={useSites.pages.states.isAdd}>
           <SitesForm
             use={useSites}
             formType="add"
@@ -56,8 +56,8 @@ export const MainSites = ({
           />
         </FadeIn>
       )}
-      {useSites.states.isUpdate && (
-        <FadeIn keyName="update" isVisible={useSites.states.isUpdate}>
+      {useSites.pages.states.isUpdate && (
+        <FadeIn keyName="update" isVisible={useSites.pages.states.isUpdate}>
           <SitesForm
             formType="update"
             use={useSites}

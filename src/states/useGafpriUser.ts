@@ -28,9 +28,9 @@ import {
   generalChangeLastName,
   generalChangeName,
   generalChangePhone,
-  generalChangePhoto,
   generalChangeRoles,
   generalChanceIsActive,
+  generalChangePhotoWebSockets,
 } from '../Changes';
 
 export interface UserAttributes {
@@ -544,12 +544,13 @@ export const useGafpriUsers = ({
   const changePhoto = async (
     e: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
-    generalChangePhoto({
+    generalChangePhotoWebSockets({
       e,
       changeError,
       setSubmitting,
       setPhoto,
       validation: validationPhoto,
+      from: 'photo-user',
     });
   };
 

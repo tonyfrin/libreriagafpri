@@ -2,9 +2,9 @@ import type { ButtonProps } from '../Button';
 import type { ListPropsExtended } from '../List';
 import type { ErrorProps } from '../Error';
 import type { HeaderProps } from '../Header';
-import type { UseSitesReturn } from '../../states';
+import type { UseGafpriSitesReturn } from '../../states';
 export type InitSitesProps = {
-    use: UseSitesReturn;
+    use: UseGafpriSitesReturn;
     optionButtonContainerStyle?: string;
     updateButtonProps?: ButtonProps;
     deleteButtonProps?: ButtonProps;
@@ -13,7 +13,7 @@ export type InitSitesProps = {
     listProps?: ListPropsExtended;
 };
 export type InitSitesPropsExtended = {
-    use?: UseSitesReturn;
+    use?: UseGafpriSitesReturn;
     optionButtonContainerStyle?: string;
     updateButtonProps?: ButtonProps;
     deleteButtonProps?: ButtonProps;

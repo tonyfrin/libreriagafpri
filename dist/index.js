@@ -3117,6 +3117,12 @@ Object.defineProperty(exports, "generalChangeGalleryPhoto", {
     return _Changes.generalChangeGalleryPhoto;
   }
 });
+Object.defineProperty(exports, "generalChangeGalleryPhotoWebSockets", {
+  enumerable: true,
+  get: function get() {
+    return _Changes.generalChangeGalleryPhotoWebSockets;
+  }
+});
 Object.defineProperty(exports, "generalChangeHeight", {
   enumerable: true,
   get: function get() {
@@ -3187,6 +3193,12 @@ Object.defineProperty(exports, "generalChangePhoto", {
   enumerable: true,
   get: function get() {
     return _Changes.generalChangePhoto;
+  }
+});
+Object.defineProperty(exports, "generalChangePhotoWebSockets", {
+  enumerable: true,
+  get: function get() {
+    return _Changes.generalChangePhotoWebSockets;
   }
 });
 Object.defineProperty(exports, "generalChangePostCode", {

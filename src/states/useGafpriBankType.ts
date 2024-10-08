@@ -1,6 +1,6 @@
 import { useGafpriError } from './useGafpriError';
 import type { UseErrorReturn } from './useGafpriError';
-import { UseSitesReturn } from './useGafpriSites';
+import { UseGafpriSitesReturn } from './useGafpriSites';
 import { UseCurrenciesReturn } from './useGafpriCurrencies';
 import {
   UseGafpriApiBankTypeReturn,
@@ -29,7 +29,7 @@ export interface UseGafpriBankTypeReturn {
 
 export type UseGafpriBankTypeProps = {
   token: string | null;
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
   useCurrencies: UseCurrenciesReturn;
 };
 

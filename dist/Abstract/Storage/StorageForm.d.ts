@@ -1,10 +1,10 @@
 import { ContainerButtonPropsExtended } from '../Containers';
 import { ModelFormPropsExtended } from '../Form';
-import { UseGafpriStorageReturn, UseSitesReturn } from '../../states';
+import { UseGafpriStorageReturn, UseGafpriSitesReturn } from '../../states';
 import { InputProps, GsSelectPropsExtended } from '../Input';
 export type StorageFormProps = {
     use: UseGafpriStorageReturn;
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
     formType: 'add' | 'update';
     modelFormProps?: ModelFormPropsExtended;
     nameContainerProps?: ContainerButtonPropsExtended;
@@ -26,7 +26,7 @@ export type StorageFormProps = {
 export type StorageFormPropsExtended = {
     use?: UseGafpriStorageReturn;
     formType?: 'add' | 'update';
-    useSites?: UseSitesReturn;
+    useSites?: UseGafpriSitesReturn;
     modelFormProps?: ModelFormPropsExtended;
     nameContainerProps?: ContainerButtonPropsExtended;
     nameInputProps?: InputProps;

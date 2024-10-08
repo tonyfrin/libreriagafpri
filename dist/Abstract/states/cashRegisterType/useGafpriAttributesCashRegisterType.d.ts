@@ -1,5 +1,5 @@
 import { SingleValue } from 'react-select';
-import { UseSitesReturn } from '../../../states';
+import { UseGafpriSitesReturn } from '../../../states';
 import { SelectDefault } from '../../../helpers';
 import { UseGafpriAttributesCashRegisterTypeUserReturn } from './cashRegisterTypeUser';
 type State = {
@@ -29,7 +29,7 @@ export type UseGafpriAttributesCashRegisterTypeReturn = {
 };
 export type UseGafpriAttributesCashRegisterTypeProps = {
     useCrtu: UseGafpriAttributesCashRegisterTypeUserReturn;
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
 };
 export declare function useGafpriAttributesCashRegisterType({ useCrtu, useSites, }: UseGafpriAttributesCashRegisterTypeProps): UseGafpriAttributesCashRegisterTypeReturn;
 export {};

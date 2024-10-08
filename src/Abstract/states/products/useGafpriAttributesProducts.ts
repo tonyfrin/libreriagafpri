@@ -48,7 +48,7 @@ import { SelectDefault, generatePermanentLink } from '../../../helpers';
 import { UseCategoryReturn, Category, UseErrorReturn } from '../../../states';
 import {
   generalChangePhoto,
-  generalChangeGalleryPhoto,
+  generalChangeGalleryPhotoWebSockets,
   generalChangeType,
   generalChangeStatus,
   generalChangeName,
@@ -834,13 +834,14 @@ export function useGafpriAttributesProducts({
   const changeGalleryImage = async (
     e: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
-    await generalChangeGalleryPhoto({
+    await generalChangeGalleryPhotoWebSockets({
       e,
       changeError: useError.actions.changeError,
       setSubmitting,
       setPhoto: setGalleryImage,
       validation: validationGalleryImage,
       selectedOptions: galleryImage,
+      from: 'product-gallery',
     });
   };
 

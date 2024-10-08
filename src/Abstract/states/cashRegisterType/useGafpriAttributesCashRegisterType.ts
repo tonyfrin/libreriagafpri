@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SingleValue } from 'react-select';
-import { UseSitesReturn } from '../../../states';
+import { UseGafpriSitesReturn } from '../../../states';
 import { SelectDefault } from '../../../helpers';
 import {
   generalValidationName,
@@ -37,7 +37,7 @@ export type UseGafpriAttributesCashRegisterTypeReturn = {
 
 export type UseGafpriAttributesCashRegisterTypeProps = {
   useCrtu: UseGafpriAttributesCashRegisterTypeUserReturn;
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
 };
 
 export function useGafpriAttributesCashRegisterType({
@@ -54,7 +54,7 @@ export function useGafpriAttributesCashRegisterType({
     label: 'Elija sucursal',
   });
   const siteOptions =
-    useSites.states.sites.data?.items?.map((item) => {
+    useSites.data.states.sites?.map((item) => {
       return { value: `${item.id}`, label: item.name };
     }) || [];
 

@@ -21,12 +21,6 @@ export type {
   UseGafpriEntityReturn,
   UseGafpriEntityProps,
 } from './useGafpriEntity';
-export { useGafpriSites } from './useGafpriSites';
-export type {
-  UseSitesReturn,
-  SitesAttributes,
-  UseSitesProps,
-} from './useGafpriSites';
 export { useGafpriUsers } from './useGafpriUser';
 export type {
   UserAttributes,
@@ -136,3 +130,8 @@ export type {
   UseGafpriWalletAccountReturn,
   UseGafpriWalletAccountProps,
 } from './useGafpriWalletAccount';
+export { useGafpriSites } from './useGafpriSites';
+export type {
+  UseGafpriSitesProps,
+  UseGafpriSitesReturn,
+} from './useGafpriSites';

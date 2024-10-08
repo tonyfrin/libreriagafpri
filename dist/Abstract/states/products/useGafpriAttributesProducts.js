@@ -672,13 +672,14 @@ function useGafpriAttributesProducts(_ref) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return (0, _Changes.generalChangeGalleryPhoto)({
+            return (0, _Changes.generalChangeGalleryPhotoWebSockets)({
               e: e,
               changeError: useError.actions.changeError,
               setSubmitting: setSubmitting,
               setPhoto: setGalleryImage,
               validation: validationGalleryImage,
-              selectedOptions: galleryImage
+              selectedOptions: galleryImage,
+              from: 'product-gallery'
             });
           case 2:
           case "end":

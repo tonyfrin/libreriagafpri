@@ -279,12 +279,13 @@ function useGafpriCategory(_ref) {
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            (0, _Changes.generalChangePhoto)({
+            (0, _Changes.generalChangePhotoWebSockets)({
               e: e,
               changeError: changeError,
               setSubmitting: setSubmitting,
               setPhoto: setPhoto,
-              validation: validationPhoto
+              validation: validationPhoto,
+              from: 'category-photo'
             });
           case 1:
           case "end":

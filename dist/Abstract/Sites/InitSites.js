@@ -42,7 +42,7 @@ var InitSites = exports.InitSites = function InitSites(_ref) {
       title: 'Sitios',
       buttonLargeProps: {
         label: 'Añadir sitios',
-        onClick: use.actions.goAdd,
+        onClick: use.pages.actions.goAdd,
         Icon: _fa.FaPlus,
         titleButton: 'Agregar',
         description: 'Agrega un nuevo Sitio.'
@@ -50,7 +50,7 @@ var InitSites = exports.InitSites = function InitSites(_ref) {
     } : _ref$headerProps,
     _ref$errorProps = _ref.errorProps,
     errorProps = _ref$errorProps === void 0 ? {
-      error: use.states.error
+      error: use.attributes.states.error
     } : _ref$errorProps,
     listProps = _ref.listProps;
   var ButtonUpdate = function ButtonUpdate(_ref2) {
@@ -60,20 +60,20 @@ var InitSites = exports.InitSites = function InitSites(_ref) {
     }, /*#__PURE__*/_react["default"].createElement(_Button.Button, (0, _extends2["default"])({
       buttonProps: {
         onClick: function onClick() {
-          return use.actions.goUpdate(id);
+          return use.pages.actions.goUpdate(id);
         }
       }
     }, updateButtonProps)), /*#__PURE__*/_react["default"].createElement(_Button.Button, (0, _extends2["default"])({
       buttonProps: {
         onClick: function onClick() {
-          return use.actions.deleteSites(id);
+          return use.api.actions.erase(id);
         }
       }
     }, deleteButtonProps)));
   };
-  var filteredSites = use.actions.filterByName(use.states.searchTerm);
-  var sites = use.actions.sortByName(filteredSites, use.states.orderList) || [];
-  var paginatedSites = use.actions.getPaginated(sites, use.states.currentPage, use.states.itemsPerPage);
+  var filteredSites = use.paginations.actions.filterByName(use.paginations.states.searchTerm, use.data.states.sites);
+  var sites = use.paginations.actions.sortByName(filteredSites, use.paginations.states.orderList) || [];
+  var paginatedSites = use.paginations.actions.getPaginated(sites, use.paginations.states.currentPage, use.paginations.states.itemsPerPage);
   var items = (_paginatedSites$map = paginatedSites === null || paginatedSites === void 0 ? void 0 : paginatedSites.map(function (item) {
     var stateCountry = _constants.StatesCountries[0][item === null || item === void 0 ? void 0 : item.country][0][item === null || item === void 0 ? void 0 : item.state] || '';
     var country = _constants.Countries[0][item === null || item === void 0 ? void 0 : item.country] || '';
@@ -89,14 +89,14 @@ var InitSites = exports.InitSites = function InitSites(_ref) {
     value: 'desc',
     label: 'Descendente'
   }];
-  var valueDefaul = use.states.orderList === 'asc' ? {
+  var valueDefaul = use.paginations.states.orderList === 'asc' ? {
     value: 'asc',
     label: 'Ascendente'
   } : {
     value: 'desc',
     label: 'Descendente'
   };
-  var totalPages = Math.ceil(sites.length / use.states.itemsPerPage);
+  var totalPages = Math.ceil(sites.length / use.paginations.states.itemsPerPage);
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Header.Header, headerProps), /*#__PURE__*/_react["default"].createElement(_Error.Error, errorProps), /*#__PURE__*/_react["default"].createElement(_List.List, (0, _extends2["default"])({
     title: "Sitios",
     items: items,
@@ -106,7 +106,7 @@ var InitSites = exports.InitSites = function InitSites(_ref) {
       options: options,
       onChange: function onChange(event) {
         if (event !== null && event !== void 0 && event.value) {
-          use.actions.setOrderList(event.value);
+          use.paginations.actions.setOrderList(event.value);
         }
       },
       defaultValue: valueDefaul,
@@ -115,15 +115,15 @@ var InitSites = exports.InitSites = function InitSites(_ref) {
       }
     },
     inputProps: {
-      value: use.states.searchTerm,
+      value: use.paginations.states.searchTerm,
       onChange: function onChange(e) {
-        return use.actions.setSearchTerm(e.target.value);
+        return use.paginations.actions.setSearchTerm(e.target.value);
       },
       placeholder: 'Buscar por nombre...'
     },
     propsPagination: {
-      currentPage: use.states.currentPage,
-      setCurrentPage: use.actions.setCurrentPage,
+      currentPage: use.paginations.states.currentPage,
+      setCurrentPage: use.paginations.actions.setCurrentPage,
       totalPages: totalPages
     }
   }, listProps)));

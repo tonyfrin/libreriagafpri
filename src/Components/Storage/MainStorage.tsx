@@ -7,11 +7,14 @@ import {
   StorageFormPropsExtended,
   StorageForm,
 } from '../../Abstract';
-import type { UseGafpriStorageReturn, UseSitesReturn } from '../../states';
+import type {
+  UseGafpriStorageReturn,
+  UseGafpriSitesReturn,
+} from '../../states';
 
 export type MainStorageProps = {
   use: UseGafpriStorageReturn;
-  useSites: UseSitesReturn;
+  useSites: UseGafpriSitesReturn;
   initStorageProps?: InitStoragePropsExtended;
   addFormProps?: StorageFormPropsExtended;
   updateFormProps?: StorageFormPropsExtended;
@@ -19,7 +22,7 @@ export type MainStorageProps = {
 
 export type MainStoragePropsExtended = {
   use?: UseGafpriStorageReturn;
-  useSites?: UseSitesReturn;
+  useSites?: UseGafpriSitesReturn;
   initStorageProps?: InitStoragePropsExtended;
   addFormProps?: StorageFormPropsExtended;
   updateFormProps?: StorageFormPropsExtended;

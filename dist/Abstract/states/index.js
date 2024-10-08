@@ -99,6 +99,12 @@ Object.defineProperty(exports, "useGafpriApiShippingMethods", {
     return _shipping.useGafpriApiShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriApiSites", {
+  enumerable: true,
+  get: function get() {
+    return _sites.useGafpriApiSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriApiStorage", {
   enumerable: true,
   get: function get() {
@@ -285,6 +291,12 @@ Object.defineProperty(exports, "useGafpriAttributesShippingMethods", {
     return _shipping.useGafpriAttributesShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriAttributesSites", {
+  enumerable: true,
+  get: function get() {
+    return _sites.useGafpriAttributesSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriAttributesStorage", {
   enumerable: true,
   get: function get() {
@@ -391,6 +403,12 @@ Object.defineProperty(exports, "useGafpriDataShippingMethods", {
   enumerable: true,
   get: function get() {
     return _shipping.useGafpriDataShippingMethods;
+  }
+});
+Object.defineProperty(exports, "useGafpriDataSites", {
+  enumerable: true,
+  get: function get() {
+    return _sites.useGafpriDataSites;
   }
 });
 Object.defineProperty(exports, "useGafpriDataStorage", {
@@ -531,6 +549,12 @@ Object.defineProperty(exports, "useGafpriPagesShippingMethods", {
     return _shipping.useGafpriPagesShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriPagesSites", {
+  enumerable: true,
+  get: function get() {
+    return _sites.useGafpriPagesSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriPagesStorage", {
   enumerable: true,
   get: function get() {
@@ -639,6 +663,12 @@ Object.defineProperty(exports, "useGafpriPaginationsShippingMethods", {
     return _shipping.useGafpriPaginationsShippingMethods;
   }
 });
+Object.defineProperty(exports, "useGafpriPaginationsSites", {
+  enumerable: true,
+  get: function get() {
+    return _sites.useGafpriPaginationsSites;
+  }
+});
 Object.defineProperty(exports, "useGafpriPaginationsStorage", {
   enumerable: true,
   get: function get() {
@@ -708,3 +738,4 @@ var _credits = require("./credits");
 var _paymentMethods = require("./paymentMethods");
 var _orderReturn = require("./orderReturn");
 var _wallet = require("./wallet");
+var _sites = require("./sites");

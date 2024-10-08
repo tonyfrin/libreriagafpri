@@ -1,5 +1,5 @@
 import type { UseErrorReturn } from './useGafpriError';
-import { UseSitesReturn } from './useGafpriSites';
+import { UseGafpriSitesReturn } from './useGafpriSites';
 import { UseUserReturn } from './useGafpriUser';
 import { UseGafpriApiCashRegisterTypeReturn, UseGafpriPagesCashRegisterTypeReturn, UseGafpriAttributesCashRegisterTypeReturn, UseGafpriDataCashRegisterTypeReturn, UseGafpriPaginationsCashRegisterTypeReturn, UseGafpriAttributesCashRegisterTypeUserReturn, UseGafpriSubPagesCashRegisterTypeReturn } from '../Abstract';
 export interface UseGafpriCashRegisterTypeReturn {
@@ -14,7 +14,7 @@ export interface UseGafpriCashRegisterTypeReturn {
 }
 export type UseGafpriCashRegisterTypeProps = {
     token: string | null;
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
     useUser: UseUserReturn;
 };
 export declare function useGafpriCashRegisterType({ token, useSites, useUser, }: UseGafpriCashRegisterTypeProps): UseGafpriCashRegisterTypeReturn;

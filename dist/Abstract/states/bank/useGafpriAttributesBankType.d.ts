@@ -1,5 +1,5 @@
 import { SingleValue } from 'react-select';
-import { UseSitesReturn, UseCurrenciesReturn } from '../../../states';
+import { UseGafpriSitesReturn, UseCurrenciesReturn } from '../../../states';
 import { SelectDefault } from '../../../helpers';
 import { GeneralAttribute } from '../../../Validations';
 type State = {
@@ -65,7 +65,7 @@ export type UseGafpriAttributesBankTypeReturn = {
     actions: Actions;
 };
 export type UseGafpriAttributesBankTypeProps = {
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
     useCurrencies: UseCurrenciesReturn;
 };
 export declare function useGafpriAttributesBankType({ useCurrencies, useSites, }: UseGafpriAttributesBankTypeProps): UseGafpriAttributesBankTypeReturn;

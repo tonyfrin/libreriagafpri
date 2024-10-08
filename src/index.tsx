@@ -985,6 +985,7 @@ export type {
   InitWalletAccountProps,
   InitWalletAccountPropsExtended,
   UserWalletAccountSearchFormProps,
+  SitesAttributes,
 } from './Abstract';
 export {
   MainFooter,
@@ -1185,9 +1186,8 @@ export type {
   RolesAttributes,
   UseGafpriEntityReturn,
   UseGafpriEntityProps,
-  UseSitesReturn,
-  SitesAttributes,
-  UseSitesProps,
+  UseGafpriSitesReturn,
+  UseGafpriSitesProps,
   UserAttributes,
   UseUserReturn,
   UseUserProps,
@@ -1647,6 +1647,8 @@ export {
   generalChangeCreditTimeToPay,
   generalChangeCreditLimit,
   generalChangeWebSite,
+  generalChangePhotoWebSockets,
+  generalChangeGalleryPhotoWebSockets,
 } from './Changes';
 export type {
   GeneralChangeNoteProps,
@@ -1719,4 +1721,6 @@ export type {
   GeneralChangeCreditTimeToPayProps,
   GeneralChangeCreditLimitProps,
   GeneralChangeWebSiteProps,
+  GeneralChangePhotoWebSocketsProps,
+  GeneralChangeGalleryPhotoWebSocketsProps,
 } from './Changes';

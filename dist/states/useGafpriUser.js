@@ -424,12 +424,13 @@ var useGafpriUsers = exports.useGafpriUsers = function useGafpriUsers(_ref) {
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            (0, _Changes.generalChangePhoto)({
+            (0, _Changes.generalChangePhotoWebSockets)({
               e: e,
               changeError: changeError,
               setSubmitting: setSubmitting,
               setPhoto: setPhoto,
-              validation: validationPhoto
+              validation: validationPhoto,
+              from: 'photo-user'
             });
           case 1:
           case "end":

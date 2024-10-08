@@ -14,7 +14,7 @@ var _constants = require("../../../constants");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 function useGafpriAttributesStorage(_ref) {
-  var _useSites$states$site;
+  var _useSites$data$states;
   var useError = _ref.useError,
     useSites = _ref.useSites;
   var _useState = (0, _react.useState)(''),
@@ -117,7 +117,7 @@ function useGafpriAttributesStorage(_ref) {
     _useState44 = (0, _slicedToArray2["default"])(_useState43, 2),
     siteDefault = _useState44[0],
     setSiteDefault = _useState44[1];
-  var siteOptions = ((_useSites$states$site = useSites.states.sites.data) === null || _useSites$states$site === void 0 || (_useSites$states$site = _useSites$states$site.items) === null || _useSites$states$site === void 0 ? void 0 : _useSites$states$site.map(function (item) {
+  var siteOptions = ((_useSites$data$states = useSites.data.states.sites) === null || _useSites$data$states === void 0 ? void 0 : _useSites$data$states.map(function (item) {
     return {
       value: "".concat(item.id),
       label: item.name

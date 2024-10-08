@@ -1,8 +1,8 @@
 import type { LoadingProps } from '../Loading';
-import type { UseCurrenciesReturn, UseSitesReturn } from '../../states';
+import type { UseCurrenciesReturn, UseGafpriSitesReturn } from '../../states';
 import type { InitSitesPropsExtended, SitesFormPropsExtended } from '../../Abstract';
 export type MainSitesProps = {
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
     useCurrencies: UseCurrenciesReturn;
     loadingProps?: LoadingProps;
     initProps?: InitSitesPropsExtended;
@@ -10,7 +10,7 @@ export type MainSitesProps = {
     updateFormProps?: SitesFormPropsExtended;
 };
 export type MainSitesPropsExtended = {
-    useSites: UseSitesReturn;
+    useSites: UseGafpriSitesReturn;
     useCurrencies: UseCurrenciesReturn;
     loadingProps?: LoadingProps;
     initProps?: InitSitesPropsExtended;

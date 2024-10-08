@@ -177,6 +177,12 @@ Object.defineProperty(exports, "generalChangeGalleryPhoto", {
     return _generalChangeGalleryPhoto.generalChangeGalleryPhoto;
   }
 });
+Object.defineProperty(exports, "generalChangeGalleryPhotoWebSockets", {
+  enumerable: true,
+  get: function get() {
+    return _generalChangeGalleryPhotoWebSockets.generalChangeGalleryPhotoWebSockets;
+  }
+});
 Object.defineProperty(exports, "generalChangeHeight", {
   enumerable: true,
   get: function get() {
@@ -247,6 +253,12 @@ Object.defineProperty(exports, "generalChangePhoto", {
   enumerable: true,
   get: function get() {
     return _generalChangePhoto.generalChangePhoto;
+  }
+});
+Object.defineProperty(exports, "generalChangePhotoWebSockets", {
+  enumerable: true,
+  get: function get() {
+    return _generalChangePhotoWebSockets.generalChangePhotoWebSockets;
   }
 });
 Object.defineProperty(exports, "generalChangePostCode", {
@@ -493,3 +505,5 @@ var _generalChangeSettings = require("./generalChangeSettings");
 var _generalChangeBankType = require("./generalChangeBankType");
 var _generalChangeCreditLimit = require("./generalChangeCreditLimit");
 var _generalChangeCreditTimeToPay = require("./generalChangeCreditTimeToPay");
+var _generalChangePhotoWebSockets = require("./generalChangePhotoWebSockets");
+var _generalChangeGalleryPhotoWebSockets = require("./generalChangeGalleryPhotoWebSockets");

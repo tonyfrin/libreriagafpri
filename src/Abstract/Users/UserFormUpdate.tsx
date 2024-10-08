@@ -13,7 +13,7 @@ import { ContainerButton } from '../Containers';
 import type { ContainerButtonPropsExtended } from '../Containers';
 import { ModelForm, PhotoUser } from '../Form';
 import type { ModelFormPropsExtended, PhotoUserProps } from '../Form';
-import type { UseUserReturn, UseSitesReturn } from '../../states';
+import type { UseUserReturn } from '../../states';
 
 export type UserFormUpdateProps = {
   use: UseUserReturn;

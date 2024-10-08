@@ -1,9 +1,9 @@
 import type { InputProps, GsSelectPropsExtended } from '../Input';
 import type { ContainerButtonPropsExtended } from '../Containers';
 import type { ModelFormPropsExtended } from '../Form';
-import type { UseSitesReturn, UseCurrenciesReturn } from '../../states';
+import type { UseGafpriSitesReturn, UseCurrenciesReturn } from '../../states';
 export type SitesFormProps = {
-    use: UseSitesReturn;
+    use: UseGafpriSitesReturn;
     formType: 'add' | 'update';
     useCurrencies: UseCurrenciesReturn;
     modelFormProps?: ModelFormPropsExtended;
@@ -38,7 +38,7 @@ export type SitesFormProps = {
     hostInputProps?: InputProps;
 };
 export type SitesFormPropsExtended = {
-    use?: UseSitesReturn;
+    use?: UseGafpriSitesReturn;
     formType?: 'add' | 'update';
     useCurrencies?: UseCurrenciesReturn;
     modelFormProps?: ModelFormPropsExtended;

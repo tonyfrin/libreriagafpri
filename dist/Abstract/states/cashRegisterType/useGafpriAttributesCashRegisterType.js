@@ -10,7 +10,7 @@ var _react = require("react");
 var _Validations = require("../../../Validations");
 var _Changes = require("../../../Changes");
 function useGafpriAttributesCashRegisterType(_ref) {
-  var _useSites$states$site;
+  var _useSites$data$states;
   var useCrtu = _ref.useCrtu,
     useSites = _ref.useSites;
   var _useState = (0, _react.useState)(''),
@@ -36,7 +36,7 @@ function useGafpriAttributesCashRegisterType(_ref) {
     _useState10 = (0, _slicedToArray2["default"])(_useState9, 2),
     siteDefault = _useState10[0],
     setSiteDefault = _useState10[1];
-  var siteOptions = ((_useSites$states$site = useSites.states.sites.data) === null || _useSites$states$site === void 0 || (_useSites$states$site = _useSites$states$site.items) === null || _useSites$states$site === void 0 ? void 0 : _useSites$states$site.map(function (item) {
+  var siteOptions = ((_useSites$data$states = useSites.data.states.sites) === null || _useSites$data$states === void 0 ? void 0 : _useSites$data$states.map(function (item) {
     return {
       value: "".concat(item.id),
       label: item.name
