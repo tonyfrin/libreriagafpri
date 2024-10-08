@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { css } from '@emotion/css';
 import { Button } from '../Button';
@@ -11,9 +11,11 @@ import type { ErrorProps } from '../Error';
 import { Header } from '../Header';
 import type { HeaderProps } from '../Header';
 import type { UseGafpriSitesReturn } from '../../states';
+import { Loading } from '../../Components';
 
 export type InitSitesProps = {
   use: UseGafpriSitesReturn;
+  token: string | null;
   optionButtonContainerStyle?: string;
   updateButtonProps?: ButtonProps;
   deleteButtonProps?: ButtonProps;
@@ -39,6 +41,7 @@ const defaultOptionButtonContainerStyle = css`
 
 export const InitSites = ({
   use,
+  token,
   optionButtonContainerStyle = defaultOptionButtonContainerStyle,
   updateButtonProps = {
     title: 'Actualizar',
@@ -68,6 +71,20 @@ export const InitSites = ({
   },
   listProps,
 }: InitSitesProps): JSX.Element => {
+  const deleteSite = async (id: number): Promise<void> => {
+    try {
+      use.data.actions.setIsReady(false);
+      const data = await use.api.actions.erase(id);
+      if (data && data.success) {
+        use.data.actions.handleDeletedSite({ itemId: id });
+      }
+    } catch (error) {
+      use.error.actions.changeError(['Error al eliminar sitio']);
+    } finally {
+      use.data.actions.setIsReady(true);
+    }
+  };
+
   const ButtonUpdate: React.FC<{ id: number }> = ({ id }) => {
     return (
       <div className={css(optionButtonContainerStyle)}>
@@ -79,7 +96,7 @@ export const InitSites = ({
         />
         <Button
           buttonProps={{
-            onClick: () => use.api.actions.erase(id),
+            onClick: () => deleteSite(id),
           }}
           {...deleteButtonProps}
         />
@@ -134,42 +151,66 @@ export const InitSites = ({
     sites.length / use.paginations.states.itemsPerPage
   );
 
+  const getSites = async (): Promise<void> => {
+    try {
+      use.data.actions.setIsReady(false);
+      const data = await use.data.actions.getSites();
+      if (data && data.success) {
+        use.data.actions.setSites(data.data.items);
+      }
+    } catch (error) {
+      use.data.actions.setSites([]);
+    } finally {
+      use.data.actions.setIsReady(true);
+    }
+  };
+
+  useEffect(() => {
+    getSites();
+  }, [token]);
+
   return (
     <>
-      <Header {...headerProps} />
-      <Error {...errorProps} />
-      <List
-        title="Sitios"
-        items={items}
-        headers={headers}
-        columns={5}
-        selectProps={{
-          options: options,
-          onChange: (event) => {
-            if (event?.value) {
-              use.paginations.actions.setOrderList(
-                event.value as 'asc' | 'desc'
-              );
-            }
-          },
-          defaultValue: valueDefaul,
-          styles: {
-            width: '50%',
-          },
-        }}
-        inputProps={{
-          value: use.paginations.states.searchTerm,
-          onChange: (e) =>
-            use.paginations.actions.setSearchTerm(e.target.value),
-          placeholder: 'Buscar por nombre...',
-        }}
-        propsPagination={{
-          currentPage: use.paginations.states.currentPage,
-          setCurrentPage: use.paginations.actions.setCurrentPage,
-          totalPages: totalPages,
-        }}
-        {...listProps}
-      />
+      {!use.data.states.isReady ? (
+        <Loading />
+      ) : (
+        <>
+          <Header {...headerProps} />
+          <Error {...errorProps} />
+          <List
+            title="Sitios"
+            items={items}
+            headers={headers}
+            columns={5}
+            selectProps={{
+              options: options,
+              onChange: (event) => {
+                if (event?.value) {
+                  use.paginations.actions.setOrderList(
+                    event.value as 'asc' | 'desc'
+                  );
+                }
+              },
+              defaultValue: valueDefaul,
+              styles: {
+                width: '50%',
+              },
+            }}
+            inputProps={{
+              value: use.paginations.states.searchTerm,
+              onChange: (e) =>
+                use.paginations.actions.setSearchTerm(e.target.value),
+              placeholder: 'Buscar por nombre...',
+            }}
+            propsPagination={{
+              currentPage: use.paginations.states.currentPage,
+              setCurrentPage: use.paginations.actions.setCurrentPage,
+              totalPages: totalPages,
+            }}
+            {...listProps}
+          />
+        </>
+      )}
     </>
   );
 };

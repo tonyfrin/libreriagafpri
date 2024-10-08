@@ -5,8 +5,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SitesForm = void 0;
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = _interopRequireDefault(require("react"));
 var _Input = require("../Input");
@@ -92,6 +94,80 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     _React$useState20 = (0, _slicedToArray2["default"])(_React$useState19, 2),
     InputType = _React$useState20[0],
     setInputType = _React$useState20[1];
+  var _React$useState21 = _react["default"].useState( /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null)),
+    _React$useState22 = (0, _slicedToArray2["default"])(_React$useState21, 2),
+    InputStatus = _React$useState22[0],
+    setInputStatus = _React$useState22[1];
+  var updateSite = /*#__PURE__*/function () {
+    var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var data;
+      return _regenerator["default"].wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            use.data.actions.setIsReady(false);
+            _context.next = 4;
+            return use.api.actions.update();
+          case 4:
+            data = _context.sent;
+            if (data && data.success) {
+              use.data.actions.handleUpdatedSite(data.item);
+            }
+            _context.next = 11;
+            break;
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](0);
+            use.error.actions.changeError(['Error al actualizar sitio']);
+          case 11:
+            _context.prev = 11;
+            use.data.actions.setIsReady(true);
+            return _context.finish(11);
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[0, 8, 11, 14]]);
+    }));
+    return function updateSite() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var appSite = /*#__PURE__*/function () {
+    var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+      var data;
+      return _regenerator["default"].wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            use.data.actions.setIsReady(false);
+            _context2.next = 4;
+            return use.api.actions.add();
+          case 4:
+            data = _context2.sent;
+            if (data && data.success) {
+              use.data.actions.handleNewSite(data.item);
+            }
+            _context2.next = 11;
+            break;
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](0);
+            use.error.actions.changeError(['Error al crear sitio']);
+          case 11:
+            _context2.prev = 11;
+            use.data.actions.setIsReady(true);
+            return _context2.finish(11);
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 8, 11, 14]]);
+    }));
+    return function appSite() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   var currentSite = isUpdateForm ? use.data.actions.getById(use.attributes.states.siteId) : null;
   _react["default"].useEffect(function () {
     use.attributes.actions.validationName(use.attributes.states.name);
@@ -177,6 +253,22 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
         });
       }
       if (currentSite.host) use.attributes.actions.changeHost(currentSite.host);
+      if (currentSite.type) {
+        var typeOptionValue = use.attributes.states.typeOptions.find(function (option) {
+          return option.value === currentSite.type;
+        });
+        if (typeOptionValue !== undefined) use.attributes.actions.changeType(typeOptionValue);
+      }
+      if (currentSite.status) {
+        var statusOptionValue = use.attributes.states.statusOptions.find(function (option) {
+          return option.value === currentSite.status;
+        });
+        if (statusOptionValue !== undefined) use.attributes.actions.changeType(statusOptionValue);
+      }
+      if (currentSite.longitude) use.attributes.actions.setLongitude(currentSite.longitude);
+      if (currentSite.latitude) use.attributes.actions.setLatitude(currentSite.latitude);
+      if (currentSite.image) use.attributes.actions.setImage(currentSite.image);
+      if (currentSite.galleryImage) use.attributes.actions.setGalleryImage(currentSite.galleryImage);
     }
     if (isAddForm) {
       setInputTypeDocument(function () {
@@ -291,6 +383,20 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
           }
         });
       });
+      setInputStatus(function () {
+        return /*#__PURE__*/_react["default"].createElement(_Input.SelectStatus, {
+          changeStatus: function changeStatus(event) {
+            return use.attributes.actions.changeStatus(event);
+          },
+          props: {
+            options: use.attributes.states.statusOptions,
+            defaultValue: use.attributes.states.statusDefault,
+            styles: {
+              width: '90%'
+            }
+          }
+        });
+      });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -366,7 +472,7 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
   }, [use.attributes.states.country, use.attributes.states.stateCountryOptions, use.attributes.states.cityOptions]);
   _react["default"].useEffect(function () {
     if (isUpdateForm) {
-      var _use$attributes$state, _use$attributes$state2, _use$attributes$state3, _use$attributes$state4, _use$attributes$state5, _use$attributes$state6, _use$attributes$state7;
+      var _use$attributes$state, _use$attributes$state2, _use$attributes$state3, _use$attributes$state4, _use$attributes$state5, _use$attributes$state6;
       if (((_use$attributes$state = use.attributes.states.documentIndexDefault) === null || _use$attributes$state === void 0 ? void 0 : _use$attributes$state.label) !== 'Elija el tipo de Documento') {
         setInputTypeDocument(function () {
           return /*#__PURE__*/_react["default"].createElement(_Input.SelectDocumentIdIndex, {
@@ -463,22 +569,34 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
           });
         });
       }
-      if (((_use$attributes$state7 = use.attributes.states.typeDefault) === null || _use$attributes$state7 === void 0 ? void 0 : _use$attributes$state7.value) !== '') {
-        setInputType(function () {
-          return /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
-            changeType: function changeType(event) {
-              return use.attributes.actions.changeType(event);
-            },
-            props: {
-              options: use.attributes.states.typeOptions,
-              defaultValue: use.attributes.states.typeDefault,
-              styles: {
-                width: '90%'
-              }
+      setInputType(function () {
+        return /*#__PURE__*/_react["default"].createElement(_Input.SelectType, {
+          changeType: function changeType(event) {
+            return use.attributes.actions.changeType(event);
+          },
+          props: {
+            options: use.attributes.states.typeOptions,
+            defaultValue: use.attributes.states.typeDefault,
+            styles: {
+              width: '90%'
             }
-          });
+          }
         });
-      }
+      });
+      setInputStatus(function () {
+        return /*#__PURE__*/_react["default"].createElement(_Input.SelectStatus, {
+          changeStatus: function changeStatus(event) {
+            return use.attributes.actions.changeStatus(event);
+          },
+          props: {
+            options: use.attributes.states.statusOptions,
+            defaultValue: use.attributes.states.statusDefault,
+            styles: {
+              width: '90%'
+            }
+          }
+        });
+      });
     }
   }, [use.attributes.states.documentIndexDefault]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -550,8 +668,8 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
   var title1Text = isAddForm ? 'Nuevo Sitio' : 'Actualizar Sitio';
   var title2Text = isAddForm ? 'Agrega un nuevo Sitio' : "Actualiza la informaci\xF3n del sitio #".concat(currentSite === null || currentSite === void 0 ? void 0 : currentSite.id);
   var buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  var buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
-  var handleActions = function handleActions(action, value) {
+  var buttonAction = isAddForm ? appSite : updateSite;
+  var handleActions = function handleActions(action) {
     switch (action) {
       case 'submit':
         buttonAction();
@@ -749,7 +867,7 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     styles: {
       width: '96.5%'
     }
-  }, taxesHostContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, InputType)), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
+  }, taxesHostContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, InputType, InputStatus)), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
     styles: {
       width: '96.5%'
     }

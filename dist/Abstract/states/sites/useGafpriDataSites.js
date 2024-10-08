@@ -1,7 +1,6 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -10,14 +9,11 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
-var _react = _interopRequireWildcard(require("react"));
+var _react = require("react");
 var _helpers = require("../../../helpers");
 var _constants = require("../../../constants");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
 var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSites(_ref) {
   var token = _ref.token;
-  // Define los estados necesarios para los atributos de Site
   var _useState = (0, _react.useState)(false),
     _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
     isReady = _useState2[0],
@@ -26,25 +22,9 @@ var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSite
     _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
     sites = _useState4[0],
     setSites = _useState4[1];
-  var onIsReady = function onIsReady() {
-    setIsReady(true);
-  };
-  var notReady = function notReady() {
-    setIsReady(false);
-  };
-
-  // Manejo de la data en D
-
-  var onSites = function onSites(newData) {
-    setSites(newData.data.items);
-    onIsReady();
-  };
-  var offSites = function offSites() {
-    setSites([]);
-    notReady();
-  };
   var getSites = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+      var data;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -58,15 +38,13 @@ var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSite
               initRoute: _constants.SITES_ROUTE,
               initToken: {
                 token: token
-              },
-              functionFetching: notReady,
-              functionSuccess: onSites
+              }
             });
           case 3:
-            _context.next = 6;
-            break;
+            data = _context.sent;
+            return _context.abrupt("return", data);
           case 5:
-            notReady();
+            return _context.abrupt("return", null);
           case 6:
           case "end":
             return _context.stop();
@@ -77,6 +55,8 @@ var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSite
       return _ref2.apply(this, arguments);
     };
   }();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
   var handleNewSite = function handleNewSite(newItem) {
     setSites(function (prevState) {
       var newData = [].concat((0, _toConsumableArray2["default"])(prevState || []), [newItem]);
@@ -111,11 +91,6 @@ var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSite
     }
     return null;
   }
-  // Efects
-  _react["default"].useEffect(function () {
-    getSites();
-  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
-
   var states = {
     isReady: isReady,
     sites: sites
@@ -124,12 +99,13 @@ var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSite
   // Define las acciones necesarias para los atributos de Site
   var actions = {
     setIsReady: setIsReady,
-    offSites: offSites,
     getById: getById,
     getMainSite: getMainSite,
     handleNewSite: handleNewSite,
     handleDeletedSite: handleDeletedSite,
-    handleUpdatedSite: handleUpdatedSite
+    handleUpdatedSite: handleUpdatedSite,
+    getSites: getSites,
+    setSites: setSites
   };
   return {
     states: states,

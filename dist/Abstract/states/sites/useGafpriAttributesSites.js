@@ -315,37 +315,66 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
   }];
   var _useState101 = (0, _react.useState)(''),
     _useState102 = (0, _slicedToArray2["default"])(_useState101, 2),
-    latitude = _useState102[0],
-    setLatitude = _useState102[1];
-  var _useState103 = (0, _react.useState)(''),
+    status = _useState102[0],
+    setStatus = _useState102[1];
+  var _useState103 = (0, _react.useState)(false),
     _useState104 = (0, _slicedToArray2["default"])(_useState103, 2),
-    longitude = _useState104[0],
-    setLongitude = _useState104[1];
-  var _useState105 = (0, _react.useState)(''),
+    statusValid = _useState104[0],
+    setStatusValid = _useState104[1];
+  var _useState105 = (0, _react.useState)({
+      value: '',
+      label: 'Selecciona el Status'
+    }),
     _useState106 = (0, _slicedToArray2["default"])(_useState105, 2),
-    image = _useState106[0],
-    setImage = _useState106[1];
-  var _useState107 = (0, _react.useState)(true),
+    statusDefault = _useState106[0],
+    setStatusDefault = _useState106[1];
+  var statusOptions = [{
+    label: 'Público',
+    value: 'public'
+  }, {
+    label: 'Borrador',
+    value: 'draft'
+  }, {
+    label: 'Privado',
+    value: 'private'
+  }];
+  var _useState107 = (0, _react.useState)(''),
     _useState108 = (0, _slicedToArray2["default"])(_useState107, 2),
-    imageValid = _useState108[0],
-    setImageValid = _useState108[1];
-  var _useState109 = (0, _react.useState)(false),
+    latitude = _useState108[0],
+    setLatitude = _useState108[1];
+  var _useState109 = (0, _react.useState)(''),
     _useState110 = (0, _slicedToArray2["default"])(_useState109, 2),
-    submitting = _useState110[0],
-    setSubmitting = _useState110[1];
-  var _useState111 = (0, _react.useState)([]),
+    longitude = _useState110[0],
+    setLongitude = _useState110[1];
+  var _useState111 = (0, _react.useState)(''),
     _useState112 = (0, _slicedToArray2["default"])(_useState111, 2),
-    galleryImage = _useState112[0],
-    setGalleryImage = _useState112[1];
+    image = _useState112[0],
+    setImage = _useState112[1];
   var _useState113 = (0, _react.useState)(true),
     _useState114 = (0, _slicedToArray2["default"])(_useState113, 2),
-    galleryImageValid = _useState114[0],
-    setGalleryImageValid = _useState114[1];
-  var error = useError.states.error;
-  var _useState115 = (0, _react.useState)(0),
+    imageValid = _useState114[0],
+    setImageValid = _useState114[1];
+  var _useState115 = (0, _react.useState)(false),
     _useState116 = (0, _slicedToArray2["default"])(_useState115, 2),
-    siteId = _useState116[0],
-    setSiteId = _useState116[1];
+    submitting = _useState116[0],
+    setSubmitting = _useState116[1];
+  var _useState117 = (0, _react.useState)([]),
+    _useState118 = (0, _slicedToArray2["default"])(_useState117, 2),
+    galleryImage = _useState118[0],
+    setGalleryImage = _useState118[1];
+  var _useState119 = (0, _react.useState)(true),
+    _useState120 = (0, _slicedToArray2["default"])(_useState119, 2),
+    galleryImageValid = _useState120[0],
+    setGalleryImageValid = _useState120[1];
+  var _useState121 = (0, _react.useState)(false),
+    _useState122 = (0, _slicedToArray2["default"])(_useState121, 2),
+    submittingGallery = _useState122[0],
+    setSubmittingGallery = _useState122[1];
+  var error = useError.states.error;
+  var _useState123 = (0, _react.useState)(0),
+    _useState124 = (0, _slicedToArray2["default"])(_useState123, 2),
+    siteId = _useState124[0],
+    setSiteId = _useState124[1];
   var infoReset = function infoReset() {
     setIsReset(true);
     setName('');
@@ -416,6 +445,12 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
     setTypeDefault({
       value: '',
       label: 'Selecciona el tipo de tienda'
+    });
+    setStatus('');
+    setStatusValid(false);
+    setStatusDefault({
+      value: '',
+      label: 'Selecciona el Status'
     });
     setLatitude('');
     setLongitude('');
@@ -544,6 +579,11 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
   var validationType = function validationType(value) {
     var valid = value.length > 0;
     setTypeValid(valid);
+    return valid;
+  };
+  var validationStatus = function validationStatus(value) {
+    var valid = value.length > 0;
+    setStatusValid(valid);
     return valid;
   };
   var validationHost = function validationHost(value) {
@@ -736,6 +776,13 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
       setType(options.value);
     }
   };
+  var changeStatus = function changeStatus(options) {
+    if (options) {
+      validationStatus(options.value);
+      setStatusDefault(options);
+      setStatus(options.value);
+    }
+  };
   var changeHost = function changeHost(value) {
     (0, _Changes.generalChangeWebSite)({
       value: value,
@@ -776,7 +823,7 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
             return (0, _Changes.generalChangeGalleryPhotoWebSockets)({
               e: e,
               changeError: useError.actions.changeError,
-              setSubmitting: setSubmitting,
+              setSubmitting: setSubmittingGallery,
               setPhoto: setGalleryImage,
               validation: validationGalleryImage,
               selectedOptions: galleryImage,
@@ -863,7 +910,12 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
     longitude: longitude,
     image: image,
     galleryImage: galleryImage,
-    submitting: submitting
+    submitting: submitting,
+    submittingGallery: submittingGallery,
+    status: status,
+    statusValid: statusValid,
+    statusDefault: statusDefault,
+    statusOptions: statusOptions
   };
 
   // Define las acciones necesarias para los atributos de Site
@@ -920,7 +972,11 @@ var useGafpriAttributesSites = exports.useGafpriAttributesSites = function useGa
     removeGalleryImage: removeGalleryImage,
     setLatitude: setLatitude,
     setLongitude: setLongitude,
-    setSubmitting: setSubmitting
+    setSubmitting: setSubmitting,
+    validationStatus: validationStatus,
+    changeStatus: changeStatus,
+    setImage: setImage,
+    setGalleryImage: setGalleryImage
   };
   return {
     states: states,

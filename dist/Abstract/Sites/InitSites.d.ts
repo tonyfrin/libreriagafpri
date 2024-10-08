@@ -5,6 +5,7 @@ import type { HeaderProps } from '../Header';
 import type { UseGafpriSitesReturn } from '../../states';
 export type InitSitesProps = {
     use: UseGafpriSitesReturn;
+    token: string | null;
     optionButtonContainerStyle?: string;
     updateButtonProps?: ButtonProps;
     deleteButtonProps?: ButtonProps;
@@ -21,4 +22,4 @@ export type InitSitesPropsExtended = {
     errorProps?: ErrorProps;
     listProps?: ListPropsExtended;
 };
-export declare const InitSites: ({ use, optionButtonContainerStyle, updateButtonProps, deleteButtonProps, headerProps, errorProps, listProps, }: InitSitesProps) => JSX.Element;
+export declare const InitSites: ({ use, token, optionButtonContainerStyle, updateButtonProps, deleteButtonProps, headerProps, errorProps, listProps, }: InitSitesProps) => JSX.Element;

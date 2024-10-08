@@ -1,9 +1,9 @@
 import { UseGafpriAttributesSitesReturn } from './useGafpriAttributesSites';
 export type UseGafpriApiSitesReturn = {
     actions: {
-        update: () => void;
-        add: () => void;
-        erase: (id: number) => void;
+        update: () => Promise<any>;
+        add: () => Promise<any>;
+        erase: (id: number) => Promise<any>;
     };
 };
 export type UseGafpriApiSitesProps = {

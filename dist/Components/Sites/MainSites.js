@@ -15,12 +15,14 @@ var MainSites = exports.MainSites = function MainSites(_ref) {
     loadingProps = _ref.loadingProps,
     initProps = _ref.initProps,
     addFormProps = _ref.addFormProps,
-    updateFormProps = _ref.updateFormProps;
+    updateFormProps = _ref.updateFormProps,
+    token = _ref.token;
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, useSites.pages.states.isFetching && /*#__PURE__*/_react["default"].createElement(_Loading.Loading, loadingProps), useSites.pages.states.isInit && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, (0, _extends2["default"])({
     keyName: "init",
     isVisible: useSites.pages.states.isInit
   }, initProps), /*#__PURE__*/_react["default"].createElement(_Abstract.InitSites, {
-    use: useSites
+    use: useSites,
+    token: token
   })), useSites.pages.states.isAdd && /*#__PURE__*/_react["default"].createElement(_Abstract.FadeIn, {
     keyName: "add",
     isVisible: useSites.pages.states.isAdd

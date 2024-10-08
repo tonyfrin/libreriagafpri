@@ -10,6 +10,7 @@ import type {
 
 export type MainSitesProps = {
   useSites: UseGafpriSitesReturn;
+  token: string | null;
   useCurrencies: UseCurrenciesReturn;
   loadingProps?: LoadingProps;
   initProps?: InitSitesPropsExtended;
@@ -19,6 +20,7 @@ export type MainSitesProps = {
 
 export type MainSitesPropsExtended = {
   useSites: UseGafpriSitesReturn;
+  token: string | null;
   useCurrencies: UseCurrenciesReturn;
   loadingProps?: LoadingProps;
   initProps?: InitSitesPropsExtended;
@@ -33,6 +35,7 @@ export const MainSites = ({
   initProps,
   addFormProps,
   updateFormProps,
+  token,
 }: MainSitesProps): JSX.Element => {
   return (
     <>
@@ -43,7 +46,7 @@ export const MainSites = ({
           isVisible={useSites.pages.states.isInit}
           {...initProps}
         >
-          <InitSites use={useSites} />
+          <InitSites use={useSites} token={token} />
         </FadeIn>
       )}
       {useSites.pages.states.isAdd && (

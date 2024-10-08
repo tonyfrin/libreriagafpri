@@ -15,7 +15,6 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 var useGafpriApiSites = exports.useGafpriApiSites = function useGafpriApiSites(_ref) {
   var attributes = _ref.attributes,
     token = _ref.token;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   var add = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
       var payload, updatedPayload, data;
@@ -42,7 +41,8 @@ var useGafpriApiSites = exports.useGafpriApiSites = function useGafpriApiSites(_
               decimalSeparator: attributes.states.decimalSeparator,
               decimalNumbers: attributes.states.decimalNumbers,
               taxes: attributes.states.taxes,
-              host: attributes.states.host
+              host: attributes.states.host,
+              status: attributes.states.status
             };
             updatedPayload = _objectSpread(_objectSpread(_objectSpread({}, payload), attributes.states.postCode ? {
               postCode: attributes.states.postCode
@@ -73,8 +73,6 @@ var useGafpriApiSites = exports.useGafpriApiSites = function useGafpriApiSites(_
       return _ref2.apply(this, arguments);
     };
   }();
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   var update = /*#__PURE__*/function () {
     var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
       var payload, updatedPayload, data;
@@ -101,7 +99,8 @@ var useGafpriApiSites = exports.useGafpriApiSites = function useGafpriApiSites(_
               decimalSeparator: attributes.states.decimalSeparator,
               decimalNumbers: attributes.states.decimalNumbers,
               taxes: attributes.states.taxes,
-              host: attributes.states.host
+              host: attributes.states.host,
+              status: attributes.states.status
             };
             updatedPayload = _objectSpread(_objectSpread(_objectSpread({}, payload), attributes.states.postCode ? {
               postCode: attributes.states.postCode
@@ -132,8 +131,6 @@ var useGafpriApiSites = exports.useGafpriApiSites = function useGafpriApiSites(_
       return _ref3.apply(this, arguments);
     };
   }();
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   var erase = /*#__PURE__*/function () {
     var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(id) {
       var data;
@@ -167,8 +164,8 @@ var useGafpriApiSites = exports.useGafpriApiSites = function useGafpriApiSites(_
       return _ref4.apply(this, arguments);
     };
   }();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
-  // Define las acciones necesarias para los atributos de Site
   var actions = {
     add: add,
     update: update,

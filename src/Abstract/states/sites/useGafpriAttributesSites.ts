@@ -140,6 +140,12 @@ export type UseGafpriAttributesSitesReturn = {
     galleryImage: string[];
 
     submitting: boolean;
+    submittingGallery: boolean;
+
+    status: string;
+    statusValid: boolean;
+    statusDefault: SelectDefault;
+    statusOptions: SelectDefault[];
   };
   actions: {
     infoReset: () => void;
@@ -220,6 +226,13 @@ export type UseGafpriAttributesSitesReturn = {
     setLatitude: (value: string) => void;
     setLongitude: (value: string) => void;
     setSubmitting: (value: boolean) => void;
+
+    validationStatus: (value: string) => boolean;
+    changeStatus: (
+      options: SingleValue<{ value: string; label: string }>
+    ) => void;
+    setImage: (value: string) => void;
+    setGalleryImage: (value: string[]) => void;
   };
 };
 
@@ -374,6 +387,18 @@ export const useGafpriAttributesSites = ({
     { label: 'Venta al detal', value: 'suply' },
   ];
 
+  const [status, setStatus] = useState('');
+  const [statusValid, setStatusValid] = useState(false);
+  const [statusDefault, setStatusDefault] = useState<SelectDefault>({
+    value: '',
+    label: 'Selecciona el Status',
+  });
+  const statusOptions: SelectDefault[] = [
+    { label: 'Público', value: 'public' },
+    { label: 'Borrador', value: 'draft' },
+    { label: 'Privado', value: 'private' },
+  ];
+
   const [latitude, setLatitude] = useState('');
 
   const [longitude, setLongitude] = useState('');
@@ -384,6 +409,7 @@ export const useGafpriAttributesSites = ({
 
   const [galleryImage, setGalleryImage] = useState<string[]>([]);
   const [galleryImageValid, setGalleryImageValid] = useState<boolean>(true);
+  const [submittingGallery, setSubmittingGallery] = useState(false);
 
   const { error } = useError.states;
 
@@ -471,6 +497,13 @@ export const useGafpriAttributesSites = ({
     setTypeDefault({
       value: '',
       label: 'Selecciona el tipo de tienda',
+    });
+
+    setStatus('');
+    setStatusValid(false);
+    setStatusDefault({
+      value: '',
+      label: 'Selecciona el Status',
     });
 
     setLatitude('');
@@ -639,6 +672,12 @@ export const useGafpriAttributesSites = ({
   const validationType = (value: string): boolean => {
     const valid = value.length > 0;
     setTypeValid(valid);
+    return valid;
+  };
+
+  const validationStatus = (value: string): boolean => {
+    const valid = value.length > 0;
+    setStatusValid(valid);
     return valid;
   };
 
@@ -868,6 +907,16 @@ export const useGafpriAttributesSites = ({
     }
   };
 
+  const changeStatus = (
+    options: SingleValue<{ value: string; label: string }>
+  ): void => {
+    if (options) {
+      validationStatus(options.value);
+      setStatusDefault(options);
+      setStatus(options.value);
+    }
+  };
+
   const changeHost = (value: string): void => {
     generalChangeWebSite({
       value,
@@ -895,7 +944,7 @@ export const useGafpriAttributesSites = ({
     await generalChangeGalleryPhotoWebSockets({
       e,
       changeError: useError.actions.changeError,
-      setSubmitting,
+      setSubmitting: setSubmittingGallery,
       setPhoto: setGalleryImage,
       validation: validationGalleryImage,
       selectedOptions: galleryImage,
@@ -995,6 +1044,12 @@ export const useGafpriAttributesSites = ({
     galleryImage,
 
     submitting,
+    submittingGallery,
+
+    status,
+    statusValid,
+    statusDefault,
+    statusOptions,
   };
 
   // Define las acciones necesarias para los atributos de Site
@@ -1053,6 +1108,10 @@ export const useGafpriAttributesSites = ({
     setLatitude,
     setLongitude,
     setSubmitting,
+    validationStatus,
+    changeStatus,
+    setImage,
+    setGalleryImage,
   };
 
   return {

@@ -4,11 +4,12 @@ import { UseGafpriAttributesSitesReturn } from './useGafpriAttributesSites';
 
 export type UseGafpriApiSitesReturn = {
   actions: {
-    update: () => void;
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    update: () => Promise<any>;
 
-    add: () => void;
+    add: () => Promise<any>;
 
-    erase: (id: number) => void;
+    erase: (id: number) => Promise<any>;
   };
 };
 
@@ -21,7 +22,6 @@ export const useGafpriApiSites = ({
   attributes,
   token,
 }: UseGafpriApiSitesProps): UseGafpriApiSitesReturn => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const add = async (): Promise<any> => {
     if (token) {
       const payload = {
@@ -41,6 +41,7 @@ export const useGafpriApiSites = ({
         decimalNumbers: attributes.states.decimalNumbers,
         taxes: attributes.states.taxes,
         host: attributes.states.host,
+        status: attributes.states.status,
       };
 
       const updatedPayload = {
@@ -65,7 +66,6 @@ export const useGafpriApiSites = ({
     return null;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const update = async (): Promise<any> => {
     if (token) {
       const payload = {
@@ -85,6 +85,7 @@ export const useGafpriApiSites = ({
         decimalNumbers: attributes.states.decimalNumbers,
         taxes: attributes.states.taxes,
         host: attributes.states.host,
+        status: attributes.states.status,
       };
 
       const updatedPayload = {
@@ -109,7 +110,6 @@ export const useGafpriApiSites = ({
     return null;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const erase = async (id: number): Promise<any> => {
     if (token) {
       const data = await gafpriFetch({
@@ -122,8 +122,8 @@ export const useGafpriApiSites = ({
     }
     return null;
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
-  // Define las acciones necesarias para los atributos de Site
   const actions = {
     add,
     update,

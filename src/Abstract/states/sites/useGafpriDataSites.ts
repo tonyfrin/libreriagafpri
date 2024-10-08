@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { gafpriFetch } from '../../../helpers';
 import { SITES_ROUTE } from '../../../constants';
 
@@ -8,6 +8,7 @@ type DeletedSite = {
 
 export interface SitesAttributes {
   id: number;
+  type: string;
   name: string;
   documentIndex: string;
   documentNumber: string;
@@ -26,15 +27,14 @@ export interface SitesAttributes {
   decimalNumbers: number;
   taxes: boolean;
   host: string;
+  status: string;
   createdAt: Date;
   modifiedAt: Date;
+  latitude: string;
+  longitude: string;
+  image: string;
+  galleryImage: string[];
 }
-
-type dataSites = {
-  data: {
-    items: SitesAttributes[];
-  };
-};
 
 export type UseGafpriDataSitesReturn = {
   states: {
@@ -47,6 +47,9 @@ export type UseGafpriDataSitesReturn = {
     handleDeletedSite: (value: DeletedSite) => void;
     handleUpdatedSite: (itemUpdate: SitesAttributes) => void;
     getById: (id: number) => SitesAttributes | null;
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    getSites: () => Promise<any>;
+    setSites: (value: SitesAttributes[]) => void;
   };
 };
 
@@ -57,44 +60,22 @@ export type UseGafpriDataSitesProps = {
 export const useGafpriDataSites = ({
   token,
 }: UseGafpriDataSitesProps): UseGafpriDataSitesReturn => {
-  // Define los estados necesarios para los atributos de Site
   const [isReady, setIsReady] = useState(false);
 
   const [sites, setSites] = useState<SitesAttributes[]>([]);
 
-  const onIsReady = (): void => {
-    setIsReady(true);
-  };
-
-  const notReady = (): void => {
-    setIsReady(false);
-  };
-
-  // Manejo de la data en D
-
-  const onSites = (newData: dataSites): void => {
-    setSites(newData.data.items);
-    onIsReady();
-  };
-
-  const offSites = (): void => {
-    setSites([]);
-    notReady();
-  };
-
-  const getSites = async (): Promise<void> => {
+  const getSites = async (): Promise<any> => {
     if (token) {
-      await gafpriFetch({
+      const data = await gafpriFetch({
         initMethod: 'GET',
         initRoute: SITES_ROUTE,
         initToken: { token },
-        functionFetching: notReady,
-        functionSuccess: onSites,
       });
-    } else {
-      notReady();
+      return data;
     }
+    return null;
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const handleNewSite = (newItem: SitesAttributes): void => {
     setSites((prevState) => {
@@ -134,10 +115,6 @@ export const useGafpriDataSites = ({
 
     return null;
   }
-  // Efects
-  React.useEffect(() => {
-    getSites();
-  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const states = {
     isReady,
@@ -147,12 +124,13 @@ export const useGafpriDataSites = ({
   // Define las acciones necesarias para los atributos de Site
   const actions = {
     setIsReady,
-    offSites,
     getById,
     getMainSite,
     handleNewSite,
     handleDeletedSite,
     handleUpdatedSite,
+    getSites,
+    setSites,
   };
 
   return {

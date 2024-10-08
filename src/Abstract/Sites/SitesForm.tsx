@@ -21,6 +21,7 @@ import {
   InputEmail,
   InputWebSite,
   SelectType,
+  SelectStatus,
 } from '../Input';
 import type { InputProps, GsSelectPropsExtended } from '../Input';
 import { ContainerButton } from '../Containers';
@@ -152,6 +153,35 @@ export const SitesForm = ({
   const [InputDecimalNumbers, setInputDecimalNumbers] = React.useState(<></>);
   const [InputTaxes, setInputTaxes] = React.useState(<></>);
   const [InputType, setInputType] = React.useState(<></>);
+  const [InputStatus, setInputStatus] = React.useState(<></>);
+
+  const updateSite = async (): Promise<void> => {
+    try {
+      use.data.actions.setIsReady(false);
+      const data = await use.api.actions.update();
+      if (data && data.success) {
+        use.data.actions.handleUpdatedSite(data.item);
+      }
+    } catch (error) {
+      use.error.actions.changeError(['Error al actualizar sitio']);
+    } finally {
+      use.data.actions.setIsReady(true);
+    }
+  };
+
+  const appSite = async (): Promise<void> => {
+    try {
+      use.data.actions.setIsReady(false);
+      const data = await use.api.actions.add();
+      if (data && data.success) {
+        use.data.actions.handleNewSite(data.item);
+      }
+    } catch (error) {
+      use.error.actions.changeError(['Error al crear sitio']);
+    } finally {
+      use.data.actions.setIsReady(true);
+    }
+  };
 
   const currentSite = isUpdateForm
     ? use.data.actions.getById(use.attributes.states.siteId)
@@ -348,6 +378,27 @@ export const SitesForm = ({
       }
 
       if (currentSite.host) use.attributes.actions.changeHost(currentSite.host);
+      if (currentSite.type) {
+        const typeOptionValue = use.attributes.states.typeOptions.find(
+          (option) => option.value === currentSite.type
+        );
+        if (typeOptionValue !== undefined)
+          use.attributes.actions.changeType(typeOptionValue);
+      }
+      if (currentSite.status) {
+        const statusOptionValue = use.attributes.states.statusOptions.find(
+          (option) => option.value === currentSite.status
+        );
+        if (statusOptionValue !== undefined)
+          use.attributes.actions.changeType(statusOptionValue);
+      }
+      if (currentSite.longitude)
+        use.attributes.actions.setLongitude(currentSite.longitude);
+      if (currentSite.latitude)
+        use.attributes.actions.setLatitude(currentSite.latitude);
+      if (currentSite.image) use.attributes.actions.setImage(currentSite.image);
+      if (currentSite.galleryImage)
+        use.attributes.actions.setGalleryImage(currentSite.galleryImage);
     }
 
     if (isAddForm) {
@@ -482,6 +533,21 @@ export const SitesForm = ({
             props={{
               options: use.attributes.states.typeOptions,
               defaultValue: use.attributes.states.typeDefault,
+              styles: {
+                width: '90%',
+              },
+            }}
+          />
+        );
+      });
+
+      setInputStatus((): JSX.Element => {
+        return (
+          <SelectStatus
+            changeStatus={(event) => use.attributes.actions.changeStatus(event)}
+            props={{
+              options: use.attributes.states.statusOptions,
+              defaultValue: use.attributes.states.statusDefault,
               styles: {
                 width: '90%',
               },
@@ -714,22 +780,35 @@ export const SitesForm = ({
         });
       }
 
-      if (use.attributes.states.typeDefault?.value !== '') {
-        setInputType((): JSX.Element => {
-          return (
-            <SelectType
-              changeType={(event) => use.attributes.actions.changeType(event)}
-              props={{
-                options: use.attributes.states.typeOptions,
-                defaultValue: use.attributes.states.typeDefault,
-                styles: {
-                  width: '90%',
-                },
-              }}
-            />
-          );
-        });
-      }
+      setInputType((): JSX.Element => {
+        return (
+          <SelectType
+            changeType={(event) => use.attributes.actions.changeType(event)}
+            props={{
+              options: use.attributes.states.typeOptions,
+              defaultValue: use.attributes.states.typeDefault,
+              styles: {
+                width: '90%',
+              },
+            }}
+          />
+        );
+      });
+
+      setInputStatus((): JSX.Element => {
+        return (
+          <SelectStatus
+            changeStatus={(event) => use.attributes.actions.changeStatus(event)}
+            props={{
+              options: use.attributes.states.statusOptions,
+              defaultValue: use.attributes.states.statusDefault,
+              styles: {
+                width: '90%',
+              },
+            }}
+          />
+        );
+      });
     }
   }, [use.attributes.states.documentIndexDefault]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -818,9 +897,9 @@ export const SitesForm = ({
     : `Actualiza la información del sitio #${currentSite?.id}`;
 
   const buttonTitle = isAddForm ? 'Agregar' : 'Actualizar';
-  const buttonAction = isAddForm ? use.api.actions.add : use.api.actions.update;
+  const buttonAction = isAddForm ? appSite : updateSite;
 
-  const handleActions = (action: string, value: any) => {
+  const handleActions = (action: string) => {
     switch (action) {
       case 'submit':
         buttonAction();
@@ -1100,7 +1179,10 @@ export const SitesForm = ({
           }}
           {...taxesHostContainerProps}
         >
-          <>{InputType}</>
+          <>
+            {InputType}
+            {InputStatus}
+          </>
         </ContainerButton>
         <ContainerButton
           styles={{

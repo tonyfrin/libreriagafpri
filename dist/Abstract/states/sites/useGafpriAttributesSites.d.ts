@@ -68,6 +68,11 @@ export type UseGafpriAttributesSitesReturn = {
         image: string;
         galleryImage: string[];
         submitting: boolean;
+        submittingGallery: boolean;
+        status: string;
+        statusValid: boolean;
+        statusDefault: SelectDefault;
+        statusOptions: SelectDefault[];
     };
     actions: {
         infoReset: () => void;
@@ -153,6 +158,13 @@ export type UseGafpriAttributesSitesReturn = {
         setLatitude: (value: string) => void;
         setLongitude: (value: string) => void;
         setSubmitting: (value: boolean) => void;
+        validationStatus: (value: string) => boolean;
+        changeStatus: (options: SingleValue<{
+            value: string;
+            label: string;
+        }>) => void;
+        setImage: (value: string) => void;
+        setGalleryImage: (value: string[]) => void;
     };
 };
 export type UseGafpriAttributesSitesProps = {

@@ -3,6 +3,7 @@ type DeletedSite = {
 };
 export interface SitesAttributes {
     id: number;
+    type: string;
     name: string;
     documentIndex: string;
     documentNumber: string;
@@ -21,8 +22,13 @@ export interface SitesAttributes {
     decimalNumbers: number;
     taxes: boolean;
     host: string;
+    status: string;
     createdAt: Date;
     modifiedAt: Date;
+    latitude: string;
+    longitude: string;
+    image: string;
+    galleryImage: string[];
 }
 export type UseGafpriDataSitesReturn = {
     states: {
@@ -35,6 +41,8 @@ export type UseGafpriDataSitesReturn = {
         handleDeletedSite: (value: DeletedSite) => void;
         handleUpdatedSite: (itemUpdate: SitesAttributes) => void;
         getById: (id: number) => SitesAttributes | null;
+        getSites: () => Promise<any>;
+        setSites: (value: SitesAttributes[]) => void;
     };
 };
 export type UseGafpriDataSitesProps = {
