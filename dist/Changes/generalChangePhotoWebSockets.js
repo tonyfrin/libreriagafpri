@@ -53,7 +53,7 @@ var generalChangePhotoWebSockets = exports.generalChangePhotoWebSockets = /*#__P
       while (1) switch (_context.prev = _context.next) {
         case 0:
           e = _ref.e, setSubmitting = _ref.setSubmitting, changeError = _ref.changeError, setPhoto = _ref.setPhoto, from = _ref.from, validation = _ref.validation;
-          ws = new WebSocket('wss://uploadimagemicroservise-599d9ed3d216.herokuapp.com');
+          ws = new WebSocket('wss://arcane-atoll-79481-4993f5a277e8.herokuapp.com');
           clientId = (0, _uuid.v4)();
           TIMEOUT_DURATION = 10000; // 10 segundos
           handleTimeout = function handleTimeout() {

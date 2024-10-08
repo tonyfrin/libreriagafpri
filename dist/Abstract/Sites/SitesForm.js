@@ -753,10 +753,6 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     styles: {
       width: '96.5%'
     }
-  }, taxesHostContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, InputType)), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, (0, _extends2["default"])({
-    styles: {
-      width: '96.5%'
-    }
   }, taxesHostContainerProps), /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Form.PhotoProduct, {
     photo: use.attributes.states.image,
     changePhoto: use.attributes.actions.changeImage,

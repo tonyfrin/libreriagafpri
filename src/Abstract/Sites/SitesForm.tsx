@@ -1108,14 +1108,6 @@ export const SitesForm = ({
           }}
           {...taxesHostContainerProps}
         >
-          <>{InputType}</>
-        </ContainerButton>
-        <ContainerButton
-          styles={{
-            width: '96.5%',
-          }}
-          {...taxesHostContainerProps}
-        >
           <>
             <PhotoProduct
               photo={use.attributes.states.image}

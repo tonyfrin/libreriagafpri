@@ -36,7 +36,7 @@ var useGafpriDataSites = exports.useGafpriDataSites = function useGafpriDataSite
   // Manejo de la data en D
 
   var onSites = function onSites(newData) {
-    setSites(newData);
+    setSites(newData.data.items);
     onIsReady();
   };
   var offSites = function offSites() {

@@ -30,6 +30,12 @@ export interface SitesAttributes {
   modifiedAt: Date;
 }
 
+type dataSites = {
+  data: {
+    items: SitesAttributes[];
+  };
+};
+
 export type UseGafpriDataSitesReturn = {
   states: {
     isReady: boolean;
@@ -66,8 +72,8 @@ export const useGafpriDataSites = ({
 
   // Manejo de la data en D
 
-  const onSites = (newData: SitesAttributes[]): void => {
-    setSites(newData);
+  const onSites = (newData: dataSites): void => {
+    setSites(newData.data.items);
     onIsReady();
   };
 

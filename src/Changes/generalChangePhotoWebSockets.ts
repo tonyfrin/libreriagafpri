@@ -67,7 +67,7 @@ export const generalChangePhotoWebSockets = async ({
   validation,
 }: GeneralChangePhotoWebSocketsProps): Promise<void> => {
   const ws = new WebSocket(
-    'wss://uploadimagemicroservise-599d9ed3d216.herokuapp.com'
+    'wss://arcane-atoll-79481-4993f5a277e8.herokuapp.com'
   );
   const clientId = uuidv4();
   const TIMEOUT_DURATION = 10000; // 10 segundos
