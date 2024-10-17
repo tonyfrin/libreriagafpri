@@ -126,13 +126,6 @@ export type UseGafpriAttributesSitesReturn = {
             label: string;
         }>) => void;
         changeHost: (host: string) => void;
-        changeType: (options: SingleValue<{
-            value: string;
-            label: string;
-        }>) => void;
-        changeImage: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
-        changeGalleryImage: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
-        removeGalleryImage: (image: string) => void;
         validationButtonNext: () => void;
         validationName: (value: string) => boolean;
         validationDocumentIndex: (value: string) => boolean;
@@ -151,10 +144,10 @@ export type UseGafpriAttributesSitesReturn = {
         validationDecimalNumbers: (value: string) => boolean;
         validationTaxes: (value: string) => boolean;
         validationHost: (value: string) => boolean;
+        setSiteId: (value: number) => void;
         validationType: (value: string) => boolean;
         validationImage: (value: string) => boolean;
         validationGalleryImage: (value: string[]) => boolean;
-        setSiteId: (value: number) => void;
         setLatitude: (value: string) => void;
         setLongitude: (value: string) => void;
         setSubmitting: (value: boolean) => void;
@@ -165,6 +158,13 @@ export type UseGafpriAttributesSitesReturn = {
         }>) => void;
         setImage: (value: string) => void;
         setGalleryImage: (value: string[]) => void;
+        changeType: (options: SingleValue<{
+            value: string;
+            label: string;
+        }>) => void;
+        changeImage: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
+        changeGalleryImage: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
+        removeGalleryImage: (image: string) => void;
     };
 };
 export type UseGafpriAttributesSitesProps = {

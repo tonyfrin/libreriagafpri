@@ -8,7 +8,7 @@ type DeletedSite = {
 
 export interface SitesAttributes {
   id: number;
-  type: string;
+
   name: string;
   documentIndex: string;
   documentNumber: string;
@@ -27,9 +27,11 @@ export interface SitesAttributes {
   decimalNumbers: number;
   taxes: boolean;
   host: string;
-  status: string;
+
   createdAt: Date;
   modifiedAt: Date;
+  type: string;
+  status: string;
   latitude: string;
   longitude: string;
   image: string;

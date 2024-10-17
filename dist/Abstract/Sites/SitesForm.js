@@ -5,17 +5,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SitesForm = void 0;
+var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _react = _interopRequireDefault(require("react"));
+var _css = require("@emotion/css");
 var _Input = require("../Input");
 var _Containers = require("../Containers");
 var _Form = require("../Form");
 var _constants = require("../../constants");
 var _Slider = require("../Slider");
+var _templateObject;
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var SitesForm = exports.SitesForm = function SitesForm(_ref) {
@@ -720,7 +723,8 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     },
     props: _objectSpread({
       inputProps: {
-        defaultValue: use.attributes.states.documentNumber
+        defaultValue: use.attributes.states.documentNumber,
+        title: undefined
       },
       styles: {
         padding: '10px 19px',
@@ -818,7 +822,8 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     },
     props: _objectSpread({
       inputProps: {
-        defaultValue: use.attributes.states.phone
+        defaultValue: use.attributes.states.phone,
+        title: undefined
       },
       styles: {
         padding: '10px 19px',
@@ -879,7 +884,7 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     setSubmitting: use.attributes.actions.setSubmitting
   }))), /*#__PURE__*/_react["default"].createElement(_Containers.ContainerButton, {
     styles: {
-      width: '100%',
+      width: '90%',
       display: 'block'
     }
   }, /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Slider.SliderHorizontal, {
@@ -888,6 +893,7 @@ var SitesForm = exports.SitesForm = function SitesForm(_ref) {
     remove: use.attributes.actions.removeGalleryImage
   }), /*#__PURE__*/_react["default"].createElement(_Form.PhotoGalleryForm, {
     changePhoto: use.attributes.actions.changeGalleryImage,
-    formId: "photo-form"
+    formId: "photo-form",
+    imageFormConatinerStyle: (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n                display: flex;\n                flex-direction: column-reverse;\n                width: 110%;\n              "])))
   })))));
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from '@emotion/css';
 import {
   Input,
   SelectDocumentIdIndex,
@@ -966,6 +967,7 @@ export const SitesForm = ({
               props={{
                 inputProps: {
                   defaultValue: use.attributes.states.documentNumber,
+                  title: undefined,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -1103,6 +1105,7 @@ export const SitesForm = ({
               props={{
                 inputProps: {
                   defaultValue: use.attributes.states.phone,
+                  title: undefined,
                 },
                 styles: {
                   padding: '10px 19px',
@@ -1202,7 +1205,7 @@ export const SitesForm = ({
         </ContainerButton>
         <ContainerButton
           styles={{
-            width: '100%',
+            width: '90%',
             display: 'block',
           }}
         >
@@ -1215,6 +1218,11 @@ export const SitesForm = ({
             <PhotoGalleryForm
               changePhoto={use.attributes.actions.changeGalleryImage}
               formId="photo-form"
+              imageFormConatinerStyle={css`
+                display: flex;
+                flex-direction: column-reverse;
+                width: 110%;
+              `}
             />
           </>
         </ContainerButton>

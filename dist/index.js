@@ -1203,6 +1203,18 @@ Object.defineProperty(exports, "InputAccountNumber", {
     return _Abstract.InputAccountNumber;
   }
 });
+Object.defineProperty(exports, "InputAddress1", {
+  enumerable: true,
+  get: function get() {
+    return _Abstract.InputAddress1;
+  }
+});
+Object.defineProperty(exports, "InputAddress2", {
+  enumerable: true,
+  get: function get() {
+    return _Abstract.InputAddress2;
+  }
+});
 Object.defineProperty(exports, "InputBankName", {
   enumerable: true,
   get: function get() {
@@ -2053,6 +2065,12 @@ Object.defineProperty(exports, "PhotoDocumentId", {
   enumerable: true,
   get: function get() {
     return _Abstract.PhotoDocumentId;
+  }
+});
+Object.defineProperty(exports, "PhotoEntity", {
+  enumerable: true,
+  get: function get() {
+    return _Abstract.PhotoEntity;
   }
 });
 Object.defineProperty(exports, "PhotoForm", {
