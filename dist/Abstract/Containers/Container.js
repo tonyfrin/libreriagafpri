@@ -10,7 +10,7 @@ var _react = _interopRequireDefault(require("react"));
 var _css = require("@emotion/css");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 var ContainerInputStyles = function ContainerInputStyles(styles) {
-  return (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  width: ", ";\n  margin: ", ";\n  ", "\n"])), (styles === null || styles === void 0 ? void 0 : styles.width) || '91.66667%', (styles === null || styles === void 0 ? void 0 : styles.margin) || '10px 0px', (styles === null || styles === void 0 ? void 0 : styles.custom) || '');
+  return (0, _css.css)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  width: ", ";\n  margin: ", ";\n  display: ", ";\n  flex-direction: ", ";\n}\n  ", "\n"])), (styles === null || styles === void 0 ? void 0 : styles.width) || '91.66667%', (styles === null || styles === void 0 ? void 0 : styles.margin) || '10px 0px', (styles === null || styles === void 0 ? void 0 : styles.display) || 'flex', (styles === null || styles === void 0 ? void 0 : styles.flexDirection) || 'column', (styles === null || styles === void 0 ? void 0 : styles.custom) || '');
 };
 var ContainerInput = exports.ContainerInput = function ContainerInput(_ref) {
   var _ref$styles = _ref.styles,

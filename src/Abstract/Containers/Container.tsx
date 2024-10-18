@@ -4,12 +4,17 @@ import { css, cx } from '@emotion/css';
 const ContainerInputStyles = (styles: ContainerStyles) => css`
   width: ${styles?.width || '91.66667%'};
   margin: ${styles?.margin || '10px 0px'};
+  display: ${styles?.display || 'flex'};
+  flex-direction: ${styles?.flexDirection || 'column'};
+}
   ${styles?.custom || ''}
 `;
 
 export type ContainerStyles = {
   width?: string;
   margin?: string | number;
+  display?: string;
+  flexDirection?: string;
   custom?: string;
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 export type ContainerStyles = {
     width?: string;
     margin?: string | number;
+    display?: string;
+    flexDirection?: string;
     custom?: string;
 };
 type ConainerInput = {
