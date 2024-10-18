@@ -89,6 +89,19 @@ export const MainMenu = ({
                 contentProps={{
                   onClick: button.onClick,
                 }}
+                contentStyles={{
+                  custom: `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  `,
+                }}
+                imageStyles={{
+                  custom: `
+                    box-shadow: 0px 4px 10px rgb(105 105 105);
+                    margin-bottom: 10px;
+                  `,
+                }}
               />
             </li>
           );

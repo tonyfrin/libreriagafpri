@@ -47,6 +47,12 @@ var MainMenu = exports.MainMenu = function MainMenu(_ref) {
         image: button.image,
         contentProps: {
           onClick: button.onClick
+        },
+        contentStyles: {
+          custom: "\n                    display: flex;\n                    flex-direction: column;\n                    align-items: center;\n                  "
+        },
+        imageStyles: {
+          custom: "\n                    box-shadow: 0px 4px 10px rgb(105 105 105);\n                    margin-bottom: 10px;\n                  "
         }
       }));
     })));
