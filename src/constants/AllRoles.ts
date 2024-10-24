@@ -9,6 +9,15 @@ export const AllRoles = [
     ],
   },
   {
+    name: 'Entidades',
+    permissions: [
+      { name: 'Obtener', value: 'entityGet' },
+      { name: 'Crear', value: 'entityCreate' },
+      { name: 'Actualizar', value: 'entityUpdate' },
+      { name: 'Borrar', value: 'entityDelete' },
+    ],
+  },
+  {
     name: 'Clientes',
     permissions: [
       { name: 'Obtener', value: 'customerGet' },
