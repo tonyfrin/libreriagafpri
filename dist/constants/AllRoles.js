@@ -511,4 +511,22 @@ var AllRoles = exports.AllRoles = [{
     name: 'Obtener',
     value: 'shipping-methodsGet'
   }]
+}, {
+  name: 'Cargos',
+  permissions: [{
+    name: 'Crear',
+    value: 'chargesCreate'
+  }, {
+    name: 'Obtener',
+    value: 'chargesGet'
+  }]
+}, {
+  name: 'Descargos',
+  permissions: [{
+    name: 'Crear',
+    value: 'dischargesCreate'
+  }, {
+    name: 'Obtener',
+    value: 'dischargesGet'
+  }]
 }];
